@@ -5,26 +5,23 @@ left:
     url: /
 
   - title: Docs
-    url: /docs/installation/
+    url: /docs/adoption/
 
-  - title: Blog
-    url: /blog/
-
-  - title: Changelogs
+  - title: Blogs
     dropdown:
 
-      - title: Timeline Style
-        url: /changelog-timeline/
+      - title: Power CAT
+        url: https://www.microsoft.com
 
-      - title: Post Style
-        url: /changelog-posts/
+      - title: Power Apps
+        url: https://www.microsoft.com
 
-
-# Navbar right menu navigation links
+      - title: Power Automate
+        url: https://www.microsoft.com
 
 right:
 
-  - title: Changelog
+  - title: What's New
     url: /changelog-timeline/
     button: primary-outline
 
