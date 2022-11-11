@@ -1,52 +1,142 @@
 # Welcome to Jekyll!
 #
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
+# This config file is meant for settings that affect your whole blog.
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 
-title: Power CAT
-email: powerpnp@microsoft.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Power CAT
-baseurl: /powercat # the subpath of your site, e.g. /blog
-url: microsoft.github.io # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  robstand
+# Site title and description
+title:              Power CAT
+description:        Power CAT
+lang:               en
+
+# Site subpath, e.g. /blog
+baseurl:            /powercat
+
+# Permalink URLs structure, for permalink style options see: https://jekyllrb.com/docs/permalinks/
+permalink:          /:title/
+
+# Site base hostname & protocol, e.g. http://example.com
+url:                microsoft.github.io
+
+# Site logo # e.g. logo.png, upload logo image file to /uploads/ folder
+logo:               
+
+navbar:
+    sticky:         true
+    search:         true
+  
+# Default author settings
+author:
+    name:           Power CAT
+    title:          Power CAT Team  
+    avatar:         avatar-tom.png
+
+# Author settings, displayed on post and doc pages if front matter references author name e.g. author: peter
+authors:
+    john:
+      name:         John Brown
+      title:        Support     
+      avatar:       avatar-john.png
+    evan:
+      name:         Evan Wells
+      title:        Support    
+      avatar:       avatar-evan.png
+    sara:
+      name:         Sara Galen
+      title:        Lead Developer     
+      avatar:       avatar-sara.png
+    alex:
+      name:         Alex Koch
+      title:        Design Engineer     
+      avatar:       avatar-alex.png
+    daniel:
+      name:         Daniel Shultz
+      title:        Developer      
+      avatar:       avatar-daniel.png
+    tom:
+      name:         Tom Farrell
+      title:        Developer     
+      avatar:       avatar-tom.png
+
+# Social icons displayed in footer
+social:
+    email:
+    website:
+    facebook:       https://www.facebook.com/
+    flickr:
+    dribbble:
+    github:
+    googleplus:
+    instagram:      https://www.instagram.com/
+    linkedin:
+    pinterest:
+    twitter:        https://twitter.com/
+    vimeo:          https://vimeo.com/
+    youtube:
+
+# Share button
+share:
+    post:           true # Display share buttons on a post page
+    doc:            true # Display share buttons on a doc page
+    twitter:        username # Enable by adding Twitter handle 
+    facebook:       true # Enable by setting true (Facebook handle not required)
+
+# Default footer image settings
+footer:
+    copyright:      2022 Microsoft Corp
+
+# Disqus comments shortname, requires Disqus account https://disqus.com/
+disqus:
+    shortname:      # 1234
+
+# Google analytics code, get your code here https://www.google.com/analytics/
+google_analytics:
+
+# Number of posts displayed on blog page
+paginate:           10
+
+# Blog path
+paginate_path:      "/blog/:num/"
+
+# Path to post content assets directory i.e post images, pdfs etc
+uploads:            /uploads/
 
 # Build settings
-theme: minima
-plugins:
-  - jekyll-feed
+markdown:           kramdown
+highlighter:        rouge
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+gems:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-avatar
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+
+sass:
+  style:            compressed
+
+collections:
+  docs:
+    output:         true
+  faqs:
+    output:         false
+  changelogs:
+    output:         false
+
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path:         ""
+      type:         posts
+    values:
+      layout:       post
+  # _docs
+  - scope:
+      path:         ""
+      type:         docs
+    values:
+      layout:       doc
