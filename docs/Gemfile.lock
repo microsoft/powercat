@@ -125,6 +125,9 @@ GEM
       octokit (~> 4.0, != 4.4.0)
     jekyll-include-cache (0.2.1)
       jekyll (>= 3.7, < 5.0)
+    jekyll-livereload (0.2.2)
+      em-websocket (~> 0.5)
+      jekyll (~> 3.0)
     jekyll-mentions (1.6.0)
       html-pipeline (~> 2.3)
       jekyll (>= 3.7, < 5.0)
@@ -257,13 +260,17 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages (~> 227)
-  http_parser.rb (~> 0.6.0)
-  jekyll-feed (~> 0.12)
-  minima (~> 2.5)
-  tzinfo (>= 1, < 3)
+  jekyll-avatar
+  jekyll-feed (~> 0.6)
+  jekyll-gist
+  jekyll-livereload
+  jekyll-paginate (~> 1.1)
+  jekyll-seo-tag
   tzinfo-data
-  wdm (~> 0.1.1)
   webrick (~> 1.7)
+
+RUBY VERSION
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.3.25
