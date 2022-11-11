@@ -1,16 +1,16 @@
 # Boxes include navigation
 
-- title: Getting Started
-  desc: Get started fast with installation and theme setup instructions
+- title: Guidance
+  desc: Learn about our guidance
   icon: cog
-  doc: installation
+  doc: guidanceoverview
 
-- title: Theme Features
-  desc: Lean about all the theme options, features and how to use them
+- title: Toolkits
+  desc: Learn about our toolkits
   icon: settings
-  doc: hero
+  doc: toolkitoverview
 
-- title: Customization
-  desc: Get help or tailor the theme to your specific requirements
+- title: Power CAT
+  desc: Learn about what Power CAT does
   icon: code
-  doc: customize
+  doc: powercatoverview

@@ -1,36 +1,17 @@
-- title: Getting Started
+- title: Guidance
   docs:
-  - installation
-  - setup
-  - navigation
-  - footer
-  - posts
-  - docs
-  - comments
-  - analytics
+  - guidanceoverview
+  - adoption
+  - migration
+  - modernization
 
-- title: Theme Features
+- title: Toolkits
   docs:
-  - hero
-  - boxes
-  - featured
-  - videos
-  - faq
-  - team
-  - cta
-  - changelog
-  - contact
-  - media
-  - toc
-  - alerts
+  - toolkitoverview
+  - coetoolkit
+  - creatorkit
+  - automationkit
 
-- title: Customization
+- title: Power CAT
   docs:
-  - translation
-  - customize
-  - development
-  - sources
-
-- title: Help
-  docs:
-  - support
+  - powercatoverview
