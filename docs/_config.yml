@@ -22,7 +22,7 @@ title: Power CAT
 email: powerpnp@microsoft.com
 description: >- # this means to ignore newlines until "baseurl:"
   Power CAT
-baseurl: /powercat/ # the subpath of your site, e.g. /blog
+baseurl: /powercat # the subpath of your site, e.g. /blog
 url: microsoft.github.io # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  robstand
 
