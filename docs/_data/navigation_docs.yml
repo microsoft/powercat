@@ -1,9 +1,11 @@
+- title: Power CAT
+  docs:
+  - powercatoverview
+
 - title: Guidance
   docs:
   - guidanceoverview
   - adoption
-  - migration
-  - modernization
 
 - title: Toolkits
   docs:
@@ -11,7 +13,12 @@
   - coetoolkit
   - creatorkit
   - automationkit
+  - almaccelerator
 
-- title: Power CAT
+- title: Blogs
   docs:
-  - powercatoverview
+  - blogs/blogoverview
+
+- title: Power CAT Live
+  docs:
+  - powercatlive

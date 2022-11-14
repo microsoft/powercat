@@ -1,16 +1,21 @@
 # Boxes include navigation
 
+- title: Power CAT
+  desc: Who we are and what we do
+  icon: bolt
+  doc: powercatoverview
+
 - title: Guidance
   desc: Learn about our guidance
-  icon: cog
+  icon: file-text
   doc: guidanceoverview
 
 - title: Toolkits
   desc: Learn about our toolkits
-  icon: settings
+  icon: cog
   doc: toolkitoverview
 
-- title: Power CAT
-  desc: Learn about what Power CAT does
-  icon: code
-  doc: powercatoverview
+- title: Blogs
+  desc: Check out our blogs
+  icon: rss
+  doc: blogs/blogoverview

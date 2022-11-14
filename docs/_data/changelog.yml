@@ -1,7 +1,7 @@
 # Changelog page source
 
 - title: New guidance released
-  label: GUIDANCE
+  label: LEARN
   date: November 2022
   list:
   - <a href="#">Securing the default environment</a>
@@ -9,7 +9,7 @@
   - <a href="#">Best practices for RPA</a>
 
 - title: CoE Toolkit updates
-  label: TOOLKIT
+  label: GITHUB
   date: October 19, 2022
   list:
   - Awesome new features
@@ -21,3 +21,10 @@
   list:
   - Phil and Charles talk about IT.
   - Watch it on <a href="https://youtube.com">Power CAT Live</a>.
+
+- title: Power Platform Administration Planning
+  label: BLOG
+  date: September 8, 2022
+  list:
+  - Steve Jeffery covers a simple solution to help you plan administration.
+  - Find it on the <a href="#">Power Apps blog</a>.

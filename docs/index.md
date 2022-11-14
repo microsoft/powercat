@@ -2,13 +2,13 @@
 layout: page
 width: expand
 hero:
-    title: Power CAT
-    subtitle: This site is a work in progress. The real content is coming soon! 
+    title: 
+    subtitle: This site is a work in progress. The real launch is coming soon! 
     image: header.png
     search: true
 ---
 
-{% include boxes.html columns="3" title="Stuff We Make" subtitle="Choose a topic you are interested in" %}
+{% include boxes.html columns="4" title="What We Do" subtitle="We do a lot of stuff and make a lot of stuff" %}
 
 {% include featured.html tag="featured" title="Popular Articles" subtitle="Featured articles" %}
 

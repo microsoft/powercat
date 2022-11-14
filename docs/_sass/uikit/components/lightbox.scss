@@ -22,7 +22,11 @@
 $lightbox-z-index:                               $global-z-index + 10 !default;
 $lightbox-background:                            #000 !default;
 
+$lightbox-focus-outline:                         rgba(255,255,255,0.7) !default;
+
 $lightbox-item-color:                            rgba(255,255,255,0.7) !default;
+$lightbox-item-max-width:                        100vw !default;
+$lightbox-item-max-height:                       100vh !default;
 
 $lightbox-toolbar-padding-vertical:              10px !default;
 $lightbox-toolbar-padding-horizontal:            10px !default;
@@ -52,6 +56,7 @@ $lightbox-button-hover-color:                    #fff !default;
  * 4. Horizontal padding
  * 5. Mask the background page
  * 6. Fade-in transition
+ * 7. Prevent cancellation of pointer events while dragging
  */
 
 .uk-lightbox {
@@ -69,6 +74,8 @@ $lightbox-button-hover-color:                    #fff !default;
     /* 6 */
     opacity: 0;
     transition: opacity 0.15s linear;
+    /* 7 */
+    touch-action: pinch-zoom;
     @if(mixin-exists(hook-lightbox)) {@include hook-lightbox();}
 }
 
@@ -83,6 +90,13 @@ $lightbox-button-hover-color:                    #fff !default;
     /* 2 */
     opacity: 1;
 }
+
+/*
+ * Focus
+ */
+
+.uk-lightbox :focus { outline-color: $lightbox-focus-outline; }
+.uk-lightbox :focus-visible { outline-color: $lightbox-focus-outline; }
 
 
 /* Page
@@ -105,7 +119,6 @@ $lightbox-button-hover-color:                    #fff !default;
  * 4. Optimize animation
  * 5. Responsiveness
  *    Using `vh` for `max-height` to fix image proportions after resize in Safari and Opera
- *    Using `vh` and `vw` to make responsive image work in IE11
  */
 
 .uk-lightbox-items > * {
@@ -128,8 +141,8 @@ $lightbox-button-hover-color:                    #fff !default;
 
 /* 5 */
 .uk-lightbox-items > * > * {
-    max-width: 100vw;
-    max-height: 100vh;
+    max-width: $lightbox-item-max-width;
+    max-height: $lightbox-item-max-height;
 }
 
 .uk-lightbox-items > * > :not(iframe) {
@@ -149,7 +162,7 @@ $lightbox-button-hover-color:                    #fff !default;
     @if(mixin-exists(hook-lightbox-toolbar)) {@include hook-lightbox-toolbar();}
 }
 
-.uk-lightbox-toolbar * { color: $lightbox-toolbar-color; }
+.uk-lightbox-toolbar > * { color: $lightbox-toolbar-color; }
 
 
 /* Toolbar Icon (Close)
@@ -192,20 +205,22 @@ $lightbox-button-hover-color:                    #fff !default;
     @if(mixin-exists(hook-lightbox-button)) {@include hook-lightbox-button();}
 }
 
-/*
- * Hover
- */
-
+/* Hover */
 .uk-lightbox-button:hover {
     color: $lightbox-button-hover-color;
     @if(mixin-exists(hook-lightbox-button-hover)) {@include hook-lightbox-button-hover();}
+}
+
+/* OnClick */
+.uk-lightbox-button:active {
+    @if(mixin-exists(hook-lightbox-button-active)) {@include hook-lightbox-button-active();}
 }
 
 
 /* Caption
  ========================================================================== */
 
-.uk-lightbox-caption {}
+.uk-lightbox-caption:empty { display: none; }
 
 
 /* Iframe
@@ -229,4 +244,5 @@ $lightbox-button-hover-color:                    #fff !default;
 // @mixin hook-lightbox-toolbar-icon-hover(){}
 // @mixin hook-lightbox-button(){}
 // @mixin hook-lightbox-button-hover(){}
+// @mixin hook-lightbox-button-active(){}
 // @mixin hook-lightbox-misc(){}

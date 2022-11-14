@@ -4,30 +4,20 @@ left:
   - title: Home
     url: /
 
-  - title: Docs
-    url: /docs/adoption/
-
-  - title: Blogs
-    dropdown:
-
-      - title: Power CAT
-        url: https://www.microsoft.com
-
-      - title: Power Apps
-        url: https://www.microsoft.com
-
-      - title: Power Automate
-        url: https://www.microsoft.com
-
-right:
-
+  - title: Portfolio
+    url: /docs/powercatoverview/
+  
   - title: What's New
     url: /changelog-timeline/
-    button: primary-outline
 
-  - title: Contact
-    url: /contact/
-    button: success
+  - title: Customer stories
+    url: https://aka.ms/PowerPlatformStories
+
+#right:
+  #- title: Contact
+   # url: /contact/
+   # button: success
+  # button: primary-outline
 
   # - title: Changelog
   #   url: /contact/

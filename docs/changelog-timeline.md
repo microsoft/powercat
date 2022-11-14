@@ -5,6 +5,6 @@ tags: [new]
 width: small
 ---
 
-We release new and updated guidance and toolkits regularly.
+All the latest from Power CAT.
 
 {% include changelog.html %}

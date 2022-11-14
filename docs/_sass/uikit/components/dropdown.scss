@@ -5,12 +5,11 @@
 //
 // Adopted:         `uk-dropdown-nav`
 //
-// Modifiers:       `uk-dropdown-top-*`
-//                  `uk-dropdown-bottom-*`
-//                  `uk-dropdown-left-*`
-//                  `uk-dropdown-right-*`
+// Modifiers:       `uk-dropdown-large`
 //                  `uk-dropdown-stack`
 //                  `uk-dropdown-grid`
+//
+// States:          `uk-active`
 //
 // ========================================================================
 
@@ -19,14 +18,19 @@
 // ========================================================================
 
 $dropdown-z-index:                               $global-z-index + 20 !default;
+$dropdown-margin:                                $global-small-margin !default;
+$dropdown-viewport-margin:                       15px !default;
 $dropdown-min-width:                             200px !default;
 $dropdown-padding:                               15px !default;
 $dropdown-background:                            $global-muted-background !default;
 $dropdown-color:                                 $global-color !default;
-$dropdown-margin:                                $global-small-margin !default;
+$dropdown-color-mode:                            none !default;
+
+$dropdown-large-padding:                         40px !default;
 
 $dropdown-nav-item-color:                        $global-muted-color !default;
 $dropdown-nav-item-hover-color:                  $global-color !default;
+$dropdown-nav-subtitle-font-size:                $global-small-font-size !default;
 $dropdown-nav-header-color:                      $global-emphasis-color !default;
 $dropdown-nav-divider-border-width:              $global-border-width !default;
 $dropdown-nav-divider-border:                    $global-border !default;
@@ -51,6 +55,8 @@ $dropdown-nav-sublist-item-hover-color:          $global-color !default;
     /* 2 */
     position: absolute;
     z-index: $dropdown-z-index;
+    --uk-position-offset: #{$dropdown-margin};
+    --uk-position-viewport-offset: #{$dropdown-viewport-margin};
     /* 3 */
     box-sizing: border-box;
     min-width: $dropdown-min-width;
@@ -64,13 +70,28 @@ $dropdown-nav-sublist-item-hover-color:          $global-color !default;
 /* Show */
 .uk-dropdown.uk-open { display: block; }
 
+/*
+ * Remove margin from the last-child
+ */
+
+.uk-dropdown > :last-child { margin-bottom: 0; }
+
+// Color Mode
+@if ( $dropdown-color-mode == light ) { .uk-dropdown { @extend .uk-light !optional;} }
+@if ( $dropdown-color-mode == dark ) { .uk-dropdown { @extend .uk-dark !optional;} }
+
+
+/* Size modifier
+ ========================================================================== */
+
+.uk-dropdown-large { padding: $dropdown-large-padding; }
+
 
 /* Nav
  * Adopts `uk-nav`
  ========================================================================== */
 
 .uk-dropdown-nav {
-    white-space: nowrap;
     @if(mixin-exists(hook-dropdown-nav)) {@include hook-dropdown-nav();}
 }
 
@@ -83,12 +104,20 @@ $dropdown-nav-sublist-item-hover-color:          $global-color !default;
     @if(mixin-exists(hook-dropdown-nav-item)) {@include hook-dropdown-nav-item();}
 }
 
-/* Hover + Focus + Active */
+/* Hover + Active */
 .uk-dropdown-nav > li > a:hover,
-.uk-dropdown-nav > li > a:focus,
 .uk-dropdown-nav > li.uk-active > a {
     color: $dropdown-nav-item-hover-color;
     @if(mixin-exists(hook-dropdown-nav-item-hover)) {@include hook-dropdown-nav-item-hover();}
+}
+
+/*
+ * Subtitle
+ */
+
+.uk-dropdown-nav .uk-nav-subtitle {
+    font-size: $dropdown-nav-subtitle-font-size;
+    @if(mixin-exists(hook-dropdown-nav-subtitle)) {@include hook-dropdown-nav-subtitle();}
 }
 
 /*
@@ -116,17 +145,7 @@ $dropdown-nav-sublist-item-hover-color:          $global-color !default;
 .uk-dropdown-nav .uk-nav-sub a { color: $dropdown-nav-sublist-item-color; }
 
 .uk-dropdown-nav .uk-nav-sub a:hover,
-.uk-dropdown-nav .uk-nav-sub a:focus { color: $dropdown-nav-sublist-item-hover-color; }
-
-
-/* Direction / Alignment modifiers
- ========================================================================== */
-
-/* Direction */
-[class*='uk-dropdown-top'] { margin-top: (-$dropdown-margin); }
-[class*='uk-dropdown-bottom'] { margin-top: $dropdown-margin; }
-[class*='uk-dropdown-left'] { margin-left: (-$dropdown-margin); }
-[class*='uk-dropdown-right'] { margin-left: $dropdown-margin; }
+.uk-dropdown-nav .uk-nav-sub li.uk-active > a { color: $dropdown-nav-sublist-item-hover-color; }
 
 
 /* Grid modifiers
@@ -145,6 +164,7 @@ $dropdown-nav-sublist-item-hover-color:          $global-color !default;
 // @mixin hook-dropdown-nav(){}
 // @mixin hook-dropdown-nav-item(){}
 // @mixin hook-dropdown-nav-item-hover(){}
+// @mixin hook-dropdown-nav-subtitle(){}
 // @mixin hook-dropdown-nav-header(){}
 // @mixin hook-dropdown-nav-divider(){}
 // @mixin hook-dropdown-misc(){}
