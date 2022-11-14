@@ -4,7 +4,7 @@ width: expand
 hero:
     title: Power CAT
     subtitle: This site is a work in progress. The real content is coming soon! 
-    image:
+    image: header.png
     search: true
 ---
 
