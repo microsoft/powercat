@@ -134,16 +134,6 @@ $table-expand-min-width:                         150px !default;
 }
 
 
-/* Row
- ========================================================================== */
-
-.uk-table > tr.uk-active,
-.uk-table tbody tr.uk-active {
-    background: $table-row-active-background;
-    @if(mixin-exists(hook-table-row-active)) {@include hook-table-row-active();}
-}
-
-
 /* Alignment modifier
  ========================================================================== */
 
@@ -185,6 +175,15 @@ $table-expand-min-width:                         150px !default;
     @if(mixin-exists(hook-table-hover)) {@include hook-table-hover();}
 }
 
+
+/* Active state
+ ========================================================================== */
+
+.uk-table > tr.uk-active,
+.uk-table tbody tr.uk-active {
+    background: $table-row-active-background;
+    @if(mixin-exists(hook-table-row-active)) {@include hook-table-row-active();}
+}
 
 /* Size modifier
  ========================================================================== */
@@ -262,11 +261,11 @@ $table-expand-min-width:                         150px !default;
 
     .uk-table-responsive th:not(:first-child):not(.uk-table-link),
     .uk-table-responsive td:not(:first-child):not(.uk-table-link),
-    .uk-table-responsive .uk-table-link:not(:first-child) > a { padding-top: round($table-cell-padding-vertical / 3) !important; }
+    .uk-table-responsive .uk-table-link:not(:first-child) > a { padding-top: round(($table-cell-padding-vertical * 0.33333)) !important; }
 
     .uk-table-responsive th:not(:last-child):not(.uk-table-link),
     .uk-table-responsive td:not(:last-child):not(.uk-table-link),
-    .uk-table-responsive .uk-table-link:not(:last-child) > a { padding-bottom: round($table-cell-padding-vertical / 3) !important; }
+    .uk-table-responsive .uk-table-link:not(:last-child) > a { padding-bottom: round(($table-cell-padding-vertical * 0.33333)) !important; }
 
     .uk-table-justify.uk-table-responsive th,
     .uk-table-justify.uk-table-responsive td {

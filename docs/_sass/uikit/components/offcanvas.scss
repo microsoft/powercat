@@ -5,7 +5,6 @@
 //
 // Sub-objects:     `uk-offcanvas-bar`
 //                  `uk-offcanvas-container`
-//                  `uk-offcanvas-content`
 //                  `uk-offcanvas-page`
 //
 // Adopted:         `uk-offcanvas-close`
@@ -14,7 +13,7 @@
 //                  `uk-offcanvas-bar-animation`
 //                  `uk-offcanvas-reveal`
 //                  `uk-offcanvas-overlay`
-//                  `uk-offcanvas-content-animation`
+//                  `uk-offcanvas-container-animation`
 //
 // States:          `uk-open`
 //
@@ -27,17 +26,19 @@
 $offcanvas-z-index:                              $global-z-index !default;
 
 $offcanvas-bar-width:                            270px !default;
-$offcanvas-bar-padding-vertical:                 $global-margin !default;
-$offcanvas-bar-padding-horizontal:               $global-margin !default;
+$offcanvas-bar-padding-vertical:                 20px !default;
+$offcanvas-bar-padding-horizontal:               20px !default;
 $offcanvas-bar-background:                       $global-secondary-background !default;
 $offcanvas-bar-color-mode:                       light !default;
 
-$offcanvas-bar-width-m:                          350px !default;
-$offcanvas-bar-padding-vertical-m:               $global-medium-gutter !default;
-$offcanvas-bar-padding-horizontal-m:             $global-medium-gutter !default;
+$offcanvas-bar-width-s:                          350px !default;
+$offcanvas-bar-padding-vertical-s:               $global-gutter !default;
+$offcanvas-bar-padding-horizontal-s:             $global-gutter !default;
 
-$offcanvas-close-position:                       20px !default;
+$offcanvas-close-position:                       5px !default;
 $offcanvas-close-padding:                        5px !default;
+
+$offcanvas-close-position-s:                     10px !default;
 
 $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
 
@@ -79,7 +80,6 @@ $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
  * 1. Set position
  * 2. Size and style
  * 3. Allow scrolling
- * 4. Transform
  */
 
 .uk-offcanvas-bar {
@@ -87,7 +87,7 @@ $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
+    left: (-$offcanvas-bar-width);
     /* 2 */
     box-sizing: border-box;
     width: $offcanvas-bar-width;
@@ -96,17 +96,16 @@ $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
     /* 3 */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    /* 4 */
-    transform: translateX(-100%);
     @if(mixin-exists(hook-offcanvas-bar)) {@include hook-offcanvas-bar();}
 }
 
-/* Tablet landscape and bigger */
-@media (min-width: $breakpoint-medium) {
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
 
     .uk-offcanvas-bar {
-        width: $offcanvas-bar-width-m;
-        padding: $offcanvas-bar-padding-vertical-m $offcanvas-bar-padding-horizontal-m;
+        left: (-$offcanvas-bar-width-s);
+        width: $offcanvas-bar-width-s;
+        padding: $offcanvas-bar-padding-vertical-s $offcanvas-bar-padding-horizontal-s;
     }
 
 }
@@ -118,28 +117,39 @@ $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
 /* Flip modifier */
 .uk-offcanvas-flip .uk-offcanvas-bar {
     left: auto;
-    right: 0;
-    transform: translateX(100%);
+    right: (-$offcanvas-bar-width);
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .uk-offcanvas-flip .uk-offcanvas-bar { right: (-$offcanvas-bar-width-s); }
+
 }
 
 /*
  * Open
  */
 
-.uk-open > .uk-offcanvas-bar { transform: translateX(0); }
+.uk-open > .uk-offcanvas-bar { left: 0; }
+.uk-offcanvas-flip .uk-open > .uk-offcanvas-bar {
+    left: auto;
+    right: 0;
+}
 
 /*
  * Slide Animation (Used in slide and push mode)
  */
 
-.uk-offcanvas-bar-animation { transition: transform 0.3s ease-out; }
+.uk-offcanvas-bar-animation { transition: left 0.3s ease-out; }
+.uk-offcanvas-flip .uk-offcanvas-bar-animation { transition-property: right; }
 
 /*
  * Reveal Animation
  * 1. Set position
  * 2. Clip the bar
  * 3. Animation
- * 4. Reset transform
+ * 4. Reset position
  */
 
 .uk-offcanvas-reveal {
@@ -157,15 +167,21 @@ $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
 
 .uk-offcanvas-reveal .uk-offcanvas-bar {
     /* 4 */
-    transform: translateX(0);
+    left: 0;
+}
+
+.uk-offcanvas-flip .uk-offcanvas-reveal .uk-offcanvas-bar {
+    /* 4 */
+    left: auto;
+    right: 0;
 }
 
 .uk-open > .uk-offcanvas-reveal { width: $offcanvas-bar-width; }
 
 /* Tablet landscape and bigger */
-@media (min-width: $breakpoint-medium) {
+@media (min-width: $breakpoint-small) {
 
-    .uk-open > .uk-offcanvas-reveal { width: $offcanvas-bar-width-m; }
+    .uk-open > .uk-offcanvas-reveal { width: $offcanvas-bar-width-s; }
 
 }
 
@@ -191,6 +207,22 @@ $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
     padding: $offcanvas-close-padding;
     @if(mixin-exists(hook-offcanvas-close)) {@include hook-offcanvas-close();}
 }
+
+/* Tablet landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .uk-offcanvas-close {
+        top: $offcanvas-close-position-s;
+        right: $offcanvas-close-position-s;
+    }
+
+}
+
+/*
+ * Remove margin from adjacent element
+ */
+
+.uk-offcanvas-close:first-child + * { margin-top: 0; }
 
 
 /* Overlay
@@ -232,7 +264,7 @@ $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
 .uk-offcanvas-overlay.uk-open::before { opacity: 1; }
 
 
-/* Container
+/* Prevent scrolling
  ========================================================================== */
 
 /*
@@ -243,49 +275,40 @@ $offcanvas-overlay-background:                   rgba(0,0,0,0.1) !default;
 .uk-offcanvas-page,
 .uk-offcanvas-container { overflow-x: hidden; }
 
-/*
- * Prevent all scrollbars if overlay is used
- */
 
-.uk-offcanvas-container-overlay { overflow: hidden; }
-
-
-/* Content
+/* Container
  ========================================================================== */
 
 /*
  * Prepare slide-out animation (Used in reveal and push mode)
  * Using `position: left` instead of `transform` because position `fixed` elements like sticky navbars
  * lose their fixed state and behaves like `absolute` within a transformed container
- * Note: JS sets a fixed width and height so the page can slide-out without shrinking
- * 1. Smooth scrolling
+ * 1. Provide a fixed width and prevent shrinking
  */
 
-.uk-offcanvas-container .uk-offcanvas-content {
+.uk-offcanvas-container {
     position: relative;
     left: 0;
     transition: left 0.3s ease-out;
     /* 1 */
-    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    width: 100%;
 }
-
-/* Disable scrolling if overlay mode */
-.uk-offcanvas-overlay .uk-offcanvas-content { overflow-y: hidden; }
 
 /*
  * Activate slide-out animation
  */
 
-:not(.uk-offcanvas-flip) > .uk-offcanvas-content-animation { left: $offcanvas-bar-width; }
+:not(.uk-offcanvas-flip).uk-offcanvas-container-animation { left: $offcanvas-bar-width; }
 
-.uk-offcanvas-flip > .uk-offcanvas-content-animation { left: (-$offcanvas-bar-width); }
+.uk-offcanvas-flip.uk-offcanvas-container-animation { left: (-$offcanvas-bar-width); }
 
 /* Tablet landscape and bigger */
-@media (min-width: $breakpoint-medium) {
+@media (min-width: $breakpoint-small) {
 
-    :not(.uk-offcanvas-flip) > .uk-offcanvas-content-animation { left: $offcanvas-bar-width-m; }
+    :not(.uk-offcanvas-flip).uk-offcanvas-container-animation { left: $offcanvas-bar-width-s; }
 
-    .uk-offcanvas-flip > .uk-offcanvas-content-animation { left: (-$offcanvas-bar-width-m); }
+    .uk-offcanvas-flip.uk-offcanvas-container-animation { left: (-$offcanvas-bar-width-s); }
 
 }
 

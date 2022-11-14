@@ -92,15 +92,19 @@
 .uk-invisible { visibility: hidden !important; }
 
 
-/* Hover
+/* Based on the State of the Parent Element
  ========================================================================== */
 
 /*
- * Hidden
- * Can't use `display: hidden` because it's not focusable. This is accessible through keyboard.
+ * Can't use `display: none` nor `visibility: hidden` because both are not focusable.
+ * The target stays visible if any element within receives focus through keyboard.
  */
 
-.uk-visible-toggle:not(:hover):not(.uk-hover) .uk-hidden-hover:not(:focus) {
+/*
+ * Discard space when hidden.
+ */
+
+.uk-visible-toggle:not(:hover):not(:focus) .uk-hidden-hover:not(:focus-within) {
     position: absolute !important;
     width: 0 !important;
     height: 0 !important;
@@ -110,36 +114,27 @@
 }
 
 /*
- * Invisible
- * Can't use `visibility: hidden` because it's not focusable. This is accessible through keyboard.
+ * Keep space when hidden.
  */
 
-.uk-visible-toggle:not(:hover):not(.uk-hover) .uk-invisible-hover:not(:focus) { opacity: 0 !important; }
+.uk-visible-toggle:not(:hover):not(:focus) .uk-invisible-hover:not(:focus-within) { opacity: 0 !important; }
 
 
-/* Touch
+/* Based on Hover Capability of the Pointing Device
  ========================================================================== */
 
 /*
- * Hide if primary pointing device has limited accuracy, e.g. a touch screen.
- * Works on mobile browsers: Safari, Chrome and Android browser
+ * Hover
  */
 
-@media (pointer: coarse) {
+/* Hide if primary pointing device doesn't support hover, e.g. touch screens. */
+@media (hover: none) {
     .uk-hidden-touch { display: none !important; }
 }
 
-/*
- * Hide if primary pointing device is accurate, e.g. mouse.
- * 1. Fallback for IE11 and Firefox, because `pointer` is not supported
- * 2. Reset if supported
- */
-
-/* 1 */
-.uk-hidden-notouch { display: none !important; }
-
-@media (pointer: coarse) {
-    .uk-hidden-notouch { display: block !important; }
+/* Hide if primary pointing device supports hover, e.g. mice. */
+@media (hover) {
+    .uk-hidden-notouch { display: none !important; }
 }
 
 
