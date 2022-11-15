@@ -2,12 +2,7 @@
   docs:
   - powercatoverview
 
-- title: Guidance
-  docs:
-  - guidanceoverview
-  - adoption
-
-- title: Toolkits
+- title: Tools
   docs:
   - toolkitoverview
   - coetoolkit
@@ -15,10 +10,12 @@
   - automationkit
   - almaccelerator
 
-- title: Blogs
+- title: Guidance
   docs:
-  - blogs/blogoverview
+  - guidanceoverview
+  - adoption
 
-- title: Power CAT Live
+- title: Customer Stories
   docs:
-  - powercatlive
+  - industry
+  - techscenario

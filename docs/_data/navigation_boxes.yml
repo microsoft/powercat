@@ -1,21 +1,31 @@
 # Boxes include navigation
 
-- title: Power CAT
+- title: CoE Starter Kit
   desc: Who we are and what we do
   icon: bolt
-  doc: powercatoverview
+  doc: coetoolkit
 
-- title: Guidance
+- title: Power CAT Live
   desc: Learn about our guidance
   icon: file-text
   doc: guidanceoverview
 
-- title: Toolkits
+- title: Creator Kit
   desc: Learn about our toolkits
   icon: cog
   doc: toolkitoverview
 
-- title: Blogs
+- title: Guidance Center
+  desc: Check out our blogs
+  icon: rss
+  doc: blogs/blogoverview
+
+- title: Automation Kit
+  desc: Check out our blogs
+  icon: rss
+  doc: blogs/blogoverview
+
+- title: Adoption
   desc: Check out our blogs
   icon: rss
   doc: blogs/blogoverview

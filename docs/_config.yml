@@ -64,7 +64,7 @@ share:
 
 # Default footer image settings
 footer:
-    copyright:      2022 Microsoft Corp
+    copyright:      (c) 2022 Microsoft Corp
 
 # Disqus comments shortname, requires Disqus account https://disqus.com/
 disqus:

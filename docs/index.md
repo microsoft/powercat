@@ -8,7 +8,7 @@ hero:
     search: true
 ---
 
-{% include boxes.html columns="4" title="What We Do" subtitle="We do a lot of stuff and make a lot of stuff" %}
+{% include boxes.html columns="3" title="What We Do" subtitle="We do a lot of stuff and make a lot of stuff" %}
 
 {% include featured.html tag="featured" title="Popular Articles" subtitle="Featured articles" %}
 
