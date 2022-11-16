@@ -3,12 +3,12 @@ layout: page
 width: expand
 hero:
     title: 
-    subtitle: This site is a work in progress. The real launch is coming soon! 
+    subtitle: This site is a work in progress.
     image: header.png
     search: true
 ---
 
-{% include boxes.html columns="3" title="What We Do" subtitle="We do a lot of stuff and make a lot of stuff" %}
+{% include boxes.html columns="2" title="What We Do" subtitle="Description of what we do and produce" %}
 
 {% include featured.html tag="featured" title="Popular Articles" subtitle="Featured articles" %}
 

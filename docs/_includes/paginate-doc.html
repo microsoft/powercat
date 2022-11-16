@@ -1,3 +1,4 @@
+
 {% assign docs = site.data.navigation_docs | map: 'docs' | join: ',' | split: ',' %}
 
 {% for document in docs %}
@@ -25,6 +26,7 @@
                     <div class="uk-text-right"><a class="remove-underline hvr-forward" href="{{next_page}}">{{ site.data.translation[site.lang].next | default: "Next" }} &rarr;</a></div>
                 {% endif %}
             </div>
+          
         </div>
     </div>
     {% break %}

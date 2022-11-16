@@ -1,21 +1,15 @@
-- title: Power CAT
+- title: Resources
   docs:
-  - powercatoverview
+  - resources
 
 - title: Tools
   docs:
-  - toolkitoverview
-  - coetoolkit
-  - creatorkit
-  - automationkit
-  - almaccelerator
+  - tools/automation-kit
+  - tools/coe-starter-kit
+  - tools/creator-kit
+  - tools/alm-accelerator
 
 - title: Guidance
   docs:
-  - guidanceoverview
+  - guidance/overview
   - adoption
-
-- title: Customer Stories
-  docs:
-  - industry
-  - techscenario
