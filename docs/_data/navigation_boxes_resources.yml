@@ -20,7 +20,7 @@
   icon: cog
   doc: tools/alm-accelerator
 
-- title: Guidance
+- title: Prescriptive Guidance
   desc: Best practices to help you create and implement the business and technology strategies to succeed with Power Platform.
   icon: cog
   doc: guidance/overview
