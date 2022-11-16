@@ -1,6 +1,6 @@
 ---
-title: Does the item come with installation and setup documentation?
-categories: [presale]
+title: Storytelling
+categories: [programs]
 ---
 
-Yes, all our items come with either bundled documentation located in your "All files & documentation" download zip or online documentation.
+We bring to life compelling customer stories that highlight the diverse and creative ways in which Power Platform is used in the real world.
