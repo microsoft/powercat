@@ -1,31 +1,51 @@
 # Boxes include navigation
 
-- title: CoE Starter Kit
-  desc: Who we are and what we do
-  icon: coe
-  doc: coetoolkit
-
-- title: Power CAT Live
-  desc: Learn about our guidance
-  icon: file-text
+- title: Customer Advisory Programs
+  desc: We work directly with marquee customers to enable accelerated adoption and maximize the business value they achieve from Power Platform.
+  icon: cog
   doc: guidanceoverview
 
-- title: Creator Kit
-  desc: Learn about our toolkits
+- title: CAT-managed Communities
+  desc: We nurture enterprise customers' and top partners' connections with product development and their peers in our NDA communities.
   icon: cog
-  doc: toolkitoverview
+  doc: guidanceoverview
 
-- title: Guidance Center
-  desc: Check out our blogs
-  icon: rss
-  doc: blogs/blogoverview
+- title: Guidance and Toolkits
+  desc: We bring our best practices and real-world expertise to everyone by publishing documentation, blogs, videos, and toolkits.
+  icon: cog
+  doc: guidanceoverview
 
-- title: Automation Kit
-  desc: Check out our blogs
-  icon: rss
-  doc: blogs/blogoverview
+- title: Storytelling
+  desc: We bring to life compelling customer stories that highlight the diverse and creative ways in which Power Platform is used in the real world.
+  icon: cog
+  doc: guidanceoverview
 
-- title: Adoption
-  desc: Check out our blogs
-  icon: rss
-  doc: blogs/blogoverview
+#- title: CoE Starter Kit
+#  desc: Who we are and what we do
+#  icon: coe
+#  doc: coetoolkit
+
+# - title: Power CAT Live
+#  desc: Learn about our guidance
+#  icon: file-text
+# doc: guidanceoverview
+
+#- title: Creator Kit
+#  desc: Learn about our toolkits
+#  icon: cog
+#  doc: toolkitoverview
+
+#- title: Guidance Center
+#  desc: Check out our blogs
+#  icon: rss
+#  doc: blogs/blogoverview
+
+#- title: Automation Kit
+#  desc: Check out our blogs
+#  icon: rss
+#  doc: blogs/blogoverview
+
+#- title: Adoption
+#  desc: Check out our blogs
+#  icon: rss
+#  doc: blogs/blogoverview

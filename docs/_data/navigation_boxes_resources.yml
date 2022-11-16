@@ -1,0 +1,35 @@
+# Boxes include navigation
+
+- title: Automation Kit
+  desc: Manage, govern, and scale Power Automate adoption
+  icon: automation
+  doc: tools/automation-kit
+
+- title: CoE Kit
+  desc: Get started with a strategy for adopting Power Platform
+  icon: coe
+  doc: tools/coe-starter-kit
+
+- title: Creator Kit
+  desc: Create consistent, beautiful, and effective user experiences for your Power Apps
+  icon: creator
+  doc: tools/creator-kit
+
+- title: ALM Accelerator
+  desc: Implement source control and deploy solutions in Microsoft Power Platform.
+  icon: cog
+  doc: tools/alm-accelerator
+
+- title: Guidance
+  desc: Best practices to help you create and implement the business and technology strategies to succeed with Power Platform.
+  icon: cog
+  doc: guidance/overview
+
+- title: Adoption
+  desc: Jumpstart your Power Platform adoption with guidance and resources.
+  icon: cog
+  doc: guidance/adoption
+
+
+
+
