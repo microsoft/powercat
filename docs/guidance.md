@@ -1,4 +1,6 @@
 ---
+layout: forward
+target: https://aka.ms/PowerPlatformGuidance
 layout: page
 width: expand
 hero:
@@ -8,6 +10,6 @@ hero:
     search: true
 ---
 
-{% include resources-boxes.html columns="3" title="" subtitle="" %}
+<!-- {% include resources-boxes.html columns="3" title="" subtitle="" %}
 
-{% include featured.html tag="featured" title="Popular Articles" subtitle="Featured articles" %}
+{% include featured.html tag="featured" title="Popular Articles" subtitle="Featured articles" %} -->
