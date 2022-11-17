@@ -15,20 +15,31 @@
   icon: creator
   doc: tools/creator-kit
 
+- title: Guidance
+  desc: Best practices for succeeding with Power Platform.
+  icon: guidance
+  doc: guidance/overview
+
 - title: ALM Accelerator
   desc: Implement source control and deploy solutions in Microsoft Power Platform.
-  icon: cog
+  icon: alm
   doc: tools/alm-accelerator
-
-- title: Prescriptive Guidance
-  desc: Best practices to help you create and implement the business and technology strategies to succeed with Power Platform.
-  icon: cog
-  doc: guidance/overview
 
 - title: Adoption
   desc: Jumpstart your Power Platform adoption with guidance and resources.
-  icon: cog
+  icon: adoption
   doc: guidance/adoption
+
+- title: Power CAT Live
+  desc: Videos about Power Platform.
+  icon: powercatlive
+  doc: guidance/powercatlive
+
+- title: Customer Stories
+  desc: Customer stories
+  icon: stories
+  doc: storytelling/customer-stories
+
 
 
 
