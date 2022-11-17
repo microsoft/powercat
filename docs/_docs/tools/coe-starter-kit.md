@@ -1,13 +1,19 @@
 ---
-layout: forward
-target: https://learn.microsoft.com/en-us/power-platform/guidance/coe/starter-kit
 title: CoE Starter Kit
 subtitle: 
 tags: [adoption, migration, featured, manuela]
 author: manuela
 ---
-The Microsoft Power Platform Center of Excellence (CoE) Starter Kit is a set of templates that are designed to help you develop a strategy for adopting, maintaining and supporting the Power Platform, with a focus on Power Apps and Power Automate.
+The Microsoft Power Platform Center of Excellence (CoE) Starter Kit is a set of templates that are designed to help you develop a strategy for adopting, maintaining, and supporting the Power Platform, with a focus on Power Apps and Power Automate.
 
-[Download the CoE Starter Kit](https://github.com/microsoft/coe-starter-kit)
+### Resources
+<div>
+    <ul class="uk-nav uk-nav-secondary">
+        <li class="uk-active"><a href="https://aka.ms/CoEStarterKit"><div>CoE Starter Kit guidance<div class="uk-nav-subtitle">Guidance to help you understand the motivation for and resonsibilities of a Center of Excellence , in addition to walking you through the prerequisites, setup instructions, and individual components of the CoE Starter Kit.</div></div></a></li>
+        <li class="uk-active"><a href="https://github.com/microsoft/coe-starter-kit"><div>CoE Starter Kit on GitHub<div class="uk-nav-subtitle">The CoE Starter Kit GitHub Repo contains the source, releases, issues and backlog items of all components that are part of the CoE Starter Kit.</div></div></a></li>
+        <li class="uk-active"><a href="https://aka.ms/coekitvideos"><div>CoE Starter Kit playlist<div class="uk-nav-subtitle">Video series with walkthroughs and how-tos for CoE Starter Kit capabilities. </div></div></a></li>
+    </ul>
+</div>
 
-[Read the CoE Starter Kit guidance](https://learn.microsoft.com/en-us/power-platform/guidance/coe/starter-kit)
+<!-- layout: forward
+target: https://learn.microsoft.com/en-us/power-platform/guidance/coe/starter-kit -->
