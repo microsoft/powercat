@@ -21,12 +21,12 @@
   doc: guidance/power-platform-patterns-and-practices
 
 - title: ALM Accelerator
-  desc: Implement source control and deploy solutions in Microsoft Power Platform.
+  desc: Implement source control and deploy solutions in Microsoft Power Platform
   icon: alm
   doc: tools/alm-accelerator
 
 - title: Adoption
-  desc: Jumpstart your Power Platform adoption with guidance and resources.
+  desc: Jumpstart your Power Platform adoption with guidance and resources
   icon: adoption
   doc: guidance/adoption
 
@@ -36,7 +36,7 @@
   doc: guidance/powercatlive
 
 - title: Customer Stories
-  desc: Customer stories
+  desc: Compelling Power Platform success stories
   icon: stories
   doc: storytelling/customer-stories
 
