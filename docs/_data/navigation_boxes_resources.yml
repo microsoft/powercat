@@ -18,7 +18,7 @@
 - title: Guidance
   desc: Best practices for succeeding with Power Platform.
   icon: guidance
-  doc: guidance/overview
+  doc: guidance/power-platform-patterns-and-practices
 
 - title: ALM Accelerator
   desc: Implement source control and deploy solutions in Microsoft Power Platform.
