@@ -6,4 +6,4 @@ author: powercat
 ---
 
 # All about resources
-We make a lot of nice stuff.
+This is a test of an approach to including info about all of our offerings instead of redirecting.
