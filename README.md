@@ -1,6 +1,6 @@
 # Power CAT
 
-About Power CAT
+
 
 ## Contributing
 
