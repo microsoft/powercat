@@ -4,3 +4,13 @@ subtitle: Describes the doc
 tags: [features]
 author: powercat
 ---
+
+Intro text or description
+
+<div>
+    <ul class="uk-nav uk-nav-secondary">
+        <li class="uk-active"><a href="#"><div>Property<div class="uk-nav-subtitle">Description of property</div></div></a></li>
+        <li class="uk-active"><a href="#"><div>Property<div class="uk-nav-subtitle">Description of property</div></div></a></li>
+        <li class="uk-active"><a href="#"><div>Property<div class="uk-nav-subtitle">Description of property</div></div></a></li>
+    </ul>
+</div>
