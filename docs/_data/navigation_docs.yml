@@ -2,14 +2,15 @@
   docs:
   - resources
 
+- title: Guidance
+  docs:
+  - guidance/power-platform-patterns-and-practices
+  - guidance/power-platform-adoption
+  - guidance/power-cat-video-channel
+
 - title: Tools
   docs:
   - tools/automation-kit
   - tools/coe-starter-kit
   - tools/creator-kit
   - tools/alm-accelerator
-
-#- title: Guidance
-#  docs:
-#  - guidance/overview
-#  - adoption

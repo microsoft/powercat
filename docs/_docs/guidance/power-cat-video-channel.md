@@ -1,9 +1,9 @@
 ---
 layout: forward
 target: https://aka.ms/PowerCatLive
-title: Overview
+title: Power CAT Live
 subtitle: About Power CAT Live
-tags: [features]
+tags: [guidance]
 author: powercat
 ---
 <!-- Come into Microsoft as we solve problems and talk with PMs to find out about new and upcoming features in Power Platform and meet the people that bring those features to life.

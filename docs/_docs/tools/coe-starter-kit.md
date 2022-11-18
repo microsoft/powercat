@@ -1,9 +1,10 @@
 ---
 title: CoE Starter Kit
 subtitle: 
-tags: [adoption, migration, featured, manuela]
+tags: [adoption, migration, tool, manuela]
 author: manuela
 ---
+
 The Microsoft Power Platform Center of Excellence (CoE) Starter Kit is a set of templates that are designed to help you develop a strategy for adopting, maintaining, and supporting the Power Platform, with a focus on Power Apps and Power Automate.
 
 <div>
