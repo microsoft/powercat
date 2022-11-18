@@ -4,5 +4,7 @@ subtitle:
 tags: [overview]
 author: powercat
 ---
+{% include featured.html tag="guidance" title="" subtitle="Guidance" %}
 
-This is a test of an approach to including info about all of our offerings instead of redirecting.
+{% include featured.html tag="tool" title="" subtitle="Tools" %}
+

@@ -1,8 +1,8 @@
 ---
 layout: forward
 target: https://adoption.microsoft.com/en-us/powerplatform/
-title: Adoption
+title: Power Platform adoption
 subtitle: Guidance about adoption
-tags: [featured]
+tags: [guidance]
 author: powercat
 ---

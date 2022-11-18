@@ -1,8 +1,8 @@
 ---
 layout: forward
 target: https://aka.ms/powerplatformguidance
-title: Guidance
+title: Patterns and practices
 subtitle: Guidance
-tags: [featured]
+tags: [guidance]
 author: powercat
 ---
