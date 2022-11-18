@@ -1,0 +1,25 @@
+# Boxes include navigation
+
+- title: Power Platform
+  desc: 
+  icon: power-platform
+  doc: tools/automation-kit
+
+- title: Power Apps
+  desc: 
+  icon: power-apps
+  doc: tools/coe-starter-kit
+
+- title: Power Automate
+  desc: 
+  icon: power-automate
+  doc: tools/creator-kit
+
+- title: Power Pages
+  desc: 
+  icon: power-pages
+  doc: tools/creator-kit
+
+
+
+

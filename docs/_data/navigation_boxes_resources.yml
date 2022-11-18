@@ -11,29 +11,29 @@
   doc: tools/coe-starter-kit
 
 - title: Creator Kit
-  desc: Create consistent, beautiful, and effective user experiences for your Power Apps
+  desc: Create engaging and effective UX for your apps
   icon: creator
   doc: tools/creator-kit
 
 - title: Guidance
-  desc: Best practices for succeeding with Power Platform.
+  desc: Resources to help you succeed with Power Platform
   icon: guidance
-  doc: guidance/power-platform-patterns-and-practices
+  doc: power-cat-guidance
 
 - title: ALM Accelerator
-  desc: Implement source control and deploy solutions in Microsoft Power Platform
+  desc: Apply ALM practices to Power Platform
   icon: alm
   doc: tools/alm-accelerator
 
 - title: Adoption
-  desc: Jumpstart your Power Platform adoption with guidance and resources
+  desc: Jumpstart your Power Platform adoption
   icon: adoption
-  doc: guidance/adoption
+  doc: guidance/power-platform-adoption
 
-- title: Power CAT Live
-  desc: Videos about Power Platform.
+- title: Videos
+  desc: Interviews and how-tos covering advanced topics
   icon: powercatlive
-  doc: guidance/powercatlive
+  doc: guidance/power-cat-video-channel
 
 - title: Customer Stories
   desc: Compelling Power Platform success stories

@@ -1,6 +1,6 @@
 ---
-title: Title of the doc
-subtitle: Describes the doc
+title: Customer stories
+subtitle: Customer stories
 tags: [features]
 author: powercat
 ---
