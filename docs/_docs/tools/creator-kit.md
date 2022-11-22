@@ -3,7 +3,7 @@ layout: forward
 target: https://learn.microsoft.com/en-us/power-platform/guidance/creator-kit/overview
 title: Creator Kit
 subtitle: Describes the doc
-tags: [maker, UX, user experience, user interface]
+tags: [tool, maker, UX, user experience, user interface]
 author: denise
 ---
 
