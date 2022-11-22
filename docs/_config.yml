@@ -5,8 +5,8 @@
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
 # Site title and description
-title:              Power CAT 
-description:        Power CAT
+title:              Power CAT
+description:        Power Platform Customer Advisory Team
 lang:               en
 
 # Site subpath, e.g. /blog
@@ -60,7 +60,7 @@ share:
     post:           true # Display share buttons on a post page
     doc:            true # Display share buttons on a doc page
     twitter:        username # Enable by adding Twitter handle 
-    facebook:       true # Enable by setting true (Facebook handle not required)
+    facebook:       false # Enable by setting true (Facebook handle not required)
 
 # Default footer image settings
 footer:

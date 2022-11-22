@@ -1,7 +1,7 @@
 ---
 title: Automation Kit
 subtitle: 
-tags: [power automate, rpa, tool]
+tags: [automate, rpa, flow, process]
 author: powercat
 ---
 

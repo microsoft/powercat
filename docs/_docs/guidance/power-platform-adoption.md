@@ -1,5 +1,5 @@
 ---
-title: Adoption
+title: Power Platform adoption
 subtitle: 
 tags: [guidance]
 author: powercat

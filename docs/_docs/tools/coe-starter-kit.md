@@ -1,7 +1,7 @@
 ---
 title: CoE Starter Kit
 subtitle: 
-tags: [adoption, migration, tool, manuela]
+tags: [adoption, migration]
 author: manuela
 ---
 
