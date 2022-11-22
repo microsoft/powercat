@@ -3,9 +3,9 @@ layout: page
 width: expand
 hero:
     title: 
-    subtitle: The Power Platform Customer Advisory Team (Power CAT) is a team of customer-facing solution architects, program managers and engineers within Power Platform engineering. The team charter includes engaging with marquee customers and guiding their platform implementation to success
+    subtitle: The Power Platform Customer Advisory Team (Power CAT) is a team of customer-facing solution architects, program managers and engineers within Power Platform engineering. The team charter includes engaging with marquee customers and guiding their platform implementation to success.
     image: header.png
-    search: false
+    search: true
 ---
 
 
