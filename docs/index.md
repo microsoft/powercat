@@ -20,5 +20,5 @@ hero:
 
 <!--{% include team.html authors="evan, john, sara, alex, tom, daniel" title="We are here to help" subtitle="Our team is just an email away ready to answer your questions" %}-->
 
-{% include cta.html title="Want to know more?" button_text="Contact Us" button_url="/contact/" subtitle="Get in touch with us" %}
+<!-- {% include cta.html title="Want to know more?" button_text="Contact Us" button_url="/contact/" subtitle="Get in touch with us" %} -->
 
