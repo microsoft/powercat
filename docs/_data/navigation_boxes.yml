@@ -1,24 +1,44 @@
 # Boxes include navigation
 
-- title: Customer Advisory Programs
-  desc: We work directly with marquee customers to enable accelerated adoption and maximize the business value they achieve from Power Platform.
-  icon: cog
-  doc: guidanceoverview
+- title: Guidance & Tools
+  desc: Resources to help you succeed with Power Platform
+  icon: guidance
+  doc: guidance/power-cat-guidance
 
-- title: CAT-managed Communities
-  desc: We nurture enterprise customers' and top partners' connections with product development and their peers in our NDA communities.
-  icon: cog
-  doc: guidanceoverview
+- title: Adoption Workbook
+  desc: Jumpstart your Power Platform adoption
+  icon: adoption
+  doc: guidance/power-platform-adoption
 
-- title: Guidance and Toolkits
-  desc: We bring our best practices and real-world expertise to everyone by publishing documentation, blogs, videos, and toolkits.
-  icon: cog
-  doc: guidanceoverview
+- title: Customer Stories
+  desc: Compelling Power Platform success stories
+  icon: stories
+  doc: storytelling/customer-stories
 
-- title: Storytelling
-  desc: We bring to life compelling customer stories that highlight the diverse and creative ways in which Power Platform is used in the real world.
-  icon: cog
-  doc: guidanceoverview
+- title: Power CAT Live
+  desc: Interviews and how-tos covering advanced topics
+  icon: powercatlive
+  doc: guidance/power-cat-video-channel
+
+#- title: Guidance
+#  desc: We bring our best practices and real-world expertise to everyone by publishing documentation, blogs, videos, and toolkits.
+#  icon: guidance
+#  doc: guidanceoverview
+
+#- title: Customer Advisory Programs
+#  desc: We work directly with marquee customers to enable accelerated adoption and maximize the business value they achieve from Power Platform.
+#  icon: cog
+#  doc: guidanceoverview
+
+#- title: CAT-managed Communities
+#  desc: We nurture enterprise customers' and top partners' connections with product development and their peers in our NDA communities.
+#  icon: cog
+#  doc: guidanceoverview
+
+#- title: Storytelling
+#  desc: We bring to life compelling customer stories that highlight the diverse and creative ways in which Power Platform is used in the real world.
+#  icon: stories
+#  doc: guidanceoverview
 
 #- title: CoE Starter Kit
 #  desc: Who we are and what we do

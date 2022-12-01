@@ -9,7 +9,7 @@ hero:
 ---
 
 
-{% include resources-boxes.html columns="4" title="" subtitle="" %}
+{% include boxes.html columns="4" title="Our resources" subtitle="" %}
 
 {% include faqs.html multiple="true" title="What we do" category="programs" subtitle="" %}
 

@@ -4,8 +4,8 @@ left:
   - title: Home
     url: /
 
-  - title: Resources
-    url: /docs/power-cat-resources/
+  #- title: Resources
+  #  url: /docs/power-cat-resources/
   
   - title: What's New
     url: /changelog-timeline/
