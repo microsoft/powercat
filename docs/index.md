@@ -9,9 +9,9 @@ hero:
 ---
 
 
-{% include boxes.html columns="4" title="Our resources" subtitle="" %}
+{% include boxes.html columns="4" title="" subtitle="" %}
 
-{% include faqs.html multiple="true" title="What we do" category="programs" subtitle="" %}
+{% include faqs.html multiple="true" title="What we work on" category="programs" subtitle="" %}
 
 <!-- {% include featured.html tag="featured" title="Popular Articles" subtitle="Featured articles" %} -->
 
