@@ -1,5 +1,10 @@
 # Boxes include navigation
 
+- title: ALM Accelerator
+  desc: Apply ALM practices to Power Platform
+  icon: alm
+  doc: tools/alm-accelerator
+
 - title: Automation Kit
   desc: Manage, govern, and scale Power Automate adoption
   icon: automation
@@ -15,30 +20,25 @@
   icon: creator
   doc: tools/creator-kit
 
-- title: Guidance
-  desc: Resources to help you succeed with Power Platform
-  icon: guidance
-  doc: power-cat-guidance
+#- title: Patterns & Practices
+#  desc: Resources to help you succeed with Power Platform
+#  icon: guidance
+#  doc: power-cat-resources
 
-- title: ALM Accelerator
-  desc: Apply ALM practices to Power Platform
-  icon: alm
-  doc: tools/alm-accelerator
+#- title: Adoption Workbook
+#  desc: Jumpstart your Power Platform adoption
+#  icon: adoption
+#  doc: guidance/power-platform-adoption
 
-- title: Adoption
-  desc: Jumpstart your Power Platform adoption
-  icon: adoption
-  doc: guidance/power-platform-adoption
+#- title: Customer Stories
+#  desc: Compelling Power Platform success stories
+#  icon: stories
+#  doc: storytelling/customer-stories
 
-- title: Videos
-  desc: Interviews and how-tos covering advanced topics
-  icon: powercatlive
-  doc: guidance/power-cat-video-channel
-
-- title: Customer Stories
-  desc: Compelling Power Platform success stories
-  icon: stories
-  doc: storytelling/customer-stories
+#- title: Power CAT Live
+#  desc: Interviews and how-tos covering advanced topics
+#  icon: powercatlive
+#  doc: guidance/power-cat-video-channel
 
 
 

@@ -1,0 +1,19 @@
+- title: ALM Accelerator
+  desc: Apply ALM practices to Power Platform
+  icon: alm
+  doc: tools/alm-accelerator
+
+- title: Automation Kit
+  desc: Manage, govern, and scale Power Automate adoption
+  icon: automation
+  doc: tools/automation-kit
+
+- title: CoE Kit
+  desc: Get started with a strategy for adopting Power Platform
+  icon: coe
+  doc: tools/coe-starter-kit
+
+- title: Creator Kit
+  desc: Create engaging and effective UX for your apps
+  icon: creator
+  doc: tools/creator-kit

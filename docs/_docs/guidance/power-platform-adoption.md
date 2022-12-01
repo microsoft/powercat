@@ -1,10 +1,12 @@
 ---
+layout: forward
+target: https://adoption.microsoft.com/powerplatform/
 title: Power Platform adoption
 subtitle: 
-tags: [guidance]
+tags: []
 author: powercat
 ---
-Intro text or description
+
 
 <div>
     <ul class="uk-nav uk-nav-secondary">

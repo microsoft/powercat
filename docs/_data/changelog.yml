@@ -1,30 +1,8 @@
 # Changelog page source
 
-- title: New guidance released
+- title: New managed environment guidance
   label: LEARN
   date: November 2022
   list:
-  - <a href="#">Securing the default environment</a>
-  - <a href="#">Collaborating on Power Apps projects</a>
-  - <a href="#">Best practices for RPA</a>
-
-- title: CoE Toolkit updates
-  label: GITHUB
-  date: October 19, 2022
-  list:
-  - Awesome new features
-  - New guidance for the latest release of the toolkit
-
-- title: Future of IT with Charles Lamanna
-  label: POWER CAT LIVE
-  date: October 15, 2022
-  list:
-  - Phil and Charles talk about IT.
-  - Watch it on <a href="https://youtube.com">Power CAT Live</a>.
-
-- title: Power Platform Administration Planning
-  label: BLOG
-  date: September 8, 2022
-  list:
-  - Steve Jeffery covers a simple solution to help you plan administration.
-  - Find it on the <a href="#">Power Apps blog</a>.
+  - <a href="https://learn.microsoft.com/en-us/power-platform/guidance/adoption/manage-default-environment">Manage the default environment</a>
+  - <a href="https://learn.microsoft.com/en-us/power-platform/guidance/adoption/secure-default-environment">Secure the default environment</a>
