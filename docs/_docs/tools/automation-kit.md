@@ -1,4 +1,6 @@
 ---
+layout: forward
+target: AutomationCoE
 title: Automation Kit
 subtitle: 
 tags: [tool, automate, rpa, flow, process]
