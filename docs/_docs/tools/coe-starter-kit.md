@@ -1,4 +1,6 @@
 ---
+layout: forward
+target: https://aka.ms/CoEStarterKit
 title: CoE Starter Kit
 subtitle: 
 tags: [tool, adoption, migration]

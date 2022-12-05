@@ -8,8 +8,7 @@ width: expand
 hero:
      title: Patterns & practices
      subtitle: Tools, guides, strategies, and frameworks, based on real-world experience with customers and backed by expertise, to help you be successful with Power Platform.
-     search: false
+     search: true
 ---
-{% include featured.html tag="guidance" title="" subtitle="Guidance" %}
-
-{% include featured.html tag="tool" title="" subtitle="Tools" %}
+{% include boxes-resources.html columns="4" title="Tools" subtitle="" %}
+{% include boxes-resources-best-practices.html columns="3" title="Guidance" subtitle="" %}

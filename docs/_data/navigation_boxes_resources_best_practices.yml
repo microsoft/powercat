@@ -1,25 +1,16 @@
 # Boxes include navigation
 
 - title: Power Platform
-  desc: 
-  icon: power-platform
-  doc: tools/automation-kit
+  desc: Power Platform guidance
+  icon: PowerPlatform
+  doc: guidance/power-cat-guidance
 
 - title: Power Apps
-  desc: 
-  icon: power-apps
-  doc: tools/coe-starter-kit
+  desc: Power Apps guidance
+  icon: PowerApps
+  doc: guidance/power-cat-guidance
 
 - title: Power Automate
-  desc: 
-  icon: power-automate
-  doc: tools/creator-kit
-
-- title: Power Pages
-  desc: 
-  icon: power-pages
-  doc: tools/creator-kit
-
-
-
-
+  desc: Power Automate guidance
+  icon: PowerAutomate
+  doc: guidance/power-cat-guidance
