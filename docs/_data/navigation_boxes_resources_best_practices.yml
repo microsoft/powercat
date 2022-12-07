@@ -1,16 +1,16 @@
 # Boxes include navigation
 
 - title: Power Platform
-  desc: Power Platform guidance
+  desc: Best practices for Power Platform
   icon: PowerPlatform
-  doc: guidance/power-cat-guidance
+  doc: guidance/power-platform-guidance
 
 - title: Power Apps
-  desc: Power Apps guidance
+  desc: Best practices for Power Apps
   icon: PowerApps
-  doc: guidance/power-cat-guidance
+  doc: guidance/power-apps-guidance
 
 - title: Power Automate
-  desc: Power Automate guidance
+  desc: Best practices for Power Automate
   icon: PowerAutomate
-  doc: guidance/power-cat-guidance
+  doc: guidance/power-automate-guidance
