@@ -5,6 +5,6 @@ tags: [new]
 width: small
 ---
 
-All the latest from Power CAT.
+The latest releases and updates from the Power CAT team.
 
 {% include changelog.html %}
