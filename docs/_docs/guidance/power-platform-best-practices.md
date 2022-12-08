@@ -1,4 +1,6 @@
 ---
+layout: forward
+target: https://aka.ms/powerplatformguidance
 title: Best practices
 subtitle: 
 tags: []
