@@ -1,8 +1,16 @@
 # Changelog page source
 
+- title: December CoE toolkit release
+  label: TOOLKIT
+  date: December 2022
+  list:
+  - This release contains a preview of a Setup Wizard experience for all components in the Core, Governance and Nurture components (a wizard for each independent feature), which will make setup, deployment and upgrade of the CoE kit much easier
+  - <a href="https://github.com/microsoft/coe-starter-kit/releases/tag/CoEStarterKit-December2022">December release of the CoE Starter Kit</a>
+
 - title: New managed environment guidance
-  label: LEARN
+  label: GUIDANCE
   date: November 2022
   list:
+  - This new guidance provides best practices for managing and securing the default Power Platform environment.
   - <a href="https://learn.microsoft.com/en-us/power-platform/guidance/adoption/manage-default-environment">Manage the default environment</a>
   - <a href="https://learn.microsoft.com/en-us/power-platform/guidance/adoption/secure-default-environment">Secure the default environment</a>
