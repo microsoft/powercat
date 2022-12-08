@@ -7,7 +7,7 @@ width: expand
 #author: powercat
 hero:
      title: Patterns & practices
-     subtitle: Tools, guides, strategies, and frameworks, based on real-world experience with customers and backed by expertise, to help you be successful with Power Platform.
+     subtitle: Tools, guides, strategies, and frameworks, based on real-world experience with customers and backed by expertise, to help you be successful with Microsoft Power Platform.
      search: false
 ---
 {% include boxes-resources.html columns="4" title="Tools" subtitle="" %}

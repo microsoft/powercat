@@ -1,22 +1,22 @@
 # Boxes include navigation
 
-- title: Guidance & Tools
-  desc: Resources to help you succeed with Power Platform
+- title: Patterns & Practices
+  desc: Tools and guidance to help you succeed with Microsoft Power Platform
   icon: guidance
   doc: power-cat-resources
 
-- title: Adoption
-  desc: Jumpstart your Power Platform adoption
+- title: Microsoft Power Platform Adoption
+  desc: Jumpstart your Microsoft Power Platform adoption with a workbook, best practices, and maturity model
   icon: adoption
   doc: guidance/power-platform-adoption
 
-- title: Customer Stories
-  desc: Compelling Power Platform success stories
+- title: Customer Success Stories
+  desc: Compelling stories of customer success with Microsoft Power Platform
   icon: stories
   doc: storytelling/customer-stories
 
-- title: Power CAT Live
-  desc: Interviews and how-tos covering advanced topics
+- title: Power CAT on YouTube
+  desc: Interviews and how-tos covering advanced Microsoft Power Platform topics 
   icon: powercatlive
   doc: guidance/power-cat-video-channel
 
