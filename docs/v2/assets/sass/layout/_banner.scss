@@ -1,0 +1,176 @@
+///
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Banner */
+
+	#banner {
+		$overlay: transparentize(_palette(accent2, bg), 0.8);
+
+		@include color-typography(accent2);
+		@include color-button(accent2);
+		@include padding(6em, 0, (4.5em, 0, 0, 0));
+		@include vendor('display', 'flex');
+		@include vendor('align-items', 'center');
+		@include vendor('justify-content', 'center');
+		@include vendor('background-image', (
+			'linear-gradient(to top, #{$overlay}, #{$overlay})',
+			'url("../../images/banner.jpg")',
+		));
+		background-attachment: fixed;
+		background-position: center;
+		background-size: cover;
+		height: 75vh;
+		min-height: 30em;
+		position: relative;
+
+		&:after {
+			@include vendor('pointer-events', 'none');
+			@include vendor('transition', (
+				'opacity 2s ease',
+				'visibility 2s'
+			));
+			background-color: _palette(accent2, bg);
+			content: '';
+			height: 100%;
+			left: 0;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			visibility: hidden;
+			width: 100%;
+			z-index: _misc(z-index-base) + 1;
+		}
+
+		.inner {
+			@include vendor('display', 'flex');
+			@include vendor('align-items', 'center');
+			max-width: _size(inner);
+
+			h2 {
+				font-size: 2.75em;
+				margin-bottom: 0;
+				margin-top: -0.25em;
+				line-height: 1.3;
+			}
+
+			p {
+				font-size: 1.2em;
+				margin: (_size(element-margin) * 0.35) 0 0 0;
+			}
+
+			.content {
+				@include vendor('transition', (
+					'transform 1s ease-out',
+					'opacity 1s ease-out'
+				));
+				@include vendor('transform', 'translateY(0)');
+				opacity: 1;
+
+				> :last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			.actions {
+				@include vendor('transition', (
+					'transform 1s ease-out',
+					'opacity 1s ease-out'
+				));
+				@include vendor('transform', 'translateY(0)');
+				opacity: 1;
+
+				border-left: solid 1px _palette(accent2, border);
+				margin: 0 0 0 _size(section-spacing);
+				min-width: 20em;
+				padding: 1em 0 1em (_size(section-spacing) * 0.75);
+			}
+		}
+
+		@include breakpoint('<=large') {
+			background-attachment: scroll;
+
+			.inner {
+				max-width: 100%;
+				padding: 0 (_size(section-spacing) * 0.75);
+			}
+		}
+
+		@include breakpoint('<=medium') {
+			.inner {
+				@include vendor('flex-direction', 'column');
+				@include vendor('align-items', 'stretch');
+				text-align: center;
+
+				.actions {
+					border-left: 0;
+					margin: (_size(section-spacing) * 0.75) 0 0 0;
+					min-width: 0;
+					padding: 0;
+				}
+			}
+		}
+
+		@include breakpoint('<=small') {
+			@include padding(5.5em, 0, (2em, 0, 0, 0));
+			height: auto;
+			min-height: 0;
+
+			.inner {
+				padding: 0 1.5em;
+
+				h2 {
+					font-size: 1.75em;
+				}
+
+				p {
+					font-size: 1em;
+				}
+
+				.actions {
+					margin: _size(element-margin) 0 0 0;
+				}
+			}
+		}
+
+		@include breakpoint('<=xsmall') {
+			min-height: 75vh;
+
+			.inner {
+				-ms-flex: 1;
+			}
+		}
+
+		body.is-preload & {
+			&:after {
+				opacity: 1;
+				visibility: visible;
+			}
+
+			.inner {
+				.content {
+					opacity: 0;
+					@include vendor('transform', 'translateY(-1em)');
+				}
+
+				.actions {
+					opacity: 0;
+					@include vendor('transform', 'translateY(1em)');
+				}
+			}
+
+			@include breakpoint('<=medium') {
+				.inner {
+					.content {
+						@include vendor('transform', 'translateY(0)');
+					}
+
+					.actions {
+						@include vendor('transform', 'translateY(0)');
+					}
+				}
+			}
+		}
+	}

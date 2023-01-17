@@ -1,0 +1,73 @@
+///
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Main */
+
+	#main {
+		background: _palette(bg);
+		border-bottom: solid 1px darken(_palette(bg-alt), 5);
+
+		> header {
+			$overlay: transparentize(_palette(accent2, bg), 0.8);
+
+			@include color-typography(accent2);
+			@include vendor('background-image', (
+				'linear-gradient(to top, #{$overlay}, #{$overlay})',
+				'url("../../images/banner.jpg")',
+			));
+			background-attachment: fixed;
+			background-position: center;
+			background-size: cover;
+			padding: 7em 0;
+			position: relative;
+			text-align: center;
+			top: -7em;
+
+			h2 {
+				font-size: 2.75em;
+				line-height: 1.3;
+				margin-bottom: 0;
+			}
+
+			p {
+				margin: (_size(element-margin) * 0.5) 0 0 0;
+			}
+		}
+
+		@include breakpoint('<=xlarge') {
+			> header {
+				top: -5em;
+			}
+		}
+
+		@include breakpoint('<=large') {
+			> header {
+				background-attachment: scroll;
+				padding: 6em (_size(section-spacing) * 0.75);
+			}
+		}
+
+		@include breakpoint('<=medium') {
+			> header {
+				padding: 8em (_size(section-spacing) * 0.75);
+			}
+		}
+
+		@include breakpoint('<=small') {
+			> header {
+				padding: 5em 1.5em;
+				top: -3em;
+
+				h2 {
+					font-size: 1.75em;
+				}
+
+				p {
+					font-size: 1em;
+				}
+			}
+		}
+	}

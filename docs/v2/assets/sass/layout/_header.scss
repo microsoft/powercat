@@ -1,0 +1,177 @@
+///
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Header */
+
+	body {
+		padding-top: 3.125em;
+	}
+
+	@include keyframes('reveal-header') {
+		0% { top: -4em; opacity: 0; }
+		100% { top: 0; opacity: 1; }
+	}
+
+	#header {
+		background-color: _palette(bg);
+		border-bottom: solid 1px _palette(border);
+		cursor: default;
+		height: 3.25em;
+		left: 0;
+		line-height: 3.25em;
+		position: fixed;
+		text-align: right;
+		top: 0;
+		width: 100%;
+		z-index: _misc(z-index-base) + 1;
+
+		> h1 {
+			color: _palette(fg-bold);
+			display: inline-block;
+			height: inherit;
+			left: 1.25em;
+			line-height: inherit;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: 0;
+
+			a {
+				font-size: 1.25em;
+			}
+		}
+
+		> a {
+			@include vendor('transition', 'color #{_duration(transition)} ease-in-out');
+			color: inherit;
+			display: inline-block;
+			font-size: 0.8em;
+			letter-spacing: _font(kerning-alt);
+			padding: 0 0.75em;
+			text-decoration: none;
+			text-transform: uppercase;
+
+			&[href="#menu"] {
+				@include icon(false, solid);
+				-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+				&:before {
+					content: '\f0c9';
+					float: right;
+					line-height: inherit;
+					margin: 0 0 0 0.75em;
+				}
+			}
+
+			& + a[href="#menu"]:last-child {
+				border-left: solid 1px _palette(border);
+				padding-left: 2em;
+				margin-left: 1em;
+			}
+
+			&:last-child {
+				padding-right: 1.25em;
+			}
+
+			@include breakpoint('<=small') {
+				padding: 0 0.5em;
+
+				& + a[href="#menu"]:last-child {
+					margin-left: 0.25em;
+					padding-left: 1em;
+				}
+
+				&:last-child {
+					padding-right: 1em;
+				}
+			}
+		}
+
+		& + #banner {
+			margin-top: -3.125em;
+		}
+
+		&.reveal {
+			@include vendor('animation', 'reveal-header 0.5s ease');
+		}
+
+		&.alt {
+			@include vendor('animation', 'none');
+			background-color: transparent;
+			box-shadow: 0 1px 0 0 _palette(accent2, border);
+			color: _palette(accent2, fg);
+			position: absolute;
+			top: (_size(section-spacing) - 1em);
+			left: _size(section-spacing);
+			width: calc(100% - #{_size(section-spacing) * 2});
+
+			> h1 {
+				color: _palette(accent2, fg-bold);
+				left: 0;
+			}
+
+			> a {
+				& + a[href="#menu"]:last-child {
+					border-left-color: _palette(accent2, border);
+				}
+
+				&:last-child {
+					padding-right: 0;
+				}
+			}
+		}
+	}
+
+	@include breakpoint('<=large') {
+		#header {
+			&.alt {
+				$section-spacing: _size(section-spacing) * 0.75;
+
+				top: ($section-spacing - 1em);
+				left: $section-spacing;
+				width: calc(100% - #{$section-spacing * 2});
+			}
+		}
+	}
+
+	@include breakpoint('<=medium') {
+		body {
+			padding-top: 44px;
+		}
+
+		#header {
+			height: 44px;
+			line-height: 44px;
+
+			> h1 {
+				left: 1em;
+
+				a {
+					font-size: 1em;
+				}
+			}
+		}
+	}
+
+	@include breakpoint('<=small') {
+		#header {
+			&.alt {
+				top: 0.25em;
+				left: 1.5em;
+				width: calc(100% - 3em);
+			}
+		}
+	}
+
+	@include breakpoint('<=xsmall') {
+		#header {
+			min-width: 320px;
+
+			&.alt {
+				min-width: 0;
+			}
+		}
+	}

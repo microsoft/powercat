@@ -1,0 +1,163 @@
+///
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Footer */
+
+	#footer {
+		$overlay: transparentize(_palette(accent2, bg), 0.8);
+
+		@include color-typography(accent2);
+		@include color-button(accent2);
+		@include padding(7em, 0);
+		@include vendor('background-image', (
+			'linear-gradient(to top, #{$overlay}, #{$overlay})',
+			'url("../../images/banner.jpg")',
+		));
+		background-attachment: fixed;
+		background-position: center;
+		background-size: cover;
+
+		a {
+			color: inherit;
+		}
+
+		.contact {
+			list-style: none;
+			padding: 0;
+
+			li {
+				display: inline-block;
+				padding: 0;
+
+				&:before {
+					content: '\2022';
+					margin: 0 0.75em;
+				}
+
+				&:first-child {
+					&:before {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.links {
+			list-style: none;
+			padding: 0;
+
+			li {
+				border-left: solid 1px;
+				display: inline-block;
+				line-height: 1;
+				margin: 0 0 0 1.5em;
+				padding: 0 0 0 1.5em;
+
+				&:first-child {
+					border-left: 0;
+					margin-left: 0;
+					padding-left: 0;
+				}
+
+				a {
+					font-size: 0.8em;
+					letter-spacing: _font(kerning-alt);
+					text-decoration: none;
+					text-transform: uppercase;
+				}
+			}
+		}
+
+		> .inner {
+			@include vendor('display', 'flex');
+			@include vendor('flex-wrap', 'wrap');
+			margin: 0 auto;
+			width: _size(inner);
+
+			> * {
+				font-size: 0.8em;
+				width: 50%;
+			}
+
+			.icons {
+				@include vendor('order', '2');
+				text-align: right;
+			}
+
+			.contact {
+				@include vendor('order', '4');
+				text-align: right;
+			}
+
+			.links {
+				@include vendor('order', '1');
+			}
+
+			.copyright {
+				@include vendor('order', '3');
+			}
+		}
+
+		@include breakpoint('<=xlarge') {
+			@include padding(5em, 0);
+		}
+
+		@include breakpoint('<=large') {
+			background: _palette(accent2, bg);
+
+			> .inner {
+				width: 100%;
+				padding: 0 (_size(section-spacing) * 0.75);
+			}
+		}
+
+		@include breakpoint('<=medium') {
+			> .inner {
+				display: block;
+
+				> * {
+					width: 100%;
+					font-size: 1em;
+					text-align: center !important;
+				}
+			}
+		}
+
+		@include breakpoint('<=small') {
+			@include padding(3em, 0);
+
+			> .inner {
+				width: 100%;
+				padding: 0 1.5em;
+
+				> * {
+					font-size: 0.8em;
+				}
+			}
+		}
+
+		@include breakpoint('<=xsmall') {
+			.contact {
+				list-style: none;
+
+				li {
+					display: block;
+					padding: 0;
+
+					&:before {
+						display: none;
+					}
+				}
+			}
+
+			.links {
+				li {
+					margin: 0 0 0 0.75em;
+					padding: 0 0 0 0.75em;
+				}
+			}
+		}
+	}
