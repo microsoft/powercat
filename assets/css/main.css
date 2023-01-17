@@ -28,6 +28,8 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;}
 
+
+
 body {
 	line-height: 1;
 }
@@ -2037,7 +2039,7 @@ input, select, textarea {
 	.features section width 33.33333
 */
 
-	.features {
+	/* .features {
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -2100,8 +2102,190 @@ input, select, textarea {
 	.features section {
 		background-color: #ffffff;
 		border-bottom: solid 1px #eaeaea;
+	} */
+
+/* new features */
+.features {
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-moz-flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin: 0 0 2em -3em;
+	width: calc(100% + 3em);
+}
+
+	.features article {
+		-moz-align-items: center;
+		-webkit-align-items: center;
+		-ms-align-items: center;
+		align-items: center;
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		margin: 0 0 3em 3em;
+		position: relative;
+		width: calc(50% - 3em);
 	}
 
+		.features article:nth-child(2n - 1) {
+			margin-right: 1.5em;
+		}
+
+		.features article:nth-child(2n) {
+			margin-left: 1.5em;
+		}
+
+		.features article:nth-last-child(1), .features article:nth-last-child(2) {
+			margin-bottom: 0;
+		}
+
+		.features article .icon {
+			-moz-flex-grow: 0;
+			-webkit-flex-grow: 0;
+			-ms-flex-grow: 0;
+			flex-grow: 0;
+			-moz-flex-shrink: 0;
+			-webkit-flex-shrink: 0;
+			-ms-flex-shrink: 0;
+			flex-shrink: 0;
+			display: block;
+			height: 10em;
+			line-height: 10em;
+			margin: 0 2em 0 0;
+			text-align: center;
+			width: 10em;
+		}
+
+			.features article .icon:before {
+				color: #62d4e5;
+				font-size: 2.75rem;
+				position: relative;
+				top: 0.05em;
+			}
+
+			.features article .icon:after {
+				-moz-transform: rotate(45deg);
+				-webkit-transform: rotate(45deg);
+				-ms-transform: rotate(45deg);
+				transform: rotate(45deg);
+				border-radius: 0.25rem;
+				border: solid 0px rgba(210, 215, 217, 0.75);
+				content: '';
+				display: block;
+				height: 7em;
+				left: 50%;
+				margin: -3.5em 0 0 -3.5em;
+				position: absolute;
+				top: 50%;
+				width: 7em;
+			}
+
+		.features article .content {
+			-moz-flex-grow: 1;
+			-webkit-flex-grow: 1;
+			-ms-flex-grow: 1;
+			flex-grow: 1;
+			-moz-flex-shrink: 1;
+			-webkit-flex-shrink: 1;
+			-ms-flex-shrink: 1;
+			flex-shrink: 1;
+			width: 100%;
+		}
+
+			.features article .content > :last-child {
+				margin-bottom: 0;
+			}
+
+	@media screen and (max-width: 980px) {
+
+		.features {
+			margin: 0 0 2em 0;
+			width: 100%;
+		}
+
+			.features article {
+				margin: 0 0 3em 0;
+				width: 100%;
+			}
+
+				.features article:nth-child(2n - 1) {
+					margin-right: 0;
+				}
+
+				.features article:nth-child(2n) {
+					margin-left: 0;
+				}
+
+				.features article:nth-last-child(1), .features article:nth-last-child(2) {
+					margin-bottom: 3em;
+				}
+
+				.features article:last-child {
+					margin-bottom: 0;
+				}
+
+				.features article .icon {
+					height: 8em;
+					line-height: 8em;
+					width: 8em;
+				}
+
+					.features article .icon:before {
+						font-size: 2.25rem;
+					}
+
+					.features article .icon:after {
+						height: 6em;
+						margin: -3em 0 0 -3em;
+						width: 6em;
+					}
+
+	}
+
+	@media screen and (max-width: 480px) {
+
+		.features article {
+			-moz-flex-direction: column;
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			-moz-align-items: -moz-flex-start;
+			-webkit-align-items: -webkit-flex-start;
+			-ms-align-items: -ms-flex-start;
+			align-items: flex-start;
+		}
+
+			.features article .icon {
+				height: 6em;
+				line-height: 6em;
+				margin: 0 0 1.5em 0;
+				width: 6em;
+			}
+
+				.features article .icon:before {
+					font-size: 1.5rem;
+				}
+
+				.features article .icon:after {
+					height: 4em;
+					margin: -2em 0 0 -2em;
+					width: 4em;
+				}
+
+	}
+
+	@media screen and (max-width: 480px) {
+
+		.features article .icon:before {
+			font-size: 1.25rem;
+		}
+
+	}
 	
 
 /* Form */
@@ -2371,7 +2555,7 @@ input, select, textarea {
 			-ms-transform: rotate(45deg);
 			transform: rotate(45deg);
 			border-radius: 4px;
-			border: solid 1px;
+			border: solid 0px;
 			display: block;
 			font-size: 1.75em;
 			height: 2.5em;
@@ -2389,9 +2573,9 @@ input, select, textarea {
 				-ms-transform: rotate(-45deg);
 				transform: rotate(-45deg);
 				text-align: center;
-			}
+			} */
 
-	.icon.major {
+	/* .icon.major {
 		border-color: rgba(144, 144, 144, 0.2);
 	}
 
