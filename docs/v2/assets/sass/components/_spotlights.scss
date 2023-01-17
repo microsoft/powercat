@@ -1,0 +1,114 @@
+///
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Spotlights */
+
+	.spotlights {
+		margin: 0 0 _size(element-margin) 0;
+
+		section {
+			@include vendor('display', 'flex');
+			@include vendor('align-items', 'center');
+			@include vendor('flex-direction', 'row');
+			border-top: solid 1px;
+			margin-top: _size(section-spacing) * 0.85;
+			padding-top: _size(section-spacing) * 0.85;
+
+			.image {
+				position: relative;
+				width: 35%;
+
+				img {
+					display: block;
+					width: 100%;
+				}
+			}
+
+			.content {
+				-ms-flex: 1;
+				margin: 0 0 0 _size(section-spacing);
+				width: 65%;
+
+				> :last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			&:first-child {
+				border-top: 0;
+				margin-top: 0;
+				padding-top: 0;
+			}
+
+			&:nth-child(2n) {
+				@include vendor('flex-direction', 'row-reverse');
+
+				.content {
+					margin: 0 _size(section-spacing) 0 0;
+				}
+			}
+		}
+
+		@include breakpoint('<=medium') {
+			section {
+				$section-spacing: _size(section-spacing) * 0.75;
+
+				@include vendor('align-items', 'flex-start');
+
+				.image {
+					top: 0.35em;
+					width: 40%;
+				}
+
+				.content {
+					margin: 0 0 0 $section-spacing;
+					width: 60%;
+				}
+
+				&:nth-child(2n) {
+					.content {
+						margin: 0 $section-spacing 0 0;
+					}
+				}
+			}
+		}
+
+		@include breakpoint('<=small') {
+			section {
+				margin-top: _size(element-margin);
+				padding-top: _size(element-margin);
+			}
+		}
+
+		@include breakpoint('<=xsmall') {
+			section {
+				display: block;
+
+				.image {
+					display: block;
+					top: 0;
+					width: 100%;
+					margin: 0 0 _size(element-margin) 0;
+				}
+
+				.content {
+					margin: 0;
+					width: 100%;
+					text-align: center;
+				}
+			}
+		}
+	}
+
+	@mixin color-spotlights($p: null) {
+		.spotlights {
+			section {
+				border-top-color: _palette($p, border);
+			}
+		}
+	}
+
+	@include color-spotlights;

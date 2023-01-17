@@ -1,0 +1,71 @@
+///
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Icon */
+
+	.icon {
+		@include icon;
+		border-bottom: none;
+		position: relative;
+
+		> .label {
+			display: none;
+		}
+
+		&.solid {
+			&:before {
+				font-weight: 900;
+			}
+		}
+
+		&.brands {
+			&:before {
+				font-family: 'Font Awesome 5 Brands';
+			}
+		}
+
+		&.major {
+			@include vendor('transform', 'rotate(45deg)');
+			border-radius: _size(border-radius);
+			border: solid 1px;
+			display: block;
+			font-size: 1.75em;
+			height: 2.5em;
+			line-height: 2.5em;
+			margin: 0 auto _size(element-margin) auto;
+			position: relative;
+			text-align: center;
+			top: 0.5em;
+			width: 2.5em;
+
+			&:before {
+				@include vendor('transform', 'rotate(-45deg)');
+				
+				text-align: center;
+			}
+		}
+	}
+
+	@mixin color-icon($p: null) {
+		$highlight: _palette($p, highlight);
+
+		.icon {
+			&.major {
+				border-color: _palette($p, border);
+
+				&:before {
+					@if $p == $highlight {
+						color: _palette($highlight, fg-bold);
+					}
+					@else {
+						color: _palette($highlight, bg);
+					}
+				}
+			}
+		}
+	}
+
+	@include color-icon;
