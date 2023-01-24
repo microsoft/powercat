@@ -1,0 +1,84 @@
+///
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
+///
+
+/* Image Circles */
+
+	.image-circles {
+		margin: 0 0 _size(element-margin) 0;
+		text-align: right;
+
+		.images {
+			@include vendor('display', 'flex');
+			@include vendor('flex-direction', 'row');
+			margin: 1em 0 0 -1em;
+			width: calc(100% + 1em);
+
+			> * {
+				-ms-flex: 1;
+				display: block;
+				margin: 0 0 0 1em;
+				position: relative;
+				white-space: nowrap;
+				width: 50%;
+
+				&:before {
+					border-radius: 100%;
+					content: '';
+					display: block;
+					height: 100%;
+					margin: 0 0 0 1em;
+					overflow: hidden;
+					position: absolute;
+					right: 0;
+					top: 0;
+					width: calc(50% - 0.5em);
+				}
+
+				img {
+					border-radius: 100%;
+					display: block;
+					width: calc(50% - 0.5em);
+				}
+			}
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:nth-child(2n - 1) {
+				> * {
+					@include vendor('transform', 'scaleX(-1)');
+
+					img {
+						@include vendor('transform', 'scaleX(-1)');
+					}
+				}
+			}
+		}
+
+		@include breakpoint('<=medium') {
+			width: 100%;
+			max-width: 30em;
+		}
+
+		@include breakpoint('<=small') {
+			max-width: 16em;
+		}
+	}
+
+	@mixin color-image-circles($p: null) {
+		.image-circles {
+			.images {
+				> * {
+					&:before {
+						box-shadow: inset 0 0 0 1px _palette($p, border);
+					}
+				}
+			}
+		}
+	}
+
+	@include color-image-circles;
