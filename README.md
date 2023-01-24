@@ -1,5 +1,7 @@
 # Power CAT
+We are the Power Customer Advisory Team (Power CAT), part of the Microsoft Power Platform engineering team at Microsoft. We work with a specific group of key enterprise customers and do whatever it takes to ensure their success with Power Platform. We are a diverse group of technical architects, community managers, program managers, developers, and content creators, located all over the world, all sharing a deep passion for the possibilities of low-code. Our charter includes engaging with key enterprise customers and guiding their platform implementation to success, sharing with the world what we learn from our engagements with customers in guidance and tools, and celebrating the success of our customers via compelling customer stories.
 
+This repository contains the Power CAT website.
 
 
 ## Contributing
