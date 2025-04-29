@@ -234,6 +234,18 @@ body {
     color: var(--ms-blue);
 }
 
+details {
+    padding: 5px; 
+    border: 5px solid #f7f7f7;
+    border-radius: 3px;
+}
+summary {
+    list-style-position: outside;
+    margin-left: 30px;
+    padding: 5px 5px 5px 10px;
+    border-radius: 5px;
+}
+
 .register-btn {
     display: inline-block;
     background-color: var(--ms-blue);
