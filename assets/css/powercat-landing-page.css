@@ -1986,11 +1986,11 @@ html {
     align-items: center;
     border: 2px none #8f2b87;
     border-radius: 50px;
-    background-color: #5f8fc5;
+    background-color: #9ee6f4;
     box-shadow: none;
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
-    color: #ffff;
+    color: #000000;
     font-size: 12px;
     line-height: 17px;
     font-weight: 600;
