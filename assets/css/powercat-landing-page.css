@@ -2067,9 +2067,9 @@ html {
   }
   
   .lnd_card_title_white {
-    margin-bottom: 25px;
+    margin-bottom: 0px;
     color: #f5f7fd;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
     font-weight: 400;
     text-align: center;
