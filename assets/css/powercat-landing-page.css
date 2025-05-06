@@ -2069,7 +2069,7 @@ html {
   .lnd_card_title_white {
     margin-bottom: 25px;
     color: #f5f7fd;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 22px;
     font-weight: 400;
     text-align: center;
@@ -8136,7 +8136,7 @@ html {
       line-height: 57px;
     }
     .lnd_paragraph {
-      font-size: 16px;
+      font-size: 24px;
       line-height: 24px;
     }
     .lnd_paragraph.meetings {
