@@ -1986,12 +1986,12 @@ html {
     align-items: center;
     border: 2px none #8f2b87;
     border-radius: 50px;
-    background-color: #9ee6f4;
+    background-color: #0078D4;
     box-shadow: none;
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
-    color: #000000;
-    font-size: 12px;
+    color: #ffffff;
+    font-size: 14px;
     line-height: 17px;
     font-weight: 600;
     letter-spacing: 1px;
@@ -2001,7 +2001,7 @@ html {
   
   .lnd_btn_02:hover {
     border-width: 0px;
-    background-color: #c01ab2;
+    background-color: #0A2647;
     box-shadow: -1px 6px 20px 0 rgba(32, 27, 61, 0.14);
   }
   
