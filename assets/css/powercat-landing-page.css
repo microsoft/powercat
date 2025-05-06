@@ -3094,7 +3094,7 @@ html {
     max-width: 500px;
     margin-bottom: 18px;
     color: #000;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 24px;
   }
   
@@ -6419,10 +6419,10 @@ html {
   
   .h06_text {
     max-width: 560px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     color: #f5f7fd;
-    font-size: 18px;
-    line-height: 25px;
+    font-size: 22px;
+    line-height: 28px;
     font-weight: 500;
   }
   
