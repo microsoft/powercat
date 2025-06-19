@@ -19,37 +19,223 @@
         };
 
         const cards = [
-    { title: "Manager", description: "Oversees operations and ensures alignment with goals.", category: "Stakeholders" },
-    { title: "IT Administrator", description: "Maintains technical infrastructure and ensures system security.", category: "Stakeholders" },
-    { title: "Change Manager", description: "Leads initiatives for smooth transitions to new processes.", category: "Stakeholders" },
-    { title: "Customer/Client", description: "Provides feedback on product usability and satisfaction.", category: "Stakeholders" },
-    { title: "Partner/Supplier", description: "Supplies goods or services critical to operations.", category: "Stakeholders" },
-    { title: "End User", description: "Interacts with the system daily and relies on its functionality.", category: "Stakeholders" },
-    { title: "Process Owner", description: "Responsible for key workflows and their efficiency.", category: "Stakeholders" },
+        {
+            "Title": "Data Quality Issues",
+            "Description": "Incomplete, outdated, or inconsistent data can affect system performance and accuracy.",
+            "Category": "Challenges"
+        },
+        {
+            "Title": "User Adoption Resistance",
+            "Description": "Employees or customers may be hesitant to trust or use new technologies.",
+            "Category": "Challenges"
+        },
+        {
+            "Title": "Integration Complexity",
+            "Description": "Difficulty in connecting the solution with existing systems and workflows.",
+            "Category": "Challenges"
+        },
+        {
+            "Title": "Data Privacy",
+            "Description": "Ensuring sensitive information is protected.",
+            "Category": "Challenges"
+        },
+        {
+            "Title": "Skills Gap",
+            "Description": "Addressing the need for upskilling employees.",
+            "Category": "Challenges"
+        },
+        {
+            "Title": "Resource Contraints",
+            "Description": "Working with financial, people, or other resource contraints to implement the solution.",
+            "Category": "Challenges"
+        },
+        {
+            "Title": "Unclear success critieria",
+            "Description": "Uncertainty about the project's goals and/or success measurement criteria.",
+            "Category": "Challenges"
+        },
+        {
+            "Title": "Explanability gaps",
+            "Description": "Users report difficulty understanding how AI decisions are made.",
+            "Category": "Challenges"
+        },
+        {
+            "Title": "Improve Efficiency",
+            "Description": "Streamline processes to save time.",
+            "Category": "Objectives"
+        },
+        {
+            "Title": "Enhance User Experience",
+            "Description": "Improve usability and accessibility to ensure a seamless interaction for users.",
+            "Category": "Objectives"
+        },
+        {
+            "Title": "Reduce Costs",
+            "Description": "Lower operational expenses by optimizing resources and automating processes.",
+            "Category": "Objectives"
+        },
+        {
+            "Title": "Ensure Compliance",
+            "Description": "Meet regulatory and policy requirements to mitigate legal and security risks.",
+            "Category": "Objectives"
+        },
+        {
+            "Title": "Increase Revenue",
+            "Description": "Drive growth through better decision-making, new opportunities, and improved customer engagement.",
+            "Category": "Objectives"
+        },
+        {
+            "Title": "Improve Collaboration",
+            "Description": "Enhance communication and coordination across teams and departments.",
+            "Category": "Objectives"
+        },
+        {
+            "Title": "Scale Operations",
+            "Description": "Enable business growth by creating adaptable and scalable solutions.",
+            "Category": "Objectives"
+        },
+        {
+            "Title": "Improved Employee Satisfaction",
+            "Description": "Employees feel supported and engaged.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Automate repetitive tasks",
+            "Description": "Automation streamlines operations and frees up employee time.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Reduce response times",
+            "Description": "Common queries and requests are managed faster, allowing teams to focus on strategic initiatives.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Optimize workflow",
+            "Description": "Agent optimizes workflow, increasing scale and accuracy.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Cost Savings",
+            "Description": "Automation reduces operational expenses.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Improved resource allocation",
+            "Description": "Employees are able to support larger and/or more complex workloads.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Enhanced decision making",
+            "Description": "Users gain better insights through improved data analysis.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Increased process resilience",
+            "Description": "Sustems or processes are more robust and adaptable to unexpected challenges.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Improved user trust",
+            "Description": "Users feel confident in the system's fairness, transparency, and reliability.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Increased revenue streams",
+            "Description": "The system identifies or unlocks new opportunities for generating income.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Higher customer satisfaction",
+            "Description": "Improved services lead to happier customers and greater lifetime customer value.",
+            "Category": "Outcomes"
+        },
+        {
+            "Title": "Manager",
+            "Description": "Oversees operations and ensures alignment with goals.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "IT Administrator",
+            "Description": "Maintains technical infrastructure and ensures system security.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Change Manager",
+            "Description": "Leads initiatives for smooth transitions to new processes.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Customer/Client",
+            "Description": "Provides feedback on product usability and satisfaction.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Partner/Supplier",
+            "Description": "Supplies goods or services critical to operations.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "End User",
+            "Description": "Interacts with the system daily and relies on its functionality.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Process Owner",
+            "Description": "Responsible for key workflows and their efficiency.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Compliance Officer",
+            "Description": "Ensures organizational processes meet legal and regulatory requirements",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Responsible AI Group",
+            "Description": "Provides insights and/or approval on ethical, fair, and accountable use of AI technologies.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Director",
+            "Description": "Sets departmental strategies and ensures resources are allocated effectively.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Executive",
+            "Description": "Defines organizational vision and strategy, approves high-level decisions.",
+            "Category": "Stakeholders"
+        },
+        {
+            "Title": "Compliance regulation update",
+            "Description": "New legal requirements force adjustments to the system for compliance.",
+            "Category": "Wildcard"
+        },
+        {
+            "Title": "Bias in AI outputs",
+            "Description": "The agent system is found to unfairly show favor certain employee groups",
+            "Category": "Wildcard"
+        },
+        {
+            "Title": "Upstream service downtime",
+            "Description": "Temporary technical glitches in a dependant service cause reliability and/or availability issues.",
+            "Category": "Wildcard"
+        },
+        {
+            "Title": "Employee Mistrust",
+            "Description": "Concerns arise about the transparency of the AI solution.",
+            "Category": "Wildcard"
+        },
+        {
+            "Title": "Competition Launches AI",
+            "Description": "A competitor launches a similar AI solution.",
+            "Category": "Wildcard"
+        },
+        {
+            "Title": "High Staff Turnover",
+            "Description": "Key staff leaving creates resource gaps.",
+            "Category": "Wildcard"
+        }
+    ];
 
-    { title: "Improve Efficiency", description: "Streamline processes to save time.", category: "Objectives" },
-    { title: "Enhance User Experience", description: "Improve usability and accessibility to ensure a seamless interaction for users.", category: "Objectives" },
-    { title: "Reduce Costs", description: "Lower operational expenses by optimizing resources and automating processes.", category: "Objectives" },
-    { title: "Ensure Compliance", description: "Meet regulatory and policy requirements to mitigate legal and security risks.", category: "Objectives" },
-    { title: "Increase Revenue", description: "Drive growth through better decision-making, new opportunities, and improved customer engagement.", category: "Objectives" },
-    { title: "Improve Collaboration", description: "Enhance communication and coordination across teams and departments.", category: "Objectives" },
-    { title: "Scale Operations", description: "Enable business growth by creating adaptable and scalable solutions.", category: "Objectives" },
-
-    { title: "Data Quality Issues", description: "Incomplete, outdated, or inconsistent data can affect system performance and accuracy.", category: "Challenges" },
-    { title: "User Adoption Resistance", description: "Employees or customers may be hesitant to trust or use new technologies.", category: "Challenges" },
-    { title: "Integration Complexity", description: "Difficulty in connecting the solution with existing systems and workflows.", category: "Challenges" },
-    { title: "Data Privacy", description: "Ensuring sensitive information is protected.", category: "Challenges" },
-    { title: "Skills Gap", description: "Addressing the need for upskilling employees.", category: "Challenges" },
-    // outcomes
-    { title: "Improved Employee Satisfaction", description: "Employees feel supported and engaged.", category: "Outcomes" },
-    { title: "Automate repetitive tasks", description: "Automation streamlines operations and frees up employee time.", category: "Outcomes" },
-    { title: "Reduce response times", description: "Common queries and requests are managed faster, allowing teams to focus on strategic initiatives.", category: "Outcomes" },
-    { title: "Optimize workflow", description: "Agent optimizes workflow, increasing scale and accuracy.", category: "Outcomes" },
-    { title: "Employee Mistrust", description: "Concerns arise about the transparency of the AI solution.", category: "Wildcard" },
-    { title: "Competition Launches AI", description: "A competitor launches a similar AI solution.", category: "Wildcard" },
-    { title: "Cost Savings", description: "Automation reduces operational expenses.", category: "Outcomes" },
-    { title: "High Staff Turnover", description: "Key staff leaving creates resource gaps.", category: "Wildcard" }
-];
 
         // Minimum word count for validation
         const minWordCount = 20;        
@@ -167,7 +353,7 @@ document.querySelectorAll(".nested-zone, .zone.NotRelevant").forEach(zone => {
             });
 
             // Ensure we are dropping in a valid zone
-            if (zone.closest('.zone').dataset.category === data.category || zone.classList.contains("NotRelevant")) {
+            if (zone.closest('.zone').dataset.category != null || zone.classList.contains("NotRelevant")) {
                 
                 // phils request of limiting to three primary/ essential careds
                 const restrictedZones = [
