@@ -1,0 +1,637 @@
+
+        
+        
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        #game-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            padding: 20px;
+            gap: 20px;
+            background-image: linear-gradient(to right, #006B8E, #009DDC);
+        }
+
+            #logo-container {
+                position: relative;
+                height: 50px;
+                padding: 0px;
+                margin: 0PX;
+            }
+
+                #logo-container img {
+                    width: 200px;
+                    height: auto;
+                }
+
+        #card-generator {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            gap: 10px;
+            padding-left: 16px;
+        }
+
+        #card-generator button {
+            padding: 10px 20px;
+            font-size: 12px;
+            background-color: #006b7a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #card-list {
+            padding-left: 50px;
+        }
+
+        #card-generator button:hover {
+            background-color: #0056b3;
+        }
+
+        .card {
+            /*display: flex;
+            flex-direction: column;*/
+            border: 1px solid #ccc;
+            padding: 5px;
+            /*border-left: 10px solid;*/
+            border-radius: 7px;
+            background-color: white;
+            margin-bottom: 10px;
+            cursor: grab;
+            width: 175px;
+            height: 200px;
+            text-align: center;
+        }
+
+            .card p, .card strong {
+                text-align: center!important;
+            }   
+
+            .card p {
+                margin: 32px 0px 32px 0px;
+                font-size: 12px;
+            }
+
+            .card strong {
+                font-weight: 700;
+                font-size: 14px;
+                margin-top: 16px;
+            }
+            
+            .card-icon {
+                width: 55px;
+                height: auto;
+                margin: auto;
+                display: block;
+            }
+
+        .dropped-card {
+            padding: 5px;
+            height: 15px;
+            width: 92%;
+        }
+
+            .dropped-card strong {
+                font-size: 12px;;
+            }
+
+        .Stakeholders { border-left-color: blue; }
+
+            .Stakeholders strong, .Objectives strong, .Challenges strong, .Outcomes strong, .zone.NotRelevant strong, .Wildcard strong {
+                padding: 0px;
+                font-weight: 400;
+            }
+
+            .Stakeholders .card {
+                height: 25x!important;
+            }
+
+        .Objectives { border-left-color: green; }
+        .Challenges { border-left-color: orange; }
+        .Outcomes { border-left-color: purple; }
+        .Wildcard { border-left-color: red; }
+
+        #game-board {
+            width: 80%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+        }
+
+        .zone, .playbook-category  {
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 10px;
+            position: relative;
+            min-height: 150px;
+            overflow-y: auto;
+            box-shadow: 2px 2px 6px rgb(50, 50, 50);
+        }
+
+        .nested-zone {
+            border-radius: 6px;
+            margin-top: 10px;
+            padding: 10px;
+            min-height: 115px;
+            overflow-y: auto;
+            background-color: #f1f1f1;
+        }
+
+            .nested-zone h3 {
+                font-weight: 100;
+                font-size: 13px;
+                margin: 0px;
+                padding: 0px 0px 10px 0px;
+            }
+
+        .zone-title {
+            position:relative;
+            padding: 0 5px;
+            font-weight: bold;
+        }
+
+            .zone-title h2 {
+                font-weight: 100;
+                font-size: 16px;
+                background-color: none;
+                color: #f0f0f0;
+            }
+
+        .zone.Stakeholders, #playbook-stakeholders { 
+            background-image: linear-gradient(to left, #006B8E, #009DDC); 
+        }
+        .zone.Objectives, #playbook-objectives { 
+            
+            background-image: linear-gradient(to right, #00883F, #007E5F); 
+        }
+        .zone.Challenges, #playbook-challenges { 
+            
+            background-image: linear-gradient(to right, #FBB040, #F8963E); 
+        }
+        .zone.Outcomes, #playbook-outcomes { 
+            
+            background-image: linear-gradient(to right, #9E1F63, #Ef3F6C); 
+        }
+        .zone.Wildcard { 
+            border-color: red; 
+            background-color: #FFF;
+        }
+
+            .zone.Wildcard h2 {color:#000}
+
+        .zone.NotRelevant { border-color: black; }
+
+        #timer-container {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 100;
+            color: #f1f1f1;
+            padding: 0px;
+            width: 200px;
+            margin: 0 auto;
+            position: absolute;
+            top: 310px;
+            border-bottom: 1px solid #009ddc;
+        }
+
+            #timer-container p {
+                float: left;
+                font-size: 11px;
+            }
+
+            #timer-container span {
+                font-size: 15px;
+                margin-top: 5px;
+                padding-top: 5px;
+                float: right;
+            }
+
+        #card-counter p {
+            left: 0px;
+            top: 35px;
+            position: absolute;
+        }
+
+        #card-counter span {
+            position: absolute;
+            top: 35px;
+            left: 190px;
+        }
+
+        #countdown-timer.warning {
+            color: red;
+            font-weight: bold;
+        }
+        #instructions-zone {
+            position: absolute;
+            top: 380px;
+            width: 260px;
+        }
+
+        #instructions-zone h2{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: 100;
+            color: #f0f0f0;
+        }
+
+            #instructions p, li {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 11px;
+                color: #f1f1f1;
+            }
+
+            #draw-card {
+                display: none;
+            }
+
+            #draw-card-centred {
+                position: absolute;
+                top: 47.5%;
+                left: 47.5%;
+                transform: translate(-50%, -50%);
+                width: 100px; /* Ensure it's a perfect circle */
+                height: 100px;
+                font-size: 14px;
+                background-color: #f1f1f1;
+                color: #0056b3;
+                border: none;
+                border-radius: 50%; /* Makes it a circle */
+                cursor: pointer;
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-weight: bold;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                box-shadow: 2px 2px 6px rgb(50, 50, 50);
+            }
+
+            /* Hover Effect */
+            #draw-card-centred:hover {
+                background-color: #0056b3;
+                transform: translate(-50%, -50%) scale(1.1);
+                color: #f1f1f1;
+            }
+
+            /* Optional: When button is clicked */
+            #draw-card-centred:active {
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+
+            /* playbook styles */
+            #game-board {
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            /* playbook grid */
+            #playbook-section {
+                display: none;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                text-align: center;
+                transition: opacity 1s ease-in-out;
+            }
+
+                #playbook-section h2 {
+                    font-size: 17px;
+                    font-weight: 400;
+                    text-align: left;
+                    color: #f1f1f1;
+                    position: absolute;
+                    left: 165px;
+                    top: 65px;
+                }
+
+            /* Grid layout to match the original game structure */
+            #playbook-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                gap: 20px;
+                width: 80%;
+                margin: auto;
+            }
+
+            /* Each quadrant box */
+            .playbook-category {
+                height: 300px;
+            }
+
+                .playbook-category h3 {
+                    font-weight: 400;
+                    font-size: 16px;
+                    text-align: left;
+                    color: #f1f1f1;
+                }
+
+                .playbook-prompt {
+                    color: #f1f1f1;
+                    font-size: 13px;
+                    text-align: left;
+                }
+
+                #stakeholders-cards .card {
+                    flex: fit-content;
+                }
+
+            /* The Wildcard section takes full width below */
+            #playbook-wildcard {
+                margin-top: 20px;
+                padding: 15px;
+                background: white;
+                border: 3px solid #ff6600;
+                border-radius: 8px;
+                text-align: left;
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .playbook-card {
+                height: 18px;
+            }
+
+                .playbook-card strong {
+                    font-weight: 400;
+                    font-size: 11px;
+                }
+
+                #stakeholders-cards.Stakeholders, #challenges-cards.Challenges {
+                    flex: fit-content;
+                }
+
+                #outcomes-card.outcomes{
+                    flex-shrink: 0; /* Prevents the dropdown from stretching */
+                    width: auto;
+                    min-width: 150px; /* Ensures a consistent dropdown width */
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                    padding: 5px;
+                    font-size: 0.9rem;
+                    cursor: pointer;
+                    float: left;
+                }
+                    .measurement-dropdown {
+                        text-align: right;
+                        min-height: 30px;
+                        min-width: 150px;
+                        display: flex;
+                        flex-shrink: 0;
+                        height: 100%;
+                        border-radius: 7px;
+                        border-color: #f1f1f1;
+                    }
+
+            .playbook-card {
+                margin-bottom: 0px;
+            }
+
+            /* Styling for the card area */
+            .playbook-card-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .card-wrapper {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+                align-items: center;
+            }
+
+            /* Input field for explanations */
+            .comment-box {
+                width: 100%;
+                margin-top: 5px;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 12px;
+                font-family: Arial, Helvetica, sans-serif;
+                min-height: 50px;
+                max-height: 115px;
+            }
+
+            /*finalisation button and zone*/
+            #proceed-to-finalization {
+                position: absolute;
+                top: 50%;
+                left: 59%;
+                transform: translate(-50%, -50%);
+                width: 100px; /* Ensure it's a perfect circle */
+                height: 100px;
+                font-size: 14px;
+                background-color: #0078d7;
+                color: white;
+                border: none;
+                border-radius: 50%; /* Makes it a circle */
+                cursor: pointer;
+                display: none; /* Initially hidden */
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                font-weight: bold;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+
+            #proceed-to-finalization:hover {
+                background-color: #0056b3;
+                /*transform: scale(1.1);*/
+                color: #fff;
+            }
+
+            #scenario-description {
+                width: 100%;
+                min-height: 100px;
+                margin-top: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 10px;
+            }
+
+        #finalization-section {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+            #finalization-left, #finalization-right {
+                flex: 1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            #finalization-left {
+                background-color: #f9f9f9;
+                border-right: 1px solid #ccc;
+                padding: 20px;
+            }
+
+            #finalization-left textarea {
+                width: 100%;
+                height: 200px;
+                margin-bottom: 10px;
+                padding: 10px;
+                font-size: 14px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                resize: none;
+            }
+
+            #finalization-right {
+                background-color: #fff;
+                overflow-y: auto;
+            }
+
+            #generated-business-case {
+                padding: 20px;
+                font-size: 12px;
+                line-height: 1.6;
+                white-space: pre-wrap;
+                border-radius: 5px;
+            }
+
+                /* #finalization-section h2 {
+                    color: #f1f1f1;
+                    font-weight: 100;
+                    font-size: 16px;
+                    position: absolute;
+                    left: 0px;
+                    top: 50px;
+                } */
+
+                #finalization-section p {
+                    font-size: 12px;
+                    color: #f1f1f1;
+                }
+
+                #spinner {
+                    display: none;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 1000;
+                }
+
+                .spinner {
+                    border: 8px solid #f3f3f3;
+                    border-top: 8px solid #3498db;
+                    border-radius: 50%;
+                    width: 60px;
+                    height: 60px;
+                    animation: spin 1s linear infinite;
+                }
+
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+
+                .business-case-container {
+                    width: 85%;
+                    margin: 20px auto;
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    padding: 10px;
+                    background: #f9f9f9;
+                    border-radius: 8px;
+                    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+                }
+
+                .business-section {
+                    padding: 20px;
+                    border-bottom: 1px solid #ddd;
+                    margin-bottom: 20px;
+                }
+
+                .business-section h2, .business-section h3 {
+                    text-align: center;
+                    font-size: 15px;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                    color: #004085!important;
+                }
+
+                .business-section p, .business-section li {
+                    font-size: 13px;
+                    text-align: justify;
+                    color: #333!important;
+                    padding: 5px 10px;
+                }
+
+                                /* Modal Background */
+                .modal {
+                    display: none; /* Initially Hidden */
+                    position: fixed;
+                    z-index: 1000;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                /* Modal Content */
+                .modal-content {
+                    background: white;
+                    padding: 20px;
+                    width: 80%;
+                    max-height: 90%;
+                    overflow-y: auto;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                    text-align: left;
+                    position: relative;
+                }
+
+                /* Close Button */
+                .close-btn {
+                    position: absolute;
+                    top: 10px;
+                    right: 15px;
+                    font-size: 24px;
+                    cursor: pointer;
+                }
+
+                /* Modal Footer (PDF Download Button) */
+                .modal-footer {
+                    width: 100%;
+                    background: #0078d7;
+                    color: white;
+                    padding: 12px;
+                    font-size: 16px;
+                    border: none;
+                    border-radius: 6px;
+                    text-align: center;
+                    cursor: pointer;
+                    margin-top: 20px;
+                }
+
+                .modal-footer:hover {
+                    background: #0056b3;
+                }
