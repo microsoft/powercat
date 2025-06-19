@@ -18,7 +18,25 @@
             "Not Relevant": []
         };
 
-        const cards = [
+        function shuffle(array) {
+            let currentIndex = array.length;
+
+            // While there remain elements to shuffle...
+            while (currentIndex != 0) {
+
+                // Pick a remaining element...
+                let randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+
+                // And swap it with the current element.
+                [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+            }
+
+            return array;
+        }
+
+        let cards = shuffle([
         {
             title: "Data Quality Issues",
             description: "Incomplete, outdated, or inconsistent data can affect system performance and accuracy.",
@@ -234,8 +252,7 @@
             description: "Key staff leaving creates resource gaps.",
             category: "Wildcard"
         }
-    ];
-
+    ]);
 
         // Minimum word count for validation
         const minWordCount = 20;        
@@ -353,7 +370,11 @@ document.querySelectorAll(".nested-zone, .zone.NotRelevant").forEach(zone => {
             });
 
             // Ensure we are dropping in a valid zone
-            if (zone.closest('.zone').dataset.category != null || zone.classList.contains("NotRelevant")) {
+            const allowedCategories = ["Stakeholders", "Objectives", "Challenges", "Outcomes"];
+            if (allowedCategories.includes(zone.closest('.zone').dataset.category)
+                || zone.classList.contains("NotRelevant")
+                || (zone.classList.contains("Wildcard") && data.category === "Wildcard")
+            ) {
                 
                 // phils request of limiting to three primary/ essential careds
                 const restrictedZones = [
