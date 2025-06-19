@@ -99,6 +99,7 @@
             padding: 5px;
             height: 15px;
             width: 92%;
+            border-left: 10px solid;
         }
 
             .dropped-card strong {
