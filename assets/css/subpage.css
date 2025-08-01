@@ -208,7 +208,13 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
-
+    .session-box {
+      background-color: #f9f9f9;
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      border-left: 4px solid #0078d4;
+    }
 .session-content {
     padding: 1.5rem;
 }
