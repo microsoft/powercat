@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Design Workshop Tool</title>
+    <link rel="stylesheet" href="workshop.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Agent Design Workshop</h1>
+            <p>From Scenario to Platform: Your AI Agent Implementation Journey</p>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- Phase 1: Decision Framework -->
+            <div class="phase active" id="phase1">
+                <div class="section">
+                    <h2><span class="icon">🎯</span>Platform Selection Framework</h2>
+                    <p style="font-size: 1.1rem; color: #6b7280; margin-bottom: 30px;">
+                        Use this framework to evaluate your scenario and determine the best Microsoft AI agent platform for your needs.
+                    </p>
+                    
+                    <div class="criteria-grid">
+                        <div class="criteria-card">
+                            <h4>🏢 M365 Copilot</h4>
+                            <p><strong>Best for:</strong> Productivity enhancement within existing Microsoft 365 workflows</p>
+                            <ul style="margin-top: 10px; color: #6b7280;">
+                                <li>Document creation & editing</li>
+                                <li>Email and calendar management</li>
+                                <li>Meeting summarization</li>
+                                <li>Quick data insights from Office apps</li>
+                                <li>Standard security requirements</li>
+                            </ul>
+                            <div class="tag">Low Code</div>
+                            <div class="tag">Fast Deploy</div>
+                        </div>
+                        
+                        <div class="criteria-card">
+                            <h4>🛠️ Copilot Studio</h4>
+                            <p><strong>Best for:</strong> Custom conversational AI agents with business logic integration</p>
+                            <ul style="margin-top: 10px; color: #6b7280;">
+                                <li>Customer service chatbots</li>
+                                <li>Internal help desk automation</li>
+                                <li>Process automation with human interaction</li>
+                                <li>Integration with Power Platform</li>
+                                <li>Moderate customization needs</li>
+                            </ul>
+                            <div class="tag">Low-Code</div>
+                            <div class="tag">Customizable</div>
+                        </div>
+                        
+                        <div class="criteria-card">
+                            <h4>☁️ Azure AI Foundry</h4>
+                            <p><strong>Best for:</strong> Enterprise-scale, custom AI solutions with full control</p>
+                            <ul style="margin-top: 10px; color: #6b7280;">
+                                <li>Complex multi-modal AI applications</li>
+                                <li>Custom model training & fine-tuning</li>
+                                <li>Advanced security & compliance</li>
+                                <li>Integration with external systems</li>
+                                <li>High scalability requirements</li>
+                            </ul>
+                            <div class="tag">Full Code</div>
+                            <div class="tag">Enterprise</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <div></div>
+                    <button class="btn" onclick="nextPhase()">Start Assessment 🚀</button>
+                </div>
+            </div>
+            
+            <!-- Phase 2: Scenario Assessment -->
+            <div class="phase" id="phase2">
+                <div class="section">
+                    <h2><span class="icon">📋</span>Scenario Assessment</h2>
+                    
+                    <h3>Your Agent Scenario</h3>
+                    <textarea class="textarea" id="scenario" placeholder="Describe your agent scenario in detail. What problem are you trying to solve? What should the agent do?"></textarea>
+                    
+                    <h3>Key Stakeholders</h3>
+                    <textarea class="textarea" id="stakeholders" placeholder="Who are the primary users? Who are the decision makers? List internal and external stakeholders."></textarea>
+                    
+                    <h3>Technical Requirements</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div>
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #374151;">Expected Users</label>
+                            <select class="input" id="userCount">
+                                <option value="small">Small (1-50 users)</option>
+                                <option value="medium">Medium (51-500 users)</option>
+                                <option value="large">Large (500+ users)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #374151;">Complexity Level</label>
+                            <select class="input" id="complexity">
+                                <option value="simple">Simple (Basic Q&A, information retrieval)</option>
+                                <option value="moderate">Moderate (Multi-step processes, integrations)</option>
+                                <option value="complex">Complex (Custom logic, multiple systems)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <h3>Integration Needs</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="m365" class="checkbox"> Microsoft 365 Apps
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="powerPlatform" class="checkbox"> Power Platform
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="dynamics" class="checkbox"> Dynamics 365
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="external" class="checkbox"> External APIs
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="databases" class="checkbox"> Custom Databases
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="legacy" class="checkbox"> Legacy Systems
+                        </label>
+                    </div>
+                    
+                    <h3>Risks & Concerns</h3>
+                    <textarea class="textarea" id="risks" placeholder="What are your main concerns? Security, compliance, data privacy, user adoption, technical challenges, etc."></textarea>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevPhase()">← Back</button>
+                    <button class="btn" onclick="generateRecommendation()">Get Platform Recommendation 🎯</button>
+                </div>
+            </div>
+            
+            <!-- Phase 3: Results & Next Steps -->
+            <div class="phase" id="phase3">
+                <div class="results" id="recommendationResult">
+                    <h3>🎯 Recommended Platform</h3>
+                    <div id="platformRecommendation"></div>
+                </div>
+                
+                <div class="section">
+                    <h2><span class="icon">📋</span>Implementation Checklist</h2>
+                    <div id="implementationChecklist"></div>
+                </div>
+                
+                <div class="section">
+                    <h2><span class="icon">🚀</span>Next Steps</h2>
+                    <div id="nextSteps"></div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevPhase()">← Back</button>
+                    <button class="btn" onclick="exportResults()">Export Results 📄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPhase = 1;
+        const totalPhases = 3;
+        
+        function updateProgress() {
+            const progress = (currentPhase / totalPhases) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function showPhase(phase) {
+            document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+            document.getElementById(`phase${phase}`).classList.add('active');
+            updateProgress();
+        }
+        
+        function nextPhase() {
+            if (currentPhase < totalPhases) {
+                currentPhase++;
+                showPhase(currentPhase);
+            }
+        }
+        
+        function prevPhase() {
+            if (currentPhase > 1) {
+                currentPhase--;
+                showPhase(currentPhase);
+            }
+        }
+        
+        function generateRecommendation() {
+            const scenario = document.getElementById('scenario').value;
+            const complexity = document.getElementById('complexity').value;
+            const userCount = document.getElementById('userCount').value;
+            const m365 = document.getElementById('m365').checked;
+            const powerPlatform = document.getElementById('powerPlatform').checked;
+            const external = document.getElementById('external').checked;
+            const databases = document.getElementById('databases').checked;
+            const legacy = document.getElementById('legacy').checked;
+            
+            let recommendedPlatform = '';
+            let reasoning = '';
+            let checklist = [];
+            let nextSteps = [];
+            
+            // Decision logic
+            if (complexity === 'simple' && m365 && !external && !legacy) {
+                recommendedPlatform = 'M365 Copilot';
+                reasoning = 'Your scenario involves simple productivity tasks within the Microsoft 365 ecosystem. M365 Copilot provides the fastest time-to-value with minimal setup.';
+                checklist = [
+                    'Verify M365 E3/E5 licensing',
+                    'Ensure user accounts have appropriate permissions',
+                    'Review data governance policies',
+                    'Plan user training and adoption',
+                    'Set up usage analytics monitoring'
+                ];
+                nextSteps = [
+                    'Contact your Microsoft CSM to enable M365 Copilot',
+                    'Conduct pilot with 10-20 key users',
+                    'Gather feedback and refine use cases',
+                    'Plan organization-wide rollout',
+                    'Develop governance and best practices'
+                ];
+            } else if (complexity === 'moderate' || powerPlatform || (external && !legacy)) {
+                recommendedPlatform = 'Copilot Studio';
+                reasoning = 'Your scenario requires custom conversational experiences with business logic integration. Copilot Studio offers the right balance of customization and ease of deployment.';
+                checklist = [
+                    'Verify Power Platform licensing',
+                    'Map out conversation flows and intents',
+                    'Identify required connectors and integrations',
+                    'Design authentication and security model',
+                    'Plan testing strategy for different user scenarios',
+                    'Create content and knowledge base',
+                    'Set up analytics and monitoring'
+                ];
+                nextSteps = [
+                    'Create Copilot Studio environment',
+                    'Build initial bot prototype with key flows',
+                    'Test with sample data and user scenarios',
+                    'Integrate with identified systems',
+                    'Conduct user acceptance testing',
+                    'Deploy to production with phased rollout'
+                ];
+            } else {
+                recommendedPlatform = 'Azure AI Foundry';
+                reasoning = 'Your scenario involves complex requirements, custom integrations, or enterprise-scale deployment. Azure AI Foundry provides the flexibility and control needed for sophisticated AI solutions.';
+                checklist = [
+                    'Set up Azure subscription and resource groups',
+                    'Design system architecture and data flow',
+                    'Plan security, compliance, and governance',
+                    'Select appropriate AI models and services',
+                    'Design API architecture and integration points',
+                    'Plan development, testing, and deployment pipeline',
+                    'Set up monitoring, logging, and analytics',
+                    'Create disaster recovery and backup strategy'
+                ];
+                nextSteps = [
+                    'Assemble development team with AI/ML expertise',
+                    'Create proof of concept with core functionality',
+                    'Develop MVP with essential features',
+                    'Conduct security and performance testing',
+                    'Build production deployment pipeline',
+                    'Plan user training and change management',
+                    'Execute phased production rollout'
+                ];
+            }
+            
+            // Display results
+            document.getElementById('platformRecommendation').innerHTML = `
+                <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px 0;">
+                    <h4 style="color: #059669; font-size: 1.8rem; margin-bottom: 15px;">
+                        ${recommendedPlatform}
+                    </h4>
+                    <p style="font-size: 1.1rem; color: #374151; line-height: 1.6;">
+                        ${reasoning}
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('implementationChecklist').innerHTML = 
+                checklist.map(item => `
+                    <div class="checklist-item">
+                        <input type="checkbox" class="checkbox">
+                        <span style="color: #374151; font-size: 1rem;">${item}</span>
+                    </div>
+                `).join('');
+                
+            document.getElementById('nextSteps').innerHTML = `
+                <div class="info-box">
+                    ${nextSteps.map((step, index) => `
+                        <div style="margin: 15px 0; padding: 10px; background: rgba(255,255,255,0.7); border-radius: 8px;">
+                            <strong>Step ${index + 1}:</strong> ${step}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            nextPhase();
+        }
+        
+        function exportResults() {
+            const results = {
+                scenario: document.getElementById('scenario').value,
+                stakeholders: document.getElementById('stakeholders').value,
+                risks: document.getElementById('risks').value,
+                platform: document.querySelector('#platformRecommendation h4').textContent,
+                reasoning: document.querySelector('#platformRecommendation p').textContent
+            };
+            
+            const exportText = `
+AGENT STRATEGY WORKSHOP RESULTS
+================================
+
+SCENARIO:
+${results.scenario}
+
+STAKEHOLDERS:
+${results.stakeholders}
+
+RISKS & CONCERNS:
+${results.risks}
+
+RECOMMENDED PLATFORM:
+${results.platform}
+
+REASONING:
+${results.reasoning}
+
+Generated on: ${new Date().toLocaleDateString()}
+            `;
+            
+            const blob = new Blob([exportText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'agent-strategy-results.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
