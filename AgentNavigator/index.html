@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microsoft Agent Platform Decision Tool</title>
-    <meta name="description" content="Interactive tool to help you choose the best Microsoft agent platform for your use case - Microsoft 365 Copilot, Agent Builder, Copilot Studio, or Azure AI Foundry.">
+    <meta name="description" content="Interactive tool to help you choose the best Microsoft agent platform for your use case - Microsoft 365 Copilot, Copilot Studio Lite, Copilot Studio, or Azure AI Foundry.">
+    
+    <!-- RTF export for Word document compatibility -->
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
@@ -676,6 +678,56 @@
         .component-description {
             font-size: 14px;
             color: hsl(var(--muted-foreground));
+            margin-bottom: 12px;
+        }
+
+        .component-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .component-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .component-checkbox input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: hsl(var(--primary));
+        }
+
+        .component-checkbox label {
+            font-size: 13px;
+            font-weight: 500;
+            color: hsl(var(--foreground));
+            cursor: pointer;
+        }
+
+        .component-textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 8px;
+            border: 1px solid hsl(var(--border));
+            border-radius: 4px;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            font-size: 12px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .component-textarea:focus {
+            outline: none;
+            border-color: hsl(var(--ring));
+            box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+        }
+
+        .component-textarea::placeholder {
+            color: hsl(var(--muted-foreground));
         }
 
         .agent-types-grid {
@@ -893,24 +945,24 @@
                             
                             <div class="platform-grid">
                                 <div class="platform-preview">
-                                    <div class="platform-preview-icon">🤖</div>
+                                    <div class="platform-preview-icon">🤝</div>
                                     <h3 class="platform-preview-title">Microsoft 365 Copilot</h3>
-                                    <p class="platform-preview-desc">1st Party Agents</p>
+                                    <p class="platform-preview-desc">Out-of-the-Box</p>
                                 </div>
                                 <div class="platform-preview">
-                                    <div class="platform-preview-icon">🤖</div>
-                                    <h3 class="platform-preview-title">Agent Builder</h3>
-                                    <p class="platform-preview-desc">Custom Solutions</p>
+                                    <div class="platform-preview-icon">🏗️</div>
+                                    <h3 class="platform-preview-title">Copilot Studio Lite</h3>
+                                    <p class="platform-preview-desc">Organizational Extension</p>
                                 </div>
                                 <div class="platform-preview">
-                                    <div class="platform-preview-icon">🤖</div>
+                                    <div class="platform-preview-icon">🎨</div>
                                     <h3 class="platform-preview-title">Copilot Studio</h3>
-                                    <p class="platform-preview-desc">Low-Code Platform</p>
+                                    <p class="platform-preview-desc">Intuitive, Natural Language Building Experience</p>
                                 </div>
                                 <div class="platform-preview">
-                                    <div class="platform-preview-icon">🤖</div>
+                                    <div class="platform-preview-icon">☁️</div>
                                     <h3 class="platform-preview-title">Azure AI Foundry</h3>
-                                    <p class="platform-preview-desc">Enterprise Scale</p>
+                                    <p class="platform-preview-desc">Enterprise Platform</p>
                                 </div>
                             </div>
                             
@@ -975,6 +1027,16 @@
                                 </ul>
                             </div>
                         </div>
+
+                        <!-- 1st Party Agents Section (shows for Microsoft 365 Copilot) -->
+                        <div id="first-party-agents" class="first-party-agents-section hidden" style="background-color: hsl(var(--muted)); border-radius: var(--radius); padding: 24px; margin-bottom: 24px;">
+                            <h4 style="font-weight: 600; color: hsl(var(--foreground)); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                                <span class="icon">🤖</span> Available 1st Party Copilot Agents
+                            </h4>
+                            <div id="agents-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+                                <!-- 1st party agents will be dynamically added here -->
+                            </div>
+                        </div>
                         
                         <div class="reasoning-section" data-testid="reasoning-section">
                             <h3 class="reasoning-title">
@@ -995,8 +1057,8 @@
                         </div>
 
                         <div class="center">
-                            <button class="btn btn-primary btn-lg" id="view-implementation" data-testid="button-view-implementation">
-                                View Implementation Guide <span class="icon icon-chevron-right"></span>
+                            <button class="btn btn-primary btn-lg" id="view-structure" data-testid="button-view-structure">
+                                Plan Agent Structure <span class="icon icon-chevron-right"></span>
                             </button>
                         </div>
                     </div>
@@ -1031,11 +1093,17 @@
                             </div>
                         </div>
 
+                        <div class="separator"></div>
+
                         <div class="center">
-                            <button class="btn btn-primary btn-lg" id="view-structure" data-testid="button-view-structure">
-                                Plan Agent Structure <span class="icon icon-chevron-right"></span>
+                            <button class="btn btn-secondary" id="restart-btn" data-testid="button-restart">
+                                <span class="icon icon-restart"></span> Start Over
+                            </button>
+                            <button class="btn btn-primary" id="export-btn" data-testid="button-export">
+                                <span class="icon icon-download"></span> Export Word Document
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -1048,109 +1116,18 @@
                             <span class="icon">🔗</span> Agent Structure Planning
                         </h2>
                         
-                        <div class="structure-sections">
-                            <!-- Core Components -->
-                            <div class="structure-section">
-                                <h3 class="structure-section-title">
-                                    <span class="icon">⚙️</span> Core Components
-                                </h3>
-                                <div class="component-grid">
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #3b82f6;">📄</span> Instructions
-                                        </h4>
-                                        <p class="component-description">Define agent behavior, personality, and response guidelines</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #22c55e;">💾</span> Knowledge Base
-                                        </h4>
-                                        <p class="component-description">Document sources, data connections, and information repositories</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #f97316;">🔧</span> Tools & Functions
-                                        </h4>
-                                        <p class="component-description">APIs, plugins, and external service integrations</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #a855f7;">🌿</span> Conversation Flows
-                                        </h4>
-                                        <p class="component-description">Dialog management and conversation pathways</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Integration & Deployment -->
-                            <div class="structure-section">
-                                <h3 class="structure-section-title">
-                                    <span class="icon">🔗</span> Integration & Deployment
-                                </h3>
-                                <div class="component-grid">
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #3b82f6;">🔗</span> Connectors
-                                        </h4>
-                                        <p class="component-description">System integrations and data source connections</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #22c55e;">💬</span> Channels
-                                        </h4>
-                                        <p class="component-description">Deployment targets and user interaction points</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #f97316;">🔔</span> Triggers
-                                        </h4>
-                                        <p class="component-description">Event-based activation and automation rules</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Agent Type & Behavior -->
-                            <div class="structure-section">
-                                <h3 class="structure-section-title">
-                                    <span class="icon">👥</span> Agent Type & Behavior
-                                </h3>
-                                <div class="agent-types-grid">
-                                    <div class="agent-type-card">
-                                        <h4 class="agent-type-title">
-                                            <span class="icon" style="color: #3b82f6;">👥</span> Conversational Agent
-                                        </h4>
-                                        <ul class="agent-features">
-                                            <li class="agent-feature">Interactive dialog-based responses</li>
-                                            <li class="agent-feature">User-initiated conversations</li>
-                                            <li class="agent-feature">Question-answer patterns</li>
-                                            <li class="agent-feature">Context-aware interactions</li>
-                                        </ul>
-                                    </div>
-                                    <div class="agent-type-card">
-                                        <h4 class="agent-type-title">
-                                            <span class="icon" style="color: #22c55e;">⚙️</span> Autonomous Agent
-                                        </h4>
-                                        <ul class="agent-features">
-                                            <li class="agent-feature">Proactive task execution</li>
-                                            <li class="agent-feature">Event-driven automation</li>
-                                            <li class="agent-feature">Background processing</li>
-                                            <li class="agent-feature">Scheduled operations</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="platform-specific-structure">
+                            <!-- Platform-specific content will be dynamically inserted here -->
                         </div>
 
                         <div class="separator"></div>
 
                         <div class="center">
-                            <button class="btn btn-secondary" id="restart-btn" data-testid="button-restart">
-                                <span class="icon icon-restart"></span> Start Over
-                            </button>
-                            <button class="btn btn-primary" id="export-btn" data-testid="button-export">
-                                <span class="icon icon-download"></span> Export Plan
+                            <button class="btn btn-primary btn-lg" id="structure-to-implementation" data-testid="button-structure-to-implementation">
+                                View Implementation Guide <span class="icon icon-chevron-right"></span>
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -1158,115 +1135,140 @@
     </main>
 
     <script>
-        // Application Data
+        // Application Data - Updated based on Microsoft AI Agent Decision Matrix
         const questions = [
             {
-                id: 'useCaseComplexity',
-                title: 'What is the complexity of your use case?',
-                subtitle: 'Consider the scope and technical requirements of your agent',
+                id: 'primaryPurpose',
+                title: 'What is your primary purpose for the AI agent?',
+                subtitle: 'This helps determine which platform aligns with your core objectives',
                 options: [
                     { 
-                        id: 'simple', 
-                        label: 'Simple automation or basic Q&A', 
-                        description: 'Single-purpose agent with minimal complexity' 
+                        id: 'productivity', 
+                        label: 'Personal productivity assistance', 
+                        description: 'Writing assistance, data analysis, and information retrieval within Office workflows' 
                     },
                     { 
-                        id: 'moderate', 
-                        label: 'Multi-step workflows with some customization', 
-                        description: 'Moderate complexity with custom logic' 
+                        id: 'organizational', 
+                        label: 'Organizational knowledge and simple tasks', 
+                        description: 'Handle internal FAQs, specialized queries, or basic integrations for your organization' 
                     },
                     { 
-                        id: 'complex', 
-                        label: 'Complex business processes with multiple integrations', 
-                        description: 'Enterprise-grade solution with extensive requirements' 
+                        id: 'business_process', 
+                        label: 'Custom business process automation', 
+                        description: 'Specific workflow automation with conversational interfaces and action-taking capabilities' 
+                    },
+                    { 
+                        id: 'enterprise_ai', 
+                        label: 'Enterprise AI/ML platform capabilities', 
+                        description: 'Bespoke AI solutions, model training, complex multi-step agents, and advanced analytics' 
                     }
                 ]
             },
             {
-                id: 'technicalExpertise',
-                title: 'What is your team\'s technical expertise level?',
-                subtitle: 'This helps determine the appropriate complexity level',
+                id: 'targetAudience',
+                title: 'Who is your primary target audience?',
+                subtitle: 'Consider the technical skill level and role of your users',
                 options: [
+                    { 
+                        id: 'end_users', 
+                        label: 'End-users & knowledge workers', 
+                        description: 'Employees who want AI assistance in everyday Microsoft 365 tasks' 
+                    },
+                    { 
+                        id: 'business_users', 
+                        label: 'Business users in the organization', 
+                        description: 'Teams who need company-specific knowledge and simple automations' 
+                    },
+                    { 
+                        id: 'business_analysts', 
+                        label: 'Business analysts & Power Platform makers', 
+                        description: 'IT teams creating custom departmental solutions with minimal code' 
+                    },
+                    { 
+                        id: 'developers', 
+                        label: 'Software developers & data scientists', 
+                        description: 'Technical teams building advanced AI solutions with full control' 
+                    }
+                ]
+            },
+            {
+                id: 'complexityLevel',
+                title: 'What level of complexity do you need?',
+                subtitle: 'Consider development effort, customization, and technical requirements',
+                options: [
+                    { 
+                        id: 'lowest', 
+                        label: 'Lowest - Turn it on and use', 
+                        description: 'No customization needed, pre-defined behavior and scope' 
+                    },
                     { 
                         id: 'low', 
-                        label: 'Business user with minimal coding experience', 
-                        description: 'Prefer no-code or low-code solutions' 
-                    },
-                    { 
-                        id: 'medium', 
-                        label: 'Some technical background, comfortable with configuration', 
-                        description: 'Can handle some scripting and configuration' 
-                    },
-                    { 
-                        id: 'high', 
-                        label: 'Professional developers with coding expertise', 
-                        description: 'Comfortable with full development environments' 
-                    }
-                ]
-            },
-            {
-                id: 'integrationNeeds',
-                title: 'What integration requirements do you have?',
-                subtitle: 'Consider existing systems and data sources',
-                options: [
-                    { 
-                        id: 'microsoft', 
-                        label: 'Primarily Microsoft 365 and Teams', 
-                        description: 'Working within Microsoft ecosystem' 
-                    },
-                    { 
-                        id: 'mixed', 
-                        label: 'Mix of Microsoft and third-party systems', 
-                        description: 'Need connectors to various platforms' 
-                    },
-                    { 
-                        id: 'enterprise', 
-                        label: 'Complex enterprise systems and custom APIs', 
-                        description: 'Extensive integration requirements' 
-                    }
-                ]
-            },
-            {
-                id: 'deploymentScale',
-                title: 'What is your expected deployment scale?',
-                subtitle: 'Think about the number of users and usage volume',
-                options: [
-                    { 
-                        id: 'team', 
-                        label: 'Small team or department (< 100 users)', 
-                        description: 'Limited scope deployment' 
-                    },
-                    { 
-                        id: 'organization', 
-                        label: 'Organization-wide (100-1000 users)', 
-                        description: 'Company-wide deployment' 
-                    },
-                    { 
-                        id: 'enterprise', 
-                        label: 'Large enterprise or external customers (1000+ users)', 
-                        description: 'High-scale production deployment' 
-                    }
-                ]
-            },
-            {
-                id: 'customizationLevel',
-                title: 'How much customization do you need?',
-                subtitle: 'Consider branding, unique features, and specific behaviors',
-                options: [
-                    { 
-                        id: 'minimal', 
-                        label: 'Use existing features with minimal customization', 
-                        description: 'Standard functionality is sufficient' 
+                        label: 'Low - Configure with your content', 
+                        description: 'Add connectors or data sources with guided setup process' 
                     },
                     { 
                         id: 'moderate', 
-                        label: 'Some custom logic and branded experience', 
-                        description: 'Need tailored workflows and appearance' 
+                        label: 'Moderate - Custom workflows and logic', 
+                        description: 'Build conversational agents with custom behaviors and integrations' 
                     },
                     { 
-                        id: 'extensive', 
-                        label: 'Highly customized with unique features', 
-                        description: 'Require significant custom development' 
+                        id: 'highest', 
+                        label: 'Highest - Full software development', 
+                        description: 'Custom architecture, model training, and enterprise-grade development' 
+                    }
+                ]
+            },
+            {
+                id: 'integrationScope',
+                title: 'What are your integration requirements?',
+                subtitle: 'Consider your data sources and system connectivity needs',
+                options: [
+                    { 
+                        id: 'microsoft_graph', 
+                        label: 'Microsoft 365 and Graph data only', 
+                        description: 'Work with emails, Teams, SharePoint, OneDrive within M365 permissions' 
+                    },
+                    { 
+                        id: 'extended_microsoft', 
+                        label: 'Extended Microsoft ecosystem', 
+                        description: 'Microsoft Graph + some internal knowledge bases and limited plugins' 
+                    },
+                    { 
+                        id: 'power_platform', 
+                        label: 'Power Platform connectors', 
+                        description: '1400+ connectors, APIs, Dataverse, and various enterprise systems' 
+                    },
+                    { 
+                        id: 'unlimited', 
+                        label: 'Unlimited integration freedom', 
+                        description: 'Any data source, API, database, or system that can be coded' 
+                    }
+                ]
+            },
+            {
+                id: 'deploymentNeeds',
+                title: 'What are your deployment requirements?',
+                subtitle: 'Consider where and how users will access your agent',
+                options: [
+                    { 
+                        id: 'microsoft_managed', 
+                        label: 'Microsoft-managed within M365', 
+                        description: 'Built into Office apps - Word, Teams, Outlook sidebar/chat' 
+                    },
+                    { 
+                        id: 'microsoft_hosted', 
+                        label: 'Microsoft-hosted in M365 environment', 
+                        description: 'Accessed via Copilot Chat interfaces but with custom capabilities' 
+                    },
+                    { 
+                        id: 'multiple_channels', 
+                        label: 'Multiple channels and touchpoints', 
+                        description: 'Teams, SharePoint, web pages, and custom interfaces' 
+                    },
+                    { 
+                        id: 'anywhere', 
+                        label: 'Deploy anywhere', 
+                        description: 'Web apps, mobile apps, Teams apps, chatbots, or custom integrations' 
                     }
                 ]
             }
@@ -1275,31 +1277,32 @@
         const platformOptions = {
             'microsoft365copilot': {
                 id: 'microsoft365copilot',
-                name: 'Microsoft 365 Copilot 1st Party Agents',
+                name: 'Microsoft 365 Copilot Chat (Out-of-the-Box)',
                 icon: 'users',
                 color: 'blue',
-                description: 'Ready-to-use agents integrated directly into your Microsoft 365 environment',
+                description: 'Personal productivity assistant with 11+ specialized 1st party agents covering sales, finance, HR, project management, and more',
                 benefits: [
-                    'Zero development time required',
-                    'Native Microsoft 365 integration',
-                    'Built-in security and compliance',
-                    'Immediate deployment capability',
-                    'Automatic updates and maintenance'
+                    'Zero-effort AI inside Office apps - immediate productivity benefits',
+                    'Specialized agents: Sales, Service, Finance, Research, Analytics, HR, Project Management',
+                    'Seamless integration with Word, Outlook, Teams, Excel, PowerPoint, SharePoint',
+                    'Natural language generation, summarization, and contextual Q&A using GPT-4',
+                    'Built-in security and compliance with M365 permissions',
+                    'No development or customization required'
                 ],
                 reasoning: []
             },
             'agentbuilder': {
                 id: 'agentbuilder',
-                name: 'Microsoft 365 Copilot Agent Builder',
+                name: 'Microsoft 365 Copilot with Copilot Studio Lite',
                 icon: 'wrench',
                 color: 'green',
-                description: 'Build custom agents with moderate complexity for your organization',
+                description: 'Extend Copilot beyond the 11+ built-in agents with custom organizational knowledge and company-specific capabilities',
                 benefits: [
-                    'Custom agent development within Microsoft 365',
-                    'Moderate customization capabilities',
-                    'Integrated with Microsoft Graph',
-                    'Organizational data access',
-                    'Simplified deployment process'
+                    'Lightweight customization without code for needs beyond 1st party agents',
+                    'Organizational Q&A from custom knowledge bases and internal documents',
+                    'Simple task execution through plugins and flows',
+                    'Stays within familiar Copilot UI for users',
+                    'Connect SharePoint libraries, internal systems, and specialized FAQ documents'
                 ],
                 reasoning: []
             },
@@ -1308,28 +1311,28 @@
                 name: 'Microsoft Copilot Studio',
                 icon: 'paint-brush',
                 color: 'purple',
-                description: 'Low-code platform for creating sophisticated conversational agents',
+                description: 'Intuitive, natural language building experience for creating custom conversational agents with advanced workflows and multi-channel deployment',
                 benefits: [
-                    'Visual conversation design',
-                    'Rich connector ecosystem',
-                    'Multi-channel deployment',
-                    'Advanced analytics and insights',
-                    'Iterative development workflow'
+                    'Full conversational agent capabilities with branching dialogues',
+                    'Access to 1400+ Power Platform connectors',
+                    'Multi-channel deployment (Teams, web, SharePoint)',
+                    'Action-taking capabilities through Power Automate',
+                    'Visual conversation design and custom prompt engineering'
                 ],
                 reasoning: []
             },
             'azureai': {
                 id: 'azureai',
-                name: 'Microsoft Azure AI Foundry',
+                name: 'Azure AI Foundry Agent Service',
                 icon: 'cloud',
                 color: 'indigo',
-                description: 'Enterprise-scale platform for complex AI agents with full customization',
+                description: 'Enterprise AI/ML platform for building bespoke AI solutions with complete development control and advanced capabilities',
                 benefits: [
-                    'Complete development control',
-                    'Advanced AI model integration',
-                    'Enterprise-grade scalability',
-                    'Custom data processing pipelines',
-                    'Comprehensive monitoring and observability'
+                    'Unlimited integration freedom with any data source or system',
+                    'Custom model training, fine-tuning, and deployment',
+                    'Advanced features like RAG, custom decision logic, and autonomous agents',
+                    'Enterprise-grade scalability with comprehensive monitoring',
+                    'Full software development flexibility and control'
                 ],
                 reasoning: []
             }
@@ -1338,66 +1341,67 @@
         const implementationChecklists = {
             'microsoft365copilot': {
                 predev: [
-                    'Verify Microsoft 365 Copilot licensing and permissions',
-                    'Identify specific 1st party agents needed for your use case',
-                    'Review existing Microsoft 365 data and security policies',
-                    'Plan user training and adoption strategy',
-                    'Establish success metrics and KPIs for agent effectiveness'
+                    'Verify Microsoft 365 Copilot licensing for target users',
+                    'Identify which of the 11+ 1st party agents match your use case (Sales, Finance, HR, etc.)',
+                    'Review data access permissions and Microsoft Graph connectivity',
+                    'Enable Bing integration if web search capabilities are needed',
+                    'Configure approved SharePoint sites and data sources for specialized agents',
+                    'Plan user onboarding and training for Office app and specialized agent integration'
                 ],
                 postdev: [
-                    'Deploy agents to target user groups and departments',
-                    'Monitor usage analytics and performance metrics',
-                    'Collect user feedback and iterate on agent effectiveness',
-                    'Maintain data governance and compliance standards',
-                    'Provide ongoing user support and training resources'
+                    'Monitor Copilot and specialized agent usage analytics within M365 admin center',
+                    'Track adoption of specific 1st party agents (Sales, Service, Finance, HR, etc.)',
+                    'Collect user feedback on productivity improvements across specialized agents',
+                    'Ensure data governance policies are being followed for all agent types',
+                    'Provide ongoing support for users learning Copilot and specialized agent features'
                 ]
             },
             'agentbuilder': {
                 predev: [
-                    'Assess organizational requirements and define use cases',
-                    'Design agent conversation flows and interaction scenarios',
-                    'Identify required Microsoft 365 data sources and permissions',
-                    'Plan agent permissions and access control policies',
-                    'Create comprehensive agent testing and validation strategy'
+                    'Define organizational knowledge sources and FAQ content',
+                    'Identify internal SharePoint libraries and document sources',
+                    'Plan Graph Connector setup for external knowledge bases',
+                    'Design simple conversation flows for company-specific queries',
+                    'Configure permissions for organizational data access'
                 ],
                 postdev: [
-                    'Deploy agent to Microsoft 365 environment and target users',
-                    'Monitor agent performance and user interaction patterns',
-                    'Implement feedback collection and continuous improvement process',
-                    'Maintain agent knowledge base and response accuracy',
-                    'Scale deployment based on adoption metrics and user feedback'
+                    'Deploy agent capabilities within Copilot Chat experience',
+                    'Monitor organizational query patterns and response accuracy',
+                    'Update knowledge sources and refine agent responses',
+                    'Measure user satisfaction with company-specific AI assistance',
+                    'Scale to additional departments based on success metrics'
                 ]
             },
             'copilotstudio': {
                 predev: [
-                    'Define detailed agent requirements and user journey mapping',
-                    'Design comprehensive conversation flows and dialog trees',
-                    'Identify and configure required connectors and system integrations',
-                    'Plan knowledge base structure, content sources, and maintenance',
-                    'Establish development, testing, and staging environment procedures'
+                    'Map out conversational flows and user journey scenarios',
+                    'Identify required Power Platform connectors (from 1400+ available)',
+                    'Design agent personality, tone, and response patterns',
+                    'Plan integration with Dataverse, APIs, and business systems',
+                    'Set up development and testing environments in Power Platform'
                 ],
                 postdev: [
-                    'Deploy agent to selected channels and user touchpoints',
-                    'Implement comprehensive monitoring and analytics tracking',
-                    'Establish maintenance procedures and regular update cycles',
-                    'Optimize agent performance based on usage data and user feedback',
-                    'Plan feature enhancements and scaling for additional use cases'
+                    'Deploy to Teams, SharePoint, or web channels as planned',
+                    'Implement comprehensive analytics and conversation tracking',
+                    'Monitor connector performance and system integrations',
+                    'Continuously optimize conversation flows based on user interactions',
+                    'Plan expansion to additional channels and use cases'
                 ]
             },
             'azureai': {
                 predev: [
-                    'Architect comprehensive solution design and technical requirements',
-                    'Plan cloud infrastructure, resource allocation, and cost management',
-                    'Design data architecture, integration patterns, and security framework',
-                    'Establish development, staging, and production environment workflows',
-                    'Create comprehensive testing, validation, and quality assurance framework'
+                    'Design AI architecture including RAG, custom models, and data pipelines',
+                    'Plan Azure infrastructure, compute resources, and cost management',
+                    'Architect data integration patterns for enterprise systems',
+                    'Establish MLOps pipelines for model training and deployment',
+                    'Create comprehensive security, monitoring, and governance frameworks'
                 ],
                 postdev: [
-                    'Deploy to production with comprehensive monitoring and alerting',
-                    'Implement detailed logging, observability, and performance tracking',
-                    'Establish CI/CD pipelines for ongoing updates and maintenance',
-                    'Monitor performance metrics, costs, and resource utilization patterns',
-                    'Maintain model performance and implement continuous learning processes'
+                    'Deploy to production with full observability and alerting',
+                    'Implement model performance monitoring and retraining pipelines',
+                    'Establish CI/CD for continuous integration and deployment',
+                    'Monitor costs, performance metrics, and resource utilization',
+                    'Maintain model accuracy and implement feedback loops for improvement'
                 ]
             }
         };
@@ -1408,72 +1412,444 @@
         let answers = {};
         let recommendedPlatform = null;
         let isDarkTheme = false;
+        let structurePlanningData = {};
 
-        // Platform determination logic
+        // 1st Party Copilot Agents - Available out-of-the-box
+        const firstPartyCopilots = {
+            'sales_crm': {
+                name: 'Copilot for Sales',
+                description: 'Integrates with Dynamics 365 and Salesforce to assist with CRM tasks'
+            },
+            'customer_service': {
+                name: 'Copilot for Service', 
+                description: 'Supports customer service workflows and case resolution'
+            },
+            'finance_reporting': {
+                name: 'Copilot for Finance',
+                description: 'Helps with financial reporting and analysis'
+            },
+            'research_content': {
+                name: 'Researcher Agent',
+                description: 'Synthesizes information and drafts content'
+            },
+            'data_analysis': {
+                name: 'Analyst Agent',
+                description: 'Transforms data into insights and visualizations'
+            },
+            'meeting_facilitation': {
+                name: 'Facilitator Agent',
+                description: 'Manages Teams meetings, notes, and moderation'
+            },
+            'hr_it_selfservice': {
+                name: 'Employee Self-Service Agent',
+                description: 'Handles HR and IT tasks like PTO requests and helpdesk tickets'
+            },
+            'sharepoint_access': {
+                name: 'SharePoint Agents',
+                description: 'Provide natural language access to SharePoint content'
+            },
+            'interpretation': {
+                name: 'Interpreter Agent',
+                description: 'Enables real-time speech-to-speech interpretation in Teams'
+            },
+            'project_management': {
+                name: 'Project Manager Agent',
+                description: 'Automate project management tasks in Planner'
+            },
+            'skills_expertise': {
+                name: 'Skills Agent',
+                description: 'Explore organizational skills and find expertise'
+            }
+        };
+
+        // Platform-specific structure planning content
+        const platformStructures = {
+            'microsoft365copilot': {
+                title: '1st Party Agent Configuration',
+                sections: [
+                    {
+                        title: 'Agent Selection & Setup',
+                        icon: '🤖',
+                        components: [
+                            { 
+                                title: 'License Verification', 
+                                icon: '📋', 
+                                color: '#3b82f6',
+                                description: 'Verify Microsoft 365 Copilot licensing for target users and roles'
+                            },
+                            { 
+                                title: 'Agent Enablement', 
+                                icon: '⚡', 
+                                color: '#22c55e',
+                                description: 'Enable specific 1st party agents (Sales, Finance, HR, etc.) based on user needs'
+                            },
+                            { 
+                                title: 'Data Permissions', 
+                                icon: '🔐', 
+                                color: '#f97316',
+                                description: 'Configure Microsoft Graph permissions and data access for specialized agents'
+                            },
+                            { 
+                                title: 'SharePoint Integration', 
+                                icon: '📚', 
+                                color: '#a855f7',
+                                description: 'Connect SharePoint sites and document libraries for agent knowledge sources'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Usage & Deployment',
+                        icon: '🚀',
+                        components: [
+                            { 
+                                title: 'User Training', 
+                                icon: '👥', 
+                                color: '#3b82f6',
+                                description: 'Plan training for Office apps integration and specialized agent features'
+                            },
+                            { 
+                                title: 'Governance Policies', 
+                                icon: '⚖️', 
+                                color: '#22c55e',
+                                description: 'Establish data governance and usage policies across all agent types'
+                            },
+                            { 
+                                title: 'Analytics Setup', 
+                                icon: '📊', 
+                                color: '#f97316',
+                                description: 'Configure M365 admin center monitoring for agent usage and adoption'
+                            }
+                        ]
+                    }
+                ]
+            },
+            'agentbuilder': {
+                title: 'Custom M365 Agent Architecture',
+                sections: [
+                    {
+                        title: 'Knowledge & Data Sources',
+                        icon: '📚',
+                        components: [
+                            { 
+                                title: 'Organizational Knowledge', 
+                                icon: '🏢', 
+                                color: '#3b82f6',
+                                description: 'Define internal FAQ content and organizational-specific information'
+                            },
+                            { 
+                                title: 'SharePoint Libraries', 
+                                icon: '📁', 
+                                color: '#22c55e',
+                                description: 'Connect to internal SharePoint document libraries and knowledge bases'
+                            },
+                            { 
+                                title: 'Microsoft Graph APIs', 
+                                icon: '🔗', 
+                                color: '#f97316',
+                                description: 'Configure Graph API connections for calendar, email, and team data'
+                            },
+                            { 
+                                title: 'Custom Data Sources', 
+                                icon: '🗄️', 
+                                color: '#a855f7',
+                                description: 'Integrate external systems and databases through approved connectors'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Agent Behavior & Deployment',
+                        icon: '⚙️',
+                        components: [
+                            { 
+                                title: 'Response Templates', 
+                                icon: '📝', 
+                                color: '#3b82f6',
+                                description: 'Design standardized response patterns and organizational tone'
+                            },
+                            { 
+                                title: 'Access Controls', 
+                                icon: '🔒', 
+                                color: '#22c55e',
+                                description: 'Set user permissions and data access levels within M365 ecosystem'
+                            },
+                            { 
+                                title: 'Testing & Validation', 
+                                icon: '🧪', 
+                                color: '#f97316',
+                                description: 'Test agent responses with organizational stakeholders before deployment'
+                            }
+                        ]
+                    }
+                ]
+            },
+            'copilotstudio': {
+                title: 'Conversational Agent Design',
+                sections: [
+                    {
+                        title: 'Conversation Architecture',
+                        icon: '💬',
+                        components: [
+                            { 
+                                title: 'Topics & Intents', 
+                                icon: '🎯', 
+                                color: '#3b82f6',
+                                description: 'Define conversation topics and user intent recognition patterns'
+                            },
+                            { 
+                                title: 'Dialog Flows', 
+                                icon: '🌊', 
+                                color: '#22c55e',
+                                description: 'Map out conversation pathways and decision trees'
+                            },
+                            { 
+                                title: 'Fallback Handling', 
+                                icon: '🔄', 
+                                color: '#f97316',
+                                description: 'Design graceful fallback responses for unrecognized queries'
+                            },
+                            { 
+                                title: 'Entity Extraction', 
+                                icon: '🔍', 
+                                color: '#a855f7',
+                                description: 'Configure data extraction from user messages (dates, names, etc.)'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Multi-Channel Deployment',
+                        icon: '📡',
+                        components: [
+                            { 
+                                title: 'Teams Integration', 
+                                icon: '👥', 
+                                color: '#3b82f6',
+                                description: 'Configure bot deployment within Microsoft Teams environment'
+                            },
+                            { 
+                                title: 'Web Chat Widget', 
+                                icon: '🌐', 
+                                color: '#22c55e',
+                                description: 'Embed conversational interface in websites and web portals'
+                            },
+                            { 
+                                title: 'SharePoint Integration', 
+                                icon: '📚', 
+                                color: '#f97316',
+                                description: 'Deploy agent within SharePoint sites for contextual assistance'
+                            },
+                            { 
+                                title: 'Power Platform Connectors', 
+                                icon: '⚡', 
+                                color: '#a855f7',
+                                description: 'Integrate with Power Automate flows and Power Apps'
+                            }
+                        ]
+                    }
+                ]
+            },
+            'azureai': {
+                title: 'Enterprise AI Solution Architecture',
+                sections: [
+                    {
+                        title: 'AI & ML Components',
+                        icon: '🤖',
+                        components: [
+                            { 
+                                title: 'Model Selection', 
+                                icon: '🧠', 
+                                color: '#3b82f6',
+                                description: 'Choose appropriate Azure OpenAI models and configure custom fine-tuning'
+                            },
+                            { 
+                                title: 'RAG Pipeline', 
+                                icon: '🔍', 
+                                color: '#22c55e',
+                                description: 'Design retrieval-augmented generation with Azure AI Search integration'
+                            },
+                            { 
+                                title: 'Vector Databases', 
+                                icon: '🗄️', 
+                                color: '#f97316',
+                                description: 'Configure Azure Cosmos DB for vector storage and similarity search'
+                            },
+                            { 
+                                title: 'Custom Models', 
+                                icon: '⚙️', 
+                                color: '#a855f7',
+                                description: 'Plan custom model training pipelines using Azure Machine Learning'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Enterprise Infrastructure',
+                        icon: '🏗️',
+                        components: [
+                            { 
+                                title: 'Security & Compliance', 
+                                icon: '🔒', 
+                                color: '#3b82f6',
+                                description: 'Implement enterprise security policies and regulatory compliance'
+                            },
+                            { 
+                                title: 'Scalability Design', 
+                                icon: '📈', 
+                                color: '#22c55e',
+                                description: 'Plan auto-scaling policies and resource management strategies'
+                            },
+                            { 
+                                title: 'Monitoring & Logging', 
+                                icon: '📊', 
+                                color: '#f97316',
+                                description: 'Set up Application Insights and custom performance dashboards'
+                            },
+                            { 
+                                title: 'CI/CD Pipelines', 
+                                icon: '🔄', 
+                                color: '#a855f7',
+                                description: 'Establish MLOps workflows for continuous integration and deployment'
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Check if user needs are covered by 1st party agents
+        function checkFirstPartyAgentCoverage(answers) {
+            const coveredUseCase = {
+                isFirstPartyCovered: false,
+                matchingAgent: null,
+                reason: ''
+            };
+
+            // Check if the primary purpose aligns with existing 1st party agents
+            if (answers.primaryPurpose === 'productivity') {
+                // Most productivity use cases are covered by out-of-the-box Copilot or 1st party agents
+                coveredUseCase.isFirstPartyCovered = true;
+                coveredUseCase.reason = 'Personal productivity is comprehensively covered by Microsoft 365 Copilot and specialized 1st party agents';
+            }
+
+            return coveredUseCase;
+        }
+
+        // Platform determination logic - Updated with 1st Party Agent consideration
         function determinePlatform(answers) {
             let bestMatch = null;
+            
+            // First, check if needs are already covered by 1st party agents
+            const firstPartyCheck = checkFirstPartyAgentCoverage(answers);
 
-            // Microsoft 365 Copilot 1st Party Agents
-            if (answers.useCaseComplexity === 'simple' && 
-                answers.integrationNeeds === 'microsoft' && 
-                answers.customizationLevel === 'minimal') {
+            // Microsoft 365 Copilot Chat (Out-of-the-Box) - Enhanced with 1st party agent consideration
+            if ((answers.primaryPurpose === 'productivity' && 
+                 answers.targetAudience === 'end_users' && 
+                 answers.complexityLevel === 'lowest') ||
+                (firstPartyCheck.isFirstPartyCovered && 
+                 answers.complexityLevel === 'lowest')) {
                 bestMatch = {...platformOptions.microsoft365copilot};
                 bestMatch.reasoning = [
-                    'Your simple use case aligns with ready-to-use solutions',
-                    'Microsoft-focused integrations work best within the Microsoft ecosystem',
-                    'Minimal customization needs match out-of-the-box capabilities'
+                    'Personal productivity focus aligns with Copilot\'s core purpose',
+                    'Specialized 1st party agents cover sales, finance, HR, project management, and more',
+                    'End-users benefit from zero-effort AI integration in Office apps',
+                    'Lowest complexity matches out-of-the-box functionality'
                 ];
+                if (firstPartyCheck.isFirstPartyCovered) {
+                    bestMatch.reasoning.push('Your use case is likely covered by existing 1st party Copilot agents');
+                }
             }
-            // Agent Builder
-            else if ((answers.useCaseComplexity === 'moderate' && 
-                      answers.technicalExpertise !== 'low' && 
-                      answers.integrationNeeds === 'microsoft') ||
-                     (answers.useCaseComplexity === 'simple' && 
-                      answers.customizationLevel === 'moderate')) {
+            // Microsoft 365 Copilot with Copilot Studio Lite - Only when needs exceed 1st party agents
+            else if (answers.primaryPurpose === 'organizational' && 
+                     answers.targetAudience === 'business_users' && 
+                     (answers.complexityLevel === 'low' || answers.complexityLevel === 'lowest') &&
+                     (answers.integrationScope === 'microsoft_graph' || answers.integrationScope === 'extended_microsoft') &&
+                     !firstPartyCheck.isFirstPartyCovered) {
                 bestMatch = {...platformOptions.agentbuilder};
                 bestMatch.reasoning = [
-                    'Moderate complexity matches Agent Builder capabilities',
-                    'Your technical expertise enables custom agent development',
-                    'Microsoft ecosystem focus aligns with platform strengths'
+                    'Your organizational needs go beyond existing 1st party Copilot agents',
+                    'Company-specific knowledge extension fits Copilot Studio Lite\'s purpose',
+                    'Business users benefit from custom AI capabilities within familiar Copilot UI',
+                    'Low complexity aligns with guided configuration approach',
+                    'Microsoft ecosystem focus matches platform capabilities'
                 ];
             }
             // Copilot Studio
-            else if ((answers.technicalExpertise === 'medium' && 
-                      answers.customizationLevel === 'moderate') ||
-                     (answers.useCaseComplexity === 'moderate' && 
-                      answers.integrationNeeds === 'mixed')) {
+            else if (answers.primaryPurpose === 'business_process' && 
+                     answers.targetAudience === 'business_analysts' && 
+                     answers.complexityLevel === 'moderate' &&
+                     answers.integrationScope === 'power_platform') {
                 bestMatch = {...platformOptions.copilotstudio};
                 bestMatch.reasoning = [
-                    'Low-code approach matches your team\'s technical comfort level',
-                    'Mixed integrations supported through extensive connector library',
-                    'Visual development environment accelerates creation process'
+                    'Custom business process automation is Copilot Studio\'s strength',
+                    'Business analysts can leverage intuitive, natural language building experience',
+                    'Moderate complexity matches visual conversation design capabilities',
+                    'Power Platform connectors provide extensive integration options'
                 ];
             }
             // Azure AI Foundry
-            else if (answers.useCaseComplexity === 'complex' || 
-                     answers.deploymentScale === 'enterprise' || 
-                     answers.customizationLevel === 'extensive' ||
-                     (answers.technicalExpertise === 'high' && 
-                      answers.integrationNeeds === 'enterprise')) {
+            else if (answers.primaryPurpose === 'enterprise_ai' && 
+                     answers.targetAudience === 'developers' && 
+                     answers.complexityLevel === 'highest' &&
+                     answers.integrationScope === 'unlimited') {
                 bestMatch = {...platformOptions.azureai};
                 bestMatch.reasoning = [
-                    'Complex requirements need a highly customizable platform',
-                    'Enterprise scale deployment requires robust infrastructure',
-                    'Your development expertise enables advanced customization options'
+                    'Enterprise AI/ML platform needs require Azure AI Foundry\'s capabilities',
+                    'Developers need full control for advanced AI solution development',
+                    'Highest complexity demands software development approach',
+                    'Unlimited integration freedom enables comprehensive enterprise solutions'
                 ];
             }
 
-            // Fallback logic
+            // Additional logic based on specific combinations
             if (!bestMatch) {
-                if (answers.technicalExpertise === 'low') {
-                    bestMatch = {...platformOptions.microsoft365copilot};
-                    bestMatch.reasoning = ['No-code approach recommended for teams with limited technical expertise'];
-                } else if (answers.useCaseComplexity === 'complex') {
+                // Copilot Studio for multi-channel deployment needs
+                if (answers.deploymentNeeds === 'multiple_channels' && 
+                    answers.complexityLevel === 'moderate') {
+                    bestMatch = {...platformOptions.copilotstudio};
+                    bestMatch.reasoning = [
+                        'Multi-channel deployment capabilities are Copilot Studio\'s strength',
+                        'Moderate complexity allows for sophisticated conversational agents',
+                        'Teams, SharePoint, and web deployment options available'
+                    ];
+                }
+                // Azure AI for unlimited deployment needs
+                else if (answers.deploymentNeeds === 'anywhere' && 
+                         answers.integrationScope === 'unlimited') {
                     bestMatch = {...platformOptions.azureai};
-                    bestMatch.reasoning = ['Complex use cases require enterprise-grade development platform'];
+                    bestMatch.reasoning = [
+                        'Deploy anywhere capability requires full development control',
+                        'Unlimited integration scope demands enterprise platform',
+                        'Custom applications and advanced AI features needed'
+                    ];
+                }
+                // Copilot Studio Lite for extended Microsoft integration (only if not covered by 1st party agents)
+                else if (answers.integrationScope === 'extended_microsoft' && 
+                         answers.complexityLevel === 'low' && 
+                         !firstPartyCheck.isFirstPartyCovered) {
+                    bestMatch = {...platformOptions.agentbuilder};
+                    bestMatch.reasoning = [
+                        'Extended Microsoft ecosystem fits Copilot Studio Lite capabilities',
+                        'Your needs go beyond the 11+ available 1st party Copilot agents',
+                        'Low complexity configuration within M365 environment',
+                        'Company-specific knowledge augmentation'
+                    ];
+                }
+            }
+
+            // Final fallback logic - Consider 1st party agent coverage
+            if (!bestMatch) {
+                if (answers.complexityLevel === 'lowest' || firstPartyCheck.isFirstPartyCovered) {
+                    bestMatch = {...platformOptions.microsoft365copilot};
+                    bestMatch.reasoning = firstPartyCheck.isFirstPartyCovered ? 
+                        ['Your use case is likely covered by Microsoft\'s 11+ built-in Copilot agents', 'Lowest complexity requirements match out-of-the-box capabilities'] :
+                        ['Lowest complexity requirements match out-of-the-box Copilot capabilities'];
+                } else if (answers.complexityLevel === 'highest') {
+                    bestMatch = {...platformOptions.azureai};
+                    bestMatch.reasoning = ['Highest complexity requirements need enterprise development platform'];
+                } else if (answers.targetAudience === 'developers') {
+                    bestMatch = {...platformOptions.azureai};
+                    bestMatch.reasoning = ['Developer audience benefits from full control and customization options'];
                 } else {
                     bestMatch = {...platformOptions.copilotstudio};
-                    bestMatch.reasoning = ['Balanced approach suitable for most scenarios'];
+                    bestMatch.reasoning = ['Balanced intuitive, natural language building experience suitable for most business scenarios'];
                 }
             }
 
@@ -1566,6 +1942,26 @@
                 benefitsList.appendChild(li);
             });
 
+            // Show 1st party agents if Microsoft 365 Copilot is recommended
+            const firstPartySection = document.getElementById('first-party-agents');
+            if (recommendedPlatform.id === 'microsoft365copilot') {
+                firstPartySection.classList.remove('hidden');
+                const agentsGrid = document.getElementById('agents-grid');
+                agentsGrid.innerHTML = '';
+                
+                Object.values(firstPartyCopilots).forEach(agent => {
+                    const agentCard = document.createElement('div');
+                    agentCard.style.cssText = 'background-color: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: 12px;';
+                    agentCard.innerHTML = `
+                        <h5 style="font-weight: 600; color: hsl(var(--foreground)); margin-bottom: 4px; font-size: 14px;">${agent.name}</h5>
+                        <p style="font-size: 12px; color: hsl(var(--muted-foreground)); margin: 0;">${agent.description}</p>
+                    `;
+                    agentsGrid.appendChild(agentCard);
+                });
+            } else {
+                firstPartySection.classList.add('hidden');
+            }
+
             const reasoningList = document.getElementById('reasoning-list');
             reasoningList.innerHTML = '';
             recommendedPlatform.reasoning.forEach(reason => {
@@ -1574,6 +1970,67 @@
                 li.innerHTML = `<span class="check-icon">✅</span><span class="reasoning-text">${reason}</span>`;
                 reasoningList.appendChild(li);
             });
+        }
+
+        function renderStructure() {
+            const platformStructure = platformStructures[recommendedPlatform.id];
+            
+            // Update the structure section title
+            document.querySelector('.structure-title').innerHTML = `<span class="icon">🔗</span> ${platformStructure.title}`;
+            
+            const structureContainer = document.getElementById('platform-specific-structure');
+            structureContainer.innerHTML = '';
+            
+            platformStructure.sections.forEach(section => {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'structure-section';
+                sectionDiv.innerHTML = `
+                    <h3 class="structure-section-title">
+                        <span class="icon">${section.icon}</span> ${section.title}
+                    </h3>
+                    <div class="component-grid">
+                        ${section.components.map((component, componentIndex) => `
+                            <div class="component-card">
+                                <h4 class="component-title">
+                                    <span class="icon" style="color: ${component.color};">${component.icon}</span> ${component.title}
+                                </h4>
+                                <p class="component-description">${component.description}</p>
+                                <div class="component-controls">
+                                    <div class="component-checkbox">
+                                        <input type="checkbox" id="component-${section.title.replace(/\s+/g, '-').toLowerCase()}-${componentIndex}" 
+                                               data-section="${section.title}" data-component="${component.title}"
+                                               onchange="updateStructureData(this)">
+                                        <label for="component-${section.title.replace(/\s+/g, '-').toLowerCase()}-${componentIndex}">Include in plan</label>
+                                    </div>
+                                    <textarea class="component-textarea" 
+                                              placeholder="Add your specific implementation notes, decisions, or requirements for this component..."
+                                              data-section="${section.title}" data-component="${component.title}"
+                                              onchange="updateStructureData(this)"></textarea>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                structureContainer.appendChild(sectionDiv);
+            });
+        }
+
+        function updateStructureData(element) {
+            const section = element.getAttribute('data-section');
+            const component = element.getAttribute('data-component');
+            
+            if (!structurePlanningData[section]) {
+                structurePlanningData[section] = {};
+            }
+            if (!structurePlanningData[section][component]) {
+                structurePlanningData[section][component] = { selected: false, notes: '' };
+            }
+            
+            if (element.type === 'checkbox') {
+                structurePlanningData[section][component].selected = element.checked;
+            } else if (element.tagName === 'TEXTAREA') {
+                structurePlanningData[section][component].notes = element.value;
+            }
         }
 
         function renderImplementation() {
@@ -1605,18 +2062,94 @@
         }
 
         function exportPlan() {
-            const exportData = {
-                platform: recommendedPlatform,
-                answers,
-                checklist: recommendedPlatform ? implementationChecklists[recommendedPlatform.id] : null,
-                exportDate: new Date().toISOString()
+            const questionTitles = {
+                primaryPurpose: 'Primary Purpose',
+                targetAudience: 'Target Audience',
+                complexityLevel: 'Complexity Level', 
+                integrationScope: 'Integration Scope',
+                deploymentNeeds: 'Deployment Needs'
             };
+
+            // Create RTF content for Word compatibility
+            let rtf = '{\\rtf1\\ansi\\deff0\\nouicompat{\\fonttbl{\\f0\\fswiss\\fcharset0 Arial;}}';
+            rtf += '{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;}';
+            rtf += '\\viewkind4\\uc1\\pard\\f0\\fs24';
+
+            // Title
+            rtf += '\\qc\\b\\fs32 MICROSOFT AI AGENT PLATFORM PLAN\\b0\\fs24\\par\\par';
+            rtf += `\\qc\\i Generated on: ${new Date().toLocaleDateString()}\\i0\\par\\par`;
+            rtf += '\\ql'; // Left align for body text
+
+            // Recommended Platform
+            rtf += '\\b\\fs28 1. RECOMMENDED PLATFORM\\b0\\fs24\\par';
+            rtf += '\\line';
+            rtf += `\\b Platform: \\b0 ${recommendedPlatform.name}\\par\\par`;
+            rtf += `\\b Description: \\b0 ${recommendedPlatform.description}\\par\\par`;
+
+            // Assessment Results
+            rtf += '\\b\\fs28 2. ASSESSMENT RESULTS\\b0\\fs24\\par';
+            rtf += '\\line';
+            Object.entries(answers).forEach(([key, value]) => {
+                rtf += `\\b ${questionTitles[key] || key}: \\b0 ${value.replace(/_/g, ' ').toUpperCase()}\\par`;
+            });
+            rtf += '\\par';
+
+            // Reasoning
+            rtf += '\\b\\fs28 3. WHY THIS RECOMMENDATION?\\b0\\fs24\\par';
+            rtf += '\\line';
+            recommendedPlatform.reasoning.forEach((reason, index) => {
+                rtf += `${index + 1}. ${reason}\\par`;
+            });
+            rtf += '\\par';
+
+            // Structure Planning (if any data captured)
+            if (Object.keys(structurePlanningData).length > 0) {
+                rtf += '\\b\\fs28 4. AGENT STRUCTURE PLANNING\\b0\\fs24\\par';
+                rtf += '\\line';
+                
+                Object.entries(structurePlanningData).forEach(([sectionTitle, components]) => {
+                    rtf += `\\par\\b\\fs26 ${sectionTitle.toUpperCase()}\\b0\\fs24\\par`;
+                    
+                    Object.entries(components).forEach(([componentTitle, data]) => {
+                        if (data.selected || data.notes) {
+                            rtf += `${data.selected ? '\\u9745?' : '\\u9744?'} ${componentTitle}\\par`;
+                            if (data.notes) {
+                                rtf += `\\tab\\i Notes: ${data.notes}\\i0\\par`;
+                            }
+                        }
+                    });
+                });
+                rtf += '\\par';
+            }
+
+            // Implementation Checklist
+            const checklist = implementationChecklists[recommendedPlatform.id];
+            const sectionNumber = Object.keys(structurePlanningData).length > 0 ? '5' : '4';
+            rtf += `\\b\\fs28 ${sectionNumber}. IMPLEMENTATION CHECKLIST\\b0\\fs24\\par`;
+            rtf += '\\line';
             
-            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            // Pre-development
+            rtf += '\\par\\b\\fs26 PRE-DEVELOPMENT TASKS\\b0\\fs24\\par';
+            checklist.predev.forEach((item, index) => {
+                rtf += `\\u9744? ${index + 1}. ${item}\\par`;
+            });
+
+            // Post-development
+            rtf += '\\par\\b\\fs26 POST-DEVELOPMENT TASKS\\b0\\fs24\\par';
+            checklist.postdev.forEach((item, index) => {
+                rtf += `\\u9744? ${index + 1}. ${item}\\par`;
+            });
+
+            rtf += '\\par\\line\\par';
+            rtf += '\\qc\\i This plan was generated by the Microsoft Agent Platform Decision Tool\\i0\\par';
+            rtf += '}';
+
+            // Create and download RTF file
+            const blob = new Blob([rtf], { type: 'application/rtf' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `agent-platform-plan-${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `agent-platform-plan-${new Date().toISOString().split('T')[0]}.rtf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -1628,6 +2161,7 @@
             currentQuestionIndex = 0;
             answers = {};
             recommendedPlatform = null;
+            structurePlanningData = {};
             updateProgressIndicator();
             showSection('welcome-section');
         }
@@ -1677,21 +2211,22 @@
             });
 
             // Recommendation section
-            document.getElementById('view-implementation').addEventListener('click', function() {
+            document.getElementById('view-structure').addEventListener('click', function() {
                 currentStep = 3;
+                updateProgressIndicator();
+                renderStructure();
+                showSection('structure-section');
+            });
+
+            // Structure section
+            document.getElementById('structure-to-implementation').addEventListener('click', function() {
+                currentStep = 4;
                 updateProgressIndicator();
                 renderImplementation();
                 showSection('implementation-section');
             });
 
-            // Implementation section
-            document.getElementById('view-structure').addEventListener('click', function() {
-                currentStep = 4;
-                updateProgressIndicator();
-                showSection('structure-section');
-            });
-
-            // Structure section
+            // Final section buttons
             document.getElementById('restart-btn').addEventListener('click', restart);
             document.getElementById('export-btn').addEventListener('click', exportPlan);
         });
