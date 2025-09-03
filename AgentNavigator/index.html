@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Agent Platform Decision Tool</title>
+    <meta name="description" content="Interactive tool to help you choose the best Microsoft agent platform for your use case - Microsoft 365 Copilot, Agent Builder, Copilot Studio, or Azure AI Foundry.">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --background: hsl(0, 0%, 100%);
+            --foreground: hsl(222, 84%, 4.9%);
+            --card: hsl(0, 0%, 100%);
+            --card-foreground: hsl(222, 84%, 4.9%);
+            --popover: hsl(0, 0%, 100%);
+            --popover-foreground: hsl(222, 84%, 4.9%);
+            --primary: hsl(210, 100%, 50%);
+            --primary-foreground: hsl(210, 40%, 98%);
+            --secondary: hsl(210, 40%, 96%);
+            --secondary-foreground: hsl(222, 47%, 11%);
+            --muted: hsl(210, 40%, 96%);
+            --muted-foreground: hsl(215, 13%, 65%);
+            --accent: hsl(210, 40%, 94%);
+            --accent-foreground: hsl(222, 47%, 11%);
+            --destructive: hsl(0, 84%, 60%);
+            --destructive-foreground: hsl(210, 40%, 98%);
+            --border: hsl(214, 32%, 91%);
+            --input: hsl(214, 32%, 91%);
+            --ring: hsl(210, 100%, 50%);
+            --radius: 8px;
+            --font-sans: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .dark {
+            --background: hsl(222, 84%, 4.9%);
+            --foreground: hsl(210, 40%, 98%);
+            --card: hsl(222, 84%, 4.9%);
+            --card-foreground: hsl(210, 40%, 98%);
+            --popover: hsl(222, 84%, 4.9%);
+            --popover-foreground: hsl(210, 40%, 98%);
+            --primary: hsl(210, 100%, 50%);
+            --primary-foreground: hsl(222, 47%, 11%);
+            --secondary: hsl(217, 33%, 17%);
+            --secondary-foreground: hsl(210, 40%, 98%);
+            --muted: hsl(217, 33%, 17%);
+            --muted-foreground: hsl(215, 20%, 65%);
+            --accent: hsl(217, 33%, 17%);
+            --accent-foreground: hsl(210, 40%, 98%);
+            --destructive: hsl(0, 84%, 60%);
+            --destructive-foreground: hsl(210, 40%, 98%);
+            --border: hsl(217, 33%, 17%);
+            --input: hsl(217, 33%, 17%);
+            --ring: hsl(210, 100%, 50%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: hsl(var(--card));
+            border-bottom: 1px solid hsl(var(--border));
+            padding: 16px 0;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: hsl(var(--foreground));
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 1px solid transparent;
+            text-decoration: none;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            padding: 12px 24px;
+        }
+
+        .btn-primary:hover {
+            background-color: hsl(var(--primary) / 0.9);
+        }
+
+        .btn-secondary {
+            background-color: hsl(var(--secondary));
+            color: hsl(var(--secondary-foreground));
+            padding: 12px 24px;
+        }
+
+        .btn-secondary:hover {
+            background-color: hsl(var(--secondary) / 0.8);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: hsl(var(--foreground));
+            padding: 8px 12px;
+        }
+
+        .btn-ghost:hover {
+            background-color: hsl(var(--accent));
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 16px;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .card-content {
+            padding: 32px;
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .step-circle.active {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+
+        .step-circle.completed {
+            background-color: hsl(142, 71%, 45%);
+            color: white;
+        }
+
+        .step-circle.pending {
+            background-color: hsl(var(--muted));
+            color: hsl(var(--muted-foreground));
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .step-connector {
+            width: 64px;
+            height: 2px;
+            background-color: hsl(var(--border));
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 32px 0;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+        }
+
+        .welcome-icon {
+            font-size: 64px;
+            color: hsl(var(--primary));
+            margin-bottom: 16px;
+        }
+
+        .welcome-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: hsl(var(--foreground));
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            color: hsl(var(--muted-foreground));
+            max-width: 768px;
+            margin: 0 auto 32px auto;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .platform-preview {
+            background-color: hsl(var(--accent));
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .platform-preview-icon {
+            font-size: 32px;
+            color: hsl(var(--primary));
+            margin-bottom: 8px;
+        }
+
+        .platform-preview-title {
+            font-weight: 600;
+            color: hsl(var(--accent-foreground));
+            margin-bottom: 4px;
+        }
+
+        .platform-preview-desc {
+            font-size: 14px;
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* Question Styles */
+        .question-card {
+            margin-bottom: 24px;
+        }
+
+        .question-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: hsl(var(--foreground));
+            margin-bottom: 8px;
+        }
+
+        .question-subtitle {
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 24px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .option-card {
+            background-color: hsl(var(--card));
+            border: 2px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .option-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: hsl(var(--primary));
+            background-color: hsl(210, 100%, 97%);
+        }
+
+        .dark .option-card.selected {
+            background-color: hsl(217, 33%, 20%);
+        }
+
+        .option-radio {
+            margin-top: 4px;
+            accent-color: hsl(var(--primary));
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-label {
+            font-weight: 600;
+            color: hsl(var(--foreground));
+            margin-bottom: 4px;
+        }
+
+        .option-description {
+            font-size: 14px;
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* Navigation */
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-counter {
+            font-size: 14px;
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* Recommendation Styles */
+        .recommendation-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .recommendation-icon {
+            font-size: 64px;
+            color: #eab308;
+            margin-bottom: 16px;
+        }
+
+        .recommendation-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: hsl(var(--foreground));
+        }
+
+        .platform-card-large {
+            background-color: hsl(var(--accent));
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .platform-icon-large {
+            width: 64px;
+            height: 64px;
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 0 auto 16px auto;
+        }
+
+        .platform-name {
+            font-size: 32px;
+            font-weight: bold;
+            color: hsl(var(--foreground));
+            margin-bottom: 8px;
+        }
+
+        .platform-description {
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 24px;
+        }
+
+        .benefits-card {
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 16px;
+        }
+
+        .benefits-title {
+            font-weight: 600;
+            color: hsl(var(--foreground));
+            margin-bottom: 12px;
+        }
+
+        .benefits-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .check-icon {
+            color: #22c55e;
+            font-size: 16px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            font-size: 14px;
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* Reasoning Section */
+        .reasoning-section {
+            background-color: hsl(var(--muted));
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+
+        .reasoning-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: hsl(var(--foreground));
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reasoning-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .reasoning-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .reasoning-text {
+            color: hsl(var(--muted-foreground));
+        }
+
+        .next-steps-card {
+            background-color: hsl(219, 95%, 95%);
+            border: 1px solid hsl(219, 95%, 80%);
+            border-radius: var(--radius);
+            padding: 16px;
+        }
+
+        .dark .next-steps-card {
+            background-color: hsl(217, 91%, 10%);
+            border-color: hsl(217, 91%, 20%);
+        }
+
+        .next-steps-title {
+            font-weight: 600;
+            color: hsl(219, 95%, 20%);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark .next-steps-title {
+            color: hsl(219, 95%, 80%);
+        }
+
+        .next-steps-text {
+            font-size: 14px;
+            color: hsl(219, 95%, 30%);
+        }
+
+        .dark .next-steps-text {
+            color: hsl(219, 95%, 70%);
+        }
+
+        /* Implementation Checklist */
+        .checklist-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 24px;
+            color: hsl(var(--foreground));
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .checklist-section {
+            background-color: hsl(var(--accent));
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+
+        .checklist-section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: hsl(var(--accent-foreground));
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checklist-items {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid hsl(var(--border));
+            border-radius: 4px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            accent-color: hsl(var(--primary));
+        }
+
+        .checklist-item-text {
+            color: hsl(var(--accent-foreground));
+            font-size: 14px;
+        }
+
+        /* Agent Structure */
+        .structure-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 24px;
+            color: hsl(var(--foreground));
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .structure-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .structure-section {
+            background-color: hsl(var(--accent));
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+
+        .structure-section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: hsl(var(--accent-foreground));
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .component-card {
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 16px;
+        }
+
+        .component-title {
+            font-weight: 600;
+            color: hsl(var(--foreground));
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .component-description {
+            font-size: 14px;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .agent-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .agent-type-card {
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 16px;
+        }
+
+        .agent-type-title {
+            font-weight: 600;
+            color: hsl(var(--foreground));
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .agent-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .agent-feature {
+            font-size: 14px;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .agent-feature:before {
+            content: "• ";
+            margin-right: 4px;
+        }
+
+        /* Separator */
+        .separator {
+            height: 1px;
+            background-color: hsl(var(--border));
+            margin: 32px 0;
+        }
+
+        /* Center content */
+        .center {
+            text-align: center;
+        }
+
+        /* Utilities */
+        .hidden {
+            display: none;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .gap-4 {
+            gap: 16px;
+        }
+
+        .mb-4 {
+            margin-bottom: 16px;
+        }
+
+        .mb-8 {
+            margin-bottom: 32px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Icons (using Unicode symbols) */
+        .icon {
+            display: inline-block;
+            font-style: normal;
+        }
+
+        .icon-bot::before { content: "🤖"; }
+        .icon-lightbulb::before { content: "💡"; }
+        .icon-check::before { content: "✅"; }
+        .icon-chevron-right::before { content: "▶"; }
+        .icon-chevron-left::before { content: "◀"; }
+        .icon-trending-up::before { content: "📈"; }
+        .icon-info::before { content: "ℹ️"; }
+        .icon-checklist::before { content: "✅"; }
+        .icon-rocket::before { content: "🚀"; }
+        .icon-network::before { content: "🔗"; }
+        .icon-settings::before { content: "⚙️"; }
+        .icon-file::before { content: "📄"; }
+        .icon-database::before { content: "💾"; }
+        .icon-wrench::before { content: "🔧"; }
+        .icon-branch::before { content: "🌿"; }
+        .icon-link::before { content: "🔗"; }
+        .icon-message::before { content: "💬"; }
+        .icon-bell::before { content: "🔔"; }
+        .icon-users::before { content: "👥"; }
+        .icon-cog::before { content: "⚙️"; }
+        .icon-download::before { content: "⬇️"; }
+        .icon-restart::before { content: "🔄"; }
+        .icon-sun::before { content: "☀️"; }
+        .icon-moon::before { content: "🌙"; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .progress-steps {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .step-connector {
+                display: none;
+            }
+            
+            .welcome-title {
+                font-size: 32px;
+            }
+            
+            .question-title, .recommendation-title, .checklist-title, .structure-title {
+                font-size: 32px;
+            }
+            
+            .platform-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .agent-types-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">M</div>
+                    <h1 class="logo-text">Agent Platform Decision Tool</h1>
+                </div>
+                <button class="btn btn-ghost" id="theme-toggle" data-testid="button-theme-toggle">
+                    <span class="icon icon-sun" id="theme-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-steps">
+                    <div class="progress-step">
+                        <div class="step-circle pending" data-step="0" data-testid="step-indicator-1">1</div>
+                        <span class="step-label">Assessment</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="progress-step">
+                        <div class="step-circle pending" data-step="1" data-testid="step-indicator-2">2</div>
+                        <span class="step-label">Recommendation</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="progress-step">
+                        <div class="step-circle pending" data-step="2" data-testid="step-indicator-3">3</div>
+                        <span class="step-label">Implementation</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="progress-step">
+                        <div class="step-circle pending" data-step="3" data-testid="step-indicator-4">4</div>
+                        <span class="step-label">Structure</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            
+            <!-- Welcome Section -->
+            <div id="welcome-section" class="fade-in">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="welcome-section">
+                            <div class="welcome-icon">🤖</div>
+                            <h2 class="welcome-title">Choose Your Microsoft Agent Platform</h2>
+                            <p class="welcome-subtitle">
+                                Answer a few questions to discover which Microsoft agent platform best fits your scenario and requirements.
+                            </p>
+                            
+                            <div class="platform-grid">
+                                <div class="platform-preview">
+                                    <div class="platform-preview-icon">🤖</div>
+                                    <h3 class="platform-preview-title">Microsoft 365 Copilot</h3>
+                                    <p class="platform-preview-desc">1st Party Agents</p>
+                                </div>
+                                <div class="platform-preview">
+                                    <div class="platform-preview-icon">🤖</div>
+                                    <h3 class="platform-preview-title">Agent Builder</h3>
+                                    <p class="platform-preview-desc">Custom Solutions</p>
+                                </div>
+                                <div class="platform-preview">
+                                    <div class="platform-preview-icon">🤖</div>
+                                    <h3 class="platform-preview-title">Copilot Studio</h3>
+                                    <p class="platform-preview-desc">Low-Code Platform</p>
+                                </div>
+                                <div class="platform-preview">
+                                    <div class="platform-preview-icon">🤖</div>
+                                    <h3 class="platform-preview-title">Azure AI Foundry</h3>
+                                    <p class="platform-preview-desc">Enterprise Scale</p>
+                                </div>
+                            </div>
+                            
+                            <div class="center">
+                                <button class="btn btn-primary btn-lg" id="start-assessment" data-testid="button-start-assessment">
+                                    Start Assessment <span class="icon icon-chevron-right"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assessment Section -->
+            <div id="assessment-section" class="fade-in hidden">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="question-card">
+                            <h3 class="question-title" id="question-title"></h3>
+                            <p class="question-subtitle" id="question-subtitle"></p>
+                        </div>
+                        
+                        <div class="options-list" id="options-list">
+                            <!-- Options will be dynamically added here -->
+                        </div>
+                        
+                        <div class="question-nav">
+                            <button class="btn btn-ghost" id="prev-btn" data-testid="button-previous">
+                                <span class="icon icon-chevron-left"></span> Previous
+                            </button>
+                            
+                            <div class="question-counter">
+                                <span id="current-question">1</span> of <span id="total-questions">5</span>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="next-btn" data-testid="button-next" disabled>
+                                Next <span class="icon icon-chevron-right"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendation Section -->
+            <div id="recommendation-section" class="fade-in hidden">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="recommendation-header">
+                            <div class="recommendation-icon">💡</div>
+                            <h2 class="recommendation-title">Your Recommendation</h2>
+                        </div>
+                        
+                        <div class="platform-card-large" data-testid="recommended-platform">
+                            <div class="platform-icon-large" id="platform-icon-large">M</div>
+                            <h3 class="platform-name" id="platform-name"></h3>
+                            <p class="platform-description" id="platform-description"></p>
+                            
+                            <div class="benefits-card">
+                                <h4 class="benefits-title">Key Benefits for Your Use Case:</h4>
+                                <ul class="benefits-list" id="benefits-list">
+                                    <!-- Benefits will be dynamically added here -->
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="reasoning-section" data-testid="reasoning-section">
+                            <h3 class="reasoning-title">
+                                <span class="icon">📈</span> Why This Recommendation?
+                            </h3>
+                            <ul class="reasoning-list" id="reasoning-list">
+                                <!-- Reasoning will be dynamically added here -->
+                            </ul>
+                            
+                            <div class="next-steps-card">
+                                <h4 class="next-steps-title">
+                                    <span class="icon">ℹ️</span> Next Steps
+                                </h4>
+                                <p class="next-steps-text">
+                                    Proceed to the implementation checklist to start planning your agent development process.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="center">
+                            <button class="btn btn-primary btn-lg" id="view-implementation" data-testid="button-view-implementation">
+                                View Implementation Guide <span class="icon icon-chevron-right"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Section -->
+            <div id="implementation-section" class="fade-in hidden">
+                <div class="card">
+                    <div class="card-content">
+                        <h2 class="checklist-title">
+                            <span class="icon">✅</span> Implementation Checklist
+                        </h2>
+                        
+                        <div class="checklist-grid">
+                            <div class="checklist-section">
+                                <h3 class="checklist-section-title">
+                                    <span class="icon">✅</span> Pre-Development
+                                </h3>
+                                <ul class="checklist-items" id="predev-checklist" data-testid="predev-checklist">
+                                    <!-- Pre-dev items will be dynamically added here -->
+                                </ul>
+                            </div>
+                            
+                            <div class="checklist-section">
+                                <h3 class="checklist-section-title">
+                                    <span class="icon">🚀</span> Post-Development
+                                </h3>
+                                <ul class="checklist-items" id="postdev-checklist" data-testid="postdev-checklist">
+                                    <!-- Post-dev items will be dynamically added here -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="center">
+                            <button class="btn btn-primary btn-lg" id="view-structure" data-testid="button-view-structure">
+                                Plan Agent Structure <span class="icon icon-chevron-right"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Structure Section -->
+            <div id="structure-section" class="fade-in hidden">
+                <div class="card">
+                    <div class="card-content">
+                        <h2 class="structure-title">
+                            <span class="icon">🔗</span> Agent Structure Planning
+                        </h2>
+                        
+                        <div class="structure-sections">
+                            <!-- Core Components -->
+                            <div class="structure-section">
+                                <h3 class="structure-section-title">
+                                    <span class="icon">⚙️</span> Core Components
+                                </h3>
+                                <div class="component-grid">
+                                    <div class="component-card">
+                                        <h4 class="component-title">
+                                            <span class="icon" style="color: #3b82f6;">📄</span> Instructions
+                                        </h4>
+                                        <p class="component-description">Define agent behavior, personality, and response guidelines</p>
+                                    </div>
+                                    <div class="component-card">
+                                        <h4 class="component-title">
+                                            <span class="icon" style="color: #22c55e;">💾</span> Knowledge Base
+                                        </h4>
+                                        <p class="component-description">Document sources, data connections, and information repositories</p>
+                                    </div>
+                                    <div class="component-card">
+                                        <h4 class="component-title">
+                                            <span class="icon" style="color: #f97316;">🔧</span> Tools & Functions
+                                        </h4>
+                                        <p class="component-description">APIs, plugins, and external service integrations</p>
+                                    </div>
+                                    <div class="component-card">
+                                        <h4 class="component-title">
+                                            <span class="icon" style="color: #a855f7;">🌿</span> Conversation Flows
+                                        </h4>
+                                        <p class="component-description">Dialog management and conversation pathways</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Integration & Deployment -->
+                            <div class="structure-section">
+                                <h3 class="structure-section-title">
+                                    <span class="icon">🔗</span> Integration & Deployment
+                                </h3>
+                                <div class="component-grid">
+                                    <div class="component-card">
+                                        <h4 class="component-title">
+                                            <span class="icon" style="color: #3b82f6;">🔗</span> Connectors
+                                        </h4>
+                                        <p class="component-description">System integrations and data source connections</p>
+                                    </div>
+                                    <div class="component-card">
+                                        <h4 class="component-title">
+                                            <span class="icon" style="color: #22c55e;">💬</span> Channels
+                                        </h4>
+                                        <p class="component-description">Deployment targets and user interaction points</p>
+                                    </div>
+                                    <div class="component-card">
+                                        <h4 class="component-title">
+                                            <span class="icon" style="color: #f97316;">🔔</span> Triggers
+                                        </h4>
+                                        <p class="component-description">Event-based activation and automation rules</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Agent Type & Behavior -->
+                            <div class="structure-section">
+                                <h3 class="structure-section-title">
+                                    <span class="icon">👥</span> Agent Type & Behavior
+                                </h3>
+                                <div class="agent-types-grid">
+                                    <div class="agent-type-card">
+                                        <h4 class="agent-type-title">
+                                            <span class="icon" style="color: #3b82f6;">👥</span> Conversational Agent
+                                        </h4>
+                                        <ul class="agent-features">
+                                            <li class="agent-feature">Interactive dialog-based responses</li>
+                                            <li class="agent-feature">User-initiated conversations</li>
+                                            <li class="agent-feature">Question-answer patterns</li>
+                                            <li class="agent-feature">Context-aware interactions</li>
+                                        </ul>
+                                    </div>
+                                    <div class="agent-type-card">
+                                        <h4 class="agent-type-title">
+                                            <span class="icon" style="color: #22c55e;">⚙️</span> Autonomous Agent
+                                        </h4>
+                                        <ul class="agent-features">
+                                            <li class="agent-feature">Proactive task execution</li>
+                                            <li class="agent-feature">Event-driven automation</li>
+                                            <li class="agent-feature">Background processing</li>
+                                            <li class="agent-feature">Scheduled operations</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="separator"></div>
+
+                        <div class="center">
+                            <button class="btn btn-secondary" id="restart-btn" data-testid="button-restart">
+                                <span class="icon icon-restart"></span> Start Over
+                            </button>
+                            <button class="btn btn-primary" id="export-btn" data-testid="button-export">
+                                <span class="icon icon-download"></span> Export Plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Application Data
+        const questions = [
+            {
+                id: 'useCaseComplexity',
+                title: 'What is the complexity of your use case?',
+                subtitle: 'Consider the scope and technical requirements of your agent',
+                options: [
+                    { 
+                        id: 'simple', 
+                        label: 'Simple automation or basic Q&A', 
+                        description: 'Single-purpose agent with minimal complexity' 
+                    },
+                    { 
+                        id: 'moderate', 
+                        label: 'Multi-step workflows with some customization', 
+                        description: 'Moderate complexity with custom logic' 
+                    },
+                    { 
+                        id: 'complex', 
+                        label: 'Complex business processes with multiple integrations', 
+                        description: 'Enterprise-grade solution with extensive requirements' 
+                    }
+                ]
+            },
+            {
+                id: 'technicalExpertise',
+                title: 'What is your team\'s technical expertise level?',
+                subtitle: 'This helps determine the appropriate complexity level',
+                options: [
+                    { 
+                        id: 'low', 
+                        label: 'Business user with minimal coding experience', 
+                        description: 'Prefer no-code or low-code solutions' 
+                    },
+                    { 
+                        id: 'medium', 
+                        label: 'Some technical background, comfortable with configuration', 
+                        description: 'Can handle some scripting and configuration' 
+                    },
+                    { 
+                        id: 'high', 
+                        label: 'Professional developers with coding expertise', 
+                        description: 'Comfortable with full development environments' 
+                    }
+                ]
+            },
+            {
+                id: 'integrationNeeds',
+                title: 'What integration requirements do you have?',
+                subtitle: 'Consider existing systems and data sources',
+                options: [
+                    { 
+                        id: 'microsoft', 
+                        label: 'Primarily Microsoft 365 and Teams', 
+                        description: 'Working within Microsoft ecosystem' 
+                    },
+                    { 
+                        id: 'mixed', 
+                        label: 'Mix of Microsoft and third-party systems', 
+                        description: 'Need connectors to various platforms' 
+                    },
+                    { 
+                        id: 'enterprise', 
+                        label: 'Complex enterprise systems and custom APIs', 
+                        description: 'Extensive integration requirements' 
+                    }
+                ]
+            },
+            {
+                id: 'deploymentScale',
+                title: 'What is your expected deployment scale?',
+                subtitle: 'Think about the number of users and usage volume',
+                options: [
+                    { 
+                        id: 'team', 
+                        label: 'Small team or department (< 100 users)', 
+                        description: 'Limited scope deployment' 
+                    },
+                    { 
+                        id: 'organization', 
+                        label: 'Organization-wide (100-1000 users)', 
+                        description: 'Company-wide deployment' 
+                    },
+                    { 
+                        id: 'enterprise', 
+                        label: 'Large enterprise or external customers (1000+ users)', 
+                        description: 'High-scale production deployment' 
+                    }
+                ]
+            },
+            {
+                id: 'customizationLevel',
+                title: 'How much customization do you need?',
+                subtitle: 'Consider branding, unique features, and specific behaviors',
+                options: [
+                    { 
+                        id: 'minimal', 
+                        label: 'Use existing features with minimal customization', 
+                        description: 'Standard functionality is sufficient' 
+                    },
+                    { 
+                        id: 'moderate', 
+                        label: 'Some custom logic and branded experience', 
+                        description: 'Need tailored workflows and appearance' 
+                    },
+                    { 
+                        id: 'extensive', 
+                        label: 'Highly customized with unique features', 
+                        description: 'Require significant custom development' 
+                    }
+                ]
+            }
+        ];
+
+        const platformOptions = {
+            'microsoft365copilot': {
+                id: 'microsoft365copilot',
+                name: 'Microsoft 365 Copilot 1st Party Agents',
+                icon: 'users',
+                color: 'blue',
+                description: 'Ready-to-use agents integrated directly into your Microsoft 365 environment',
+                benefits: [
+                    'Zero development time required',
+                    'Native Microsoft 365 integration',
+                    'Built-in security and compliance',
+                    'Immediate deployment capability',
+                    'Automatic updates and maintenance'
+                ],
+                reasoning: []
+            },
+            'agentbuilder': {
+                id: 'agentbuilder',
+                name: 'Microsoft 365 Copilot Agent Builder',
+                icon: 'wrench',
+                color: 'green',
+                description: 'Build custom agents with moderate complexity for your organization',
+                benefits: [
+                    'Custom agent development within Microsoft 365',
+                    'Moderate customization capabilities',
+                    'Integrated with Microsoft Graph',
+                    'Organizational data access',
+                    'Simplified deployment process'
+                ],
+                reasoning: []
+            },
+            'copilotstudio': {
+                id: 'copilotstudio',
+                name: 'Microsoft Copilot Studio',
+                icon: 'paint-brush',
+                color: 'purple',
+                description: 'Low-code platform for creating sophisticated conversational agents',
+                benefits: [
+                    'Visual conversation design',
+                    'Rich connector ecosystem',
+                    'Multi-channel deployment',
+                    'Advanced analytics and insights',
+                    'Iterative development workflow'
+                ],
+                reasoning: []
+            },
+            'azureai': {
+                id: 'azureai',
+                name: 'Microsoft Azure AI Foundry',
+                icon: 'cloud',
+                color: 'indigo',
+                description: 'Enterprise-scale platform for complex AI agents with full customization',
+                benefits: [
+                    'Complete development control',
+                    'Advanced AI model integration',
+                    'Enterprise-grade scalability',
+                    'Custom data processing pipelines',
+                    'Comprehensive monitoring and observability'
+                ],
+                reasoning: []
+            }
+        };
+
+        const implementationChecklists = {
+            'microsoft365copilot': {
+                predev: [
+                    'Verify Microsoft 365 Copilot licensing and permissions',
+                    'Identify specific 1st party agents needed for your use case',
+                    'Review existing Microsoft 365 data and security policies',
+                    'Plan user training and adoption strategy',
+                    'Establish success metrics and KPIs for agent effectiveness'
+                ],
+                postdev: [
+                    'Deploy agents to target user groups and departments',
+                    'Monitor usage analytics and performance metrics',
+                    'Collect user feedback and iterate on agent effectiveness',
+                    'Maintain data governance and compliance standards',
+                    'Provide ongoing user support and training resources'
+                ]
+            },
+            'agentbuilder': {
+                predev: [
+                    'Assess organizational requirements and define use cases',
+                    'Design agent conversation flows and interaction scenarios',
+                    'Identify required Microsoft 365 data sources and permissions',
+                    'Plan agent permissions and access control policies',
+                    'Create comprehensive agent testing and validation strategy'
+                ],
+                postdev: [
+                    'Deploy agent to Microsoft 365 environment and target users',
+                    'Monitor agent performance and user interaction patterns',
+                    'Implement feedback collection and continuous improvement process',
+                    'Maintain agent knowledge base and response accuracy',
+                    'Scale deployment based on adoption metrics and user feedback'
+                ]
+            },
+            'copilotstudio': {
+                predev: [
+                    'Define detailed agent requirements and user journey mapping',
+                    'Design comprehensive conversation flows and dialog trees',
+                    'Identify and configure required connectors and system integrations',
+                    'Plan knowledge base structure, content sources, and maintenance',
+                    'Establish development, testing, and staging environment procedures'
+                ],
+                postdev: [
+                    'Deploy agent to selected channels and user touchpoints',
+                    'Implement comprehensive monitoring and analytics tracking',
+                    'Establish maintenance procedures and regular update cycles',
+                    'Optimize agent performance based on usage data and user feedback',
+                    'Plan feature enhancements and scaling for additional use cases'
+                ]
+            },
+            'azureai': {
+                predev: [
+                    'Architect comprehensive solution design and technical requirements',
+                    'Plan cloud infrastructure, resource allocation, and cost management',
+                    'Design data architecture, integration patterns, and security framework',
+                    'Establish development, staging, and production environment workflows',
+                    'Create comprehensive testing, validation, and quality assurance framework'
+                ],
+                postdev: [
+                    'Deploy to production with comprehensive monitoring and alerting',
+                    'Implement detailed logging, observability, and performance tracking',
+                    'Establish CI/CD pipelines for ongoing updates and maintenance',
+                    'Monitor performance metrics, costs, and resource utilization patterns',
+                    'Maintain model performance and implement continuous learning processes'
+                ]
+            }
+        };
+
+        // Application State
+        let currentStep = 0;
+        let currentQuestionIndex = 0;
+        let answers = {};
+        let recommendedPlatform = null;
+        let isDarkTheme = false;
+
+        // Platform determination logic
+        function determinePlatform(answers) {
+            let bestMatch = null;
+
+            // Microsoft 365 Copilot 1st Party Agents
+            if (answers.useCaseComplexity === 'simple' && 
+                answers.integrationNeeds === 'microsoft' && 
+                answers.customizationLevel === 'minimal') {
+                bestMatch = {...platformOptions.microsoft365copilot};
+                bestMatch.reasoning = [
+                    'Your simple use case aligns with ready-to-use solutions',
+                    'Microsoft-focused integrations work best within the Microsoft ecosystem',
+                    'Minimal customization needs match out-of-the-box capabilities'
+                ];
+            }
+            // Agent Builder
+            else if ((answers.useCaseComplexity === 'moderate' && 
+                      answers.technicalExpertise !== 'low' && 
+                      answers.integrationNeeds === 'microsoft') ||
+                     (answers.useCaseComplexity === 'simple' && 
+                      answers.customizationLevel === 'moderate')) {
+                bestMatch = {...platformOptions.agentbuilder};
+                bestMatch.reasoning = [
+                    'Moderate complexity matches Agent Builder capabilities',
+                    'Your technical expertise enables custom agent development',
+                    'Microsoft ecosystem focus aligns with platform strengths'
+                ];
+            }
+            // Copilot Studio
+            else if ((answers.technicalExpertise === 'medium' && 
+                      answers.customizationLevel === 'moderate') ||
+                     (answers.useCaseComplexity === 'moderate' && 
+                      answers.integrationNeeds === 'mixed')) {
+                bestMatch = {...platformOptions.copilotstudio};
+                bestMatch.reasoning = [
+                    'Low-code approach matches your team\'s technical comfort level',
+                    'Mixed integrations supported through extensive connector library',
+                    'Visual development environment accelerates creation process'
+                ];
+            }
+            // Azure AI Foundry
+            else if (answers.useCaseComplexity === 'complex' || 
+                     answers.deploymentScale === 'enterprise' || 
+                     answers.customizationLevel === 'extensive' ||
+                     (answers.technicalExpertise === 'high' && 
+                      answers.integrationNeeds === 'enterprise')) {
+                bestMatch = {...platformOptions.azureai};
+                bestMatch.reasoning = [
+                    'Complex requirements need a highly customizable platform',
+                    'Enterprise scale deployment requires robust infrastructure',
+                    'Your development expertise enables advanced customization options'
+                ];
+            }
+
+            // Fallback logic
+            if (!bestMatch) {
+                if (answers.technicalExpertise === 'low') {
+                    bestMatch = {...platformOptions.microsoft365copilot};
+                    bestMatch.reasoning = ['No-code approach recommended for teams with limited technical expertise'];
+                } else if (answers.useCaseComplexity === 'complex') {
+                    bestMatch = {...platformOptions.azureai};
+                    bestMatch.reasoning = ['Complex use cases require enterprise-grade development platform'];
+                } else {
+                    bestMatch = {...platformOptions.copilotstudio};
+                    bestMatch.reasoning = ['Balanced approach suitable for most scenarios'];
+                }
+            }
+
+            return bestMatch;
+        }
+
+        // DOM manipulation functions
+        function showSection(sectionId) {
+            document.querySelectorAll('[id$="-section"]').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function updateProgressIndicator() {
+            const steps = document.querySelectorAll('.step-circle');
+            steps.forEach((step, index) => {
+                const stepNum = parseInt(step.getAttribute('data-step'));
+                step.className = 'step-circle';
+                
+                if (stepNum < currentStep) {
+                    step.classList.add('completed');
+                    step.innerHTML = '✓';
+                } else if (stepNum === currentStep) {
+                    step.classList.add('active');
+                    step.innerHTML = stepNum + 1;
+                } else {
+                    step.classList.add('pending');
+                    step.innerHTML = stepNum + 1;
+                }
+            });
+        }
+
+        function renderQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.getElementById('question-title').textContent = question.title;
+            document.getElementById('question-subtitle').textContent = question.subtitle;
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = questions.length;
+
+            const optionsList = document.getElementById('options-list');
+            optionsList.innerHTML = '';
+
+            question.options.forEach(option => {
+                const optionElement = document.createElement('div');
+                optionElement.className = `option-card ${answers[question.id] === option.id ? 'selected' : ''}`;
+                optionElement.setAttribute('data-testid', `option-${option.id}`);
+                
+                optionElement.innerHTML = `
+                    <input type="radio" 
+                           name="${question.id}" 
+                           value="${option.id}" 
+                           class="option-radio"
+                           data-testid="radio-${option.id}"
+                           ${answers[question.id] === option.id ? 'checked' : ''}>
+                    <div class="option-content">
+                        <h4 class="option-label">${option.label}</h4>
+                        <p class="option-description">${option.description}</p>
+                    </div>
+                `;
+
+                optionElement.addEventListener('click', () => selectOption(question.id, option.id));
+                optionsList.appendChild(optionElement);
+            });
+
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+            document.getElementById('next-btn').disabled = !answers[question.id];
+            document.getElementById('next-btn').textContent = currentQuestionIndex === questions.length - 1 ? 'Get Recommendation ▶' : 'Next ▶';
+        }
+
+        function selectOption(questionId, optionId) {
+            answers[questionId] = optionId;
+            renderQuestion();
+        }
+
+        function renderRecommendation() {
+            recommendedPlatform = determinePlatform(answers);
+            
+            document.getElementById('platform-icon-large').textContent = recommendedPlatform.name.charAt(0);
+            document.getElementById('platform-name').textContent = recommendedPlatform.name;
+            document.getElementById('platform-description').textContent = recommendedPlatform.description;
+
+            const benefitsList = document.getElementById('benefits-list');
+            benefitsList.innerHTML = '';
+            recommendedPlatform.benefits.forEach(benefit => {
+                const li = document.createElement('li');
+                li.className = 'benefit-item';
+                li.innerHTML = `<span class="check-icon">✅</span><span class="benefit-text">${benefit}</span>`;
+                benefitsList.appendChild(li);
+            });
+
+            const reasoningList = document.getElementById('reasoning-list');
+            reasoningList.innerHTML = '';
+            recommendedPlatform.reasoning.forEach(reason => {
+                const li = document.createElement('li');
+                li.className = 'reasoning-item';
+                li.innerHTML = `<span class="check-icon">✅</span><span class="reasoning-text">${reason}</span>`;
+                reasoningList.appendChild(li);
+            });
+        }
+
+        function renderImplementation() {
+            const checklist = implementationChecklists[recommendedPlatform.id];
+
+            const predevList = document.getElementById('predev-checklist');
+            predevList.innerHTML = '';
+            checklist.predev.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'checklist-item';
+                li.innerHTML = `
+                    <input type="checkbox" class="checkbox" data-testid="predev-item-${index}">
+                    <span class="checklist-item-text">${item}</span>
+                `;
+                predevList.appendChild(li);
+            });
+
+            const postdevList = document.getElementById('postdev-checklist');
+            postdevList.innerHTML = '';
+            checklist.postdev.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'checklist-item';
+                li.innerHTML = `
+                    <input type="checkbox" class="checkbox" data-testid="postdev-item-${index}">
+                    <span class="checklist-item-text">${item}</span>
+                `;
+                postdevList.appendChild(li);
+            });
+        }
+
+        function exportPlan() {
+            const exportData = {
+                platform: recommendedPlatform,
+                answers,
+                checklist: recommendedPlatform ? implementationChecklists[recommendedPlatform.id] : null,
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `agent-platform-plan-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function restart() {
+            currentStep = 0;
+            currentQuestionIndex = 0;
+            answers = {};
+            recommendedPlatform = null;
+            updateProgressIndicator();
+            showSection('welcome-section');
+        }
+
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            document.documentElement.classList.toggle('dark');
+            document.getElementById('theme-icon').className = isDarkTheme ? 'icon icon-sun' : 'icon icon-moon';
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize
+            updateProgressIndicator();
+            
+            // Theme toggle
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+            // Welcome section
+            document.getElementById('start-assessment').addEventListener('click', function() {
+                currentStep = 1;
+                currentQuestionIndex = 0;
+                updateProgressIndicator();
+                renderQuestion();
+                showSection('assessment-section');
+            });
+
+            // Assessment navigation
+            document.getElementById('prev-btn').addEventListener('click', function() {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    renderQuestion();
+                }
+            });
+
+            document.getElementById('next-btn').addEventListener('click', function() {
+                if (currentQuestionIndex < questions.length - 1) {
+                    currentQuestionIndex++;
+                    renderQuestion();
+                } else {
+                    // Assessment complete
+                    currentStep = 2;
+                    updateProgressIndicator();
+                    renderRecommendation();
+                    showSection('recommendation-section');
+                }
+            });
+
+            // Recommendation section
+            document.getElementById('view-implementation').addEventListener('click', function() {
+                currentStep = 3;
+                updateProgressIndicator();
+                renderImplementation();
+                showSection('implementation-section');
+            });
+
+            // Implementation section
+            document.getElementById('view-structure').addEventListener('click', function() {
+                currentStep = 4;
+                updateProgressIndicator();
+                showSection('structure-section');
+            });
+
+            // Structure section
+            document.getElementById('restart-btn').addEventListener('click', restart);
+            document.getElementById('export-btn').addEventListener('click', exportPlan);
+        });
+    </script>
+</body>
+</html>

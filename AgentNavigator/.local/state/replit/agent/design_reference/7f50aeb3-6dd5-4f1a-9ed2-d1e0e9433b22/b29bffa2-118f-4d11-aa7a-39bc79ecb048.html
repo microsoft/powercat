@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Agent Platform Decision Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    popover: {
+                        DEFAULT: "var(--popover)",
+                        foreground: "var(--popover-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)"
+                },
+                fontFamily: {
+                    sans: ["Segoe UI", "system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+                }
+            },
+        }
+    };
+    </script>
+    <style>
+        :root {
+            --background: hsl(0 0% 100%);
+            --foreground: hsl(222 84% 4.9%);
+            --card: hsl(0 0% 100%);
+            --card-foreground: hsl(222 84% 4.9%);
+            --popover: hsl(0 0% 100%);
+            --popover-foreground: hsl(222 84% 4.9%);
+            --primary: hsl(210 100% 50%);
+            --primary-foreground: hsl(210 40% 98%);
+            --secondary: hsl(210 40% 96%);
+            --secondary-foreground: hsl(222 47% 11%);
+            --muted: hsl(210 40% 96%);
+            --muted-foreground: hsl(215 13% 65%);
+            --accent: hsl(210 40% 94%);
+            --accent-foreground: hsl(222 47% 11%);
+            --destructive: hsl(0 84% 60%);
+            --destructive-foreground: hsl(210 40% 98%);
+            --border: hsl(214 32% 91%);
+            --input: hsl(214 32% 91%);
+            --ring: hsl(210 100% 50%);
+            --radius: 8px;
+        }
+        
+        .dark {
+            --background: hsl(222 84% 4.9%);
+            --foreground: hsl(210 40% 98%);
+            --card: hsl(222 84% 4.9%);
+            --card-foreground: hsl(210 40% 98%);
+            --popover: hsl(222 84% 4.9%);
+            --popover-foreground: hsl(210 40% 98%);
+            --primary: hsl(210 100% 50%);
+            --primary-foreground: hsl(222 47% 11%);
+            --secondary: hsl(217 33% 17%);
+            --secondary-foreground: hsl(210 40% 98%);
+            --muted: hsl(217 33% 17%);
+            --muted-foreground: hsl(215 20% 65%);
+            --accent: hsl(217 33% 17%);
+            --accent-foreground: hsl(210 40% 98%);
+            --destructive: hsl(0 84% 60%);
+            --destructive-foreground: hsl(210 40% 98%);
+            --border: hsl(217 33% 17%);
+            --input: hsl(217 33% 17%);
+            --ring: hsl(210 100% 50%);
+        }
+        
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+        
+        .step-active {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+        
+        .step-completed {
+            background-color: hsl(142 71% 45%);
+            color: white;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .platform-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .platform-card.selected {
+            border-color: var(--primary);
+            background-color: hsl(210 100% 97%);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-background text-foreground min-h-screen">
+    <!-- Header -->
+    <header class="bg-card border-b border-border">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fab fa-microsoft text-primary text-2xl"></i>
+                    <h1 class="text-xl font-semibold text-foreground">Agent Platform Decision Tool</h1>
+                </div>
+                <button id="themeToggle" class="p-2 rounded-md bg-muted hover:bg-accent transition-colors">
+                    <i class="fas fa-moon text-muted-foreground"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8 max-w-4xl">
+        <!-- Progress Indicator -->
+        <div class="mb-8">
+            <div class="flex items-center justify-center space-x-4 mb-4">
+                <div class="flex items-center space-x-2">
+                    <div id="step1" class="step-indicator w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium step-active">1</div>
+                    <span class="text-sm font-medium text-muted-foreground">Assessment</span>
+                </div>
+                <div class="w-16 h-0.5 bg-border"></div>
+                <div class="flex items-center space-x-2">
+                    <div id="step2" class="step-indicator w-10 h-10 rounded-full bg-muted text-muted-foreground flex items-center justify-center font-medium">2</div>
+                    <span class="text-sm font-medium text-muted-foreground">Recommendation</span>
+                </div>
+                <div class="w-16 h-0.5 bg-border"></div>
+                <div class="flex items-center space-x-2">
+                    <div id="step3" class="step-indicator w-10 h-10 rounded-full bg-muted text-muted-foreground flex items-center justify-center font-medium">3</div>
+                    <span class="text-sm font-medium text-muted-foreground">Implementation</span>
+                </div>
+                <div class="w-16 h-0.5 bg-border"></div>
+                <div class="flex items-center space-x-2">
+                    <div id="step4" class="step-indicator w-10 h-10 rounded-full bg-muted text-muted-foreground flex items-center justify-center font-medium">4</div>
+                    <span class="text-sm font-medium text-muted-foreground">Structure</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Welcome and Assessment -->
+        <div id="welcomeSection" class="fade-in">
+            <div class="bg-card rounded-lg border border-border p-8 mb-6">
+                <div class="text-center mb-8">
+                    <i class="fas fa-robot text-primary text-4xl mb-4"></i>
+                    <h2 class="text-3xl font-bold text-foreground mb-4">Choose Your Microsoft Agent Platform</h2>
+                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                        Answer a few questions to discover which Microsoft agent platform best fits your scenario and requirements.
+                    </p>
+                </div>
+
+                <!-- Platform Overview Cards -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-accent rounded-lg p-4 text-center">
+                        <i class="fas fa-users text-primary text-2xl mb-2"></i>
+                        <h3 class="font-semibold text-accent-foreground mb-1">Microsoft 365 Copilot</h3>
+                        <p class="text-sm text-muted-foreground">1st Party Agents</p>
+                    </div>
+                    <div class="bg-accent rounded-lg p-4 text-center">
+                        <i class="fas fa-wrench text-primary text-2xl mb-2"></i>
+                        <h3 class="font-semibold text-accent-foreground mb-1">Agent Builder</h3>
+                        <p class="text-sm text-muted-foreground">Custom Solutions</p>
+                    </div>
+                    <div class="bg-accent rounded-lg p-4 text-center">
+                        <i class="fas fa-paint-brush text-primary text-2xl mb-2"></i>
+                        <h3 class="font-semibold text-accent-foreground mb-1">Copilot Studio</h3>
+                        <p class="text-sm text-muted-foreground">Low-Code Platform</p>
+                    </div>
+                    <div class="bg-accent rounded-lg p-4 text-center">
+                        <i class="fas fa-cloud text-primary text-2xl mb-2"></i>
+                        <h3 class="font-semibold text-accent-foreground mb-1">Azure AI Foundry</h3>
+                        <p class="text-sm text-muted-foreground">Enterprise Scale</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button id="startAssessment" class="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                        Start Assessment
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Questionnaire -->
+        <div id="questionnaireSection" class="hidden">
+            <div class="bg-card rounded-lg border border-border p-8">
+                <div id="questionContainer">
+                    <!-- Questions will be dynamically inserted here -->
+                </div>
+                
+                <div class="flex justify-between items-center mt-8">
+                    <button id="prevQuestion" class="px-6 py-2 text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50" disabled>
+                        <i class="fas fa-arrow-left mr-2"></i>Previous
+                    </button>
+                    <div id="questionProgress" class="text-sm text-muted-foreground">
+                        Question <span id="currentQuestion">1</span> of <span id="totalQuestions">5</span>
+                    </div>
+                    <button id="nextQuestion" class="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50">
+                        Next<i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Recommendation -->
+        <div id="recommendationSection" class="hidden fade-in">
+            <div class="bg-card rounded-lg border border-border p-8 mb-6">
+                <div class="text-center mb-8">
+                    <i class="fas fa-lightbulb text-yellow-500 text-4xl mb-4"></i>
+                    <h2 class="text-3xl font-bold text-foreground mb-4">Your Recommendation</h2>
+                </div>
+                
+                <div id="recommendedPlatform" class="bg-accent rounded-lg p-6 mb-6">
+                    <!-- Recommendation will be inserted here -->
+                </div>
+                
+                <div id="reasoningSection" class="bg-muted rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-foreground mb-4">
+                        <i class="fas fa-chart-line text-primary mr-2"></i>Why This Recommendation?
+                    </h3>
+                    <div id="reasoningContent">
+                        <!-- Reasoning will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="viewImplementation" class="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                        View Implementation Guide
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Implementation Checklist -->
+        <div id="implementationSection" class="hidden fade-in">
+            <div class="bg-card rounded-lg border border-border p-8 mb-6">
+                <h2 class="text-3xl font-bold text-foreground mb-6 text-center">
+                    <i class="fas fa-tasks text-primary mr-3"></i>Implementation Checklist
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Pre-Development -->
+                    <div class="bg-accent rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-accent-foreground mb-4 flex items-center">
+                            <i class="fas fa-clipboard-list text-primary mr-2"></i>Pre-Development
+                        </h3>
+                        <ul id="preDevChecklist" class="space-y-3">
+                            <!-- Checklist items will be inserted here -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Post-Development -->
+                    <div class="bg-accent rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-accent-foreground mb-4 flex items-center">
+                            <i class="fas fa-rocket text-primary mr-2"></i>Post-Development
+                        </h3>
+                        <ul id="postDevChecklist" class="space-y-3">
+                            <!-- Checklist items will be inserted here -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="viewStructure" class="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                        Plan Agent Structure
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Agent Structure -->
+        <div id="structureSection" class="hidden fade-in">
+            <div class="bg-card rounded-lg border border-border p-8">
+                <h2 class="text-3xl font-bold text-foreground mb-6 text-center">
+                    <i class="fas fa-sitemap text-primary mr-3"></i>Agent Structure Planning
+                </h2>
+                
+                <div class="grid gap-6">
+                    <!-- Core Components -->
+                    <div class="bg-accent rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-accent-foreground mb-4 flex items-center">
+                            <i class="fas fa-cog text-primary mr-2"></i>Core Components
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-2">
+                                    <i class="fas fa-file-alt text-blue-500 mr-2"></i>Instructions
+                                </h4>
+                                <p class="text-muted-foreground text-sm">Define agent behavior, personality, and response guidelines</p>
+                            </div>
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-2">
+                                    <i class="fas fa-database text-green-500 mr-2"></i>Knowledge Base
+                                </h4>
+                                <p class="text-muted-foreground text-sm">Document sources, data connections, and information repositories</p>
+                            </div>
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-2">
+                                    <i class="fas fa-tools text-orange-500 mr-2"></i>Tools & Functions
+                                </h4>
+                                <p class="text-muted-foreground text-sm">APIs, plugins, and external service integrations</p>
+                            </div>
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-2">
+                                    <i class="fas fa-project-diagram text-purple-500 mr-2"></i>Conversation Flows
+                                </h4>
+                                <p class="text-muted-foreground text-sm">Dialog management and conversation pathways</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Integration & Deployment -->
+                    <div class="bg-accent rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-accent-foreground mb-4 flex items-center">
+                            <i class="fas fa-plug text-primary mr-2"></i>Integration & Deployment
+                        </h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-2">
+                                    <i class="fas fa-link text-blue-500 mr-2"></i>Connectors
+                                </h4>
+                                <p class="text-muted-foreground text-sm">System integrations and data source connections</p>
+                            </div>
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-2">
+                                    <i class="fas fa-comments text-green-500 mr-2"></i>Channels
+                                </h4>
+                                <p class="text-muted-foreground text-sm">Deployment targets and user interaction points</p>
+                            </div>
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-2">
+                                    <i class="fas fa-bell text-orange-500 mr-2"></i>Triggers
+                                </h4>
+                                <p class="text-muted-foreground text-sm">Event-based activation and automation rules</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agent Type Selection -->
+                    <div class="bg-accent rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-accent-foreground mb-4 flex items-center">
+                            <i class="fas fa-brain text-primary mr-2"></i>Agent Type & Behavior
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-3">
+                                    <i class="fas fa-handshake text-blue-500 mr-2"></i>Conversational Agent
+                                </h4>
+                                <ul class="text-sm text-muted-foreground space-y-1">
+                                    <li>• Interactive dialog-based responses</li>
+                                    <li>• User-initiated conversations</li>
+                                    <li>• Question-answer patterns</li>
+                                    <li>• Context-aware interactions</li>
+                                </ul>
+                            </div>
+                            <div class="bg-card rounded-lg p-4 border border-border">
+                                <h4 class="font-semibold text-foreground mb-3">
+                                    <i class="fas fa-cogs text-green-500 mr-2"></i>Autonomous Agent
+                                </h4>
+                                <ul class="text-sm text-muted-foreground space-y-1">
+                                    <li>• Proactive task execution</li>
+                                    <li>• Event-driven automation</li>
+                                    <li>• Background processing</li>
+                                    <li>• Scheduled operations</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="restartTool" class="bg-secondary text-secondary-foreground px-6 py-2 rounded-lg font-medium hover:bg-secondary/90 transition-colors mr-4">
+                        <i class="fas fa-redo mr-2"></i>Start Over
+                    </button>
+                    <button id="exportPlan" class="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                        <i class="fas fa-download mr-2"></i>Export Plan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    (() => {
+        // Application State
+        let currentStep = 0;
+        let currentQuestionIndex = 0;
+        let answers = {};
+        let recommendedPlatform = null;
+
+        // Question Configuration
+        const questions = [
+            {
+                id: 'useCaseComplexity',
+                title: 'What is the complexity of your use case?',
+                subtitle: 'Consider the scope and technical requirements of your agent',
+                options: [
+                    { id: 'simple', label: 'Simple automation or basic Q&A', description: 'Single-purpose agent with minimal complexity' },
+                    { id: 'moderate', label: 'Multi-step workflows with some customization', description: 'Moderate complexity with custom logic' },
+                    { id: 'complex', label: 'Complex business processes with multiple integrations', description: 'Enterprise-grade solution with extensive requirements' }
+                ]
+            },
+            {
+                id: 'technicalExpertise',
+                title: 'What is your team\'s technical expertise level?',
+                subtitle: 'This helps determine the appropriate complexity level',
+                options: [
+                    { id: 'low', label: 'Business user with minimal coding experience', description: 'Prefer no-code or low-code solutions' },
+                    { id: 'medium', label: 'Some technical background, comfortable with configuration', description: 'Can handle some scripting and configuration' },
+                    { id: 'high', label: 'Professional developers with coding expertise', description: 'Comfortable with full development environments' }
+                ]
+            },
+            {
+                id: 'integrationNeeds',
+                title: 'What integration requirements do you have?',
+                subtitle: 'Consider existing systems and data sources',
+                options: [
+                    { id: 'microsoft', label: 'Primarily Microsoft 365 and Teams', description: 'Working within Microsoft ecosystem' },
+                    { id: 'mixed', label: 'Mix of Microsoft and third-party systems', description: 'Need connectors to various platforms' },
+                    { id: 'enterprise', label: 'Complex enterprise systems and custom APIs', description: 'Extensive integration requirements' }
+                ]
+            },
+            {
+                id: 'deploymentScale',
+                title: 'What is your expected deployment scale?',
+                subtitle: 'Think about the number of users and usage volume',
+                options: [
+                    { id: 'team', label: 'Small team or department (< 100 users)', description: 'Limited scope deployment' },
+                    { id: 'organization', label: 'Organization-wide (100-1000 users)', description: 'Company-wide deployment' },
+                    { id: 'enterprise', label: 'Large enterprise or external customers (1000+ users)', description: 'High-scale production deployment' }
+                ]
+            },
+            {
+                id: 'customizationLevel',
+                title: 'How much customization do you need?',
+                subtitle: 'Consider branding, unique features, and specific behaviors',
+                options: [
+                    { id: 'minimal', label: 'Use existing features with minimal customization', description: 'Standard functionality is sufficient' },
+                    { id: 'moderate', label: 'Some custom logic and branded experience', description: 'Need tailored workflows and appearance' },
+                    { id: 'extensive', label: 'Highly customized with unique features', description: 'Require significant custom development' }
+                ]
+            }
+        ];
+
+        // Platform Recommendation Logic
+        const platformLogic = {
+            'microsoft365copilot': {
+                name: 'Microsoft 365 Copilot 1st Party Agents',
+                icon: 'fas fa-users',
+                color: 'blue',
+                description: 'Ready-to-use agents integrated directly into your Microsoft 365 environment',
+                criteria: (answers) => {
+                    return answers.useCaseComplexity === 'simple' && 
+                           answers.integrationNeeds === 'microsoft' && 
+                           answers.customizationLevel === 'minimal';
+                }
+            },
+            'agentbuilder': {
+                name: 'Microsoft 365 Copilot Agent Builder',
+                icon: 'fas fa-wrench',
+                color: 'green',
+                description: 'Build custom agents with moderate complexity for your organization',
+                criteria: (answers) => {
+                    return (answers.useCaseComplexity === 'moderate' && 
+                            answers.technicalExpertise !== 'low' && 
+                            answers.integrationNeeds === 'microsoft') ||
+                           (answers.useCaseComplexity === 'simple' && 
+                            answers.customizationLevel === 'moderate');
+                }
+            },
+            'copilotstudio': {
+                name: 'Microsoft Copilot Studio',
+                icon: 'fas fa-paint-brush',
+                color: 'purple',
+                description: 'Low-code platform for creating sophisticated conversational agents',
+                criteria: (answers) => {
+                    return (answers.technicalExpertise === 'medium' && 
+                            answers.customizationLevel === 'moderate') ||
+                           (answers.useCaseComplexity === 'moderate' && 
+                            answers.integrationNeeds === 'mixed');
+                }
+            },
+            'azureai': {
+                name: 'Microsoft Azure AI Foundry',
+                icon: 'fas fa-cloud',
+                color: 'indigo',
+                description: 'Enterprise-scale platform for complex AI agents with full customization',
+                criteria: (answers) => {
+                    return answers.useCaseComplexity === 'complex' || 
+                           answers.deploymentScale === 'enterprise' || 
+                           answers.customizationLevel === 'extensive' ||
+                           (answers.technicalExpertise === 'high' && 
+                            answers.integrationNeeds === 'enterprise');
+                }
+            }
+        };
+
+        // Implementation Checklists by Platform
+        const implementationChecklists = {
+            predev: {
+                'microsoft365copilot': [
+                    'Verify Microsoft 365 Copilot licensing and permissions',
+                    'Identify specific 1st party agents needed',
+                    'Review existing Microsoft 365 data and security policies',
+                    'Plan user training and adoption strategy',
+                    'Establish success metrics and KPIs'
+                ],
+                'agentbuilder': [
+                    'Assess organizational requirements and use cases',
+                    'Design agent conversation flows and scenarios',
+                    'Identify required Microsoft 365 data sources',
+                    'Plan agent permissions and access controls',
+                    'Create agent testing and validation strategy'
+                ],
+                'copilotstudio': [
+                    'Define agent requirements and user stories',
+                    'Design conversation flows and dialog trees',
+                    'Identify required connectors and integrations',
+                    'Plan knowledge base structure and content',
+                    'Establish testing environment and procedures'
+                ],
+                'azureai': [
+                    'Architect solution design and technical requirements',
+                    'Plan infrastructure and resource allocation',
+                    'Design data architecture and integration patterns',
+                    'Establish development, staging, and production environments',
+                    'Create comprehensive testing and validation framework'
+                ]
+            },
+            postdev: {
+                'microsoft365copilot': [
+                    'Deploy agents to target user groups',
+                    'Monitor usage analytics and performance metrics',
+                    'Collect user feedback and iterate on agent effectiveness',
+                    'Maintain data governance and compliance',
+                    'Provide ongoing user support and training'
+                ],
+                'agentbuilder': [
+                    'Deploy agent to Microsoft 365 environment',
+                    'Monitor agent performance and user interactions',
+                    'Implement feedback collection and analysis',
+                    'Maintain agent knowledge and responses',
+                    'Scale deployment based on adoption metrics'
+                ],
+                'copilotstudio': [
+                    'Deploy agent to selected channels and environments',
+                    'Implement monitoring and analytics tracking',
+                    'Establish maintenance and update procedures',
+                    'Optimize agent performance based on usage data',
+                    'Plan feature enhancements and scaling'
+                ],
+                'azureai': [
+                    'Deploy to production with proper monitoring',
+                    'Implement comprehensive logging and observability',
+                    'Establish CI/CD pipelines for ongoing updates',
+                    'Monitor performance, costs, and resource utilization',
+                    'Maintain model performance and implement continuous learning'
+                ]
+            }
+        };
+
+        // DOM Elements
+        const elements = {
+            welcomeSection: document.getElementById('welcomeSection'),
+            questionnaireSection: document.getElementById('questionnaireSection'),
+            recommendationSection: document.getElementById('recommendationSection'),
+            implementationSection: document.getElementById('implementationSection'),
+            structureSection: document.getElementById('structureSection'),
+            startAssessment: document.getElementById('startAssessment'),
+            questionContainer: document.getElementById('questionContainer'),
+            prevQuestion: document.getElementById('prevQuestion'),
+            nextQuestion: document.getElementById('nextQuestion'),
+            currentQuestion: document.getElementById('currentQuestion'),
+            totalQuestions: document.getElementById('totalQuestions'),
+            viewImplementation: document.getElementById('viewImplementation'),
+            viewStructure: document.getElementById('viewStructure'),
+            restartTool: document.getElementById('restartTool'),
+            exportPlan: document.getElementById('exportPlan'),
+            themeToggle: document.getElementById('themeToggle')
+        };
+
+        // Initialize
+        function init() {
+            elements.totalQuestions.textContent = questions.length;
+            
+            // Event Listeners
+            elements.startAssessment.addEventListener('click', startQuestionnaire);
+            elements.prevQuestion.addEventListener('click', previousQuestion);
+            elements.nextQuestion.addEventListener('click', nextQuestion);
+            elements.viewImplementation.addEventListener('click', showImplementation);
+            elements.viewStructure.addEventListener('click', showStructure);
+            elements.restartTool.addEventListener('click', restartTool);
+            elements.exportPlan.addEventListener('click', exportPlan);
+            elements.themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // Navigation Functions
+        function startQuestionnaire() {
+            currentStep = 1;
+            updateStepIndicators();
+            showSection('questionnaireSection');
+            renderQuestion();
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+                updateNavigationButtons();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+                updateNavigationButtons();
+            } else {
+                // Complete assessment
+                generateRecommendation();
+            }
+        }
+
+        function showImplementation() {
+            currentStep = 2;
+            updateStepIndicators();
+            renderImplementationChecklist();
+            showSection('implementationSection');
+        }
+
+        function showStructure() {
+            currentStep = 3;
+            updateStepIndicators();
+            showSection('structureSection');
+        }
+
+        function restartTool() {
+            currentStep = 0;
+            currentQuestionIndex = 0;
+            answers = {};
+            recommendedPlatform = null;
+            updateStepIndicators();
+            showSection('welcomeSection');
+        }
+
+        // UI Functions
+        function showSection(sectionId) {
+            document.querySelectorAll('main > div').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        function updateStepIndicators() {
+            document.querySelectorAll('.step-indicator').forEach((step, index) => {
+                step.classList.remove('step-active', 'step-completed');
+                
+                if (index < currentStep) {
+                    step.classList.add('step-completed');
+                    step.innerHTML = '<i class="fas fa-check"></i>';
+                } else if (index === currentStep) {
+                    step.classList.add('step-active');
+                    step.innerHTML = index + 1;
+                } else {
+                    step.innerHTML = index + 1;
+                    step.classList.add('bg-muted', 'text-muted-foreground');
+                }
+            });
+        }
+
+        function renderQuestion() {
+            const question = questions[currentQuestionIndex];
+            elements.currentQuestion.textContent = currentQuestionIndex + 1;
+            
+            const questionHtml = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-foreground mb-2">${question.title}</h3>
+                    <p class="text-muted-foreground">${question.subtitle}</p>
+                </div>
+                
+                <div class="space-y-4">
+                    ${question.options.map(option => `
+                        <div class="platform-card bg-card border border-border rounded-lg p-4 ${answers[question.id] === option.id ? 'selected' : ''}" 
+                             data-question="${question.id}" data-value="${option.id}">
+                            <div class="flex items-start space-x-3">
+                                <div class="mt-1">
+                                    <input type="radio" name="${question.id}" value="${option.id}" 
+                                           ${answers[question.id] === option.id ? 'checked' : ''} 
+                                           class="text-primary focus:ring-primary">
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-foreground mb-1">${option.label}</h4>
+                                    <p class="text-sm text-muted-foreground">${option.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            elements.questionContainer.innerHTML = questionHtml;
+            
+            // Add click handlers for option cards
+            document.querySelectorAll('.platform-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const questionId = this.dataset.question;
+                    const value = this.dataset.value;
+                    
+                    // Update selection
+                    answers[questionId] = value;
+                    
+                    // Update UI
+                    document.querySelectorAll(`[data-question="${questionId}"]`).forEach(c => 
+                        c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // Update radio button
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    updateNavigationButtons();
+                });
+            });
+            
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            elements.prevQuestion.disabled = currentQuestionIndex === 0;
+            
+            const currentQuestion = questions[currentQuestionIndex];
+            const hasAnswer = answers[currentQuestion.id] !== undefined;
+            elements.nextQuestion.disabled = !hasAnswer;
+            
+            if (currentQuestionIndex === questions.length - 1 && hasAnswer) {
+                elements.nextQuestion.innerHTML = 'Get Recommendation <i class="fas fa-arrow-right ml-2"></i>';
+            } else {
+                elements.nextQuestion.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
+            }
+        }
+
+        function generateRecommendation() {
+            // Determine best platform based on answers
+            let bestMatch = null;
+            let bestScore = 0;
+
+            for (const [platformId, platform] of Object.entries(platformLogic)) {
+                if (platform.criteria(answers)) {
+                    // Simple scoring - in a real implementation, this would be more sophisticated
+                    bestMatch = { id: platformId, ...platform };
+                    break;
+                }
+            }
+
+            // Fallback logic if no perfect match
+            if (!bestMatch) {
+                if (answers.technicalExpertise === 'low') {
+                    bestMatch = { id: 'microsoft365copilot', ...platformLogic.microsoft365copilot };
+                } else if (answers.useCaseComplexity === 'complex') {
+                    bestMatch = { id: 'azureai', ...platformLogic.azureai };
+                } else {
+                    bestMatch = { id: 'copilotstudio', ...platformLogic.copilotstudio };
+                }
+            }
+
+            recommendedPlatform = bestMatch;
+            renderRecommendation();
+            
+            currentStep = 1;
+            updateStepIndicators();
+            showSection('recommendationSection');
+        }
+
+        function renderRecommendation() {
+            const platform = recommendedPlatform;
+            
+            const recommendationHtml = `
+                <div class="text-center mb-6">
+                    <i class="${platform.icon} text-${platform.color}-500 text-5xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-foreground mb-2">${platform.name}</h3>
+                    <p class="text-muted-foreground">${platform.description}</p>
+                </div>
+                
+                <div class="bg-card rounded-lg p-4 border border-border">
+                    <h4 class="font-semibold text-foreground mb-2">Key Benefits for Your Use Case:</h4>
+                    <ul class="text-sm text-muted-foreground space-y-1" id="platformBenefits">
+                        <!-- Benefits will be populated based on platform -->
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('recommendedPlatform').innerHTML = recommendationHtml;
+            renderReasoning();
+        }
+
+        function renderReasoning() {
+            const reasoningFactors = [];
+            
+            if (answers.useCaseComplexity === 'simple') {
+                reasoningFactors.push('Your simple use case aligns with ready-to-use or low-complexity solutions');
+            } else if (answers.useCaseComplexity === 'complex') {
+                reasoningFactors.push('Your complex requirements need a highly customizable platform');
+            }
+            
+            if (answers.technicalExpertise === 'low') {
+                reasoningFactors.push('Low-code/no-code approach matches your team\'s technical comfort level');
+            } else if (answers.technicalExpertise === 'high') {
+                reasoningFactors.push('Your development expertise enables advanced customization options');
+            }
+            
+            if (answers.integrationNeeds === 'microsoft') {
+                reasoningFactors.push('Microsoft-focused integrations work best within the Microsoft ecosystem');
+            } else if (answers.integrationNeeds === 'enterprise') {
+                reasoningFactors.push('Complex enterprise integrations require a full-featured development platform');
+            }
+            
+            const reasoningHtml = `
+                <ul class="space-y-3">
+                    ${reasoningFactors.map(factor => `
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <span class="text-muted-foreground">${factor}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+                
+                <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                        <i class="fas fa-info-circle mr-2"></i>Next Steps
+                    </h4>
+                    <p class="text-blue-800 dark:text-blue-200 text-sm">
+                        Proceed to the implementation checklist to start planning your agent development process.
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('reasoningContent').innerHTML = reasoningHtml;
+        }
+
+        function renderImplementationChecklist() {
+            const platform = recommendedPlatform;
+            const preDevItems = implementationChecklists.predev[platform.id];
+            const postDevItems = implementationChecklists.postdev[platform.id];
+            
+            const renderChecklistItems = (items) => {
+                return items.map(item => `
+                    <li class="flex items-start space-x-3">
+                        <input type="checkbox" class="mt-1 text-primary focus:ring-primary rounded">
+                        <span class="text-accent-foreground text-sm">${item}</span>
+                    </li>
+                `).join('');
+            };
+            
+            document.getElementById('preDevChecklist').innerHTML = renderChecklistItems(preDevItems);
+            document.getElementById('postDevChecklist').innerHTML = renderChecklistItems(postDevItems);
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            elements.themeToggle.innerHTML = isDark ? 
+                '<i class="fas fa-sun text-muted-foreground"></i>' : 
+                '<i class="fas fa-moon text-muted-foreground"></i>';
+        }
+
+        function exportPlan() {
+            // TODO: Implement export functionality - generate PDF or document with recommendations and checklist
+            alert('Export functionality would generate a comprehensive implementation plan document.');
+        }
+
+        // Initialize the application
+        init();
+    })();
+    </script>
+</body>
+</html>
