@@ -1,1033 +1,1205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agent Strategy & Architecture Workshop</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Strategy & Architecture Workshop</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      .progress-container {
+        background: rgba(0, 0, 0, 0.1);
+        height: 8px;
+        border-radius: 4px;
+        margin: 20px 0;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #10b981, #059669);
+        width: 0%;
+        transition: width 0.5s ease;
+        border-radius: 4px;
+      }
+
+      .main-content {
+        padding: 40px;
+      }
+
+      .phase {
+        display: none;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      .phase.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            line-height: 1.6;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        .progress-container {
-            background: rgba(0, 0, 0, 0.1);
-            height: 8px;
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #059669);
-            width: 0%;
-            transition: width 0.5s ease;
-            border-radius: 4px;
-        }
-        
-        .main-content {
-            padding: 40px;
-        }
-        
-        .phase {
-            display: none;
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        .phase.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .section h2 {
-            color: #4f46e5;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section h3 {
-            color: #374151;
-            font-size: 1.3rem;
-            margin: 25px 0 15px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e5e7eb;
-        }
-        
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-        
-        .platform-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            border: 2px solid #e5e7eb;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .platform-card:hover {
-            border-color: #4f46e5;
-            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.15);
-            transform: translateY(-5px);
-        }
-        
-        .platform-card h4 {
-            color: #1f2937;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .question-group {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 20px 0;
-            border-left: 4px solid #4f46e5;
-        }
-        
-        .question-group h4 {
-            color: #374151;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .form-group {
-            margin: 20px 0;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #374151;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.2s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-        
-        .textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .radio-group {
-            display: grid;
-            gap: 15px;
-            margin: 15px 0;
-        }
-        
-        .radio-option {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 15px;
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .radio-option:hover {
-            border-color: #4f46e5;
-            background: #f8fafc;
-        }
-        
-        .radio-option input[type="radio"] {
-            margin: 0;
-            transform: scale(1.2);
-        }
-        
-        .checkbox-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 12px;
-            margin: 15px 0;
-        }
-        
-        .checkbox-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .checkbox-option:hover {
-            border-color: #4f46e5;
-            background: #f8fafc;
-        }
-        
-        .checkbox-option input[type="checkbox"] {
-            transform: scale(1.1);
-        }
-        
-        .btn {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, #6b7280, #9ca3af);
-            margin-right: 15px;
-        }
-        
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 2px solid #e5e7eb;
-        }
-        
-        .recommendation {
-            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-            border: 2px solid #10b981;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-        }
-        
-        .recommendation h3 {
-            color: #047857;
-            border-bottom-color: #10b981;
-        }
-        
-        .score-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .score-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            border: 2px solid #e5e7eb;
-            transition: all 0.3s ease;
-        }
-        
-        .score-card.winner {
-            border-color: #10b981;
-            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-            transform: scale(1.05);
-        }
-        
-        .score-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #4f46e5;
-            margin: 10px 0;
-        }
-        
-        .score-card.winner .score-value {
-            color: #047857;
-        }
-        
-        .component-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .component-card {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #4f46e5;
-        }
-        
-        .checklist {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-        
-        .checklist h4 {
-            color: #374151;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
-        .checklist-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin: 12px 0;
-            padding: 12px;
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-        }
-        
-        .checklist-item input[type="checkbox"] {
-            margin-top: 3px;
-            transform: scale(1.1);
-        }
-        
-        .tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 16px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin: 4px 4px 4px 0;
-        }
-        
-        .complexity-low { background: #dcfce7; color: #166534; }
-        .complexity-moderate { background: #fef3c7; color: #92400e; }
-        .complexity-high { background: #fee2e2; color: #991b1b; }
-        
-        .info-box {
-            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-            border: 2px solid #3b82f6;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            color: #1e40af;
-        }
-        
-        .warning-box {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border: 2px solid #f59e0b;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            color: #92400e;
-        }
-        
-        .icon {
-            font-size: 1.5rem;
-            margin-right: 8px;
-        }
+      }
+
+      .section {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .section h2 {
+        color: #4f46e5;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section h3 {
+        color: #374151;
+        font-size: 1.3rem;
+        margin: 25px 0 15px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e5e7eb;
+      }
+
+      .platform-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin: 30px 0;
+      }
+
+      .platform-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        border: 2px solid #e5e7eb;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .platform-card:hover {
+        border-color: #4f46e5;
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.15);
+        transform: translateY(-5px);
+      }
+
+      .platform-card h4 {
+        color: #1f2937;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+
+      .question-group {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 20px 0;
+        border-left: 4px solid #4f46e5;
+      }
+
+      .question-group h4 {
+        color: #374151;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .form-group {
+        margin: 20px 0;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: border-color 0.2s ease;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .radio-group {
+        display: grid;
+        gap: 15px;
+        margin: 15px 0;
+      }
+
+      .radio-option {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px;
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .radio-option:hover {
+        border-color: #4f46e5;
+        background: #f8fafc;
+      }
+
+      .radio-option input[type="radio"] {
+        margin: 0;
+        transform: scale(1.2);
+      }
+
+      .checkbox-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 12px;
+        margin: 15px 0;
+      }
+
+      .checkbox-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .checkbox-option:hover {
+        border-color: #4f46e5;
+        background: #f8fafc;
+      }
+
+      .checkbox-option input[type="checkbox"] {
+        transform: scale(1.1);
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #6b7280, #9ca3af);
+        margin-right: 15px;
+      }
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 2px solid #e5e7eb;
+      }
+
+      .recommendation {
+        background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        border: 2px solid #10b981;
+        border-radius: 15px;
+        padding: 30px;
+        margin: 30px 0;
+      }
+
+      .recommendation h3 {
+        color: #047857;
+        border-bottom-color: #10b981;
+      }
+
+      .score-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .score-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        border: 2px solid #e5e7eb;
+        transition: all 0.3s ease;
+      }
+
+      .score-card.winner {
+        border-color: #10b981;
+        background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        transform: scale(1.05);
+      }
+
+      .score-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #4f46e5;
+        margin: 10px 0;
+      }
+
+      .score-card.winner .score-value {
+        color: #047857;
+      }
+
+      .component-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .component-card {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 20px;
+        border-left: 4px solid #4f46e5;
+      }
+
+      .checklist {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 20px 0;
+      }
+
+      .checklist h4 {
+        color: #374151;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+
+      .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin: 12px 0;
+        padding: 12px;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+      }
+
+      .checklist-item input[type="checkbox"] {
+        margin-top: 3px;
+        transform: scale(1.1);
+      }
+
+      .tag {
+        display: inline-block;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin: 4px 4px 4px 0;
+      }
+
+      .complexity-low {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .complexity-moderate {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .complexity-high {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .info-box {
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        border: 2px solid #3b82f6;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        color: #1e40af;
+      }
+
+      .warning-box {
+        background: linear-gradient(135deg, #fef3c7, #fde68a);
+        border: 2px solid #f59e0b;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        color: #92400e;
+      }
+
+      .icon {
+        font-size: 1.5rem;
+        margin-right: 8px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>AI Agent Strategy & Architecture Workshop</h1>
-            <p>Learn, Choose, and Design Your Microsoft AI Agent Solution</p>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
+      <div class="header">
+        <h1>AI Agent Strategy & Architecture Workshop</h1>
+        <p>Learn, Choose, and Design Your Microsoft AI Agent Solution</p>
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
         </div>
-        
-        <div class="main-content">
-            <!-- Phase 1: Platform Learning -->
-            <div class="phase active" id="phase1">
-                <div class="section">
-                    <h2><span class="icon">🎓</span>Understanding Microsoft AI Agent Platforms</h2>
-                    <p style="margin-bottom: 25px; color: #6b7280; font-size: 1.1rem;">
-                        Before selecting a platform, let's understand what each Microsoft AI agent platform offers and when to use them.
-                    </p>
-                    
-                    <div class="platform-grid">
-                        <div class="platform-card">
-                            <h4>M365 Copilot Chat</h4>
-                            <p><strong>Zero-effort AI inside Office</strong></p>
-                            <p style="margin: 15px 0; color: #6b7280;">Built-in productivity assistant across Microsoft 365 apps.</p>
-                            <ul style="color: #6b7280; padding-left: 20px; font-size: 0.9rem;">
-                                <li>Immediate deployment</li>
-                                <li>No development required</li>
-                                <li>Works with existing M365 data</li>
-                                <li>Standard security & compliance</li>
-                            </ul>
-                            <div class="tag complexity-low">No Code</div>
-                        </div>
-                        
-                        <div class="platform-card">
-                            <h4>Agents in Microsoft 365</h4>
-                            <p><strong>Pre-built specialized agents</strong></p>
-                            <p style="margin: 15px 0; color: #6b7280;">Ready-to-use agents for specific tasks like research and analysis.</p>
-                            <ul style="color: #6b7280; padding-left: 20px; font-size: 0.9rem;">
-                                <li>Researcher, Analyst, Facilitator</li>
-                                <li>Employee Self-Service, Skills</li>
-                                <li>Available in Agent Store</li>
-                                <li>Expert-level capabilities</li>
-                            </ul>
-                            <div class="tag complexity-low">Pre-built</div>
-                        </div>
-                        
-                        <div class="platform-card">
-                            <h4>M365 Copilot + Agent Builder</h4>
-                            <p><strong>Custom knowledge without code</strong></p>
-                            <p style="margin: 15px 0; color: #6b7280;">Extend Copilot with your organization's specific knowledge and simple automations.</p>
-                            <ul style="color: #6b7280; padding-left: 20px; font-size: 0.9rem;">
-                                <li>Connect SharePoint, documents</li>
-                                <li>Custom Q&A capabilities</li>
-                                <li>Simple workflows</li>
-                                <li>Stay within M365 ecosystem</li>
-                            </ul>
-                            <div class="tag complexity-low">No Code</div>
-                        </div>
-                        
-                        <div class="platform-card">
-                            <h4>Copilot Studio</h4>
-                            <p><strong>Custom conversational agents</strong></p>
-                            <p style="margin: 15px 0; color: #6b7280;">Build custom agents with workflows, integrations, and business logic.</p>
-                            <ul style="color: #6b7280; padding-left: 20px; font-size: 0.9rem;">
-                                <li>Visual conversation designer</li>
-                                <li>Power Platform connectors</li>
-                                <li>Custom business logic</li>
-                                <li>Multiple deployment channels</li>
-                            </ul>
-                            <div class="tag complexity-moderate">Low Code</div>
-                        </div>
-                        
-                        <div class="platform-card">
-                            <h4>Azure AI Foundry</h4>
-                            <p><strong>Enterprise AI development</strong></p>
-                            <p style="margin: 15px 0; color: #6b7280;">Full-stack AI development platform for custom solutions and model training.</p>
-                            <ul style="color: #6b7280; padding-left: 20px; font-size: 0.9rem;">
-                                <li>Custom model training</li>
-                                <li>Advanced integrations</li>
-                                <li>Full development control</li>
-                                <li>Enterprise-grade security</li>
-                            </ul>
-                            <div class="tag complexity-high">Pro Code</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="navigation">
-                    <div></div>
-                    <button class="btn" onclick="startAssessment()">Start Platform Assessment</button>
-                </div>
+      </div>
+
+      <div class="main-content">
+        <!-- Phase 1: Platform Learning -->
+        <div class="phase active" id="phase1">
+          <div class="section">
+            <h2>
+              <span class="icon">🎓</span>Understanding Microsoft AI Agent
+              Platforms
+            </h2>
+            <p style="margin-bottom: 25px; color: #6b7280; font-size: 1.1rem">
+              Before selecting a platform, let's understand what each Microsoft
+              AI agent platform offers and when to use them.
+            </p>
+
+            <div class="platform-grid">
+              <div class="platform-card">
+                <h4>M365 Copilot Chat</h4>
+                <p><strong>Zero-effort AI inside Office</strong></p>
+                <p style="margin: 15px 0; color: #6b7280">
+                  Built-in productivity assistant across Microsoft 365 apps.
+                </p>
+                <ul
+                  style="color: #6b7280; padding-left: 20px; font-size: 0.9rem"
+                >
+                  <li>Immediate deployment</li>
+                  <li>No development required</li>
+                  <li>Works with existing M365 data</li>
+                  <li>Standard security & compliance</li>
+                </ul>
+                <div class="tag complexity-low">No Code</div>
+              </div>
+
+              <div class="platform-card">
+                <h4>Agents in Microsoft 365</h4>
+                <p><strong>Pre-built specialized agents</strong></p>
+                <p style="margin: 15px 0; color: #6b7280">
+                  Ready-to-use agents for specific tasks like research and
+                  analysis.
+                </p>
+                <ul
+                  style="color: #6b7280; padding-left: 20px; font-size: 0.9rem"
+                >
+                  <li>Researcher, Analyst, Facilitator</li>
+                  <li>Employee Self-Service, Skills</li>
+                  <li>Available in Agent Store</li>
+                  <li>Expert-level capabilities</li>
+                </ul>
+                <div class="tag complexity-low">Pre-built</div>
+              </div>
+
+              <div class="platform-card">
+                <h4>M365 Copilot + Agent Builder</h4>
+                <p><strong>Custom knowledge without code</strong></p>
+                <p style="margin: 15px 0; color: #6b7280">
+                  Extend Copilot with your organization's specific knowledge and
+                  simple automations.
+                </p>
+                <ul
+                  style="color: #6b7280; padding-left: 20px; font-size: 0.9rem"
+                >
+                  <li>Connect SharePoint, documents</li>
+                  <li>Custom Q&A capabilities</li>
+                  <li>Simple workflows</li>
+                  <li>Stay within M365 ecosystem</li>
+                </ul>
+                <div class="tag complexity-low">No Code</div>
+              </div>
+
+              <div class="platform-card">
+                <h4>Copilot Studio</h4>
+                <p><strong>Custom conversational agents</strong></p>
+                <p style="margin: 15px 0; color: #6b7280">
+                  Build custom agents with workflows, integrations, and business
+                  logic.
+                </p>
+                <ul
+                  style="color: #6b7280; padding-left: 20px; font-size: 0.9rem"
+                >
+                  <li>Visual conversation designer</li>
+                  <li>Power Platform connectors</li>
+                  <li>Custom business logic</li>
+                  <li>Multiple deployment channels</li>
+                </ul>
+                <div class="tag complexity-moderate">Low Code</div>
+              </div>
+
+              <div class="platform-card">
+                <h4>Azure AI Foundry</h4>
+                <p><strong>Enterprise AI development</strong></p>
+                <p style="margin: 15px 0; color: #6b7280">
+                  Full-stack AI development platform for custom solutions and
+                  model training.
+                </p>
+                <ul
+                  style="color: #6b7280; padding-left: 20px; font-size: 0.9rem"
+                >
+                  <li>Custom model training</li>
+                  <li>Advanced integrations</li>
+                  <li>Full development control</li>
+                  <li>Enterprise-grade security</li>
+                </ul>
+                <div class="tag complexity-high">Pro Code</div>
+              </div>
             </div>
-            
-            <!-- Phase 2: Detailed Assessment -->
-            <div class="phase" id="phase2">
-                <div class="section">
-                    <h2><span class="icon">📝</span>Platform Selection Assessment</h2>
-                    
-                    <div class="question-group">
-                        <h4>Your AI Agent Scenario</h4>
-                        <div class="form-group">
-                            <label for="scenario">Describe what you want your AI agent to do:</label>
-                            <textarea id="scenario" class="form-control textarea" placeholder="Example: Help employees find internal policies, answer HR questions, and guide them through common processes like time-off requests..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="question-group">
-                        <h4>Primary Use Case Category</h4>
-                        <div class="radio-group" id="useCaseGroup">
-                            <label class="radio-option">
-                                <input type="radio" name="useCase" value="productivity">
-                                <div>
-                                    <strong>Personal Productivity</strong><br>
-                                    <span style="color: #6b7280;">Help individuals work more efficiently within existing tools and workflows</span>
-                                </div>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="useCase" value="support">
-                                <div>
-                                    <strong>Support & Self-Service</strong><br>
-                                    <span style="color: #6b7280;">Answer questions, provide information, and guide users through processes</span>
-                                </div>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="useCase" value="automation">
-                                <div>
-                                    <strong>Process Automation</strong><br>
-                                    <span style="color: #6b7280;">Automate workflows, integrate systems, and execute business processes</span>
-                                </div>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="useCase" value="analysis">
-                                <div>
-                                    <strong>Analysis & Research</strong><br>
-                                    <span style="color: #6b7280;">Analyze data, conduct research, and provide insights and recommendations</span>
-                                </div>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="useCase" value="innovation">
-                                <div>
-                                    <strong>Innovation & Competitive Advantage</strong><br>
-                                    <span style="color: #6b7280;">Transform business operations or create new capabilities with advanced AI</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="question-group">
-                        <h4>Implementation Requirements</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
-                            <div class="form-group">
-                                <label for="timeline">Implementation Timeline:</label>
-                                <select id="timeline" class="form-control">
-                                    <option value="immediate">Immediate (1-4 weeks)</option>
-                                    <option value="short">Short-term (1-3 months)</option>
-                                    <option value="medium">Medium-term (3-6 months)</option>
-                                    <option value="long">Long-term (6+ months)</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="userCount">Expected Number of Users:</label>
-                                <select id="userCount" class="form-control">
-                                    <option value="small">Small (1-50 users)</option>
-                                    <option value="medium">Medium (51-500 users)</option>
-                                    <option value="large">Large (500+ users)</option>
-                                    <option value="enterprise">Enterprise (1000+ users)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="question-group">
-                        <h4>Technical Complexity</h4>
-                        <div class="radio-group" id="complexityGroup">
-                            <label class="radio-option">
-                                <input type="radio" name="complexity" value="simple">
-                                <div>
-                                    <strong>Simple</strong><br>
-                                    <span style="color: #6b7280;">Basic Q&A, information retrieval, simple document assistance</span>
-                                </div>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="complexity" value="moderate">
-                                <div>
-                                    <strong>Moderate</strong><br>
-                                    <span style="color: #6b7280;">Multi-step processes, workflow automation, system integration</span>
-                                </div>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="complexity" value="complex">
-                                <div>
-                                    <strong>Complex</strong><br>
-                                    <span style="color: #6b7280;">Custom logic, predictive analytics, multi-system orchestration</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="question-group">
-                        <h4>Required Capabilities</h4>
-                        <div class="checkbox-grid" id="capabilitiesGrid">
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="basicQA">
-                                <span>Basic Q&A and Information Retrieval</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="research">
-                                <span>Complex Research and Analysis</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="taskExecution">
-                                <span>Task Execution and Automation</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="dataAnalysis">
-                                <span>Data Analysis and Insights</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="meetingSupport">
-                                <span>Meeting Support and Facilitation</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="workflowAutomation">
-                                <span>Workflow Automation</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="customLogic">
-                                <span>Custom Business Logic</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="predictiveAnalytics">
-                                <span>Predictive Analytics</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="question-group">
-                        <h4>Integration Requirements</h4>
-                        <div class="checkbox-grid" id="integrationsGrid">
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="m365Only">
-                                <span>Microsoft 365 Apps Only</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="sharepoint">
-                                <span>SharePoint and OneDrive</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="powerPlatform">
-                                <span>Power Platform (Power Apps, Power Automate)</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="dynamics365">
-                                <span>Dynamics 365</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="externalAPIs">
-                                <span>External APIs and Services</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="databases">
-                                <span>Custom Databases</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="legacySystems">
-                                <span>Legacy Systems</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" id="customModels">
-                                <span>Custom AI/ML Models</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="question-group">
-                        <h4>Organizational Readiness</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
-                            <div class="form-group">
-                                <label for="expertise">Technical Expertise Available:</label>
-                                <select id="expertise" class="form-control">
-                                    <option value="minimal">End users only (no technical staff)</option>
-                                    <option value="business">Business analysts and citizen developers</option>
-                                    <option value="it">IT professionals and developers</option>
-                                    <option value="advanced">AI/ML engineers and data scientists</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="budget">Budget Considerations:</label>
-                                <select id="budget" class="form-control">
-                                    <option value="minimal">Minimize additional costs</option>
-                                    <option value="moderate">Reasonable investment for value</option>
-                                    <option value="significant">Significant investment for transformation</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="question-group">
-                        <h4>Key Stakeholders</h4>
-                        <div class="form-group">
-                            <label for="stakeholders">Who are the primary users and decision makers?</label>
-                            <textarea id="stakeholders" class="form-control textarea" placeholder="List the key stakeholders, primary users, and decision makers for this agent..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="question-group">
-                        <h4>Concerns and Constraints</h4>
-                        <div class="form-group">
-                            <label for="concerns">What are your main concerns or constraints?</label>
-                            <textarea id="concerns" class="form-control textarea" placeholder="Security, compliance, data privacy, user adoption, technical challenges, budget constraints, etc."></textarea>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="navigation">
-                    <button class="btn btn-secondary" onclick="backToLearning()">← Back to Learning</button>
-                    <button class="btn" onclick="generateRecommendation()">Get Platform Recommendation</button>
-                </div>
-            </div>
-            
-            <!-- Phase 3: Platform Recommendation -->
-            <div class="phase" id="phase3">
-                <div class="section">
-                    <h2><span class="icon">🎯</span>Platform Recommendation</h2>
-                    <div class="score-grid" id="scoreGrid"></div>
-                </div>
-                
-                <div class="recommendation" id="recommendationResult">
-                    <h3>Recommended Platform</h3>
-                    <div id="platformRecommendation"></div>
-                </div>
-                
-                <div class="section">
-                    <h2><span class="icon">📋</span>Implementation Roadmap</h2>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                        <div class="checklist">
-                            <h4>Pre-Development Checklist</h4>
-                            <div id="preDevChecklist"></div>
-                        </div>
-                        
-                        <div class="checklist">
-                            <h4>Post-Development Checklist</h4>
-                            <div id="postDevChecklist"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="navigation">
-                    <button class="btn btn-secondary" onclick="backToAssessment()">← Back to Assessment</button>
-                    <button class="btn" onclick="proceedToArchitecture()">Design Agent Architecture →</button>
-                </div>
-            </div>
-            
-            <!-- Phase 4: Agent Architecture Design -->
-            <div class="phase" id="phase4">
-                <div class="section">
-                    <h2><span class="icon">🏗️</span>Agent Architecture & Components</h2>
-                    <p style="margin-bottom: 25px; color: #6b7280; font-size: 1.1rem;">
-                        Now let's design the structure and components of your AI agent to ensure it meets your specific requirements.
-                    </p>
-                    
-                    <div class="info-box">
-                        <h4>Your Recommended Platform: <span id="selectedPlatform"></span></h4>
-                        <p>Based on your assessment, we'll help you design the optimal agent architecture for this platform.</p>
-                    </div>
-                    
-                    <div class="component-grid" id="architectureComponents">
-                        <!-- Architecture components will be populated based on platform -->
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <h2><span class="icon">⚙️</span>Agent Configuration Planning</h2>
-                    <div id="configurationPlanning">
-                        <!-- Configuration details will be populated based on platform -->
-                    </div>
-                </div>
-                
-                <div class="navigation">
-                    <button class="btn btn-secondary" onclick="backToRecommendation()">← Back to Recommendation</button>
-                    <button class="btn" onclick="exportFullPlan()">Export Complete Plan</button>
-                </div>
-            </div>
+          </div>
+
+          <div class="navigation">
+            <div></div>
+            <button class="btn" onclick="startAssessment()">
+              Start Platform Assessment
+            </button>
+          </div>
         </div>
+
+        <!-- Phase 2: Detailed Assessment -->
+        <div class="phase" id="phase2">
+          <div class="section">
+            <h2><span class="icon">📝</span>Platform Selection Assessment</h2>
+
+            <div class="question-group">
+              <h4>Your AI Agent Scenario</h4>
+              <div class="form-group">
+                <label for="scenario"
+                  >Describe what you want your AI agent to do:</label
+                >
+                <textarea
+                  id="scenario"
+                  class="form-control textarea"
+                  placeholder="Example: Help employees find internal policies, answer HR questions, and guide them through common processes like time-off requests..."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="question-group">
+              <h4>Primary Use Case Category</h4>
+              <div class="radio-group" id="useCaseGroup">
+                <label class="radio-option">
+                  <input type="radio" name="useCase" value="productivity" />
+                  <div>
+                    <strong>Personal Productivity</strong><br />
+                    <span style="color: #6b7280"
+                      >Help individuals work more efficiently within existing
+                      tools and workflows</span
+                    >
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="useCase" value="support" />
+                  <div>
+                    <strong>Support & Self-Service</strong><br />
+                    <span style="color: #6b7280"
+                      >Answer questions, provide information, and guide users
+                      through processes</span
+                    >
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="useCase" value="automation" />
+                  <div>
+                    <strong>Process Automation</strong><br />
+                    <span style="color: #6b7280"
+                      >Automate workflows, integrate systems, and execute
+                      business processes</span
+                    >
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="useCase" value="analysis" />
+                  <div>
+                    <strong>Analysis & Research</strong><br />
+                    <span style="color: #6b7280"
+                      >Analyze data, conduct research, and provide insights and
+                      recommendations</span
+                    >
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="useCase" value="innovation" />
+                  <div>
+                    <strong>Innovation & Competitive Advantage</strong><br />
+                    <span style="color: #6b7280"
+                      >Transform business operations or create new capabilities
+                      with advanced AI</span
+                    >
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="question-group">
+              <h4>Implementation Requirements</h4>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 20px;
+                  margin: 20px 0;
+                "
+              >
+                <div class="form-group">
+                  <label for="timeline">Implementation Timeline:</label>
+                  <select id="timeline" class="form-control">
+                    <option value="immediate">Immediate (1-4 weeks)</option>
+                    <option value="short">Short-term (1-3 months)</option>
+                    <option value="medium">Medium-term (3-6 months)</option>
+                    <option value="long">Long-term (6+ months)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="userCount">Expected Number of Users:</label>
+                  <select id="userCount" class="form-control">
+                    <option value="small">Small (1-50 users)</option>
+                    <option value="medium">Medium (51-500 users)</option>
+                    <option value="large">Large (500+ users)</option>
+                    <option value="enterprise">Enterprise (1000+ users)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="question-group">
+              <h4>Technical Complexity</h4>
+              <div class="radio-group" id="complexityGroup">
+                <label class="radio-option">
+                  <input type="radio" name="complexity" value="simple" />
+                  <div>
+                    <strong>Simple</strong><br />
+                    <span style="color: #6b7280"
+                      >Basic Q&A, information retrieval, simple document
+                      assistance</span
+                    >
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="complexity" value="moderate" />
+                  <div>
+                    <strong>Moderate</strong><br />
+                    <span style="color: #6b7280"
+                      >Multi-step processes, workflow automation, system
+                      integration</span
+                    >
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="complexity" value="complex" />
+                  <div>
+                    <strong>Complex</strong><br />
+                    <span style="color: #6b7280"
+                      >Custom logic, predictive analytics, multi-system
+                      orchestration</span
+                    >
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="question-group">
+              <h4>Required Capabilities</h4>
+              <div class="checkbox-grid" id="capabilitiesGrid">
+                <label class="checkbox-option">
+                  <input type="checkbox" id="basicQA" />
+                  <span>Basic Q&A and Information Retrieval</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="research" />
+                  <span>Complex Research and Analysis</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="taskExecution" />
+                  <span>Task Execution and Automation</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="dataAnalysis" />
+                  <span>Data Analysis and Insights</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="meetingSupport" />
+                  <span>Meeting Support and Facilitation</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="workflowAutomation" />
+                  <span>Workflow Automation</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="customLogic" />
+                  <span>Custom Business Logic</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="predictiveAnalytics" />
+                  <span>Predictive Analytics</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="question-group">
+              <h4>Integration Requirements</h4>
+              <div class="checkbox-grid" id="integrationsGrid">
+                <label class="checkbox-option">
+                  <input type="checkbox" id="m365Only" />
+                  <span>Microsoft 365 Apps Only</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="sharepoint" />
+                  <span>SharePoint and OneDrive</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="powerPlatform" />
+                  <span>Power Platform (Power Apps, Power Automate)</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="dynamics365" />
+                  <span>Dynamics 365</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="externalAPIs" />
+                  <span>External APIs and Services</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="databases" />
+                  <span>Custom Databases</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="legacySystems" />
+                  <span>Legacy Systems</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" id="customModels" />
+                  <span>Custom AI/ML Models</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="question-group">
+              <h4>Organizational Readiness</h4>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 20px;
+                  margin: 20px 0;
+                "
+              >
+                <div class="form-group">
+                  <label for="expertise">Technical Expertise Available:</label>
+                  <select id="expertise" class="form-control">
+                    <option value="minimal">
+                      End users only (no technical staff)
+                    </option>
+                    <option value="business">
+                      Business analysts and citizen developers
+                    </option>
+                    <option value="it">IT professionals and developers</option>
+                    <option value="advanced">
+                      AI/ML engineers and data scientists
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="budget">Budget Considerations:</label>
+                  <select id="budget" class="form-control">
+                    <option value="minimal">Minimize additional costs</option>
+                    <option value="moderate">
+                      Reasonable investment for value
+                    </option>
+                    <option value="significant">
+                      Significant investment for transformation
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="question-group">
+              <h4>Key Stakeholders</h4>
+              <div class="form-group">
+                <label for="stakeholders"
+                  >Who are the primary users and decision makers?</label
+                >
+                <textarea
+                  id="stakeholders"
+                  class="form-control textarea"
+                  placeholder="List the key stakeholders, primary users, and decision makers for this agent..."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="question-group">
+              <h4>Concerns and Constraints</h4>
+              <div class="form-group">
+                <label for="concerns"
+                  >What are your main concerns or constraints?</label
+                >
+                <textarea
+                  id="concerns"
+                  class="form-control textarea"
+                  placeholder="Security, compliance, data privacy, user adoption, technical challenges, budget constraints, etc."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="navigation">
+            <button class="btn btn-secondary" onclick="backToLearning()">
+              ← Back to Learning
+            </button>
+            <button class="btn" onclick="generateRecommendation()">
+              Get Platform Recommendation
+            </button>
+          </div>
+        </div>
+
+        <!-- Phase 3: Platform Recommendation -->
+        <div class="phase" id="phase3">
+          <div class="section">
+            <h2><span class="icon">🎯</span>Platform Recommendation</h2>
+            <div class="score-grid" id="scoreGrid"></div>
+          </div>
+
+          <div class="recommendation" id="recommendationResult">
+            <h3>Recommended Platform</h3>
+            <div id="platformRecommendation"></div>
+          </div>
+
+          <div class="section">
+            <h2><span class="icon">📋</span>Implementation Roadmap</h2>
+
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px"
+            >
+              <div class="checklist">
+                <h4>Pre-Development Checklist</h4>
+                <div id="preDevChecklist"></div>
+              </div>
+
+              <div class="checklist">
+                <h4>Post-Development Checklist</h4>
+                <div id="postDevChecklist"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="navigation">
+            <button class="btn btn-secondary" onclick="backToAssessment()">
+              ← Back to Assessment
+            </button>
+            <button class="btn" onclick="proceedToArchitecture()">
+              Design Agent Architecture →
+            </button>
+          </div>
+        </div>
+
+        <!-- Phase 4: Agent Architecture Design -->
+        <div class="phase" id="phase4">
+          <div class="section">
+            <h2><span class="icon">🏗️</span>Agent Architecture & Components</h2>
+            <p style="margin-bottom: 25px; color: #6b7280; font-size: 1.1rem">
+              Now let's design the structure and components of your AI agent to
+              ensure it meets your specific requirements.
+            </p>
+
+            <div class="info-box">
+              <h4>
+                Your Recommended Platform: <span id="selectedPlatform"></span>
+              </h4>
+              <p>
+                Based on your assessment, we'll help you design the optimal
+                agent architecture for this platform.
+              </p>
+            </div>
+
+            <div class="component-grid" id="architectureComponents">
+              <!-- Architecture components will be populated based on platform -->
+            </div>
+          </div>
+
+          <div class="section">
+            <h2><span class="icon">⚙️</span>Agent Configuration Planning</h2>
+            <div id="configurationPlanning">
+              <!-- Configuration details will be populated based on platform -->
+            </div>
+          </div>
+
+          <div class="navigation">
+            <button class="btn btn-secondary" onclick="backToRecommendation()">
+              ← Back to Recommendation
+            </button>
+            <button class="btn" onclick="exportFullPlan()">
+              Export Complete Plan
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        class AgentWorkshop {
-            constructor() {
-                this.currentPhase = 1;
-                this.totalPhases = 4;
-                this.assessmentData = {};
-                this.recommendedPlatform = null;
-                this.updateProgress();
-            }
+      class AgentWorkshop {
+        constructor() {
+          this.currentPhase = 1;
+          this.totalPhases = 4;
+          this.assessmentData = {};
+          this.recommendedPlatform = null;
+          this.updateProgress();
+        }
 
-            updateProgress() {
-                const progress = (this.currentPhase / this.totalPhases) * 100;
-                const progressBar = document.getElementById('progressBar');
-                if (progressBar) {
-                    progressBar.style.width = `${progress}%`;
-                }
-            }
+        updateProgress() {
+          const progress = (this.currentPhase / this.totalPhases) * 100;
+          const progressBar = document.getElementById("progressBar");
+          if (progressBar) {
+            progressBar.style.width = `${progress}%`;
+          }
+        }
 
-            showPhase(phaseNumber) {
-                // Hide all phases
-                const phases = document.querySelectorAll('.phase');
-                phases.forEach(phase => phase.classList.remove('active'));
-                
-                // Show target phase
-                const targetPhase = document.getElementById(`phase${phaseNumber}`);
-                if (targetPhase) {
-                    targetPhase.classList.add('active');
-                    this.currentPhase = phaseNumber;
-                    this.updateProgress();
-                }
-            }
+        showPhase(phaseNumber) {
+          // Hide all phases
+          const phases = document.querySelectorAll(".phase");
+          phases.forEach((phase) => phase.classList.remove("active"));
 
-            collectAssessmentData() {
-                const data = {
-                    scenario: document.getElementById('scenario')?.value || '',
-                    stakeholders: document.getElementById('stakeholders')?.value || '',
-                    concerns: document.getElementById('concerns')?.value || '',
-                    useCase: this.getRadioValue('useCase'),
-                    timeline: document.getElementById('timeline')?.value || '',
-                    userCount: document.getElementById('userCount')?.value || '',
-                    complexity: this.getRadioValue('complexity'),
-                    expertise: document.getElementById('expertise')?.value || '',
-                    budget: document.getElementById('budget')?.value || '',
-                    capabilities: this.getCheckboxValues([
-                        'basicQA', 'research', 'taskExecution', 'dataAnalysis', 
-                        'meetingSupport', 'workflowAutomation', 'customLogic', 'predictiveAnalytics'
-                    ]),
-                    integrations: this.getCheckboxValues([
-                        'm365Only', 'sharepoint', 'powerPlatform', 'dynamics365', 
-                        'externalAPIs', 'databases', 'legacySystems', 'customModels'
-                    ])
-                };
-                
-                this.assessmentData = data;
-                return data;
-            }
+          // Show target phase
+          const targetPhase = document.getElementById(`phase${phaseNumber}`);
+          if (targetPhase) {
+            targetPhase.classList.add("active");
+            this.currentPhase = phaseNumber;
+            this.updateProgress();
+          }
+        }
 
-            getRadioValue(name) {
-                const radio = document.querySelector(`input[name="${name}"]:checked`);
-                return radio ? radio.value : '';
-            }
+        collectAssessmentData() {
+          const data = {
+            scenario: document.getElementById("scenario")?.value || "",
+            stakeholders: document.getElementById("stakeholders")?.value || "",
+            concerns: document.getElementById("concerns")?.value || "",
+            useCase: this.getRadioValue("useCase"),
+            timeline: document.getElementById("timeline")?.value || "",
+            userCount: document.getElementById("userCount")?.value || "",
+            complexity: this.getRadioValue("complexity"),
+            expertise: document.getElementById("expertise")?.value || "",
+            budget: document.getElementById("budget")?.value || "",
+            capabilities: this.getCheckboxValues([
+              "basicQA",
+              "research",
+              "taskExecution",
+              "dataAnalysis",
+              "meetingSupport",
+              "workflowAutomation",
+              "customLogic",
+              "predictiveAnalytics",
+            ]),
+            integrations: this.getCheckboxValues([
+              "m365Only",
+              "sharepoint",
+              "powerPlatform",
+              "dynamics365",
+              "externalAPIs",
+              "databases",
+              "legacySystems",
+              "customModels",
+            ]),
+          };
 
-            getCheckboxValues(ids) {
-                return ids.filter(id => {
-                    const checkbox = document.getElementById(id);
-                    return checkbox && checkbox.checked;
-                });
-            }
+          this.assessmentData = data;
+          return data;
+        }
 
-            calculatePlatformScores(data) {
-                let scores = {
-                    m365Copilot: 0,
-                    m365Agents: 0,
-                    agentBuilder: 0,
-                    copilotStudio: 0,
-                    azureFoundry: 0
-                };
+        getRadioValue(name) {
+          const radio = document.querySelector(`input[name="${name}"]:checked`);
+          return radio ? radio.value : "";
+        }
 
-                // Use case scoring
-                switch (data.useCase) {
-                    case 'productivity':
-                        scores.m365Copilot += 40;
-                        scores.m365Agents += 30;
-                        scores.agentBuilder += 25;
-                        scores.copilotStudio += 15;
-                        scores.azureFoundry += 10;
-                        break;
-                    case 'support':
-                        scores.m365Copilot += 25;
-                        scores.m365Agents += 35;
-                        scores.agentBuilder += 30;
-                        scores.copilotStudio += 25;
-                        scores.azureFoundry += 15;
-                        break;
-                    case 'automation':
-                        scores.m365Copilot += 15;
-                        scores.m365Agents += 25;
-                        scores.agentBuilder += 20;
-                        scores.copilotStudio += 40;
-                        scores.azureFoundry += 30;
-                        break;
-                    case 'analysis':
-                        scores.m365Copilot += 20;
-                        scores.m365Agents += 40;
-                        scores.agentBuilder += 15;
-                        scores.copilotStudio += 25;
-                        scores.azureFoundry += 35;
-                        break;
-                    case 'innovation':
-                        scores.m365Copilot += 10;
-                        scores.m365Agents += 15;
-                        scores.agentBuilder += 10;
-                        scores.copilotStudio += 25;
-                        scores.azureFoundry += 45;
-                        break;
-                }
+        getCheckboxValues(ids) {
+          return ids.filter((id) => {
+            const checkbox = document.getElementById(id);
+            return checkbox && checkbox.checked;
+          });
+        }
 
-                // Complexity scoring
-                switch (data.complexity) {
-                    case 'simple':
-                        scores.m365Copilot += 35;
-                        scores.m365Agents += 30;
-                        scores.agentBuilder += 30;
-                        scores.copilotStudio += 20;
-                        scores.azureFoundry += 10;
-                        break;
-                    case 'moderate':
-                        scores.m365Copilot += 20;
-                        scores.m365Agents += 25;
-                        scores.agentBuilder += 25;
-                        scores.copilotStudio += 35;
-                        scores.azureFoundry += 25;
-                        break;
-                    case 'complex':
-                        scores.m365Copilot += 10;
-                        scores.m365Agents += 15;
-                        scores.agentBuilder += 15;
-                        scores.copilotStudio += 25;
-                        scores.azureFoundry += 40;
-                        break;
-                }
+        calculatePlatformScores(data) {
+          let scores = {
+            m365Copilot: 0,
+            m365Agents: 0,
+            agentBuilder: 0,
+            copilotStudio: 0,
+            azureFoundry: 0,
+          };
 
-                // Timeline and expertise scoring
-                if (data.timeline === 'immediate' && data.expertise === 'minimal') {
-                    scores.m365Copilot += 25;
-                    scores.m365Agents += 20;
-                    scores.agentBuilder += 15;
-                    scores.copilotStudio += 10;
-                    scores.azureFoundry += 5;
-                }
+          // Use case scoring
+          switch (data.useCase) {
+            case "productivity":
+              scores.m365Copilot += 40;
+              scores.m365Agents += 30;
+              scores.agentBuilder += 25;
+              scores.copilotStudio += 15;
+              scores.azureFoundry += 10;
+              break;
+            case "support":
+              scores.m365Copilot += 25;
+              scores.m365Agents += 35;
+              scores.agentBuilder += 30;
+              scores.copilotStudio += 25;
+              scores.azureFoundry += 15;
+              break;
+            case "automation":
+              scores.m365Copilot += 15;
+              scores.m365Agents += 25;
+              scores.agentBuilder += 20;
+              scores.copilotStudio += 40;
+              scores.azureFoundry += 30;
+              break;
+            case "analysis":
+              scores.m365Copilot += 20;
+              scores.m365Agents += 40;
+              scores.agentBuilder += 15;
+              scores.copilotStudio += 25;
+              scores.azureFoundry += 35;
+              break;
+            case "innovation":
+              scores.m365Copilot += 10;
+              scores.m365Agents += 15;
+              scores.agentBuilder += 10;
+              scores.copilotStudio += 25;
+              scores.azureFoundry += 45;
+              break;
+          }
 
-                if (data.expertise === 'advanced') {
-                    scores.azureFoundry += 20;
-                    scores.copilotStudio += 15;
-                }
+          // Complexity scoring
+          switch (data.complexity) {
+            case "simple":
+              scores.m365Copilot += 35;
+              scores.m365Agents += 30;
+              scores.agentBuilder += 30;
+              scores.copilotStudio += 20;
+              scores.azureFoundry += 10;
+              break;
+            case "moderate":
+              scores.m365Copilot += 20;
+              scores.m365Agents += 25;
+              scores.agentBuilder += 25;
+              scores.copilotStudio += 35;
+              scores.azureFoundry += 25;
+              break;
+            case "complex":
+              scores.m365Copilot += 10;
+              scores.m365Agents += 15;
+              scores.agentBuilder += 15;
+              scores.copilotStudio += 25;
+              scores.azureFoundry += 40;
+              break;
+          }
 
-                // Capabilities scoring
-                if (data.capabilities.includes('research') || data.capabilities.includes('dataAnalysis')) {
-                    scores.m365Agents += 25;
-                    scores.azureFoundry += 20;
-                }
+          // Timeline and expertise scoring
+          if (data.timeline === "immediate" && data.expertise === "minimal") {
+            scores.m365Copilot += 25;
+            scores.m365Agents += 20;
+            scores.agentBuilder += 15;
+            scores.copilotStudio += 10;
+            scores.azureFoundry += 5;
+          }
 
-                if (data.capabilities.includes('meetingSupport')) {
-                    scores.m365Agents += 30;
-                }
+          if (data.expertise === "advanced") {
+            scores.azureFoundry += 20;
+            scores.copilotStudio += 15;
+          }
 
-                if (data.capabilities.includes('workflowAutomation') || data.capabilities.includes('customLogic')) {
-                    scores.copilotStudio += 25;
-                    scores.azureFoundry += 20;
-                }
+          // Capabilities scoring
+          if (
+            data.capabilities.includes("research") ||
+            data.capabilities.includes("dataAnalysis")
+          ) {
+            scores.m365Agents += 25;
+            scores.azureFoundry += 20;
+          }
 
-                if (data.capabilities.includes('predictiveAnalytics')) {
-                    scores.azureFoundry += 30;
-                    scores.copilotStudio += 15;
-                }
+          if (data.capabilities.includes("meetingSupport")) {
+            scores.m365Agents += 30;
+          }
 
-                // Integration scoring
-                if (data.integrations.includes('m365Only')) {
-                    scores.m365Copilot += 25;
-                    scores.m365Agents += 20;
-                    scores.agentBuilder += 20;
-                }
+          if (
+            data.capabilities.includes("workflowAutomation") ||
+            data.capabilities.includes("customLogic")
+          ) {
+            scores.copilotStudio += 25;
+            scores.azureFoundry += 20;
+          }
 
-                if (data.integrations.includes('powerPlatform')) {
-                    scores.copilotStudio += 25;
-                    scores.azureFoundry += 15;
-                }
+          if (data.capabilities.includes("predictiveAnalytics")) {
+            scores.azureFoundry += 30;
+            scores.copilotStudio += 15;
+          }
 
-                if (data.integrations.includes('legacySystems') || data.integrations.includes('customModels')) {
-                    scores.azureFoundry += 30;
-                    scores.copilotStudio += 20;
-                }
+          // Integration scoring
+          if (data.integrations.includes("m365Only")) {
+            scores.m365Copilot += 25;
+            scores.m365Agents += 20;
+            scores.agentBuilder += 20;
+          }
 
-                // Normalize scores to 0-100
-                const maxScore = Math.max(...Object.values(scores));
-                if (maxScore > 0) {
-                    Object.keys(scores).forEach(key => {
-                        scores[key] = Math.round((scores[key] / maxScore) * 100);
-                    });
-                }
+          if (data.integrations.includes("powerPlatform")) {
+            scores.copilotStudio += 25;
+            scores.azureFoundry += 15;
+          }
 
-                return scores;
-            }
+          if (
+            data.integrations.includes("legacySystems") ||
+            data.integrations.includes("customModels")
+          ) {
+            scores.azureFoundry += 30;
+            scores.copilotStudio += 20;
+          }
 
-            displayRecommendation(scores, data) {
-                // Display scores
-                const scoreGrid = document.getElementById('scoreGrid');
-                const platforms = [
-                    { key: 'm365Copilot', name: 'M365 Copilot Chat', description: 'Out-of-box AI' },
-                    { key: 'm365Agents', name: 'M365 Agents', description: 'Specialized Tasks' },
-                    { key: 'agentBuilder', name: 'Agent Builder', description: 'Custom Knowledge' },
-                    { key: 'copilotStudio', name: 'Copilot Studio', description: 'Custom Workflows' },
-                    { key: 'azureFoundry', name: 'Azure AI Foundry', description: 'Enterprise Innovation' }
-                ];
+          // Normalize scores to 0-100
+          const maxScore = Math.max(...Object.values(scores));
+          if (maxScore > 0) {
+            Object.keys(scores).forEach((key) => {
+              scores[key] = Math.round((scores[key] / maxScore) * 100);
+            });
+          }
 
-                let scoreHTML = '';
-                let maxScore = Math.max(...Object.values(scores));
-                
-                platforms.forEach(platform => {
-                    const score = scores[platform.key];
-                    const isWinner = score === maxScore;
-                    
-                    scoreHTML += `
-                        <div class="score-card ${isWinner ? 'winner' : ''}">
+          return scores;
+        }
+
+        displayRecommendation(scores, data) {
+          // Display scores
+          const scoreGrid = document.getElementById("scoreGrid");
+          const platforms = [
+            {
+              key: "m365Copilot",
+              name: "M365 Copilot Chat",
+              description: "Out-of-box AI",
+            },
+            {
+              key: "m365Agents",
+              name: "M365 Agents",
+              description: "Specialized Tasks",
+            },
+            {
+              key: "agentBuilder",
+              name: "Agent Builder",
+              description: "Custom Knowledge",
+            },
+            {
+              key: "copilotStudio",
+              name: "Copilot Studio",
+              description: "Custom Workflows",
+            },
+            {
+              key: "azureFoundry",
+              name: "Azure AI Foundry",
+              description: "Enterprise Innovation",
+            },
+          ];
+
+          let scoreHTML = "";
+          let maxScore = Math.max(...Object.values(scores));
+
+          platforms.forEach((platform) => {
+            const score = scores[platform.key];
+            const isWinner = score === maxScore;
+
+            scoreHTML += `
+                        <div class="score-card ${isWinner ? "winner" : ""}">
                             <h4>${platform.name}</h4>
                             <div class="score-value">${score}</div>
                             <p>${platform.description}</p>
                         </div>
                     `;
-                });
-                
-                scoreGrid.innerHTML = scoreHTML;
+          });
 
-                // Determine winner and display recommendation
-                const winner = platforms.find(p => scores[p.key] === maxScore);
-                this.recommendedPlatform = winner;
+          scoreGrid.innerHTML = scoreHTML;
 
-                const reasoning = this.generateReasoning(winner, data, scores);
-                const recommendationHTML = `
+          // Determine winner and display recommendation
+          const winner = platforms.find((p) => scores[p.key] === maxScore);
+          this.recommendedPlatform = winner;
+
+          const reasoning = this.generateReasoning(winner, data, scores);
+          const recommendationHTML = `
                     <div style="background: white; padding: 25px; border-radius: 12px; margin: 20px 0;">
                         <h4 style="color: #059669; font-size: 1.8rem; margin-bottom: 15px;">
                             ${winner.name}
@@ -1042,355 +1214,384 @@
                     </div>
                 `;
 
-                document.getElementById('platformRecommendation').innerHTML = recommendationHTML;
+          document.getElementById("platformRecommendation").innerHTML =
+            recommendationHTML;
 
-                // Display checklists
-                this.displayChecklists(winner);
-            }
+          // Display checklists
+          this.displayChecklists(winner);
+        }
 
-            generateReasoning(winner, data, scores) {
-                const reasoningMap = {
-                    'm365Copilot': 'Your scenario aligns perfectly with M365 Copilot\'s core strengths in enhancing individual productivity within the Microsoft 365 ecosystem. This platform offers immediate value with zero development effort, making it ideal for teams that want AI assistance in their daily work without technical complexity.',
-                    
-                    'm365Agents': 'Your requirements match the capabilities of specialized pre-built agents available in Microsoft 365. These agents like Researcher, Analyst, and Facilitator provide expert-level capabilities for specific tasks without requiring custom development, offering the perfect balance of sophistication and ease of deployment.',
-                    
-                    'agentBuilder': 'Your scenario requires extending Copilot with organization-specific knowledge while maintaining simplicity. Agent Builder provides the optimal solution for connecting your internal content and creating custom Q&A capabilities without leaving the familiar M365 environment.',
-                    
-                    'copilotStudio': 'Your requirements call for custom conversational experiences with workflow automation and business process integration. Copilot Studio offers the right balance of customization capabilities and deployment ease, enabling you to build tailored agents that integrate with your existing systems.',
-                    
-                    'azureFoundry': 'Your scenario involves complex requirements that demand enterprise-scale AI capabilities with full control over models and infrastructure. Azure AI Foundry provides the flexibility, advanced features, and customization needed for sophisticated AI solutions that can transform business operations.'
-                };
+        generateReasoning(winner, data, scores) {
+          const reasoningMap = {
+            m365Copilot:
+              "Your scenario aligns perfectly with M365 Copilot's core strengths in enhancing individual productivity within the Microsoft 365 ecosystem. This platform offers immediate value with zero development effort, making it ideal for teams that want AI assistance in their daily work without technical complexity.",
 
-                return reasoningMap[winner.key] || reasoningMap['m365Copilot'];
-            }
+            m365Agents:
+              "Your requirements match the capabilities of specialized pre-built agents available in Microsoft 365. These agents like Researcher, Analyst, and Facilitator provide expert-level capabilities for specific tasks without requiring custom development, offering the perfect balance of sophistication and ease of deployment.",
 
-            getKeyFactors(data) {
-                const factors = [];
-                
-                if (data.useCase) {
-                    const useCaseLabels = {
-                        'productivity': 'Personal productivity focus',
-                        'support': 'Support and self-service needs',
-                        'automation': 'Process automation requirements',
-                        'analysis': 'Analysis and research capabilities',
-                        'innovation': 'Innovation and transformation goals'
-                    };
-                    factors.push(useCaseLabels[data.useCase]);
-                }
-                
-                if (data.complexity) {
-                    factors.push(`${data.complexity} complexity level`);
-                }
-                
-                if (data.timeline === 'immediate') {
-                    factors.push('Immediate deployment needs');
-                }
-                
-                if (data.expertise === 'minimal') {
-                    factors.push('Limited technical expertise');
-                }
-                
-                return factors.length > 0 ? factors.join(', ') : 'Overall assessment alignment';
-            }
+            agentBuilder:
+              "Your scenario requires extending Copilot with organization-specific knowledge while maintaining simplicity. Agent Builder provides the optimal solution for connecting your internal content and creating custom Q&A capabilities without leaving the familiar M365 environment.",
 
-            displayChecklists(winner) {
-                const checklists = this.getChecklistsForPlatform(winner.key);
-                
-                const preDevHTML = checklists.preDev.map(item => `
+            copilotStudio:
+              "Your requirements call for custom conversational experiences with workflow automation and business process integration. Copilot Studio offers the right balance of customization capabilities and deployment ease, enabling you to build tailored agents that integrate with your existing systems.",
+
+            azureFoundry:
+              "Your scenario involves complex requirements that demand enterprise-scale AI capabilities with full control over models and infrastructure. Azure AI Foundry provides the flexibility, advanced features, and customization needed for sophisticated AI solutions that can transform business operations.",
+          };
+
+          return reasoningMap[winner.key] || reasoningMap["m365Copilot"];
+        }
+
+        getKeyFactors(data) {
+          const factors = [];
+
+          if (data.useCase) {
+            const useCaseLabels = {
+              productivity: "Personal productivity focus",
+              support: "Support and self-service needs",
+              automation: "Process automation requirements",
+              analysis: "Analysis and research capabilities",
+              innovation: "Innovation and transformation goals",
+            };
+            factors.push(useCaseLabels[data.useCase]);
+          }
+
+          if (data.complexity) {
+            factors.push(`${data.complexity} complexity level`);
+          }
+
+          if (data.timeline === "immediate") {
+            factors.push("Immediate deployment needs");
+          }
+
+          if (data.expertise === "minimal") {
+            factors.push("Limited technical expertise");
+          }
+
+          return factors.length > 0
+            ? factors.join(", ")
+            : "Overall assessment alignment";
+        }
+
+        displayChecklists(winner) {
+          const checklists = this.getChecklistsForPlatform(winner.key);
+
+          const preDevHTML = checklists.preDev
+            .map(
+              (item) => `
                     <div class="checklist-item">
                         <input type="checkbox">
                         <span>${item}</span>
                     </div>
-                `).join('');
-                
-                const postDevHTML = checklists.postDev.map(item => `
+                `
+            )
+            .join("");
+
+          const postDevHTML = checklists.postDev
+            .map(
+              (item) => `
                     <div class="checklist-item">
                         <input type="checkbox">
                         <span>${item}</span>
                     </div>
-                `).join('');
+                `
+            )
+            .join("");
 
-                document.getElementById('preDevChecklist').innerHTML = preDevHTML;
-                document.getElementById('postDevChecklist').innerHTML = postDevHTML;
-            }
+          document.getElementById("preDevChecklist").innerHTML = preDevHTML;
+          document.getElementById("postDevChecklist").innerHTML = postDevHTML;
+        }
 
-            getChecklistsForPlatform(platformKey) {
-                const checklistMap = {
-                    'm365Copilot': {
-                        preDev: [
-                            'Verify M365 E3/E5 licensing requirements',
-                            'Assess current Microsoft Graph data quality and permissions',
-                            'Review organizational data governance policies',
-                            'Identify key user groups for pilot deployment',
-                            'Plan change management and adoption strategy',
-                            'Establish success metrics and KPIs'
-                        ],
-                        postDev: [
-                            'Deploy to pilot user group (10-20 users)',
-                            'Conduct user training sessions',
-                            'Gather feedback and usage analytics',
-                            'Refine permissions and data access',
-                            'Plan organization-wide rollout',
-                            'Monitor adoption metrics and iterate'
-                        ]
-                    },
-                    'm365Agents': {
-                        preDev: [
-                            'Verify M365 Copilot licensing and agent access',
-                            'Identify specific agents needed (Researcher, Analyst, etc.)',
-                            'Review Agent Store availability for your tenant',
-                            'Assess data requirements for each agent',
-                            'Plan user training for agent-specific capabilities',
-                            'Define governance policies for agent usage'
-                        ],
-                        postDev: [
-                            'Pin relevant agents from Agent Store',
-                            'Test agents with representative use cases',
-                            'Train users on agent interaction patterns',
-                            'Monitor agent usage and effectiveness',
-                            'Collect feedback and refine agent selection',
-                            'Scale to additional user groups'
-                        ]
-                    },
-                    'agentBuilder': {
-                        preDev: [
-                            'Verify M365 Copilot and Agent Builder licensing',
-                            'Identify organizational knowledge sources',
-                            'Catalog SharePoint sites, documents, and data sources',
-                            'Plan content preparation and organization',
-                            'Design information architecture',
-                            'Establish content maintenance processes'
-                        ],
-                        postDev: [
-                            'Connect knowledge sources to Agent Builder',
-                            'Configure Q&A capabilities and responses',
-                            'Test agent with sample queries',
-                            'Deploy to pilot group within Copilot interface',
-                            'Monitor usage and refine knowledge base',
-                            'Expand knowledge sources based on gaps identified'
-                        ]
-                    },
-                    'copilotStudio': {
-                        preDev: [
-                            'Verify Power Platform licensing and capacity',
-                            'Map detailed conversation flows and user intents',
-                            'Identify required connectors and data sources',
-                            'Design authentication and security architecture',
-                            'Plan integration points with existing systems',
-                            'Create content strategy and knowledge base'
-                        ],
-                        postDev: [
-                            'Build and test agent prototype',
-                            'Integrate with identified systems and connectors',
-                            'Conduct user acceptance testing',
-                            'Deploy to production channels',
-                            'Monitor performance and analytics',
-                            'Iterate based on user feedback and usage patterns'
-                        ]
-                    },
-                    'azureFoundry': {
-                        preDev: [
-                            'Set up Azure subscription and resource governance',
-                            'Design comprehensive system architecture',
-                            'Plan security, compliance, and governance frameworks',
-                            'Select AI models, services, and compute resources',
-                            'Design MLOps pipeline and deployment strategy',
-                            'Assemble development team with required expertise'
-                        ],
-                        postDev: [
-                            'Implement comprehensive testing and validation',
-                            'Deploy production infrastructure and monitoring',
-                            'Conduct security and performance testing',
-                            'Create user documentation and training materials',
-                            'Execute phased production rollout',
-                            'Establish ongoing maintenance and improvement processes'
-                        ]
-                    }
-                };
+        getChecklistsForPlatform(platformKey) {
+          const checklistMap = {
+            m365Copilot: {
+              preDev: [
+                "Verify M365 E3/E5 licensing requirements",
+                "Assess current Microsoft Graph data quality and permissions",
+                "Review organizational data governance policies",
+                "Identify key user groups for pilot deployment",
+                "Plan change management and adoption strategy",
+                "Establish success metrics and KPIs",
+              ],
+              postDev: [
+                "Deploy to pilot user group (10-20 users)",
+                "Conduct user training sessions",
+                "Gather feedback and usage analytics",
+                "Refine permissions and data access",
+                "Plan organization-wide rollout",
+                "Monitor adoption metrics and iterate",
+              ],
+            },
+            m365Agents: {
+              preDev: [
+                "Verify M365 Copilot licensing and agent access",
+                "Identify specific agents needed (Researcher, Analyst, etc.)",
+                "Review Agent Store availability for your tenant",
+                "Assess data requirements for each agent",
+                "Plan user training for agent-specific capabilities",
+                "Define governance policies for agent usage",
+              ],
+              postDev: [
+                "Pin relevant agents from Agent Store",
+                "Test agents with representative use cases",
+                "Train users on agent interaction patterns",
+                "Monitor agent usage and effectiveness",
+                "Collect feedback and refine agent selection",
+                "Scale to additional user groups",
+              ],
+            },
+            agentBuilder: {
+              preDev: [
+                "Verify M365 Copilot and Agent Builder licensing",
+                "Identify organizational knowledge sources",
+                "Catalog SharePoint sites, documents, and data sources",
+                "Plan content preparation and organization",
+                "Design information architecture",
+                "Establish content maintenance processes",
+              ],
+              postDev: [
+                "Connect knowledge sources to Agent Builder",
+                "Configure Q&A capabilities and responses",
+                "Test agent with sample queries",
+                "Deploy to pilot group within Copilot interface",
+                "Monitor usage and refine knowledge base",
+                "Expand knowledge sources based on gaps identified",
+              ],
+            },
+            copilotStudio: {
+              preDev: [
+                "Verify Power Platform licensing and capacity",
+                "Map detailed conversation flows and user intents",
+                "Identify required connectors and data sources",
+                "Design authentication and security architecture",
+                "Plan integration points with existing systems",
+                "Create content strategy and knowledge base",
+              ],
+              postDev: [
+                "Build and test agent prototype",
+                "Integrate with identified systems and connectors",
+                "Conduct user acceptance testing",
+                "Deploy to production channels",
+                "Monitor performance and analytics",
+                "Iterate based on user feedback and usage patterns",
+              ],
+            },
+            azureFoundry: {
+              preDev: [
+                "Set up Azure subscription and resource governance",
+                "Design comprehensive system architecture",
+                "Plan security, compliance, and governance frameworks",
+                "Select AI models, services, and compute resources",
+                "Design MLOps pipeline and deployment strategy",
+                "Assemble development team with required expertise",
+              ],
+              postDev: [
+                "Implement comprehensive testing and validation",
+                "Deploy production infrastructure and monitoring",
+                "Conduct security and performance testing",
+                "Create user documentation and training materials",
+                "Execute phased production rollout",
+                "Establish ongoing maintenance and improvement processes",
+              ],
+            },
+          };
 
-                return checklistMap[platformKey] || checklistMap['m365Copilot'];
-            }
+          return checklistMap[platformKey] || checklistMap["m365Copilot"];
+        }
 
-            displayArchitecture(platformKey) {
-                document.getElementById('selectedPlatform').textContent = this.recommendedPlatform.name;
-                
-                const architectureComponents = this.getArchitectureComponents(platformKey);
-                const componentsHTML = architectureComponents.map(component => `
+        displayArchitecture(platformKey) {
+          document.getElementById("selectedPlatform").textContent =
+            this.recommendedPlatform.name;
+
+          const architectureComponents =
+            this.getArchitectureComponents(platformKey);
+          const componentsHTML = architectureComponents
+            .map(
+              (component) => `
                     <div class="component-card">
                         <h4>${component.title}</h4>
-                        <p style="margin: 10px 0; color: #6b7280;">${component.description}</p>
+                        <p style="margin: 10px 0; color: #6b7280;">${
+                          component.description
+                        }</p>
                         <ul style="padding-left: 20px; color: #6b7280;">
-                            ${component.considerations.map(item => `<li>${item}</li>`).join('')}
+                            ${component.considerations
+                              .map((item) => `<li>${item}</li>`)
+                              .join("")}
                         </ul>
                     </div>
-                `).join('');
+                `
+            )
+            .join("");
 
-                document.getElementById('architectureComponents').innerHTML = componentsHTML;
+          document.getElementById("architectureComponents").innerHTML =
+            componentsHTML;
 
-                const configurationPlanning = this.getConfigurationPlanning(platformKey);
-                document.getElementById('configurationPlanning').innerHTML = configurationPlanning;
-            }
+          const configurationPlanning =
+            this.getConfigurationPlanning(platformKey);
+          document.getElementById("configurationPlanning").innerHTML =
+            configurationPlanning;
+        }
 
-            getArchitectureComponents(platformKey) {
-                const componentMap = {
-                    'm365Copilot': [
-                        {
-                            title: 'Built-in Capabilities',
-                            description: 'Leverage existing M365 Copilot features',
-                            considerations: [
-                                'Document creation and editing assistance',
-                                'Email drafting and summarization',
-                                'Meeting insights and action items',
-                                'Data analysis in Excel and PowerBI'
-                            ]
-                        },
-                        {
-                            title: 'Data Access & Permissions',
-                            description: 'Configure what data Copilot can access',
-                            considerations: [
-                                'Microsoft Graph permissions and scope',
-                                'SharePoint site and document access',
-                                'User-based security and data isolation',
-                                'Compliance and data governance policies'
-                            ]
-                        }
-                    ],
-                    'm365Agents': [
-                        {
-                            title: 'Agent Selection',
-                            description: 'Choose appropriate pre-built agents',
-                            considerations: [
-                                'Researcher: Complex multi-step research tasks',
-                                'Analyst: Data analysis and visualization',
-                                'Facilitator: Meeting support and note-taking',
-                                'Employee Self-Service: HR and IT support'
-                            ]
-                        },
-                        {
-                            title: 'Agent Configuration',
-                            description: 'Configure agents for your organization',
-                            considerations: [
-                                'Data source connections and permissions',
-                                'Custom prompts and instructions',
-                                'Integration with organizational knowledge',
-                                'User access and deployment channels'
-                            ]
-                        }
-                    ],
-                    'agentBuilder': [
-                        {
-                            title: 'Knowledge Sources',
-                            description: 'Connect organizational knowledge',
-                            considerations: [
-                                'SharePoint document libraries and sites',
-                                'Microsoft Graph connectors for external data',
-                                'FAQ documents and policy repositories',
-                                'Structured data from business applications'
-                            ]
-                        },
-                        {
-                            title: 'Conversation Design',
-                            description: 'Design agent responses and behavior',
-                            considerations: [
-                                'Custom prompts and instructions',
-                                'Response templates and tone',
-                                'Escalation paths for complex queries',
-                                'Integration with existing workflows'
-                            ]
-                        }
-                    ],
-                    'copilotStudio': [
-                        {
-                            title: 'Conversation Flow',
-                            description: 'Design conversational logic and paths',
-                            considerations: [
-                                'User intent recognition and entity extraction',
-                                'Dialog management and context handling',
-                                'Branching logic and decision trees',
-                                'Error handling and fallback scenarios'
-                            ]
-                        },
-                        {
-                            title: 'Knowledge & Content',
-                            description: 'Implement knowledge base and responses',
-                            considerations: [
-                                'Knowledge base articles and FAQs',
-                                'Dynamic content from data sources',
-                                'Template responses and variations',
-                                'Multi-language support if needed'
-                            ]
-                        },
-                        {
-                            title: 'Tools & Actions',
-                            description: 'Configure agent capabilities and integrations',
-                            considerations: [
-                                'Power Platform connectors and APIs',
-                                'Custom actions and workflow triggers',
-                                'Integration with business systems',
-                                'Data validation and processing logic'
-                            ]
-                        },
-                        {
-                            title: 'Channels & Deployment',
-                            description: 'Choose how users interact with the agent',
-                            considerations: [
-                                'Microsoft Teams integration',
-                                'Web chat widget for websites',
-                                'Mobile app integration',
-                                'Voice channels and telephony'
-                            ]
-                        }
-                    ],
-                    'azureFoundry': [
-                        {
-                            title: 'AI Models & Services',
-                            description: 'Select and configure AI capabilities',
-                            considerations: [
-                                'Foundation models (GPT, custom models)',
-                                'Natural language processing services',
-                                'Computer vision and multimodal capabilities',
-                                'Custom model training and fine-tuning'
-                            ]
-                        },
-                        {
-                            title: 'Data Architecture',
-                            description: 'Design data ingestion and processing',
-                            considerations: [
-                                'Data sources and ingestion pipelines',
-                                'Vector databases for embeddings',
-                                'Real-time vs batch processing',
-                                'Data security and encryption'
-                            ]
-                        },
-                        {
-                            title: 'Agent Orchestration',
-                            description: 'Implement agent logic and workflows',
-                            considerations: [
-                                'Multi-agent coordination and communication',
-                                'Workflow automation and triggers',
-                                'Event-driven processing',
-                                'State management and persistence'
-                            ]
-                        },
-                        {
-                            title: 'Integration Layer',
-                            description: 'Connect with enterprise systems',
-                            considerations: [
-                                'API gateways and service mesh',
-                                'Authentication and authorization',
-                                'Message queues and event streaming',
-                                'Monitoring and observability'
-                            ]
-                        }
-                    ]
-                };
+        getArchitectureComponents(platformKey) {
+          const componentMap = {
+            m365Copilot: [
+              {
+                title: "Built-in Capabilities",
+                description: "Leverage existing M365 Copilot features",
+                considerations: [
+                  "Document creation and editing assistance",
+                  "Email drafting and summarization",
+                  "Meeting insights and action items",
+                  "Data analysis in Excel and PowerBI",
+                ],
+              },
+              {
+                title: "Data Access & Permissions",
+                description: "Configure what data Copilot can access",
+                considerations: [
+                  "Microsoft Graph permissions and scope",
+                  "SharePoint site and document access",
+                  "User-based security and data isolation",
+                  "Compliance and data governance policies",
+                ],
+              },
+            ],
+            m365Agents: [
+              {
+                title: "Agent Selection",
+                description: "Choose appropriate pre-built agents",
+                considerations: [
+                  "Researcher: Complex multi-step research tasks",
+                  "Analyst: Data analysis and visualization",
+                  "Facilitator: Meeting support and note-taking",
+                  "Employee Self-Service: HR and IT support",
+                ],
+              },
+              {
+                title: "Agent Configuration",
+                description: "Configure agents for your organization",
+                considerations: [
+                  "Data source connections and permissions",
+                  "Custom prompts and instructions",
+                  "Integration with organizational knowledge",
+                  "User access and deployment channels",
+                ],
+              },
+            ],
+            agentBuilder: [
+              {
+                title: "Knowledge Sources",
+                description: "Connect organizational knowledge",
+                considerations: [
+                  "SharePoint document libraries and sites",
+                  "Microsoft Graph connectors for external data",
+                  "FAQ documents and policy repositories",
+                  "Structured data from business applications",
+                ],
+              },
+              {
+                title: "Conversation Design",
+                description: "Design agent responses and behavior",
+                considerations: [
+                  "Custom prompts and instructions",
+                  "Response templates and tone",
+                  "Escalation paths for complex queries",
+                  "Integration with existing workflows",
+                ],
+              },
+            ],
+            copilotStudio: [
+              {
+                title: "Conversation Flow",
+                description: "Design conversational logic and paths",
+                considerations: [
+                  "User intent recognition and entity extraction",
+                  "Dialog management and context handling",
+                  "Branching logic and decision trees",
+                  "Error handling and fallback scenarios",
+                ],
+              },
+              {
+                title: "Knowledge & Content",
+                description: "Implement knowledge base and responses",
+                considerations: [
+                  "Knowledge base articles and FAQs",
+                  "Dynamic content from data sources",
+                  "Template responses and variations",
+                  "Multi-language support if needed",
+                ],
+              },
+              {
+                title: "Tools & Actions",
+                description: "Configure agent capabilities and integrations",
+                considerations: [
+                  "Power Platform connectors and APIs",
+                  "Custom actions and workflow triggers",
+                  "Integration with business systems",
+                  "Data validation and processing logic",
+                ],
+              },
+              {
+                title: "Channels & Deployment",
+                description: "Choose how users interact with the agent",
+                considerations: [
+                  "Microsoft Teams integration",
+                  "Web chat widget for websites",
+                  "Mobile app integration",
+                  "Voice channels and telephony",
+                ],
+              },
+            ],
+            azureFoundry: [
+              {
+                title: "AI Models & Services",
+                description: "Select and configure AI capabilities",
+                considerations: [
+                  "Foundation models (GPT, custom models)",
+                  "Natural language processing services",
+                  "Computer vision and multimodal capabilities",
+                  "Custom model training and fine-tuning",
+                ],
+              },
+              {
+                title: "Data Architecture",
+                description: "Design data ingestion and processing",
+                considerations: [
+                  "Data sources and ingestion pipelines",
+                  "Vector databases for embeddings",
+                  "Real-time vs batch processing",
+                  "Data security and encryption",
+                ],
+              },
+              {
+                title: "Agent Orchestration",
+                description: "Implement agent logic and workflows",
+                considerations: [
+                  "Multi-agent coordination and communication",
+                  "Workflow automation and triggers",
+                  "Event-driven processing",
+                  "State management and persistence",
+                ],
+              },
+              {
+                title: "Integration Layer",
+                description: "Connect with enterprise systems",
+                considerations: [
+                  "API gateways and service mesh",
+                  "Authentication and authorization",
+                  "Message queues and event streaming",
+                  "Monitoring and observability",
+                ],
+              },
+            ],
+          };
 
-                return componentMap[platformKey] || componentMap['m365Copilot'];
-            }
+          return componentMap[platformKey] || componentMap["m365Copilot"];
+        }
 
-            getConfigurationPlanning(platformKey) {
-                const planningMap = {
-                    'm365Copilot': `
+        getConfigurationPlanning(platformKey) {
+          const planningMap = {
+            m365Copilot: `
                         <div class="info-box">
                             <h4>Configuration Considerations</h4>
                             <p><strong>Conversational vs Autonomous:</strong> M365 Copilot operates primarily in conversational mode, responding to user prompts and requests within Microsoft 365 applications.</p>
@@ -1398,7 +1599,7 @@
                             <p><strong>Channels:</strong> Embedded in Word, Excel, PowerPoint, Outlook, Teams, and standalone Copilot Chat.</p>
                         </div>
                     `,
-                    'm365Agents': `
+            m365Agents: `
                         <div class="info-box">
                             <h4>Configuration Considerations</h4>
                             <p><strong>Conversational vs Autonomous:</strong> Agents operate conversationally within Copilot Chat but can perform autonomous research and analysis tasks.</p>
@@ -1406,7 +1607,7 @@
                             <p><strong>Channels:</strong> Accessible through Microsoft 365 Copilot Chat and integrated into relevant Office applications.</p>
                         </div>
                     `,
-                    'agentBuilder': `
+            agentBuilder: `
                         <div class="info-box">
                             <h4>Configuration Considerations</h4>
                             <p><strong>Conversational vs Autonomous:</strong> Primarily conversational, extending Copilot's knowledge with organizational content and simple automated responses.</p>
@@ -1424,7 +1625,7 @@
                             </ul>
                         </div>
                     `,
-                    'copilotStudio': `
+            copilotStudio: `
                         <div class="warning-box">
                             <h4>Important Design Decisions</h4>
                             <p><strong>Conversational vs Autonomous:</strong> You can design both conversational interactions and autonomous background processes.</p>
@@ -1454,7 +1655,7 @@
                             </div>
                         </div>
                     `,
-                    'azureFoundry': `
+            azureFoundry: `
                         <div class="warning-box">
                             <h4>Enterprise Architecture Decisions</h4>
                             <p><strong>Conversational vs Autonomous:</strong> Full flexibility to implement conversational interfaces, autonomous agents, or hybrid approaches.</p>
@@ -1493,18 +1694,18 @@
                                 </ul>
                             </div>
                         </div>
-                    `
-                };
+                    `,
+          };
 
-                return planningMap[platformKey] || planningMap['m365Copilot'];
-            }
+          return planningMap[platformKey] || planningMap["m365Copilot"];
+        }
 
-            exportFullPlan() {
-                const data = this.assessmentData;
-                const platform = this.recommendedPlatform;
-                const checklists = this.getChecklistsForPlatform(platform.key);
-                
-                const exportContent = `AI AGENT STRATEGY & ARCHITECTURE PLAN
+        exportFullPlan() {
+          const data = this.assessmentData;
+          const platform = this.recommendedPlatform;
+          const checklists = this.getChecklistsForPlatform(platform.key);
+
+          const exportContent = `AI AGENT STRATEGY & ARCHITECTURE PLAN
 =============================================
 
 EXECUTIVE SUMMARY
@@ -1527,19 +1728,19 @@ Key Decision Factors: ${this.getKeyFactors(data)}
 
 REQUIRED CAPABILITIES
 --------------------
-${data.capabilities.map(cap => `• ${cap}`).join('\n')}
+${data.capabilities.map((cap) => `• ${cap}`).join("\n")}
 
 INTEGRATION REQUIREMENTS  
 -----------------------
-${data.integrations.map(int => `• ${int}`).join('\n')}
+${data.integrations.map((int) => `• ${int}`).join("\n")}
 
 PRE-DEVELOPMENT CHECKLIST
 -------------------------
-${checklists.preDev.map(item => `☐ ${item}`).join('\n')}
+${checklists.preDev.map((item) => `☐ ${item}`).join("\n")}
 
 POST-DEVELOPMENT CHECKLIST
 --------------------------
-${checklists.postDev.map(item => `☐ ${item}`).join('\n')}
+${checklists.postDev.map((item) => `☐ ${item}`).join("\n")}
 
 CONCERNS & CONSTRAINTS
 ---------------------
@@ -1548,49 +1749,71 @@ ${data.concerns}
 Generated on: ${new Date().toLocaleString()}
 `;
 
-                const blob = new Blob([exportContent], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'ai-agent-strategy-plan.txt';
-                a.click();
-                URL.revokeObjectURL(url);
-            }
-
-            // Navigation methods
-            startAssessment() { this.showPhase(2); }
-            backToLearning() { this.showPhase(1); }
-            backToAssessment() { this.showPhase(2); }
-            backToRecommendation() { this.showPhase(3); }
-            
-            generateRecommendation() {
-                const data = this.collectAssessmentData();
-                const scores = this.calculatePlatformScores(data);
-                this.displayRecommendation(scores, data);
-                this.showPhase(3);
-            }
-            
-            proceedToArchitecture() {
-                this.displayArchitecture(this.recommendedPlatform.key);
-                this.showPhase(4);
-            }
+          const blob = new Blob([exportContent], { type: "text/plain" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "ai-agent-strategy-plan.txt";
+          a.click();
+          URL.revokeObjectURL(url);
         }
 
-        // Global functions for HTML onclick handlers
-        let workshop;
+        // Navigation methods
+        startAssessment() {
+          this.showPhase(2);
+        }
+        backToLearning() {
+          this.showPhase(1);
+        }
+        backToAssessment() {
+          this.showPhase(2);
+        }
+        backToRecommendation() {
+          this.showPhase(3);
+        }
 
-        function startAssessment() { workshop.startAssessment(); }
-        function backToLearning() { workshop.backToLearning(); }
-        function backToAssessment() { workshop.backToAssessment(); }
-        function backToRecommendation() { workshop.backToRecommendation(); }
-        function generateRecommendation() { workshop.generateRecommendation(); }
-        function proceedToArchitecture() { workshop.proceedToArchitecture(); }
-        function exportFullPlan() { workshop.exportFullPlan(); }
+        generateRecommendation() {
+          const data = this.collectAssessmentData();
+          const scores = this.calculatePlatformScores(data);
+          this.displayRecommendation(scores, data);
+          this.showPhase(3);
+        }
 
-        // Initialize workshop when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            workshop = new AgentWorkshop();
-        });
+        proceedToArchitecture() {
+          this.displayArchitecture(this.recommendedPlatform.key);
+          this.showPhase(4);
+        }
+      }
+
+      // Global functions for HTML onclick handlers
+      let workshop;
+
+      function startAssessment() {
+        workshop.startAssessment();
+      }
+      function backToLearning() {
+        workshop.backToLearning();
+      }
+      function backToAssessment() {
+        workshop.backToAssessment();
+      }
+      function backToRecommendation() {
+        workshop.backToRecommendation();
+      }
+      function generateRecommendation() {
+        workshop.generateRecommendation();
+      }
+      function proceedToArchitecture() {
+        workshop.proceedToArchitecture();
+      }
+      function exportFullPlan() {
+        workshop.exportFullPlan();
+      }
+
+      // Initialize workshop when page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        workshop = new AgentWorkshop();
+      });
     </script>
-</body>
+  </body>
 </html>
