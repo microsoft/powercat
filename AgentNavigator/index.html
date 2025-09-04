@@ -10,7 +10,7 @@
         />
 
         <!-- RTF export for Word document compatibility -->
-        <link rel="stylesheet" href="../assets/css/agent-navigator.css" />
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
         <!-- Header -->
@@ -322,6 +322,9 @@
                             </div>
 
                             <div class="center">
+                                <button class="btn btn-ghost" id="back-to-assessment" data-testid="button-back-to-assessment">
+                                    <span class="icon icon-chevron-left"></span> Back to Assessment
+                                </button>
                                 <button
                                     class="btn btn-primary btn-lg"
                                     id="view-structure"
@@ -379,6 +382,9 @@
                             <div class="separator"></div>
 
                             <div class="center">
+                                <button class="btn btn-ghost" id="back-to-structure" data-testid="button-back-to-structure">
+                                    <span class="icon icon-chevron-left"></span> Back to Structure
+                                </button>
                                 <button
                                     class="btn btn-secondary"
                                     id="restart-btn"
@@ -416,6 +422,9 @@
                             <div class="separator"></div>
 
                             <div class="center">
+                                <button class="btn btn-ghost" id="back-to-recommendation" data-testid="button-back-to-recommendation">
+                                    <span class="icon icon-chevron-left"></span> Back to Recommendation
+                                </button>
                                 <button
                                     class="btn btn-primary btn-lg"
                                     id="structure-to-implementation"
@@ -1683,6 +1692,31 @@
                         updateProgressIndicator();
                         renderImplementation();
                         showSection("implementation-section");
+                    });
+
+                // Back button handlers
+                document
+                    .getElementById("back-to-assessment")
+                    .addEventListener("click", function () {
+                        currentStep = 1;
+                        updateProgressIndicator();
+                        showSection("assessment-section");
+                    });
+
+                document
+                    .getElementById("back-to-recommendation")
+                    .addEventListener("click", function () {
+                        currentStep = 2;
+                        updateProgressIndicator();
+                        showSection("recommendation-section");
+                    });
+
+                document
+                    .getElementById("back-to-structure")
+                    .addEventListener("click", function () {
+                        currentStep = 3;
+                        updateProgressIndicator();
+                        showSection("structure-section");
                     });
 
                 // Final section buttons
