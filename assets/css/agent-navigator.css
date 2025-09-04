@@ -805,30 +805,30 @@ body {
     font-style: normal;
 }
 
-.icon-bot::before { content: ""; }
-.icon-lightbulb::before { content: "&#128161;"; }
-.icon-check::before { content: "&#10003;"; }
+.icon-bot::before { content: "🤖"; }
+.icon-lightbulb::before { content: "💡"; }
+.icon-check::before { content: "✅"; }
 .icon-chevron-right::before { content: "▶"; }
 .icon-chevron-left::before { content: "◀"; }
-.icon-trending-up::before { content: "&#128200;"; }
-.icon-info::before { content: "&#8505;"; }
-.icon-checklist::before { content: "&#10003;"; }
-.icon-rocket::before { content: "&#128640;"; }
-.icon-network::before { content: "&#128279;"; }
-.icon-settings::before { content: "&#9881;"; }
-.icon-file::before { content: "&#128196;"; }
-.icon-database::before { content: "&#128190;"; }
-.icon-wrench::before { content: "&#128295;"; }
-.icon-branch::before { content: "&#127807;"; }
-.icon-link::before { content: "&#128279;"; }
-.icon-message::before { content: "&#128172;"; }
-.icon-bell::before { content: "&#128276;"; }
-.icon-users::before { content: "&#128101;"; }
-.icon-cog::before { content: "&#9881;"; }
-.icon-download::before { content: "&#8595;"; }
-.icon-restart::before { content: "&#128260;"; }
-.icon-sun::before { content: "&#9728;"; }
-.icon-moon::before { content: "&#127769;"; }
+.icon-trending-up::before { content: "📈"; }
+.icon-info::before { content: "ℹ️"; }
+.icon-checklist::before { content: "✅"; }
+.icon-rocket::before { content: "🚀"; }
+.icon-network::before { content: "🔗"; }
+.icon-settings::before { content: "⚙️"; }
+.icon-file::before { content: "📄"; }
+.icon-database::before { content: "💾"; }
+.icon-wrench::before { content: "🔧"; }
+.icon-branch::before { content: "🌿"; }
+.icon-link::before { content: "🔗"; }
+.icon-message::before { content: "💬"; }
+.icon-bell::before { content: "🔔"; }
+.icon-users::before { content: "👥"; }
+.icon-cog::before { content: "⚙️"; }
+.icon-download::before { content: "⬇️"; }
+.icon-restart::before { content: "🔄"; }
+.icon-sun::before { content: "☀️"; }
+.icon-moon::before { content: "🌙"; }
 
 /* Responsive Design */
 @media (max-width: 768px) {
