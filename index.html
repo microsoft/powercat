@@ -1,1876 +1,555 @@
-<!DOCTYPE html>
-<html lang="en">
+<html data-wf-page="5ea5eb075186cf462b0d0585" data-wf-site="5ea49850af483731893627d2" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microsoft Agent Platform Decision Tool</title>
-    <meta name="description" content="Interactive tool to help you choose the best Microsoft agent platform for your use case - Microsoft 365 Copilot, Agent Builder, Copilot Studio, or Azure AI Foundry.">
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --background: hsl(0, 0%, 100%);
-            --foreground: hsl(222, 84%, 4.9%);
-            --card: hsl(0, 0%, 100%);
-            --card-foreground: hsl(222, 84%, 4.9%);
-            --popover: hsl(0, 0%, 100%);
-            --popover-foreground: hsl(222, 84%, 4.9%);
-            --primary: hsl(210, 100%, 50%);
-            --primary-foreground: hsl(210, 40%, 98%);
-            --secondary: hsl(210, 40%, 96%);
-            --secondary-foreground: hsl(222, 47%, 11%);
-            --muted: hsl(210, 40%, 96%);
-            --muted-foreground: hsl(215, 13%, 65%);
-            --accent: hsl(210, 40%, 94%);
-            --accent-foreground: hsl(222, 47%, 11%);
-            --destructive: hsl(0, 84%, 60%);
-            --destructive-foreground: hsl(210, 40%, 98%);
-            --border: hsl(214, 32%, 91%);
-            --input: hsl(214, 32%, 91%);
-            --ring: hsl(210, 100%, 50%);
-            --radius: 8px;
-            --font-sans: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        .dark {
-            --background: hsl(222, 84%, 4.9%);
-            --foreground: hsl(210, 40%, 98%);
-            --card: hsl(222, 84%, 4.9%);
-            --card-foreground: hsl(210, 40%, 98%);
-            --popover: hsl(222, 84%, 4.9%);
-            --popover-foreground: hsl(210, 40%, 98%);
-            --primary: hsl(210, 100%, 50%);
-            --primary-foreground: hsl(222, 47%, 11%);
-            --secondary: hsl(217, 33%, 17%);
-            --secondary-foreground: hsl(210, 40%, 98%);
-            --muted: hsl(217, 33%, 17%);
-            --muted-foreground: hsl(215, 20%, 65%);
-            --accent: hsl(217, 33%, 17%);
-            --accent-foreground: hsl(210, 40%, 98%);
-            --destructive: hsl(0, 84%, 60%);
-            --destructive-foreground: hsl(210, 40%, 98%);
-            --border: hsl(217, 33%, 17%);
-            --input: hsl(217, 33%, 17%);
-            --ring: hsl(210, 100%, 50%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background-color: hsl(var(--background));
-            color: hsl(var(--foreground));
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: 1024px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Header Styles */
-        .header {
-            background-color: hsl(var(--card));
-            border-bottom: 1px solid hsl(var(--border));
-            padding: 16px 0;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background-color: hsl(var(--primary));
-            color: hsl(var(--primary-foreground));
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .logo-text {
-            font-size: 20px;
-            font-weight: 600;
-            color: hsl(var(--foreground));
-        }
-
-        /* Button Styles */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius);
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: 1px solid transparent;
-            text-decoration: none;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background-color: hsl(var(--primary));
-            color: hsl(var(--primary-foreground));
-            padding: 12px 24px;
-        }
-
-        .btn-primary:hover {
-            background-color: hsl(var(--primary) / 0.9);
-        }
-
-        .btn-secondary {
-            background-color: hsl(var(--secondary));
-            color: hsl(var(--secondary-foreground));
-            padding: 12px 24px;
-        }
-
-        .btn-secondary:hover {
-            background-color: hsl(var(--secondary) / 0.8);
-        }
-
-        .btn-ghost {
-            background-color: transparent;
-            color: hsl(var(--foreground));
-            padding: 8px 12px;
-        }
-
-        .btn-ghost:hover {
-            background-color: hsl(var(--accent));
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn-lg {
-            padding: 16px 32px;
-            font-size: 16px;
-        }
-
-        /* Card Styles */
-        .card {
-            background-color: hsl(var(--card));
-            border: 1px solid hsl(var(--border));
-            border-radius: var(--radius);
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-        }
-
-        .card-content {
-            padding: 32px;
-        }
-
-        /* Progress Indicator */
-        .progress-indicator {
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .progress-steps {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        .progress-step {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .step-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .step-circle.active {
-            background-color: hsl(var(--primary));
-            color: hsl(var(--primary-foreground));
-        }
-
-        .step-circle.completed {
-            background-color: hsl(142, 71%, 45%);
-            color: white;
-        }
-
-        .step-circle.pending {
-            background-color: hsl(var(--muted));
-            color: hsl(var(--muted-foreground));
-        }
-
-        .step-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: hsl(var(--muted-foreground));
-        }
-
-        .step-connector {
-            width: 64px;
-            height: 2px;
-            background-color: hsl(var(--border));
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 32px 0;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Welcome Section */
-        .welcome-section {
-            text-align: center;
-        }
-
-        .welcome-icon {
-            font-size: 64px;
-            color: hsl(var(--primary));
-            margin-bottom: 16px;
-        }
-
-        .welcome-title {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 16px;
-            color: hsl(var(--foreground));
-        }
-
-        .welcome-subtitle {
-            font-size: 18px;
-            color: hsl(var(--muted-foreground));
-            max-width: 768px;
-            margin: 0 auto 32px auto;
-        }
-
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .platform-preview {
-            background-color: hsl(var(--accent));
-            border-radius: var(--radius);
-            padding: 16px;
-            text-align: center;
-        }
-
-        .platform-preview-icon {
-            font-size: 32px;
-            color: hsl(var(--primary));
-            margin-bottom: 8px;
-        }
-
-        .platform-preview-title {
-            font-weight: 600;
-            color: hsl(var(--accent-foreground));
-            margin-bottom: 4px;
-        }
-
-        .platform-preview-desc {
-            font-size: 14px;
-            color: hsl(var(--muted-foreground));
-        }
-
-        /* Question Styles */
-        .question-card {
-            margin-bottom: 24px;
-        }
-
-        .question-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: hsl(var(--foreground));
-            margin-bottom: 8px;
-        }
-
-        .question-subtitle {
-            color: hsl(var(--muted-foreground));
-            margin-bottom: 24px;
-        }
-
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .option-card {
-            background-color: hsl(var(--card));
-            border: 2px solid hsl(var(--border));
-            border-radius: var(--radius);
-            padding: 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .option-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.2);
-        }
-
-        .option-card.selected {
-            border-color: hsl(var(--primary));
-            background-color: hsl(210, 100%, 97%);
-        }
-
-        .dark .option-card.selected {
-            background-color: hsl(217, 33%, 20%);
-        }
-
-        .option-radio {
-            margin-top: 4px;
-            accent-color: hsl(var(--primary));
-        }
-
-        .option-content {
-            flex: 1;
-        }
-
-        .option-label {
-            font-weight: 600;
-            color: hsl(var(--foreground));
-            margin-bottom: 4px;
-        }
-
-        .option-description {
-            font-size: 14px;
-            color: hsl(var(--muted-foreground));
-        }
-
-        /* Navigation */
-        .question-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .question-counter {
-            font-size: 14px;
-            color: hsl(var(--muted-foreground));
-        }
-
-        /* Recommendation Styles */
-        .recommendation-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .recommendation-icon {
-            font-size: 64px;
-            color: #eab308;
-            margin-bottom: 16px;
-        }
-
-        .recommendation-title {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 16px;
-            color: hsl(var(--foreground));
-        }
-
-        .platform-card-large {
-            background-color: hsl(var(--accent));
-            border-radius: var(--radius);
-            padding: 24px;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .platform-icon-large {
-            width: 64px;
-            height: 64px;
-            background-color: hsl(var(--primary));
-            color: hsl(var(--primary-foreground));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 24px;
-            margin: 0 auto 16px auto;
-        }
-
-        .platform-name {
-            font-size: 32px;
-            font-weight: bold;
-            color: hsl(var(--foreground));
-            margin-bottom: 8px;
-        }
-
-        .platform-description {
-            color: hsl(var(--muted-foreground));
-            margin-bottom: 24px;
-        }
-
-        .benefits-card {
-            background-color: hsl(var(--card));
-            border: 1px solid hsl(var(--border));
-            border-radius: var(--radius);
-            padding: 16px;
-        }
-
-        .benefits-title {
-            font-weight: 600;
-            color: hsl(var(--foreground));
-            margin-bottom: 12px;
-        }
-
-        .benefits-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-
-        .check-icon {
-            color: #22c55e;
-            font-size: 16px;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
-        .benefit-text {
-            font-size: 14px;
-            color: hsl(var(--muted-foreground));
-        }
-
-        /* Reasoning Section */
-        .reasoning-section {
-            background-color: hsl(var(--muted));
-            border-radius: var(--radius);
-            padding: 24px;
-        }
-
-        .reasoning-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: hsl(var(--foreground));
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .reasoning-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .reasoning-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-
-        .reasoning-text {
-            color: hsl(var(--muted-foreground));
-        }
-
-        .next-steps-card {
-            background-color: hsl(219, 95%, 95%);
-            border: 1px solid hsl(219, 95%, 80%);
-            border-radius: var(--radius);
-            padding: 16px;
-        }
-
-        .dark .next-steps-card {
-            background-color: hsl(217, 91%, 10%);
-            border-color: hsl(217, 91%, 20%);
-        }
-
-        .next-steps-title {
-            font-weight: 600;
-            color: hsl(219, 95%, 20%);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .dark .next-steps-title {
-            color: hsl(219, 95%, 80%);
-        }
-
-        .next-steps-text {
-            font-size: 14px;
-            color: hsl(219, 95%, 30%);
-        }
-
-        .dark .next-steps-text {
-            color: hsl(219, 95%, 70%);
-        }
-
-        /* Implementation Checklist */
-        .checklist-title {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 24px;
-            color: hsl(var(--foreground));
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .checklist-section {
-            background-color: hsl(var(--accent));
-            border-radius: var(--radius);
-            padding: 24px;
-        }
-
-        .checklist-section-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: hsl(var(--accent-foreground));
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checklist-items {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .checkbox {
-            width: 18px;
-            height: 18px;
-            border: 2px solid hsl(var(--border));
-            border-radius: 4px;
-            margin-top: 2px;
-            flex-shrink: 0;
-            accent-color: hsl(var(--primary));
-        }
-
-        .checklist-item-text {
-            color: hsl(var(--accent-foreground));
-            font-size: 14px;
-        }
-
-        /* Agent Structure */
-        .structure-title {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 24px;
-            color: hsl(var(--foreground));
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .structure-sections {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .structure-section {
-            background-color: hsl(var(--accent));
-            border-radius: var(--radius);
-            padding: 24px;
-        }
-
-        .structure-section-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: hsl(var(--accent-foreground));
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .component-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-        }
-
-        .component-card {
-            background-color: hsl(var(--card));
-            border: 1px solid hsl(var(--border));
-            border-radius: var(--radius);
-            padding: 16px;
-        }
-
-        .component-title {
-            font-weight: 600;
-            color: hsl(var(--foreground));
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .component-description {
-            font-size: 14px;
-            color: hsl(var(--muted-foreground));
-        }
-
-        .agent-types-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-
-        .agent-type-card {
-            background-color: hsl(var(--card));
-            border: 1px solid hsl(var(--border));
-            border-radius: var(--radius);
-            padding: 16px;
-        }
-
-        .agent-type-title {
-            font-weight: 600;
-            color: hsl(var(--foreground));
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .agent-features {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .agent-feature {
-            font-size: 14px;
-            color: hsl(var(--muted-foreground));
-        }
-
-        .agent-feature:before {
-            content: "• ";
-            margin-right: 4px;
-        }
-
-        /* Separator */
-        .separator {
-            height: 1px;
-            background-color: hsl(var(--border));
-            margin: 32px 0;
-        }
-
-        /* Center content */
-        .center {
-            text-align: center;
-        }
-
-        /* Utilities */
-        .hidden {
-            display: none;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .gap-4 {
-            gap: 16px;
-        }
-
-        .mb-4 {
-            margin-bottom: 16px;
-        }
-
-        .mb-8 {
-            margin-bottom: 32px;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Icons (using Unicode symbols) */
-        .icon {
-            display: inline-block;
-            font-style: normal;
-        }
-
-        .icon-bot::before { content: "🤖"; }
-        .icon-lightbulb::before { content: "💡"; }
-        .icon-check::before { content: "✅"; }
-        .icon-chevron-right::before { content: "▶"; }
-        .icon-chevron-left::before { content: "◀"; }
-        .icon-trending-up::before { content: "📈"; }
-        .icon-info::before { content: "ℹ️"; }
-        .icon-checklist::before { content: "✅"; }
-        .icon-rocket::before { content: "🚀"; }
-        .icon-network::before { content: "🔗"; }
-        .icon-settings::before { content: "⚙️"; }
-        .icon-file::before { content: "📄"; }
-        .icon-database::before { content: "💾"; }
-        .icon-wrench::before { content: "🔧"; }
-        .icon-branch::before { content: "🌿"; }
-        .icon-link::before { content: "🔗"; }
-        .icon-message::before { content: "💬"; }
-        .icon-bell::before { content: "🔔"; }
-        .icon-users::before { content: "👥"; }
-        .icon-cog::before { content: "⚙️"; }
-        .icon-download::before { content: "⬇️"; }
-        .icon-restart::before { content: "🔄"; }
-        .icon-sun::before { content: "☀️"; }
-        .icon-moon::before { content: "🌙"; }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 16px;
-            }
-            
-            .progress-steps {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .step-connector {
-                display: none;
-            }
-            
-            .welcome-title {
-                font-size: 32px;
-            }
-            
-            .question-title, .recommendation-title, .checklist-title, .structure-title {
-                font-size: 32px;
-            }
-            
-            .platform-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .checklist-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .component-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .agent-types-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .card-content {
-                padding: 24px;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <title>Microsoft Power Customer Advisory Team</title>
+  <meta name="description"
+    content="Power CAT is dedicated to empowering organizations to achieve digital transformation at scale with Microsoft Power Platform and Microsoft Copilot Studio."
+    property="og:description">
+  <meta content="Microsoft Power CAT" property="og:title">
+  <meta name="image" property="og:image" content="https://microsoft.github.io/powercat/images/og-image.png">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="assets/css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/components.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/powercat-landing-page.css" rel="stylesheet" type="text/css">
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script
+    type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+
+  <style>
+    iframe {
+      border-radius: 30px;
+    }
+
+    @media screen and (max-width: 991px) {
+      #headerimg {
+        display: none;
+      }
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">M</div>
-                    <h1 class="logo-text">Agent Platform Decision Tool</h1>
-                </div>
-                <button class="btn btn-ghost" id="theme-toggle" data-testid="button-theme-toggle">
-                    <span class="icon icon-sun" id="theme-icon"></span>
-                </button>
-            </div>
+
+<body class="body">
+  <!-- BEGIN: Navigation -->
+  <div data-collapse="medium" data-animation="default" data-duration="400" class="nav05 w-nav">
+    <div class="nav05_wrap">
+      <a href="#home" data-ix="logo" class="logo-link w-clearfix w-nav-brand">
+        <div class="nav01_line"></div>
+        <div class="logo-text">Microsoft <BR>Power Customer Advisory Team</div>
+      </a>
+      <div class="nav04_right_wrap">
+        <div class="nav04_links">
+          <nav role="navigation" class="nav04_nav_menu w-nav-menu">
+            <!-- <a href="#spotlight" class="nav03_link w-nav-link">WHAT'S NEW</a> -->
+            <a href="#tools" class="nav03_link w-nav-link">TOOLS</a>
+            <a href="#programs" class="nav03_link w-nav-link">PROGRAMS</a>
+            <a href="#guidance" class="nav03_link w-nav-link">GUIDANCE</a>
+            <!-- <a href="#community" class="nav03_link w-nav-link">EVENTS</a> -->
+            <a href="#stories" class="nav03_link w-nav-link">STORIES</a>
+            <a href="#resources" class="nav03_link w-nav-link">RESOURCES</a>
+            
+            <!-- <a href="resources.html" class="nav03_link w-nav-link">RESOURCES</a>
+            <a href="programs/ai-webinar.html" class="nav03_link w-nav-link">AI WEBINARS</a> -->
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Progress Indicator -->
-            <div class="progress-indicator">
-                <div class="progress-steps">
-                    <div class="progress-step">
-                        <div class="step-circle pending" data-step="0" data-testid="step-indicator-1">1</div>
-                        <span class="step-label">Assessment</span>
-                    </div>
-                    <div class="step-connector"></div>
-                    <div class="progress-step">
-                        <div class="step-circle pending" data-step="1" data-testid="step-indicator-2">2</div>
-                        <span class="step-label">Recommendation</span>
-                    </div>
-                    <div class="step-connector"></div>
-                    <div class="progress-step">
-                        <div class="step-circle pending" data-step="2" data-testid="step-indicator-3">3</div>
-                        <span class="step-label">Implementation</span>
-                    </div>
-                    <div class="step-connector"></div>
-                    <div class="progress-step">
-                        <div class="step-circle pending" data-step="3" data-testid="step-indicator-4">4</div>
-                        <span class="step-label">Structure</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Content Sections -->
-            
-            <!-- Welcome Section -->
-            <div id="welcome-section" class="fade-in">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="welcome-section">
-                            <div class="welcome-icon">🤖</div>
-                            <h2 class="welcome-title">Choose Your Microsoft Agent Platform</h2>
-                            <p class="welcome-subtitle">
-                                Answer a few questions to discover which Microsoft agent platform best fits your scenario and requirements.
-                            </p>
-                            
-                            <div class="platform-grid">
-                                <div class="platform-preview">
-                                    <div class="platform-preview-icon">🤖</div>
-                                    <h3 class="platform-preview-title">Microsoft 365 Copilot</h3>
-                                    <p class="platform-preview-desc">Out-of-the-Box</p>
-                                </div>
-                                <div class="platform-preview">
-                                    <div class="platform-preview-icon">🤖</div>
-                                    <h3 class="platform-preview-title">Agent Builder</h3>
-                                    <p class="platform-preview-desc">Organizational Extension</p>
-                                </div>
-                                <div class="platform-preview">
-                                    <div class="platform-preview-icon">🤖</div>
-                                    <h3 class="platform-preview-title">Copilot Studio</h3>
-                                    <p class="platform-preview-desc">Low-Code Development</p>
-                                </div>
-                                <div class="platform-preview">
-                                    <div class="platform-preview-icon">🤖</div>
-                                    <h3 class="platform-preview-title">Azure AI Foundry</h3>
-                                    <p class="platform-preview-desc">Enterprise Platform</p>
-                                </div>
-                            </div>
-                            
-                            <div class="center">
-                                <button class="btn btn-primary btn-lg" id="start-assessment" data-testid="button-start-assessment">
-                                    Start Assessment <span class="icon icon-chevron-right"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Assessment Section -->
-            <div id="assessment-section" class="fade-in hidden">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="question-card">
-                            <h3 class="question-title" id="question-title"></h3>
-                            <p class="question-subtitle" id="question-subtitle"></p>
-                        </div>
-                        
-                        <div class="options-list" id="options-list">
-                            <!-- Options will be dynamically added here -->
-                        </div>
-                        
-                        <div class="question-nav">
-                            <button class="btn btn-ghost" id="prev-btn" data-testid="button-previous">
-                                <span class="icon icon-chevron-left"></span> Previous
-                            </button>
-                            
-                            <div class="question-counter">
-                                <span id="current-question">1</span> of <span id="total-questions">5</span>
-                            </div>
-                            
-                            <button class="btn btn-primary" id="next-btn" data-testid="button-next" disabled>
-                                Next <span class="icon icon-chevron-right"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recommendation Section -->
-            <div id="recommendation-section" class="fade-in hidden">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="recommendation-header">
-                            <div class="recommendation-icon">💡</div>
-                            <h2 class="recommendation-title">Your Recommendation</h2>
-                        </div>
-                        
-                        <div class="platform-card-large" data-testid="recommended-platform">
-                            <div class="platform-icon-large" id="platform-icon-large">M</div>
-                            <h3 class="platform-name" id="platform-name"></h3>
-                            <p class="platform-description" id="platform-description"></p>
-                            
-                            <div class="benefits-card">
-                                <h4 class="benefits-title">Key Benefits for Your Use Case:</h4>
-                                <ul class="benefits-list" id="benefits-list">
-                                    <!-- Benefits will be dynamically added here -->
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- 1st Party Agents Section (shows for Microsoft 365 Copilot) -->
-                        <div id="first-party-agents" class="first-party-agents-section hidden" style="background-color: hsl(var(--muted)); border-radius: var(--radius); padding: 24px; margin-bottom: 24px;">
-                            <h4 style="font-weight: 600; color: hsl(var(--foreground)); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                                <span class="icon">🤖</span> Available 1st Party Copilot Agents
-                            </h4>
-                            <div id="agents-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
-                                <!-- 1st party agents will be dynamically added here -->
-                            </div>
-                        </div>
-                        
-                        <div class="reasoning-section" data-testid="reasoning-section">
-                            <h3 class="reasoning-title">
-                                <span class="icon">📈</span> Why This Recommendation?
-                            </h3>
-                            <ul class="reasoning-list" id="reasoning-list">
-                                <!-- Reasoning will be dynamically added here -->
-                            </ul>
-                            
-                            <div class="next-steps-card">
-                                <h4 class="next-steps-title">
-                                    <span class="icon">ℹ️</span> Next Steps
-                                </h4>
-                                <p class="next-steps-text">
-                                    Proceed to the implementation checklist to start planning your agent development process.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="center">
-                            <button class="btn btn-primary btn-lg" id="view-implementation" data-testid="button-view-implementation">
-                                View Implementation Guide <span class="icon icon-chevron-right"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Implementation Section -->
-            <div id="implementation-section" class="fade-in hidden">
-                <div class="card">
-                    <div class="card-content">
-                        <h2 class="checklist-title">
-                            <span class="icon">✅</span> Implementation Checklist
-                        </h2>
-                        
-                        <div class="checklist-grid">
-                            <div class="checklist-section">
-                                <h3 class="checklist-section-title">
-                                    <span class="icon">✅</span> Pre-Development
-                                </h3>
-                                <ul class="checklist-items" id="predev-checklist" data-testid="predev-checklist">
-                                    <!-- Pre-dev items will be dynamically added here -->
-                                </ul>
-                            </div>
-                            
-                            <div class="checklist-section">
-                                <h3 class="checklist-section-title">
-                                    <span class="icon">🚀</span> Post-Development
-                                </h3>
-                                <ul class="checklist-items" id="postdev-checklist" data-testid="postdev-checklist">
-                                    <!-- Post-dev items will be dynamically added here -->
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="center">
-                            <button class="btn btn-primary btn-lg" id="view-structure" data-testid="button-view-structure">
-                                Plan Agent Structure <span class="icon icon-chevron-right"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Agent Structure Section -->
-            <div id="structure-section" class="fade-in hidden">
-                <div class="card">
-                    <div class="card-content">
-                        <h2 class="structure-title">
-                            <span class="icon">🔗</span> Agent Structure Planning
-                        </h2>
-                        
-                        <div class="structure-sections">
-                            <!-- Core Components -->
-                            <div class="structure-section">
-                                <h3 class="structure-section-title">
-                                    <span class="icon">⚙️</span> Core Components
-                                </h3>
-                                <div class="component-grid">
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #3b82f6;">📄</span> Instructions
-                                        </h4>
-                                        <p class="component-description">Define agent behavior, personality, and response guidelines</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #22c55e;">💾</span> Knowledge Base
-                                        </h4>
-                                        <p class="component-description">Document sources, data connections, and information repositories</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #f97316;">🔧</span> Tools & Functions
-                                        </h4>
-                                        <p class="component-description">APIs, plugins, and external service integrations</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #a855f7;">🌿</span> Conversation Flows
-                                        </h4>
-                                        <p class="component-description">Dialog management and conversation pathways</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Integration & Deployment -->
-                            <div class="structure-section">
-                                <h3 class="structure-section-title">
-                                    <span class="icon">🔗</span> Integration & Deployment
-                                </h3>
-                                <div class="component-grid">
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #3b82f6;">🔗</span> Connectors
-                                        </h4>
-                                        <p class="component-description">System integrations and data source connections</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #22c55e;">💬</span> Channels
-                                        </h4>
-                                        <p class="component-description">Deployment targets and user interaction points</p>
-                                    </div>
-                                    <div class="component-card">
-                                        <h4 class="component-title">
-                                            <span class="icon" style="color: #f97316;">🔔</span> Triggers
-                                        </h4>
-                                        <p class="component-description">Event-based activation and automation rules</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Agent Type & Behavior -->
-                            <div class="structure-section">
-                                <h3 class="structure-section-title">
-                                    <span class="icon">👥</span> Agent Type & Behavior
-                                </h3>
-                                <div class="agent-types-grid">
-                                    <div class="agent-type-card">
-                                        <h4 class="agent-type-title">
-                                            <span class="icon" style="color: #3b82f6;">👥</span> Conversational Agent
-                                        </h4>
-                                        <ul class="agent-features">
-                                            <li class="agent-feature">Interactive dialog-based responses</li>
-                                            <li class="agent-feature">User-initiated conversations</li>
-                                            <li class="agent-feature">Question-answer patterns</li>
-                                            <li class="agent-feature">Context-aware interactions</li>
-                                        </ul>
-                                    </div>
-                                    <div class="agent-type-card">
-                                        <h4 class="agent-type-title">
-                                            <span class="icon" style="color: #22c55e;">⚙️</span> Autonomous Agent
-                                        </h4>
-                                        <ul class="agent-features">
-                                            <li class="agent-feature">Proactive task execution</li>
-                                            <li class="agent-feature">Event-driven automation</li>
-                                            <li class="agent-feature">Background processing</li>
-                                            <li class="agent-feature">Scheduled operations</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="separator"></div>
-
-                        <div class="center">
-                            <button class="btn btn-secondary" id="restart-btn" data-testid="button-restart">
-                                <span class="icon icon-restart"></span> Start Over
-                            </button>
-                            <button class="btn btn-primary" id="export-btn" data-testid="button-export">
-                                <span class="icon icon-download"></span> Export Plan
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="nav04_menu_button w-nav-button">
+          <div class="nav04_menu_icon w-icon-nav-menu"></div>
         </div>
-    </main>
+      </div>
+    </div>
+  </div>
+  <!-- END: Navigation -->
+  <!-- BEGIN: Mobile navigation -->
+  <div data-collapse="medium" data-animation="default" data-duration="600" data-doc-height="1"
+    class="nav05-mobile w-nav">
+    <div class="navigation-wrapper">
+      <a href="#home" data-ix="logo" class="logo-link w-clearfix w-nav-brand">
+        <div class="logo-text">Microsoft<BR>Power Customer Advisory Team</div>
+      </a>
+      <nav role="navigation" class="nav-menu-5 w-nav-menu">
+        <div class="mobile-nav-wrapper w-hidden-main">
+          <a href="#tools" class="global-nav-button-2 w-inline-block">
+            <div>TOOLS</div>
+          </a>
+          <a href="#programs" class="global-nav-button-2 w-inline-block">
+            <div>PROGRAMS</div>
+          </a>
+          <a href="#guidance" class="global-nav-button-2 w-inline-block">
+            <div>GUIDANCE</div>
+          </a>
+          
+            <a href="#stories" class="global-nav-button-2 w-inline-block">
+              <div>STORIES</div>
+            </a>
+            <a href="#resources" class="global-nav-button-2 w-inline-block">
+              <div>RESOURCES</div>
+            </a>
 
-    <script>
-        // Application Data - Updated based on Microsoft AI Agent Decision Matrix
-        const questions = [
-            {
-                id: 'primaryPurpose',
-                title: 'What is your primary purpose for the AI agent?',
-                subtitle: 'This helps determine which platform aligns with your core objectives',
-                options: [
-                    { 
-                        id: 'productivity', 
-                        label: 'Personal productivity assistance', 
-                        description: 'Writing assistance, data analysis, and information retrieval within Office workflows' 
-                    },
-                    { 
-                        id: 'organizational', 
-                        label: 'Organizational knowledge and simple tasks', 
-                        description: 'Handle internal FAQs, specialized queries, or basic integrations for your organization' 
-                    },
-                    { 
-                        id: 'business_process', 
-                        label: 'Custom business process automation', 
-                        description: 'Specific workflow automation with conversational interfaces and action-taking capabilities' 
-                    },
-                    { 
-                        id: 'enterprise_ai', 
-                        label: 'Enterprise AI/ML platform capabilities', 
-                        description: 'Bespoke AI solutions, model training, complex multi-step agents, and advanced analytics' 
-                    }
-                ]
-            },
-            {
-                id: 'targetAudience',
-                title: 'Who is your primary target audience?',
-                subtitle: 'Consider the technical skill level and role of your users',
-                options: [
-                    { 
-                        id: 'end_users', 
-                        label: 'End-users & knowledge workers', 
-                        description: 'Employees who want AI assistance in everyday Microsoft 365 tasks' 
-                    },
-                    { 
-                        id: 'business_users', 
-                        label: 'Business users in the organization', 
-                        description: 'Teams who need company-specific knowledge and simple automations' 
-                    },
-                    { 
-                        id: 'business_analysts', 
-                        label: 'Business analysts & Power Platform makers', 
-                        description: 'IT teams creating custom departmental solutions with minimal code' 
-                    },
-                    { 
-                        id: 'developers', 
-                        label: 'Software developers & data scientists', 
-                        description: 'Technical teams building advanced AI solutions with full control' 
-                    }
-                ]
-            },
-            {
-                id: 'complexityLevel',
-                title: 'What level of complexity do you need?',
-                subtitle: 'Consider development effort, customization, and technical requirements',
-                options: [
-                    { 
-                        id: 'lowest', 
-                        label: 'Lowest - Turn it on and use', 
-                        description: 'No customization needed, pre-defined behavior and scope' 
-                    },
-                    { 
-                        id: 'low', 
-                        label: 'Low - Configure with your content', 
-                        description: 'Add connectors or data sources with guided setup process' 
-                    },
-                    { 
-                        id: 'moderate', 
-                        label: 'Moderate - Custom workflows and logic', 
-                        description: 'Build conversational agents with custom behaviors and integrations' 
-                    },
-                    { 
-                        id: 'highest', 
-                        label: 'Highest - Full software development', 
-                        description: 'Custom architecture, model training, and enterprise-grade development' 
-                    }
-                ]
-            },
-            {
-                id: 'integrationScope',
-                title: 'What are your integration requirements?',
-                subtitle: 'Consider your data sources and system connectivity needs',
-                options: [
-                    { 
-                        id: 'microsoft_graph', 
-                        label: 'Microsoft 365 and Graph data only', 
-                        description: 'Work with emails, Teams, SharePoint, OneDrive within M365 permissions' 
-                    },
-                    { 
-                        id: 'extended_microsoft', 
-                        label: 'Extended Microsoft ecosystem', 
-                        description: 'Microsoft Graph + some internal knowledge bases and limited plugins' 
-                    },
-                    { 
-                        id: 'power_platform', 
-                        label: 'Power Platform connectors', 
-                        description: '1400+ connectors, APIs, Dataverse, and various enterprise systems' 
-                    },
-                    { 
-                        id: 'unlimited', 
-                        label: 'Unlimited integration freedom', 
-                        description: 'Any data source, API, database, or system that can be coded' 
-                    }
-                ]
-            },
-            {
-                id: 'deploymentNeeds',
-                title: 'What are your deployment requirements?',
-                subtitle: 'Consider where and how users will access your agent',
-                options: [
-                    { 
-                        id: 'microsoft_managed', 
-                        label: 'Microsoft-managed within M365', 
-                        description: 'Built into Office apps - Word, Teams, Outlook sidebar/chat' 
-                    },
-                    { 
-                        id: 'microsoft_hosted', 
-                        label: 'Microsoft-hosted in M365 environment', 
-                        description: 'Accessed via Copilot Chat interfaces but with custom capabilities' 
-                    },
-                    { 
-                        id: 'multiple_channels', 
-                        label: 'Multiple channels and touchpoints', 
-                        description: 'Teams, SharePoint, web pages, and custom interfaces' 
-                    },
-                    { 
-                        id: 'anywhere', 
-                        label: 'Deploy anywhere', 
-                        description: 'Web apps, mobile apps, Teams apps, chatbots, or custom integrations' 
-                    }
-                ]
-            }
-        ];
+        </div>
+      </nav>
+      <div class="nav04_menu_button w-nav-button">
+        <div class="nav04_menu_icon w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+  <!-- END: Mobile navigation -->
+  <!-- BEGIN: Home -->
+  <div id="home" class="h06">
+    <div class="h06_container">
+      <div class="h06_block">
 
-        const platformOptions = {
-            'microsoft365copilot': {
-                id: 'microsoft365copilot',
-                name: 'Microsoft 365 Copilot Chat (Out-of-the-Box)',
-                icon: 'users',
-                color: 'blue',
-                description: 'Personal productivity assistant with 11+ specialized 1st party agents covering sales, finance, HR, project management, and more',
-                benefits: [
-                    'Zero-effort AI inside Office apps - immediate productivity benefits',
-                    'Specialized agents: Sales, Service, Finance, Research, Analytics, HR, Project Management',
-                    'Seamless integration with Word, Outlook, Teams, Excel, PowerPoint, SharePoint',
-                    'Natural language generation, summarization, and contextual Q&A using GPT-4',
-                    'Built-in security and compliance with M365 permissions',
-                    'No development or customization required'
-                ],
-                reasoning: []
-            },
-            'agentbuilder': {
-                id: 'agentbuilder',
-                name: 'Microsoft 365 Copilot with Agent Builder',
-                icon: 'wrench',
-                color: 'green',
-                description: 'Extend Copilot beyond the 11+ built-in agents with custom organizational knowledge and company-specific capabilities',
-                benefits: [
-                    'Lightweight customization without code for needs beyond 1st party agents',
-                    'Organizational Q&A from custom knowledge bases and internal documents',
-                    'Simple task execution through plugins and flows',
-                    'Stays within familiar Copilot UI for users',
-                    'Connect SharePoint libraries, internal systems, and specialized FAQ documents'
-                ],
-                reasoning: []
-            },
-            'copilotstudio': {
-                id: 'copilotstudio',
-                name: 'Microsoft Copilot Studio',
-                icon: 'paint-brush',
-                color: 'purple',
-                description: 'Low-code platform for building custom conversational agents with advanced workflows and multi-channel deployment',
-                benefits: [
-                    'Full conversational agent capabilities with branching dialogues',
-                    'Access to 1400+ Power Platform connectors',
-                    'Multi-channel deployment (Teams, web, SharePoint)',
-                    'Action-taking capabilities through Power Automate',
-                    'Visual conversation design and custom prompt engineering'
-                ],
-                reasoning: []
-            },
-            'azureai': {
-                id: 'azureai',
-                name: 'Azure AI Foundry Agent Service',
-                icon: 'cloud',
-                color: 'indigo',
-                description: 'Enterprise AI/ML platform for building bespoke AI solutions with complete development control and advanced capabilities',
-                benefits: [
-                    'Unlimited integration freedom with any data source or system',
-                    'Custom model training, fine-tuning, and deployment',
-                    'Advanced features like RAG, custom decision logic, and autonomous agents',
-                    'Enterprise-grade scalability with comprehensive monitoring',
-                    'Full software development flexibility and control'
-                ],
-                reasoning: []
-            }
-        };
+        <p class="h06_text">We are the Power Customer Advisory Team (Power CAT), part of the Power Platform and Copilot
+          Studio engineering team at Microsoft. </p>
 
-        const implementationChecklists = {
-            'microsoft365copilot': {
-                predev: [
-                    'Verify Microsoft 365 Copilot licensing for target users',
-                    'Identify which of the 11+ 1st party agents match your use case (Sales, Finance, HR, etc.)',
-                    'Review data access permissions and Microsoft Graph connectivity',
-                    'Enable Bing integration if web search capabilities are needed',
-                    'Configure approved SharePoint sites and data sources for specialized agents',
-                    'Plan user onboarding and training for Office app and specialized agent integration'
-                ],
-                postdev: [
-                    'Monitor Copilot and specialized agent usage analytics within M365 admin center',
-                    'Track adoption of specific 1st party agents (Sales, Service, Finance, HR, etc.)',
-                    'Collect user feedback on productivity improvements across specialized agents',
-                    'Ensure data governance policies are being followed for all agent types',
-                    'Provide ongoing support for users learning Copilot and specialized agent features'
-                ]
-            },
-            'agentbuilder': {
-                predev: [
-                    'Define organizational knowledge sources and FAQ content',
-                    'Identify internal SharePoint libraries and document sources',
-                    'Plan Graph Connector setup for external knowledge bases',
-                    'Design simple conversation flows for company-specific queries',
-                    'Configure permissions for organizational data access'
-                ],
-                postdev: [
-                    'Deploy agent capabilities within Copilot Chat experience',
-                    'Monitor organizational query patterns and response accuracy',
-                    'Update knowledge sources and refine agent responses',
-                    'Measure user satisfaction with company-specific AI assistance',
-                    'Scale to additional departments based on success metrics'
-                ]
-            },
-            'copilotstudio': {
-                predev: [
-                    'Map out conversational flows and user journey scenarios',
-                    'Identify required Power Platform connectors (from 1400+ available)',
-                    'Design agent personality, tone, and response patterns',
-                    'Plan integration with Dataverse, APIs, and business systems',
-                    'Set up development and testing environments in Power Platform'
-                ],
-                postdev: [
-                    'Deploy to Teams, SharePoint, or web channels as planned',
-                    'Implement comprehensive analytics and conversation tracking',
-                    'Monitor connector performance and system integrations',
-                    'Continuously optimize conversation flows based on user interactions',
-                    'Plan expansion to additional channels and use cases'
-                ]
-            },
-            'azureai': {
-                predev: [
-                    'Design AI architecture including RAG, custom models, and data pipelines',
-                    'Plan Azure infrastructure, compute resources, and cost management',
-                    'Architect data integration patterns for enterprise systems',
-                    'Establish MLOps pipelines for model training and deployment',
-                    'Create comprehensive security, monitoring, and governance frameworks'
-                ],
-                postdev: [
-                    'Deploy to production with full observability and alerting',
-                    'Implement model performance monitoring and retraining pipelines',
-                    'Establish CI/CD for continuous integration and deployment',
-                    'Monitor costs, performance metrics, and resource utilization',
-                    'Maintain model accuracy and implement feedback loops for improvement'
-                ]
-            }
-        };
+        <p class="h06_text">Power CAT is dedicated to empowering organizations to achieve digital transformation at
+          scale with Microsoft Power Platform and Microsoft Copilot Studio.</p>
+        <div class="lnd_button_wrap">
+        </div>
+      </div>
+      <div class="home-dark-wrap-section">
+        <img id="headerimg" src="images/header.png" width="520"
+          sizes="(max-width: 479px) 92vw, (max-width: 767px) 83vw, (max-width: 991px) 575px, 42vw" alt="Power CAT"
+          class="h06_image" />
+      </div>
+    </div>
+  </div>
+  <!-- BEGIN: Tools -->
+  <div id="tools" class="wrapper-2 m80-80">
+    <div class="section">
+      <div class="w-layout-grid product5-grid">
+        <div id="w-node-47a85e726b0e-2b0d0585" class="home-sections-label">
 
-        // Application State
-        let currentStep = 0;
-        let currentQuestionIndex = 0;
-        let answers = {};
-        let recommendedPlatform = null;
-        let isDarkTheme = false;
+          <div class="lnd_h2">Tools</div>
+          <p class="lnd_paragraph">Accelerate and enable successful adoption with tools developed by Power CAT, based on
+            real-world customer experience.
+          </p>
+        </div>
 
-        // 1st Party Copilot Agents - Available out-of-the-box
-        const firstPartyCopilots = {
-            'sales_crm': {
-                name: 'Copilot for Sales',
-                description: 'Integrates with Dynamics 365 and Salesforce to assist with CRM tasks'
-            },
-            'customer_service': {
-                name: 'Copilot for Service', 
-                description: 'Supports customer service workflows and case resolution'
-            },
-            'finance_reporting': {
-                name: 'Copilot for Finance',
-                description: 'Helps with financial reporting and analysis'
-            },
-            'research_content': {
-                name: 'Researcher Agent',
-                description: 'Synthesizes information and drafts content'
-            },
-            'data_analysis': {
-                name: 'Analyst Agent',
-                description: 'Transforms data into insights and visualizations'
-            },
-            'meeting_facilitation': {
-                name: 'Facilitator Agent',
-                description: 'Manages Teams meetings, notes, and moderation'
-            },
-            'hr_it_selfservice': {
-                name: 'Employee Self-Service Agent',
-                description: 'Handles HR and IT tasks like PTO requests and helpdesk tickets'
-            },
-            'sharepoint_access': {
-                name: 'SharePoint Agents',
-                description: 'Provide natural language access to SharePoint content'
-            },
-            'interpretation': {
-                name: 'Interpreter Agent',
-                description: 'Enables real-time speech-to-speech interpretation in Teams'
-            },
-            'project_management': {
-                name: 'Project Manager Agent',
-                description: 'Automate project management tasks in Planner'
-            },
-            'skills_expertise': {
-                name: 'Skills Agent',
-                description: 'Explore organizational skills and find expertise'
-            }
-        };
+        <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/CSKit.png" style="padding: 10px; width: 29%" alt="creatorkit">
+                <h4 class="lnd_h6_white">Copilot Studio Kit</h4>
+                <h4 class="lnd_card_title_white">Develop and test custom agents, use large language model to validate
+                  AI-generated content, optimize prompts, track aggregated key performance indicators of their custom
+                  agents, and more.</h4>
+                <a href="https://aka.ms/copilotstudiokit" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/powercattools.png" style="padding: 10px; width: 29%"
+                  alt="ALMAccelerator">
+                <h4 class="lnd_h6_white">Power CAT Tools</h4>
+                <h4 class="lnd_card_title_white">Enhance your development experience within Power Platform. Perform code
+                  reviews, use AI to document your solutions, evalute risks in your solutions, and more.</h4>
+                <a href="https://aka.ms/PowerCATTools" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/creator.png" style="padding: 10px;" alt="creatorkit">
+                <h4 class="lnd_h6_white">Creator Kit</h4>
+                <h4 class="lnd_card_title_white">Create
+                  consistent, beautiful, and effective user experiences for custom business applications with a
+                  collection of 24+ Fluent UI controls and templates for Power Apps.</h4>
+                <a href="https://aka.ms/creatorkit" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/CoE.png" style="padding: 10px;" alt="CoE">
+                <h4 class="lnd_h6_white">CoE Starter Kit</h4>
+                <h4 class="lnd_card_title_white">Leverage a set of templates to help you develop a strategy for
+                  adopting, maintaining, and
+                  supporting Power Platform.<br /><br /></h4>
+                <a href="https://aka.ms/coestarterkit" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
 
-        // Check if user needs are covered by 1st party agents
-        function checkFirstPartyAgentCoverage(answers) {
-            const coveredUseCase = {
-                isFirstPartyCovered: false,
-                matchingAgent: null,
-                reason: ''
-            };
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/automation.png" style="padding: 10px;"
+                  alt="automation">
+                <h4 class="lnd_h6_white">Automation Kit</h4>
+                <h4 class="lnd_card_title_white">Manage, govern, and scale automation platform adoption with Power
+                  Automate, based on industry best practices.</h4>
+                <a href="https://aka.ms/automationkit" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <!-- <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/approvals-kit-logo.png"
+                  style="padding: 10px; width: 29%" alt="approvalsKit">
+                <h4 class="lnd_h6_white">Approvals Kit</h4>
+                <h4 class="lnd_card_title_white">Manage, govern, and scale approvals using a collection of
+                  Power Apps, Power Automate, and Dataverse components with a set of templates.</h4>
+                <a href="https://learn.microsoft.com/power-automate/guidance/business-approvals-templates/introduction"
+                  target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div> -->
+          </div>
 
-            // Check if the primary purpose aligns with existing 1st party agents
-            if (answers.primaryPurpose === 'productivity') {
-                // Most productivity use cases are covered by out-of-the-box Copilot or 1st party agents
-                coveredUseCase.isFirstPartyCovered = true;
-                coveredUseCase.reason = 'Personal productivity is comprehensively covered by Microsoft 365 Copilot and specialized 1st party agents';
-            }
 
-            return coveredUseCase;
-        }
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END: Tools -->
+  <!-- BEGIN: Programs -->
+  <section id="programs">
+    <div class="wrapper-2 m80-80 grey">
+      <div class="section">
+        <div class="w-layout-grid product5-grid">
+          <div id="w-node-dda75d76c9cb-2b0d0585" class="home-sections-label">
 
-        // Platform determination logic - Updated with 1st Party Agent consideration
-        function determinePlatform(answers) {
-            let bestMatch = null;
-            
-            // First, check if needs are already covered by 1st party agents
-            const firstPartyCheck = checkFirstPartyAgentCoverage(answers);
+            <div class="lnd_h2">Programs</div>
+            <p class="lnd_paragraph">Gain skills and knowledge to help you successfully adopt and deploy impactful
+              solutions using Power Platform and Copilot Studio with programs from Power CAT and our partner teams.</p>
+          </div>
+          <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
+            <div id="youtube">
+              <div class="lnd_card_template_cta youtube">
+                <div class="lnd_card_text_wrap_02"><img src="images/PowerUp.png" style="padding: 10px;" alt="Guidance">
+                  <h4 class="lnd_h6_white">Power Up</h4>
+                  <h4 class="lnd_card_title_white">Training for individuals and enterprise organizations to develop
+                    talent in low-code and AI with a comprehensive curriculum.
+                  </h4>
+                  <a href="https://aka.ms/powerup" target="_blank" class="lnd_btn_02 w-button">Learn
+                    More..</a>
+                </div><a href="#" class="lnd_card_link w-inline-block"></a>
+              </div>
+            </div>
+            <div id="youtube">
+              <div class="lnd_card_template_cta youtube">
+                <div class="lnd_card_text_wrap_02"><img src="images/CopilotStudio.png" style="padding: 10px;"
+                    alt="Power Well-Architected">
+                  <h4 class="lnd_h6_white">Copilot Studio In A Day</h4>
+                  <h4 class="lnd_card_title_white">Learn how to develop agents using Microsoft Copilot Studio with
+                    hands-on, step-by-step exercises led by an instructor.</h4>
+                  <a href="https://aka.ms/csiad" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+                </div><a href="#" class="lnd_card_link w-inline-block"></a>
+              </div>
+            </div>
+            <div id="youtube">
+              <div class="lnd_card_template_cta youtube">
+                <div class="lnd_card_text_wrap_02"><img src="images/CopilotStudio.png" style="padding: 10px;"
+                    alt="Architecture Center">
+                  <h4 class="lnd_h6_white">AI Webinars</h4>
+                  <h4 class="lnd_card_title_white">Gain the knowledge and skills needed to successfully adopt and thrive
+                    with Copilot Studio agents in your organization in this series of interactive virtual sessions.</h4>
+                  <a href="https://aka.ms/powercat/AIWebinars" target="_blank" class="lnd_btn_02 w-button">Learn
+                    More..</a>
+                </div><a href="#" class="lnd_card_link w-inline-block"></a>
+              </div>
+            </div>
+            <div id="youtube">
+              <div class="lnd_card_template_cta youtube">
+                <div class="lnd_card_text_wrap_02"><img src="images/eac.png" style="padding: 10px;" alt="Adoption">
+                  <h4 class="lnd_h6_white">Agent Build-A-Thon</h4>
+                  <h4 class="lnd_card_title_white">Monthly hackathons hosted by Power CAT to accelerate your understanding and adoption of agentic AI</h4>
+                  <a href="programs/agent-hackathon.html" target="_blank" class="lnd_btn_02 w-button">Learn
+                    More..</a>
+                </div><a href="#" class="lnd_card_link w-inline-block"></a>
+              </div>
+            </div>
+            <div id="youtube">
+              <div class="lnd_card_template_cta youtube">
+                <div class="lnd_card_text_wrap_02"><img src="images/CopilotStudio.png" style="padding: 10px;" alt="PowerCatLive">
+                  <h4 class="lnd_h6_white">Architecture Bootcamp</h4>
+                  <h4 class="lnd_card_title_white">An intensive 3-day training program to upskill architects in
+                    implementing scalable solutions with Copilot Studio.</h4>
+                  <a href="programs/architecture-bootcamp.html" target="_blank" class="lnd_btn_02 w-button">Learn
+                    More..</a>
+                </div><a href="#" class="lnd_card_link w-inline-block"></a>
+              </div>
+            </div>
+            <div id="youtube">
+              <div class="lnd_card_template_cta youtube">
+                <div class="lnd_card_text_wrap_02"><img src="images/ks.png" style="padding: 10px;" alt="Blog">
+                  <h4 class="lnd_h6_white">Kickstarter</h4>
+                  <h4 class="lnd_card_title_white">Facilitated workshops to guide the foundations of your low code and
+                    AI transformation journeys.</h4>
+                  <a href="programs/kickstarter.html" target="_blank" class="lnd_btn_02 w-button">Learn
+                    More..</a>
+                </div><a href="#" class="lnd_card_link w-inline-block"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <!-- END: Programs-->
+  <!-- BEGIN: Guidance -->
+  <div id="guidance" class="wrapper-2 m80-80">
+    <div class="section">
+      <div class="w-layout-grid product5-grid">
+        <div id="w-node-dda75d76c9cb-2b0d0585" class="home-sections-label">
 
-            // Microsoft 365 Copilot Chat (Out-of-the-Box) - Enhanced with 1st party agent consideration
-            if ((answers.primaryPurpose === 'productivity' && 
-                 answers.targetAudience === 'end_users' && 
-                 answers.complexityLevel === 'lowest') ||
-                (firstPartyCheck.isFirstPartyCovered && 
-                 answers.complexityLevel === 'lowest')) {
-                bestMatch = {...platformOptions.microsoft365copilot};
-                bestMatch.reasoning = [
-                    'Personal productivity focus aligns with Copilot\'s core purpose',
-                    'Specialized 1st party agents cover sales, finance, HR, project management, and more',
-                    'End-users benefit from zero-effort AI integration in Office apps',
-                    'Lowest complexity matches out-of-the-box functionality'
-                ];
-                if (firstPartyCheck.isFirstPartyCovered) {
-                    bestMatch.reasoning.push('Your use case is likely covered by existing 1st party Copilot agents');
-                }
-            }
-            // Microsoft 365 Copilot with Agent Builder - Only when needs exceed 1st party agents
-            else if (answers.primaryPurpose === 'organizational' && 
-                     answers.targetAudience === 'business_users' && 
-                     (answers.complexityLevel === 'low' || answers.complexityLevel === 'lowest') &&
-                     (answers.integrationScope === 'microsoft_graph' || answers.integrationScope === 'extended_microsoft') &&
-                     !firstPartyCheck.isFirstPartyCovered) {
-                bestMatch = {...platformOptions.agentbuilder};
-                bestMatch.reasoning = [
-                    'Your organizational needs go beyond existing 1st party Copilot agents',
-                    'Company-specific knowledge extension fits Agent Builder\'s purpose',
-                    'Business users benefit from custom AI capabilities within familiar Copilot UI',
-                    'Low complexity aligns with guided configuration approach',
-                    'Microsoft ecosystem focus matches platform capabilities'
-                ];
-            }
-            // Copilot Studio
-            else if (answers.primaryPurpose === 'business_process' && 
-                     answers.targetAudience === 'business_analysts' && 
-                     answers.complexityLevel === 'moderate' &&
-                     answers.integrationScope === 'power_platform') {
-                bestMatch = {...platformOptions.copilotstudio};
-                bestMatch.reasoning = [
-                    'Custom business process automation is Copilot Studio\'s strength',
-                    'Business analysts can leverage low-code development approach',
-                    'Moderate complexity matches visual conversation design capabilities',
-                    'Power Platform connectors provide extensive integration options'
-                ];
-            }
-            // Azure AI Foundry
-            else if (answers.primaryPurpose === 'enterprise_ai' && 
-                     answers.targetAudience === 'developers' && 
-                     answers.complexityLevel === 'highest' &&
-                     answers.integrationScope === 'unlimited') {
-                bestMatch = {...platformOptions.azureai};
-                bestMatch.reasoning = [
-                    'Enterprise AI/ML platform needs require Azure AI Foundry\'s capabilities',
-                    'Developers need full control for advanced AI solution development',
-                    'Highest complexity demands software development approach',
-                    'Unlimited integration freedom enables comprehensive enterprise solutions'
-                ];
-            }
+          <div class="lnd_h2">Guidance</div>
+          <p class="lnd_paragraph">Ensure successful implementation of your Power Platform and Copilot Studio workloads
+            with comprehensive guidance and best practices.</p>
+        </div>
+        <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/arch-center.png" style="padding: 10px;"
+                  alt="Guidance">
+                <h4 class="lnd_h6_white">Architecture Center</h4>
+                <h4 class="lnd_card_title_white">Design solutions on Power Platform and Copilot Studio using established
+                  patterns and practices
+                </h4>
+                <a href="https://aka.ms/powerarchitecture" target="_blank" class="lnd_btn_02 w-button">Learn
+                  More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/powa.png" style="padding: 10px;"
+                  alt="Power Well-Architected">
+                <h4 class="lnd_h6_white">Power Well-Architected</h4>
+                <h4 class="lnd_card_title_white">Make informed decisions about the design, planning, and implementation
+                  of modern application workloads.</h4>
+                <a href="https://aka.ms/powa" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
 
-            // Additional logic based on specific combinations
-            if (!bestMatch) {
-                // Copilot Studio for multi-channel deployment needs
-                if (answers.deploymentNeeds === 'multiple_channels' && 
-                    answers.complexityLevel === 'moderate') {
-                    bestMatch = {...platformOptions.copilotstudio};
-                    bestMatch.reasoning = [
-                        'Multi-channel deployment capabilities are Copilot Studio\'s strength',
-                        'Moderate complexity allows for sophisticated conversational agents',
-                        'Teams, SharePoint, and web deployment options available'
-                    ];
-                }
-                // Azure AI for unlimited deployment needs
-                else if (answers.deploymentNeeds === 'anywhere' && 
-                         answers.integrationScope === 'unlimited') {
-                    bestMatch = {...platformOptions.azureai};
-                    bestMatch.reasoning = [
-                        'Deploy anywhere capability requires full development control',
-                        'Unlimited integration scope demands enterprise platform',
-                        'Custom applications and advanced AI features needed'
-                    ];
-                }
-                // Agent Builder for extended Microsoft integration (only if not covered by 1st party agents)
-                else if (answers.integrationScope === 'extended_microsoft' && 
-                         answers.complexityLevel === 'low' && 
-                         !firstPartyCheck.isFirstPartyCovered) {
-                    bestMatch = {...platformOptions.agentbuilder};
-                    bestMatch.reasoning = [
-                        'Extended Microsoft ecosystem fits Agent Builder capabilities',
-                        'Your needs go beyond the 11+ available 1st party Copilot agents',
-                        'Low complexity configuration within M365 environment',
-                        'Company-specific knowledge augmentation'
-                    ];
-                }
-            }
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/PowerPlatform.png" style="padding: 10px;"
+                  alt="Architecture Center">
+                <h4 class="lnd_h6_white">Power Platform Guidance</h4>
+                <h4 class="lnd_card_title_white">Create and implement the business and technology strategies necessary
+                  for successful adoption of Power Platform.</h4>
+                <a href="https://aka.ms/powerplatformguidance" target="_blank" class="lnd_btn_02 w-button">Learn
+                  More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/CopilotStudio.png" style="padding: 10px;"
+                  alt="Adoption">
+                <h4 class="lnd_h6_white">Copilot Studio Guidance</h4>
+                <h4 class="lnd_card_title_white">Create and implement the business and technology strategies necessary
+                  for successful adoption of Copilot Studio.</h4>
+                <a href="https://aka.ms/copilotstudioguidance" target="_blank" class="lnd_btn_02 w-button">Learn
+                  More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
 
-            // Final fallback logic - Consider 1st party agent coverage
-            if (!bestMatch) {
-                if (answers.complexityLevel === 'lowest' || firstPartyCheck.isFirstPartyCovered) {
-                    bestMatch = {...platformOptions.microsoft365copilot};
-                    bestMatch.reasoning = firstPartyCheck.isFirstPartyCovered ? 
-                        ['Your use case is likely covered by Microsoft\'s 11+ built-in Copilot agents', 'Lowest complexity requirements match out-of-the-box capabilities'] :
-                        ['Lowest complexity requirements match out-of-the-box Copilot capabilities'];
-                } else if (answers.complexityLevel === 'highest') {
-                    bestMatch = {...platformOptions.azureai};
-                    bestMatch.reasoning = ['Highest complexity requirements need enterprise development platform'];
-                } else if (answers.targetAudience === 'developers') {
-                    bestMatch = {...platformOptions.azureai};
-                    bestMatch.reasoning = ['Developer audience benefits from full control and customization options'];
-                } else {
-                    bestMatch = {...platformOptions.copilotstudio};
-                    bestMatch.reasoning = ['Balanced low-code approach suitable for most business scenarios'];
-                }
-            }
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- END: Guidance -->
+   <!-- BEGIN: Stories -->
+  <div id="stories" class="wrapper-2 m80-80">
+    <div class="section">
+      <div class="w-layout-grid product5-grid">
+        <div id="w-node-dda75d76c9cb-2b0d0585" class="home-sections-label">
+          <div class="lnd_h2">Customer Stories</div>
+          <p class="lnd_paragraph">Hear compelling customer stories that highlight the diverse and creative ways in which
+            Power Platform and Copilot Studio are used in the real world.</p>
+        </div>
+        <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/stories.png" style="padding: 10px;" alt="Guidance">
+                <h4 class="lnd_h6_white" align="center">Power Platform & <br /><br /> Copilot Studio Stories</h4>
+                <h4 class="lnd_card_title_white">Customer stories that showcase the ingenuity of individuals and
+                  organizations that have adopted Power Platform and Copilot Studio.
+                </h4>
+                <a href="https://aka.ms/PowerPlatformStories" target="_blank" class="lnd_btn_02 w-button">Learn
+                  More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/stories-youtube.png" style="padding: 10px;"
+                  alt="Customer story videos">
+                <h4 class="lnd_h6_white">Customer Story Videos<br /><br /><br /></h4>
+                <h4 class="lnd_card_title_white">Customer story videos that showcase how Power Platform and Copilot
+                  Studio are being used to transform businesses, careers and lives.</h4>
+                <a href="https://aka.ms/PowerPlatformVideos" target="_blank" class="lnd_btn_02 w-button">Learn
+                  More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- BEGIN: Resources -->
+  <div id="resources" class="wrapper-2 m80-80 grey">
+    <div class="section">
+      <div class="w-layout-grid product5-grid">
+        <div id="w-node-dda75d76c9cb-2b0d0585" class="home-sections-label">
 
-            return bestMatch;
-        }
+          <div class="lnd_h2">Resources</div>
+          <p class="lnd_paragraph">These resources support you wherever you are in your Power Platform and Copilot Studio journey, whether you're getting started or driving successful implementations.  </p>
+        </div>
+        <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/CopilotStudio.png" style="padding: 10px;" alt="Guidance">
+                <h4 class="lnd_h6_white">Copilot Studio Resources</h4>
+                <h4 class="lnd_card_title_white">Resources to help you on your Copilot Studio journey, curated by Power CAT and updated regularly.</h4>
+                </h4>
+                <a href="https://aka.ms/CopilotStudio/Resources" target="_blank" class="lnd_btn_02 w-button">Learn
+                  More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/PowerPlatform.png" style="padding: 10px;"
+                  alt="Customer story videos">
+                <h4 class="lnd_h6_white">Power Platform Resources</h4>
+                <h4 class="lnd_card_title_white">Resources to help you on your Power Platform journey, curated by Power CAT and updated regularly.</h4>
+                <a href="https://aka.ms/PowerPlatform/Resources" target="_blank" class="lnd_btn_02 w-button">Learn
+                  More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/stories-youtube.png" style="padding: 10px;"
+                  alt="videos">
+                <h4 class="lnd_h6_white">Power CAT Live</h4>
+                <h4 class="lnd_card_title_white">This video series showcases the solutions Power CAT is working on and
+                  discusses features of Power Platform and Copilot Studio.</h4>
+                </h4>
+                <a href="https://aka.ms/powercatlive"
+                  target="_blank" class="lnd_btn_02 w-button">Learn
+                  More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div>
+          <!-- <div id="youtube">
+            <div class="lnd_card_template_cta youtube">
+              <div class="lnd_card_text_wrap_02"><img src="images/youtube_social_icon_red.png" style="padding: 10px;"
+                  alt="Power Well-Architected">
+                <h4 class="lnd_h6_white">Power CAT Tools videos</h4>
+                <h4 class="lnd_card_title_white">Go deeper into the details of the Power CAT Tools with this video
+                  series.</h4>
+                <a href="https://www.youtube.com/playlist?list=PLi9EhCY4z99VXGl_D9FqOsx5WODCXExDG"
+                  target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
+              </div><a href="#" class="lnd_card_link w-inline-block"></a>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END: Resources -->
 
-        // DOM manipulation functions
-        function showSection(sectionId) {
-            document.querySelectorAll('[id$="-section"]').forEach(section => {
-                section.classList.add('hidden');
-            });
-            document.getElementById(sectionId).classList.remove('hidden');
-        }
 
-        function updateProgressIndicator() {
-            const steps = document.querySelectorAll('.step-circle');
-            steps.forEach((step, index) => {
-                const stepNum = parseInt(step.getAttribute('data-step'));
-                step.className = 'step-circle';
-                
-                if (stepNum < currentStep) {
-                    step.classList.add('completed');
-                    step.innerHTML = '✓';
-                } else if (stepNum === currentStep) {
-                    step.classList.add('active');
-                    step.innerHTML = stepNum + 1;
-                } else {
-                    step.classList.add('pending');
-                    step.innerHTML = stepNum + 1;
-                }
-            });
-        }
+  <!-- END: Stories -->
+  <!-- BEGIN: Office Hours-->
+  <!-- <div id="community" class="m80-80 grey" style="padding-top:30px ;">
+    <div class="lnd_title_wrap">
+      <p data-w-id="b75b9195-428d-4a2c-6adf-a9b546c79a46" class="lnd_title">OFFICE HOURS</p>
+      <h3 data-w-id="b75b9195-428d-4a2c-6adf-a9b546c79a48" class="lnd_h3 center">Stay up-to-date with the latest
+        information about tools</h3>
+    </div>
+    <div class="section-5">
+      <div class="w-layout-grid grid-thirds gapless-columns gapless-rows" id="m365dev-call">
+        <div class="padded-grid-item-2">
+          <div class="centered-grid-item-2">
+            <img style="vertical-align: top; padding: 15px;" src="images/CoE.png" alt="CoE">
+            <h4 class="h4_event">CoE Starter Kit</h4>
+            <p class="lnd_paragraph_event">Second Wednesday of each month<br>7:00 AM PT / 4:00 PM GMT</p>
+            <div class="icon-events">
+              <a href="https://aka.ms/coeofficehours" aria-label="join call in teams">
+                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="CoEKit Office Hour"
+                    class="fe08_icon-copy"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="padded-grid-item-2" id="spdev-spfx-call">
+          <div class="centered-grid-item-2">
+            <img style="vertical-align: top; padding: 15px;" src="images/automation.png" alt="AutomationKit">
+            <h4 class="h4_event">Automation Kit</h4>
+            <p class="lnd_paragraph_event">Second Tuesday of each month<br>7:00 AM - 8:00 AM PT</p>
+            <div class="icon-events">
+              <a href="https://aka.ms/ak4pp/officehours" aria-label="join call in teams">
+                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="AutomationKit Office Hour"
+                    class="fe08_icon-copy"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="padded-grid-item-2 " id="spdev-sig-call">
+          <div class="centered-grid-item-2">
+            <img style="vertical-align: top; padding: 15px;" src="images/creator.png" alt="Creator Kit">
+            <h4 class="h4_event">Creator Kit</h4>
+            <p class="lnd_paragraph_event">Last Tuesday of each month<br>9:30 PM - 10:00 PM GMT</p>
+            <div class="icon-events">
+              <a href="https://aka.ms/creatorkitofficehours" aria-label="join call in teams">
+                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="CreatorKit Office Hour"
+                    class="fe08_icon-copy"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="padded-grid-item-2" id="PowerPlatformMonthlyCall">
+          <div class="centered-grid-item-2">
+            <img style="vertical-align: top; padding: 15px;width: 33%;" src="images/ALMAccelerator.png"
+              alt="ALM Accelerator">
+            <h4 class="h4_event">ALM Accelerator</h4>
+            <p class="lnd_paragraph_event">Second Tuesday of each month<br>9:30 PM - 10:00 PM GMT</p>
+            <div class="icon-events">
+              <a href="https://aka.ms/aa4pp/officehours" aria-label="join call in teams">
+                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="ALMAccelerator Office Hour"
+                    class="fe08_icon-copy"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="padded-grid-item-2" id="officeaddinscommunitycall">
+          <div class="centered-grid-item-2">
+            <img style="vertical-align: top; padding: 15px;" src="images/approvals-kit-logo.png" alt="Approval Kit">
+            <h4 class="h4_event">Approval Kit</h4>
+            <p class="lnd_paragraph_event">Second Monday of each month<br>7:00 AM - 8:00 AM PT</p>
+            <div class="icon-events">
+           <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="" class="fe08_icon-copy"></div> 
+              <a href="https://aka.ms/ApprovalsKit/OfficeHours" aria-label="join call in teams">
+                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="Approval Kit Office Hours"
+                    class="fe08_icon-copy"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> END: Community -->
 
-        function renderQuestion() {
-            const question = questions[currentQuestionIndex];
-            document.getElementById('question-title').textContent = question.title;
-            document.getElementById('question-subtitle').textContent = question.subtitle;
-            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-            document.getElementById('total-questions').textContent = questions.length;
-
-            const optionsList = document.getElementById('options-list');
-            optionsList.innerHTML = '';
-
-            question.options.forEach(option => {
-                const optionElement = document.createElement('div');
-                optionElement.className = `option-card ${answers[question.id] === option.id ? 'selected' : ''}`;
-                optionElement.setAttribute('data-testid', `option-${option.id}`);
-                
-                optionElement.innerHTML = `
-                    <input type="radio" 
-                           name="${question.id}" 
-                           value="${option.id}" 
-                           class="option-radio"
-                           data-testid="radio-${option.id}"
-                           ${answers[question.id] === option.id ? 'checked' : ''}>
-                    <div class="option-content">
-                        <h4 class="option-label">${option.label}</h4>
-                        <p class="option-description">${option.description}</p>
-                    </div>
-                `;
-
-                optionElement.addEventListener('click', () => selectOption(question.id, option.id));
-                optionsList.appendChild(optionElement);
-            });
-
-            // Update navigation buttons
-            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
-            document.getElementById('next-btn').disabled = !answers[question.id];
-            document.getElementById('next-btn').textContent = currentQuestionIndex === questions.length - 1 ? 'Get Recommendation ▶' : 'Next ▶';
-        }
-
-        function selectOption(questionId, optionId) {
-            answers[questionId] = optionId;
-            renderQuestion();
-        }
-
-        function renderRecommendation() {
-            recommendedPlatform = determinePlatform(answers);
-            
-            document.getElementById('platform-icon-large').textContent = recommendedPlatform.name.charAt(0);
-            document.getElementById('platform-name').textContent = recommendedPlatform.name;
-            document.getElementById('platform-description').textContent = recommendedPlatform.description;
-
-            const benefitsList = document.getElementById('benefits-list');
-            benefitsList.innerHTML = '';
-            recommendedPlatform.benefits.forEach(benefit => {
-                const li = document.createElement('li');
-                li.className = 'benefit-item';
-                li.innerHTML = `<span class="check-icon">✅</span><span class="benefit-text">${benefit}</span>`;
-                benefitsList.appendChild(li);
-            });
-
-            // Show 1st party agents if Microsoft 365 Copilot is recommended
-            const firstPartySection = document.getElementById('first-party-agents');
-            if (recommendedPlatform.id === 'microsoft365copilot') {
-                firstPartySection.classList.remove('hidden');
-                const agentsGrid = document.getElementById('agents-grid');
-                agentsGrid.innerHTML = '';
-                
-                Object.values(firstPartyCopilots).forEach(agent => {
-                    const agentCard = document.createElement('div');
-                    agentCard.style.cssText = 'background-color: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: 12px;';
-                    agentCard.innerHTML = `
-                        <h5 style="font-weight: 600; color: hsl(var(--foreground)); margin-bottom: 4px; font-size: 14px;">${agent.name}</h5>
-                        <p style="font-size: 12px; color: hsl(var(--muted-foreground)); margin: 0;">${agent.description}</p>
-                    `;
-                    agentsGrid.appendChild(agentCard);
-                });
-            } else {
-                firstPartySection.classList.add('hidden');
-            }
-
-            const reasoningList = document.getElementById('reasoning-list');
-            reasoningList.innerHTML = '';
-            recommendedPlatform.reasoning.forEach(reason => {
-                const li = document.createElement('li');
-                li.className = 'reasoning-item';
-                li.innerHTML = `<span class="check-icon">✅</span><span class="reasoning-text">${reason}</span>`;
-                reasoningList.appendChild(li);
-            });
-        }
-
-        function renderImplementation() {
-            const checklist = implementationChecklists[recommendedPlatform.id];
-
-            const predevList = document.getElementById('predev-checklist');
-            predevList.innerHTML = '';
-            checklist.predev.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.className = 'checklist-item';
-                li.innerHTML = `
-                    <input type="checkbox" class="checkbox" data-testid="predev-item-${index}">
-                    <span class="checklist-item-text">${item}</span>
-                `;
-                predevList.appendChild(li);
-            });
-
-            const postdevList = document.getElementById('postdev-checklist');
-            postdevList.innerHTML = '';
-            checklist.postdev.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.className = 'checklist-item';
-                li.innerHTML = `
-                    <input type="checkbox" class="checkbox" data-testid="postdev-item-${index}">
-                    <span class="checklist-item-text">${item}</span>
-                `;
-                postdevList.appendChild(li);
-            });
-        }
-
-        function exportPlan() {
-            const exportData = {
-                platform: recommendedPlatform,
-                answers,
-                checklist: recommendedPlatform ? implementationChecklists[recommendedPlatform.id] : null,
-                exportDate: new Date().toISOString()
-            };
-            
-            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `agent-platform-plan-${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        function restart() {
-            currentStep = 0;
-            currentQuestionIndex = 0;
-            answers = {};
-            recommendedPlatform = null;
-            updateProgressIndicator();
-            showSection('welcome-section');
-        }
-
-        function toggleTheme() {
-            isDarkTheme = !isDarkTheme;
-            document.documentElement.classList.toggle('dark');
-            document.getElementById('theme-icon').className = isDarkTheme ? 'icon icon-sun' : 'icon icon-moon';
-        }
-
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize
-            updateProgressIndicator();
-            
-            // Theme toggle
-            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-
-            // Welcome section
-            document.getElementById('start-assessment').addEventListener('click', function() {
-                currentStep = 1;
-                currentQuestionIndex = 0;
-                updateProgressIndicator();
-                renderQuestion();
-                showSection('assessment-section');
-            });
-
-            // Assessment navigation
-            document.getElementById('prev-btn').addEventListener('click', function() {
-                if (currentQuestionIndex > 0) {
-                    currentQuestionIndex--;
-                    renderQuestion();
-                }
-            });
-
-            document.getElementById('next-btn').addEventListener('click', function() {
-                if (currentQuestionIndex < questions.length - 1) {
-                    currentQuestionIndex++;
-                    renderQuestion();
-                } else {
-                    // Assessment complete
-                    currentStep = 2;
-                    updateProgressIndicator();
-                    renderRecommendation();
-                    showSection('recommendation-section');
-                }
-            });
-
-            // Recommendation section
-            document.getElementById('view-implementation').addEventListener('click', function() {
-                currentStep = 3;
-                updateProgressIndicator();
-                renderImplementation();
-                showSection('implementation-section');
-            });
-
-            // Implementation section
-            document.getElementById('view-structure').addEventListener('click', function() {
-                currentStep = 4;
-                updateProgressIndicator();
-                showSection('structure-section');
-            });
-
-            // Structure section
-            document.getElementById('restart-btn').addEventListener('click', restart);
-            document.getElementById('export-btn').addEventListener('click', exportPlan);
-        });
-    </script>
+  <!-- BEGIN: Footer -->
+  <div class="">
+    <div class="wrapper">
+      <div class="centre-align"><img src="images/footer2.png" style="width: 30%; padding: 20px;" alt="Power CAT">
+      </div>
+    </div>
+  </div>
+  <!-- END: Footer -->
+  <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="assets/js/powercat-landing-page.js" type="text/javascript"></script>
 </body>
+
 </html>
