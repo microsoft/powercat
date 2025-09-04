@@ -805,7 +805,7 @@ body {
     font-style: normal;
 }
 
-.icon-bot::before { content: "&#129302;"; }
+.icon-bot::before { content: ""; }
 .icon-lightbulb::before { content: "&#128161;"; }
 .icon-check::before { content: "&#10003;"; }
 .icon-chevron-right::before { content: "▶"; }
