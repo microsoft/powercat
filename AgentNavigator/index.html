@@ -6,11 +6,11 @@
         <title>Microsoft Agent Platform Decision Tool</title>
         <meta
             name="description"
-            content="Interactive tool to help you choose the best Microsoft agent platform for your use case - Microsoft 365 Copilot, Copilot Studio Lite, Copilot Studio, or Azure AI Foundry."
+            content="Interactive tool to help you choose the best Microsoft agent platform for your use case - Microsoft 365 Copilot, Microsoft 365 Copilot with Agent Builder, Copilot Studio, or Azure AI Foundry."
         />
 
         <!-- RTF export for Word document compatibility -->
-        <link rel="stylesheet" href="../assets/css/agent-navigator.css" />
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
         <!-- Header -->
@@ -21,13 +21,13 @@
                         <div class="logo-icon">M</div>
                         <h1 class="logo-text">Agent Platform Decision Tool</h1>
                     </div>
-                    <button
+                    <!-- <button
                         class="btn btn-ghost"
                         id="theme-toggle"
                         data-testid="button-theme-toggle"
                     >
                         <span class="icon icon-sun" id="theme-icon"></span>
-                    </button>
+                    </button>-->
                 </div>
             </div>
         </header>
@@ -104,10 +104,10 @@
                                 <div class="platform-grid">
                                     <div class="platform-preview">
                                         <div class="platform-preview-icon">
-                                            🤝
+                                            <img src="https://microsoft.github.io/powercat/images/m365-copilot-logo.png" alt="M365 Copilot Icon" style="width: 32px; height: 32px;"/>
                                         </div>
                                         <h3 class="platform-preview-title">
-                                            Microsoft 365 Copilot
+                                            Microsoft 365 Copilot Chat
                                         </h3>
                                         <p class="platform-preview-desc">
                                             Built-in productivity assistant across Microsoft 365 apps and ready-to-use agents for specific tasks
@@ -115,18 +115,18 @@
                                     </div>
                                     <div class="platform-preview">
                                         <div class="platform-preview-icon">
-                                            🏗️
+                                            <img src="https://microsoft.github.io/powercat/images/copilot.png" alt="Copilot Icon" style="width: 32px; height: 32px;"/>
                                         </div>
                                         <h3 class="platform-preview-title">
-                                            Copilot Studio Agent Builder
+                                            Microsoft 365 Copilot with Agent Builder
                                         </h3>
                                         <p class="platform-preview-desc">
-                                            Extend Microsoft 365 Copilot with your organization's specific knowledge and automations.
+                                            Extend Microsoft 365 Copilot with knowledge and actions for your organization.
                                         </p>
                                     </div>
                                     <div class="platform-preview">
                                         <div class="platform-preview-icon">
-                                            🎨
+                                            <img src="https://microsoft.github.io/powercat/images/CopilotStudio.png" alt="Copilot Studio Icon" style="width: 32px; height: 32px;"/>
                                         </div>
                                         <h3 class="platform-preview-title">
                                             Copilot Studio
@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="platform-preview">
                                         <div class="platform-preview-icon">
-                                            ☁️
+                                            <img src="https://microsoft.github.io/powercat/images/ai-foundry.png" alt="Azure AI Foundry Icon" style="width: 32px; height: 32px;"/>
                                         </div>
                                         <h3 class="platform-preview-title">
                                             Azure AI Foundry
@@ -196,7 +196,7 @@
 
                                 <div class="question-counter">
                                     <span id="current-question">1</span> of
-                                    <span id="total-questions">5</span>
+                                    <span id="total-questions">4</span>
                                 </div>
 
                                 <button
@@ -443,6 +443,7 @@
         </main>
 
         <script>
+            // Application Data - Updated based on Microsoft AI Agent Decision Matrix
             const questions = [
                 {
                     id: "primaryPurpose",
@@ -530,7 +531,7 @@
                             id: "moderate",
                             label: "Moderate - Custom workflows and logic",
                             description:
-                                "Build conversational agents with custom behaviors and integrations",
+                                "Build conversational and autonomous agents with custom behaviors  and integrations",
                         },
                         {
                             id: "highest",
@@ -572,38 +573,6 @@
                         },
                     ],
                 },
-                {
-                    id: "deploymentNeeds",
-                    title: "What are your deployment requirements?",
-                    subtitle:
-                        "Consider where and how users will access your agent",
-                    options: [
-                        {
-                            id: "microsoft_managed",
-                            label: "Microsoft-managed within M365",
-                            description:
-                                "Built into Office apps - Word, Teams, Outlook sidebar/chat",
-                        },
-                        {
-                            id: "microsoft_hosted",
-                            label: "Microsoft-hosted in M365 environment",
-                            description:
-                                "Accessed via Copilot Chat interfaces but with custom capabilities",
-                        },
-                        {
-                            id: "multiple_channels",
-                            label: "Multiple channels and touchpoints",
-                            description:
-                                "Teams, SharePoint, web pages, and custom interfaces",
-                        },
-                        {
-                            id: "anywhere",
-                            label: "Deploy anywhere",
-                            description:
-                                "Web apps, mobile apps, Teams apps, chatbots, or custom integrations",
-                        },
-                    ],
-                },
             ];
 
             const platformOptions = {
@@ -624,7 +593,7 @@
                 },
                 agentbuilder: {
                     id: "agentbuilder",
-                    name: "Microsoft 365 Copilot with Copilot Studio Agent Builder",
+                    name: "Microsoft 365 Copilot with Agent Builder",
                     icon: "wrench",
                     color: "green",
                     description:
@@ -1133,7 +1102,7 @@
                         );
                     }
                 }
-                // Microsoft 365 Copilot with Copilot Studio Lite - Only when needs exceed 1st party agents
+                // Microsoft 365 Copilot with Agent Builder - Only when needs exceed 1st party agents
                 else if (
                     answers.primaryPurpose === "organizational" &&
                     answers.targetAudience === "business_users" &&
@@ -1146,7 +1115,7 @@
                     bestMatch = { ...platformOptions.agentbuilder };
                     bestMatch.reasoning = [
                         "Your organizational needs go beyond existing 1st party Copilot agents",
-                        "Company-specific knowledge extension fits Copilot Studio Lite's purpose",
+                        "Company-specific knowledge extension fits Agent Builder's purpose",
                         "Business users benefit from custom AI capabilities within familiar Copilot UI",
                         "Low complexity aligns with guided configuration approach",
                         "Microsoft ecosystem focus matches platform capabilities",
@@ -1185,39 +1154,15 @@
 
                 // Additional logic based on specific combinations
                 if (!bestMatch) {
-                    // Copilot Studio for multi-channel deployment needs
+                    // Agent Builder for extended Microsoft integration (only if not covered by 1st party agents)
                     if (
-                        answers.deploymentNeeds === "multiple_channels" &&
-                        answers.complexityLevel === "moderate"
-                    ) {
-                        bestMatch = { ...platformOptions.copilotstudio };
-                        bestMatch.reasoning = [
-                            "Multi-channel deployment capabilities are Copilot Studio's strength",
-                            "Moderate complexity allows for sophisticated conversational agents",
-                            "Teams, SharePoint, and web deployment options available",
-                        ];
-                    }
-                    // Azure AI for unlimited deployment needs
-                    else if (
-                        answers.deploymentNeeds === "anywhere" &&
-                        answers.integrationScope === "unlimited"
-                    ) {
-                        bestMatch = { ...platformOptions.azureai };
-                        bestMatch.reasoning = [
-                            "Deploy anywhere capability requires full development control",
-                            "Unlimited integration scope demands enterprise platform",
-                            "Custom applications and advanced AI features needed",
-                        ];
-                    }
-                    // Copilot Studio Lite for extended Microsoft integration (only if not covered by 1st party agents)
-                    else if (
                         answers.integrationScope === "extended_microsoft" &&
                         answers.complexityLevel === "low" &&
                         !firstPartyCheck.isFirstPartyCovered
                     ) {
                         bestMatch = { ...platformOptions.agentbuilder };
                         bestMatch.reasoning = [
-                            "Extended Microsoft ecosystem fits Copilot Studio Lite capabilities",
+                            "Extended Microsoft ecosystem fits Agent Builder capabilities",
                             "Your needs go beyond the 11+ available 1st party Copilot agents",
                             "Low complexity configuration within M365 environment",
                             "Company-specific knowledge augmentation",
