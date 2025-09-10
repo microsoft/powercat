@@ -37,27 +37,6 @@
     --font-sans: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.dark {
-    --background: hsl(222, 84%, 4.9%);
-    --foreground: hsl(210, 40%, 98%);
-    --card: hsl(222, 84%, 4.9%);
-    --card-foreground: hsl(210, 40%, 98%);
-    --popover: hsl(222, 84%, 4.9%);
-    --popover-foreground: hsl(210, 40%, 98%);
-    --primary: hsl(210, 100%, 50%);
-    --primary-foreground: hsl(222, 47%, 11%);
-    --secondary: hsl(217, 33%, 17%);
-    --secondary-foreground: hsl(210, 40%, 98%);
-    --muted: hsl(217, 33%, 17%);
-    --muted-foreground: hsl(215, 20%, 65%);
-    --accent: hsl(217, 33%, 17%);
-    --accent-foreground: hsl(210, 40%, 98%);
-    --destructive: hsl(0, 84%, 60%);
-    --destructive-foreground: hsl(210, 40%, 98%);
-    --border: hsl(217, 33%, 17%);
-    --input: hsl(217, 33%, 17%);
-    --ring: hsl(210, 100%, 50%);
-}
 
 * {
     margin: 0;
@@ -359,9 +338,6 @@ body {
     background-color: hsl(210, 100%, 97%);
 }
 
-.dark .option-card.selected {
-    background-color: hsl(217, 33%, 20%);
-}
 
 .option-radio {
     margin-top: 4px;
@@ -573,10 +549,6 @@ body {
     padding: 16px;
 }
 
-.dark .next-steps-card {
-    background-color: hsl(217, 91%, 10%);
-    border-color: hsl(217, 91%, 20%);
-}
 
 .next-steps-title {
     font-weight: 600;
@@ -587,18 +559,12 @@ body {
     gap: 8px;
 }
 
-.dark .next-steps-title {
-    color: hsl(219, 95%, 80%);
-}
 
 .next-steps-text {
     font-size: 14px;
     color: hsl(219, 95%, 30%);
 }
 
-.dark .next-steps-text {
-    color: hsl(219, 95%, 70%);
-}
 
 /* Implementation Checklist */
 .checklist-title {
@@ -907,8 +873,6 @@ body {
 .icon-cog::before { content: "⚙️"; }
 .icon-download::before { content: "⬇️"; }
 .icon-restart::before { content: "🔄"; }
-.icon-sun::before { content: "☀️"; }
-.icon-moon::before { content: "🌙"; }
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -964,13 +928,6 @@ body {
                         <div class="logo-icon"><img src="https://microsoft.github.io/powercat/images/powercattools.png" alt="Power CAT Logo" style="width: 32px; height: 32px;"/></div>
                         <h1 class="logo-text">Agent Platform Decision Tool</h1>
                     </div>
-                    <button
-                        class="btn btn-ghost"
-                        id="theme-toggle"
-                        data-testid="button-theme-toggle"
-                    >
-                        <span class="icon icon-sun" id="theme-icon"></span>
-                    </button>
                 </div>
             </div>
         </header>
@@ -1667,7 +1624,6 @@ body {
             let currentQuestionIndex = 0;
             let answers = {};
             let recommendedPlatform = null;
-            let isDarkTheme = false;
             let structurePlanningData = {};
 
             // 1st Party Copilot Agents - Available out-of-the-box
@@ -1729,7 +1685,7 @@ body {
             // Platform-specific structure planning content
             const platformStructures = {
                 microsoft365copilot: {
-                    title: "1st Party Agent Configuration",
+                    title: "Copilot Chat Configuration",
                     sections: [
                         {
                             title: "Agent Selection & Setup",
@@ -1795,7 +1751,7 @@ body {
                     ],
                 },
                 agentbuilder: {
-                    title: "Custom M365 Agent Architecture",
+                    title: "M365 Agent Architecture",
                     sections: [
                         {
                             title: "Knowledge & Data Sources",
@@ -1934,7 +1890,7 @@ body {
                     ],
                 },
                 azureai: {
-                    title: "Enterprise AI Solution Architecture",
+                    title: "AI Foundry Agent Solution Architecture",
                     sections: [
                         {
                             title: "AI & ML Components",
@@ -2675,23 +2631,12 @@ body {
                 showSection("welcome-section");
             }
 
-            function toggleTheme() {
-                isDarkTheme = !isDarkTheme;
-                document.documentElement.classList.toggle("dark");
-                document.getElementById("theme-icon").className = isDarkTheme
-                    ? "icon icon-sun"
-                    : "icon icon-moon";
-            }
 
             // Event Listeners
             document.addEventListener("DOMContentLoaded", function () {
                 // Initialize
                 updateProgressIndicator();
 
-                // Theme toggle
-                document
-                    .getElementById("theme-toggle")
-                    .addEventListener("click", toggleTheme);
 
                 // Welcome section
                 document
