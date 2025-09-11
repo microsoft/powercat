@@ -1321,7 +1321,7 @@ body {
                     <div class="card">
                         <div class="card-content">
                             <h2 class="structure-title">
-                                <span class="icon">🔗</span> Agent Structure
+                                Agent Structure
                                 Planning
                             </h2>
 
@@ -1685,7 +1685,7 @@ body {
             // Platform-specific structure planning content
             const platformStructures = {
                 microsoft365copilot: {
-                    title: "Copilot Chat Configuration",
+                    title: "Microsoft 365 Copilot Structure",
                     sections: [
                         {
                             title: "Agent Selection & Setup",
@@ -1751,7 +1751,7 @@ body {
                     ],
                 },
                 agentbuilder: {
-                    title: "M365 Agent Architecture",
+                    title: "Copilot Studio Lite Agent Structure",
                     sections: [
                         {
                             title: "Knowledge & Data Sources",
@@ -1817,7 +1817,7 @@ body {
                     ],
                 },
                 copilotstudio: {
-                    title: "Copilot Studio Agent Design",
+                    title: "Microsoft Copilot Studio Agent Structure",
                     sections: [
                         {
                             title: "Conversation Architecture",
@@ -1890,7 +1890,7 @@ body {
                     ],
                 },
                 azureai: {
-                    title: "AI Foundry Agent Solution Architecture",
+                    title: "AI Foundry Agent Structure",
                     sections: [
                         {
                             title: "AI & ML Components",
@@ -2386,7 +2386,7 @@ body {
 
                 // Update the structure section title
                 document.querySelector(".structure-title").innerHTML =
-                    `<span class="icon">🔗</span> ${platformStructure.title}`;
+                    `${platformStructure.title}`;
 
                 const structureContainer = document.getElementById(
                     "platform-specific-structure",
