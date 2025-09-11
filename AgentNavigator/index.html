@@ -6,7 +6,7 @@
         <title>Microsoft Agent Platform Decision Tool</title>
         <meta
             name="description"
-            content="Interactive tool to help you choose the best Microsoft agent platform for your use case - Microsoft 365 Copilot, Microsoft 365 Copilot with Agent Builder, Copilot Studio, or Azure AI Foundry."
+            content="Interactive tool to help you choose the best Microsoft agent platform for your use case - Microsoft 365 Copilot, Copilot Studio Lite, Copilot Studio, or Azure AI Foundry."
         />
 
         <!-- RTF export for Word document compatibility -->
@@ -1018,7 +1018,7 @@ body {
                                             <img src="https://microsoft.github.io/powercat/images/copilot.png" alt="Copilot Icon" style="width: 32px; height: 32px;"/>
                                         </div>
                                         <h3 class="platform-preview-title">
-                                            Microsoft 365 Copilot with Agent Builder
+                                            Copilot Studio Lite
                                         </h3>
                                         <p class="platform-preview-desc">
                                             Extend Microsoft 365 Copilot with knowledge and actions for your organization
@@ -1503,11 +1503,11 @@ body {
                 },
                 agentbuilder: {
                     id: "agentbuilder",
-                    name: "Microsoft 365 Copilot with Agent Builder",
+                    name: "Copilot Studio Lite",
                     icon: "wrench",
                     color: "green",
                     description:
-                        "Extend Copilot beyond the 11+ built-in agents with custom organizational knowledge and company-specific capabilities",
+                        "Extend Microsoft 365 Copilot with custom organizational knowledge and company-specific capabilities",
                     benefits: [
                         "Lightweight customization without code for needs beyond 1st party agents",
                         "Organizational Q&A from custom knowledge bases and internal documents",
@@ -1535,7 +1535,7 @@ body {
                 },
                 azureai: {
                     id: "azureai",
-                    name: "Azure AI Foundry Agent Service",
+                    name: "Azure AI Foundry",
                     icon: "cloud",
                     color: "indigo",
                     description:
@@ -2313,14 +2313,14 @@ body {
                         if (userAnswers.primaryPurpose === "productivity") {
                             reasons.push("Basic productivity needs are better served by standard Microsoft 365 Copilot without custom configuration.");
                         } else if (userAnswers.primaryPurpose === "business_process") {
-                            reasons.push("Business process automation needs advanced workflow capabilities beyond Agent Builder's scope.");
+                            reasons.push("Business process automation needs advanced workflow capabilities beyond Copilot Studio Lite's scope.");
                         } else if (userAnswers.primaryPurpose === "enterprise_ai") {
                             reasons.push("Enterprise AI development requires full platform capabilities beyond guided configuration.");
                         }
                         if (userAnswers.targetAudience === "end_users") {
                             reasons.push("End-users are better served by out-of-the-box Copilot features without custom configuration.");
                         } else if (userAnswers.targetAudience === "business_analysts") {
-                            reasons.push("Business analysts need visual workflow design capabilities beyond Agent Builder's focus.");
+                            reasons.push("Business analysts need visual workflow design capabilities beyond Copilot Studio Lite's focus.");
                         } else if (userAnswers.targetAudience === "developers") {
                             reasons.push("Developers require full control and coding capabilities beyond guided configuration.");
                         }
@@ -2335,7 +2335,7 @@ body {
                         if (userAnswers.primaryPurpose === "productivity") {
                             reasons.push("Personal productivity is better served by Microsoft 365 Copilot without complex workflow design.");
                         } else if (userAnswers.primaryPurpose === "organizational") {
-                            reasons.push("Organizational knowledge needs are better addressed through Agent Builder's guided approach.");
+                            reasons.push("Organizational knowledge needs are better addressed through Copilot Studio Lite's guided approach.");
                         } else if (userAnswers.primaryPurpose === "enterprise_ai") {
                             reasons.push("Enterprise AI development needs require full platform capabilities beyond visual conversation design.");
                         }
