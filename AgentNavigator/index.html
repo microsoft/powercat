@@ -2106,6 +2106,12 @@ body {
                         section.classList.add("hidden");
                     });
                 document.getElementById(sectionId).classList.remove("hidden");
+                
+                // Always scroll to top when navigating to a new section
+                // Use setTimeout to ensure scroll happens after DOM updates
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                }, 10);
             }
 
             function updateProgressIndicator() {
@@ -2137,6 +2143,12 @@ body {
                     currentQuestionIndex + 1;
                 document.getElementById("total-questions").textContent =
                     questions.length;
+                
+                // Always scroll to top when navigating between questions
+                // Use setTimeout to ensure scroll happens after DOM updates
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                }, 10);
 
                 const optionsList = document.getElementById("options-list");
                 optionsList.innerHTML = "";
