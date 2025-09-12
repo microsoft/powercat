@@ -968,7 +968,7 @@ body {
                             >
                                 3
                             </div>
-                            <span class="step-label">Implementation</span>
+                            <span class="step-label">Structure</span>
                         </div>
                         <div class="step-connector"></div>
                         <div class="progress-step">
@@ -979,7 +979,7 @@ body {
                             >
                                 4
                             </div>
-                            <span class="step-label">Structure</span>
+                            <span class="step-label">Implementation</span>
                         </div>
                     </div>
                 </div>
@@ -1004,13 +1004,13 @@ body {
                                 <div class="platform-grid">
                                     <div class="platform-preview">
                                         <div class="platform-preview-icon">
-                                            <img src="https://microsoft.github.io/powercat/images/m365-copilot-logo.png" alt="M365 Copilot Icon" style="width: 32px; height: 32px;"/>
+                                            <img src="https://microsoft.github.io/powercat/images/m365-copilot-logo.png" alt="Microsoft 365 Copilot Icon" style="width: 32px; height: 32px;"/>
                                         </div>
                                         <h3 class="platform-preview-title">
                                             Microsoft 365 Copilot Chat
                                         </h3>
                                         <p class="platform-preview-desc">
-                                            Built-in productivity assistant across Microsoft 365 apps and ready-to-use agents for specific tasks
+                                            Use a built-in productivity assistant across Microsoft 365 apps and ready-to-use agents for specific tasks
                                         </p>
                                     </div>
                                     <div class="platform-preview">
@@ -1021,7 +1021,7 @@ body {
                                             Copilot Studio Lite
                                         </h3>
                                         <p class="platform-preview-desc">
-                                            Extend Microsoft 365 Copilot with knowledge and actions for your organization
+                                            Quickly build agents for personal or team-assistive Q&A over existing content, enriched with organizational knowledge and actions
                                         </p>
                                     </div>
                                     <div class="platform-preview">
@@ -1032,7 +1032,7 @@ body {
                                             Copilot Studio
                                         </h3>
                                         <p class="platform-preview-desc">
-                                            Build custom conversational and autonomous agents with workflows, process automation, integrations, and business logic
+                                            Create agents for internal or external-facing scenarios that need multi-step workflows, process automation, integrations, business logic, and lifecycle management
                                         </p>
                                     </div>
                                     <div class="platform-preview">
@@ -1377,7 +1377,7 @@ body {
                             id: "business_process",
                             label: "Custom business process automation",
                             description:
-                                "Specific workflow automation with conversational interfaces and action-taking capabilities",
+                                "Specific workflow automation with conversational interfaces, autonomous triggers, and action-taking capabilities",
                         },
                         {
                             id: "enterprise_ai",
@@ -1389,39 +1389,39 @@ body {
                 },
                 {
                     id: "targetAudience",
-                    title: "Who is your primary target audience?",
+                    title: "Who is the target audience for the agent platform?",
                     subtitle:
-                        "Consider the technical skill level and role of your users",
+                        "Consider the technical skill level and role of the people who will create agents",
                     options: [
                         {
                             id: "end_users",
                             label: "End-users & knowledge workers",
                             description:
-                                "Employees who want AI assistance in everyday Microsoft 365 tasks",
+                                "Non-technical users who primarily get AI assistance for productivity tasks in Microsoft 365",
                         },
                         {
                             id: "business_users",
-                            label: "Business users in the organization",
+                            label: "Business users",
                             description:
-                                "Teams who need company-specific knowledge and simple automations",
+                                "People without coding knowledge who have the need to expand to company-specific knowledge or incorporate simple automation",
                         },
                         {
                             id: "business_analysts",
-                            label: "Business analysts & Power Platform makers",
+                            label: "Business analysts, makers, IT teams",
                             description:
-                                "IT teams creating custom departmental solutions with minimal code",
+                                "Users who are comfortable with development nad can create custom departmental or line-of-business agents incorporating business logic",
                         },
                         {
                             id: "developers",
-                            label: "Software developers & data scientists",
+                            label: "Professional developers, data scientists, AI/ML engineers, and enterprise teams",
                             description:
-                                "Technical teams building advanced AI solutions with full control",
+                                "Highly technical users who require control over infrastructure, models, and advanced integrations for bespoke AI solutions",
                         },
                     ],
                 },
                 {
                     id: "complexityLevel",
-                    title: "What level of complexity do you need?",
+                    title: "What level of complexity does your use case require?",
                     subtitle:
                         "Consider development effort, customization, and technical requirements",
                     options: [
@@ -1435,19 +1435,19 @@ body {
                             id: "low",
                             label: "Low - Configure with your content",
                             description:
-                                "Add connectors or data sources with guided setup process",
+                                "Add connectors or knowledge sources with guided setup process",
                         },
                         {
                             id: "moderate",
                             label: "Moderate - Custom workflows and logic",
                             description:
-                                "Build conversational and autonomous agents with custom behaviors  and integrations",
+                                "Build with multi-step workflows, automated triggers, custom behaviors, integrations, and business logic",
                         },
                         {
                             id: "highest",
                             label: "Highest - Full software development",
                             description:
-                                "Custom architecture, model training, and enterprise-grade development",
+                                "Custom architecture, fine-tune models, vector indexes, custom orchestration, and enterprise-grade development",
                         },
                     ],
                 },
@@ -1461,7 +1461,7 @@ body {
                             id: "microsoft_graph",
                             label: "Microsoft 365 and Graph data only",
                             description:
-                                "Work with emails, Teams, SharePoint, OneDrive within M365 permissions",
+                                "Work with emails, Teams, SharePoint, OneDrive within Microsoft 365 permissions",
                         },
                         {
                             id: "extended_microsoft",
@@ -1471,9 +1471,9 @@ body {
                         },
                         {
                             id: "power_platform",
-                            label: "Power Platform connectors",
+                            label: "Extended integrations with enterprise systems",
                             description:
-                                "1400+ connectors, APIs, Dataverse, and various enterprise systems",
+                                "1400+ services through prebuilt connectors, Dataverse, REST APIs and workflows for process automation",
                         },
                         {
                             id: "unlimited",
@@ -1496,7 +1496,7 @@ body {
                     benefits: [
                         "Immediate deployment",
                         "No development required",
-                        "Works with existing M365 data",
+                        "Works with existing Microsoft 365 data",
                         "Standard security & compliance",
                     ],
                     reasoning: [],
@@ -1523,13 +1523,14 @@ body {
                     icon: "paint-brush",
                     color: "purple",
                     description:
-                        "Intuitive, natural language building experience for creating custom conversational agents with advanced workflows and multi-channel deployment",
+                        "Intuitive, natural language building experience for creating custom conversational and autonomous agents with advanced workflows and multi-channel deployment",
                     benefits: [
                         "Full conversational agent capabilities with branching dialogues",
-                        "Access to 1400+ Power Platform connectors",
-                        "Multi-channel deployment (Teams, web, SharePoint)",
+                        "Access to 1400+ connectors",
+                        "Multi-channel deployment (Teams, custom websites & portals, SharePoint)",
                         "Action-taking capabilities through Power Automate",
                         "Visual conversation design and custom prompt engineering",
+                        "Generative AI to coordinate and manage multiple tools, knowledge, agents, or workflows",
                     ],
                     reasoning: [],
                 },
@@ -1562,7 +1563,7 @@ body {
                         "Plan user onboarding and training for Office app and specialized agent integration",
                     ],
                     postdev: [
-                        "Monitor Copilot and specialized agent usage analytics within M365 admin center",
+                        "Monitor Copilot and specialized agent usage analytics within Microsoft 365 admin center",
                         "Track adoption of specific 1st party agents (Sales, Service, Finance, HR, etc.)",
                         "Collect user feedback on productivity improvements across specialized agents",
                         "Ensure data governance policies are being followed for all agent types",
@@ -1588,10 +1589,10 @@ body {
                 copilotstudio: {
                     predev: [
                         "Map out conversational flows and user journey scenarios",
-                        "Identify required Power Platform connectors (from 1400+ available)",
+                        "Identify required connectors (from 1400+ available)",
                         "Design agent personality, tone, and response patterns",
                         "Plan integration with Dataverse, APIs, and business systems",
-                        "Set up development and testing environments in Power Platform",
+                        "Set up development and testing environments",
                     ],
                     postdev: [
                         "Deploy to Teams, SharePoint, or web channels as planned",
@@ -1744,7 +1745,7 @@ body {
                                     icon: "📊",
                                     color: "#f97316",
                                     description:
-                                        "Configure M365 admin center monitoring for agent usage and adoption",
+                                        "Configure Microsoft 365 admin center monitoring for agent usage and adoption",
                                 },
                             ],
                         },
@@ -1803,7 +1804,7 @@ body {
                                     icon: "🔒",
                                     color: "#22c55e",
                                     description:
-                                        "Set user permissions and data access levels within M365 ecosystem",
+                                        "Set user permissions and data access levels within Microsoft 365 ecosystem",
                                 },
                                 {
                                     title: "Testing & Validation",
@@ -1828,7 +1829,7 @@ body {
                                     icon: "🎯",
                                     color: "#3b82f6",
                                     description:
-                                        "Define conversation topics and user intent recognition patterns",
+                                        "Identify the main use cases your agent will cover, and break them down into user intents (what people are trying to achieve)",
                                 },
                                 {
                                     title: "Dialog Flows",
@@ -1849,43 +1850,49 @@ body {
                                     icon: "🔍",
                                     color: "#a855f7",
                                     description:
-                                        "Configure data extraction from user messages (dates, names, etc.)",
+                                        "Identify entities for data extraction (dates, names, etc.)",
                                 },
                             ],
-                        },
-                        {
-                            title: "Multi-Channel Deployment",
-                            icon: "📡",
+                            title: "Connect & Configure",
+                            icon: "🔌",
+                            color: "#a855f7",
                             components: [
                                 {
-                                    title: "Teams Integration",
-                                    icon: "👥",
+                                    title: "Knowledge Sources",
+                                    icon: "📚",
                                     color: "#3b82f6",
-                                    description:
-                                        "Configure bot deployment within Microsoft Teams environment",
+                                    description: 
+                                        "Add organizational knowledge bases, documents, websites, AI services, Dataverse",
                                 },
                                 {
-                                    title: "Web Chat Widget",
-                                    icon: "🌐",
+                                    title: "Triggers",
+                                    icon: "🚦",
                                     color: "#22c55e",
                                     description:
-                                        "Embed conversational interface in websites and web portals",
+                                        "List user & event-based triggers that trigger your agent's actions",
                                 },
                                 {
-                                    title: "SharePoint Integration",
-                                    icon: "📚",
+                                    title: "Integrations/Tools",
+                                    icon: "🛠️",
                                     color: "#f97316",
                                     description:
-                                        "Deploy agent within SharePoint sites for contextual assistance",
+                                        "Add any pre-built connectors, REST APIs, and business logic that you need to incorporate",
                                 },
                                 {
-                                    title: "Power Platform Connectors",
-                                    icon: "⚡",
-                                    color: "#a855f7",
+                                    title: "Multi-channel Deployment",
+                                    icon: "📡",
+                                    color: "#22c55e",
                                     description:
-                                        "Integrate with Power Automate flows and Power Apps",
+                                        "Configure your agent for deployment across multiple channels, including Teams, SharePoint, web chat, Outlook, or other apps",
                                 },
-                            ],
+                                {
+                                    title: "Authentication and Access",
+                                    icon: "🔐",
+                                    color: "#f97316",
+                                    description:
+                                        "Decide between end-user authentication (Copilot auth) vs. agent/service authentication, list access controls, role-based permissions, and auditing needs",
+                                }
+                            ]
                         },
                     ],
                 },
@@ -2081,7 +2088,7 @@ body {
                         bestMatch.reasoning = [
                             "Business process automation requires Copilot Studio's advanced capabilities",
                             "Moderate complexity needs visual conversation design tools",
-                            "Power Platform connectors provide extensive integration options"
+                            "Connectors provide extensive integration options"
                         ];
                         break;
 
