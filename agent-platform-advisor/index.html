@@ -946,7 +946,7 @@ body {
                             >
                                 1
                             </div>
-                            <span class="step-label">Assessment</span>
+                            <span class="step-label">Questionnaire</span>
                         </div>
                         <div class="step-connector"></div>
                         <div class="progress-step">
@@ -1054,7 +1054,7 @@ body {
                                         id="start-assessment"
                                         data-testid="button-start-assessment"
                                     >
-                                        Start Assessment
+                                        Start Questionnaire
                                         <span
                                             class="icon icon-chevron-right"
                                         ></span>
@@ -1065,7 +1065,7 @@ body {
                     </div>
                 </div>
 
-                <!-- Assessment Section -->
+                <!-- Questionnaire Section -->
                 <div id="assessment-section" class="fade-in hidden">
                     <div class="card">
                         <div class="card-content">
@@ -1233,7 +1233,7 @@ body {
 
                             <div class="center">
                                 <button class="btn btn-ghost" id="back-to-assessment" data-testid="button-back-to-assessment">
-                                    <span class="icon icon-chevron-left"></span> Back to Assessment
+                                    <span class="icon icon-chevron-left"></span> Back to Questionnaire
                                 </button>
                                 <button
                                     class="btn btn-primary"
@@ -2566,7 +2566,7 @@ body {
                 rtf += `\\b Platform: \\b0 ${recommendedPlatform.name}\\par\\par`;
                 rtf += `\\b Description: \\b0 ${recommendedPlatform.description}\\par\\par`;
 
-                // Assessment Results
+                // Questionnaire Results
                 rtf += "\\b\\fs28 2. ASSESSMENT RESULTS\\b0\\fs24\\par";
                 rtf += "\\line";
                 Object.entries(answers).forEach(([key, value]) => {
@@ -2672,7 +2672,7 @@ body {
                         showSection("assessment-section");
                     });
 
-                // Assessment navigation
+                // Questionnaire navigation
                 document
                     .getElementById("prev-btn")
                     .addEventListener("click", function () {
@@ -2689,7 +2689,7 @@ body {
                             currentQuestionIndex++;
                             renderQuestion();
                         } else {
-                            // Assessment complete
+                            // Questionnaire complete
                             currentStep = 2;
                             updateProgressIndicator();
                             renderRecommendation();
