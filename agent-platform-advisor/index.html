@@ -1096,7 +1096,7 @@ body {
 
                                 <div class="question-counter">
                                     <span id="current-question">1</span> of
-                                    <span id="total-questions">4</span>
+                                    <span id="total-questions">5</span>
                                 </div>
 
                                 <button
@@ -1389,7 +1389,7 @@ body {
                 },
                 {
                     id: "targetAudience",
-                    title: "Who is the target audience for the agent platform?",
+                    title: "Who will build agents?",
                     subtitle:
                         "Consider the technical skill level and role of the people who will create agents",
                     options: [
@@ -1480,6 +1480,38 @@ body {
                             label: "Unlimited integration freedom",
                             description:
                                 "Any data source, API, database, or system that can be coded",
+                        },
+                    ],
+                },
+                {
+                    id: "deploymentOptions",
+                    title: "Where and how do you want users to access your AI agent?",
+                    subtitle:
+                        "Consider deployment channels and user access patterns",
+                    options: [
+                        {
+                            id: "microsoft365_apps",
+                            label: "Within Microsoft 365 apps only",
+                            description:
+                                "Users access the agent directly in Teams chat, Outlook, Word, Excel, PowerPoint as a sidebar or chat interface",
+                        },
+                        {
+                            id: "copilot_chat",
+                            label: "Through Microsoft 365 Copilot Chat interfaces",
+                            description:
+                                "Custom capabilities appear within the Copilot experience in M365 apps, with organizational knowledge seamlessly integrated",
+                        },
+                        {
+                            id: "multiple_channels",
+                            label: "Multiple channels (Teams, SharePoint, web)",
+                            description:
+                                "Deploy to specific interfaces like Teams channels, SharePoint sites, or embedded web chat widgets",
+                        },
+                        {
+                            id: "custom_applications",
+                            label: "Custom applications and anywhere access",
+                            description:
+                                "Web applications, mobile apps, custom integrations, or any interface through APIs and SDKs",
                         },
                     ],
                 },
@@ -2051,6 +2083,17 @@ body {
                     indicatedPlatforms.add("azureai");
                 }
 
+                // Deployment Options mapping
+                if (answers.deploymentOptions === "microsoft365_apps") {
+                    indicatedPlatforms.add("microsoft365copilot");
+                } else if (answers.deploymentOptions === "copilot_chat") {
+                    indicatedPlatforms.add("agentbuilder");
+                } else if (answers.deploymentOptions === "multiple_channels") {
+                    indicatedPlatforms.add("copilotstudio");
+                } else if (answers.deploymentOptions === "custom_applications") {
+                    indicatedPlatforms.add("azureai");
+                }
+
                 // Find the highest capability platform from indicated platforms
                 let highestPlatform = "microsoft365copilot"; // default fallback
                 let highestLevel = 0;
@@ -2075,6 +2118,9 @@ body {
                             "End-users benefit from zero-effort AI integration in Office apps",
                             "Lowest complexity matches out-of-the-box functionality"
                         ];
+                        if (answers.deploymentOptions === "microsoft365_apps") {
+                            bestMatch.reasoning.push("Perfect fit for deployment within Microsoft 365 apps where users already work");
+                        }
                         if (firstPartyCheck.isFirstPartyCovered) {
                             bestMatch.reasoning.push("Your use case is likely covered by existing 1st party Copilot agents");
                         }
@@ -2086,6 +2132,9 @@ body {
                             "Business users benefit from custom AI capabilities within familiar Copilot UI",
                             "Extended Microsoft ecosystem integration capabilities"
                         ];
+                        if (answers.deploymentOptions === "copilot_chat") {
+                            bestMatch.reasoning.push("Seamlessly integrates custom capabilities within existing Copilot Chat experience");
+                        }
                         break;
 
                     case "copilotstudio":
@@ -2094,6 +2143,9 @@ body {
                             "Moderate complexity needs visual conversation design tools",
                             "Connectors provide extensive integration options"
                         ];
+                        if (answers.deploymentOptions === "multiple_channels") {
+                            bestMatch.reasoning.push("Multi-channel deployment capabilities support Teams, SharePoint, and web integration");
+                        }
                         break;
 
                     case "azureai":
@@ -2103,6 +2155,9 @@ body {
                             "Highest complexity demands comprehensive development platform",
                             "Unlimited integration scope requires enterprise-grade flexibility"
                         ];
+                        if (answers.deploymentOptions === "custom_applications") {
+                            bestMatch.reasoning.push("Complete deployment flexibility supports custom applications and unlimited integration scenarios");
+                        }
                         break;
                 }
 
@@ -2542,9 +2597,9 @@ body {
                 const questionTitles = {
                     primaryPurpose: "Primary Purpose",
                     targetAudience: "Target Audience",
+                    integrationScope: "Integration Scope", 
                     complexityLevel: "Complexity Level",
-                    integrationScope: "Integration Scope",
-                    deploymentNeeds: "Deployment Needs",
+                    deploymentOptions: "Deployment Options",
                 };
 
                 // Create RTF content for Word compatibility
