@@ -1389,7 +1389,7 @@ body {
                 },
                 {
                     id: "targetAudience",
-                    title: "Who will build agents?",
+                    title: "Who will build the agents?",
                     subtitle:
                         "Consider the technical skill level and role of the people who will create agents",
                     options: [
@@ -1409,7 +1409,7 @@ body {
                             id: "business_analysts",
                             label: "Business analysts, makers, IT teams",
                             description:
-                                "Users who are comfortable with development and can create custom departmental or line-of-business agents incorporating business logic",
+                                "Users who are comfortable with development nad can create custom departmental or line-of-business agents incorporating business logic",
                         },
                         {
                             id: "developers",
@@ -1487,7 +1487,7 @@ body {
                     id: "deploymentOptions",
                     title: "Where and how do you want users to access your AI agent?",
                     subtitle:
-                        "Consider channels and user access patterns",
+                        "Consider deployment channels and user access patterns",
                     options: [
                         {
                             id: "microsoft365_apps",
@@ -1499,13 +1499,13 @@ body {
                             id: "copilot_chat",
                             label: "Through Microsoft 365 Copilot Chat interfaces",
                             description:
-                                "Custom capabilities appear within the Copilot experience in Microsoft365 apps, with organizational knowledge seamlessly integrated",
+                                "Custom capabilities appear within the Copilot experience in M365 apps, with organizational knowledge seamlessly integrated",
                         },
                         {
                             id: "multiple_channels",
                             label: "Multiple channels (Teams, SharePoint, web)",
                             description:
-                                "Publish to specific channels, like web sites, social media, and communication platforms, as well asSharePoint, Teams and Microsoft 365 Copilot",
+                                "Deploy to specific interfaces like Teams channels, SharePoint sites, or embedded web chat widgets",
                         },
                         {
                             id: "custom_applications",
@@ -2414,6 +2414,8 @@ body {
                             reasons.push("Personal productivity is better served by Microsoft 365 Copilot without complex workflow design.");
                         } else if (userAnswers.primaryPurpose === "organizational") {
                             reasons.push("Organizational knowledge needs are better addressed through Copilot Studio Lite's guided approach.");
+                        } else if (userAnswers.primaryPurpose === "business_process") {
+                            reasons.push("Your business process automation requirements need enterprise-grade development capabilities beyond Copilot Studio's visual design tools.");
                         } else if (userAnswers.primaryPurpose === "enterprise_ai") {
                             reasons.push("Enterprise AI development needs require full platform capabilities beyond visual conversation design.");
                         }
@@ -2421,13 +2423,20 @@ body {
                             reasons.push("End-users benefit more from simple productivity tools than complex workflow automation.");
                         } else if (userAnswers.targetAudience === "business_users") {
                             reasons.push("Business users need guided configuration for organizational knowledge rather than workflow design.");
+                        } else if (userAnswers.targetAudience === "business_analysts") {
+                            reasons.push("Business analysts with moderate complexity needs require enterprise development platform capabilities beyond visual conversation design.");
                         } else if (userAnswers.targetAudience === "developers") {
                             reasons.push("Developers require full coding control beyond visual conversation design tools.");
                         }
                         if (userAnswers.complexityLevel === "lowest" || userAnswers.complexityLevel === "low") {
                             reasons.push("Your low complexity needs don't require advanced workflow automation capabilities.");
+                        } else if (userAnswers.complexityLevel === "moderate") {
+                            reasons.push("Your moderate complexity requirements benefit from enterprise platform capabilities rather than visual workflow design.");
                         } else if (userAnswers.complexityLevel === "highest") {
                             reasons.push("Your highest complexity requirements need enterprise development platform capabilities.");
+                        }
+                        if (userAnswers.integrationScope === "unlimited") {
+                            reasons.push("Unlimited integration scope requires enterprise development platform capabilities beyond Copilot Studio's connector ecosystem.");
                         }
                         break;
 
