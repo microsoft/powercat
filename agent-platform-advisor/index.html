@@ -292,6 +292,89 @@ body {
     color: hsl(var(--muted-foreground));
 }
 
+/* Pre-built Agents Section */
+.prebuilt-agents-content {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: hsl(var(--foreground));
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.prebuilt-agents-text {
+    text-align: left;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.prebuilt-agents-text p {
+    margin-bottom: 16px;
+    color: hsl(var(--foreground));
+}
+
+.question-prompt {
+    background-color: hsl(var(--muted));
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 24px 0;
+}
+
+.question-prompt h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin-bottom: 12px;
+}
+
+.question-list {
+    margin: 0;
+    padding-left: 24px;
+    list-style-type: disc;
+}
+
+.question-list li {
+    margin-bottom: 8px;
+    color: hsl(var(--foreground));
+    line-height: 1.4;
+}
+
+.prebuilt-agents-navigation {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.nav-question {
+    margin-bottom: 24px;
+}
+
+.nav-question h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+}
+
+.nav-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+    .nav-buttons {
+        flex-direction: row;
+        justify-content: center;
+        max-width: none;
+    }
+}
+
 /* Question Styles */
 .question-card {
     margin-bottom: 24px;
@@ -462,50 +545,6 @@ body {
     color: hsl(var(--muted-foreground));
 }
 
-/* Alternatives Section */
-.alternatives-section {
-    background-color: hsl(var(--muted));
-    border-radius: var(--radius);
-    padding: 16px;
-    margin-top: 24px;
-    margin-bottom: 24px;
-}
-
-.alternatives-title {
-    font-weight: 600;
-    color: hsl(var(--foreground));
-    margin-bottom: 16px;
-    font-size: 16px;
-}
-
-.alternatives-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.alternative-item {
-    background-color: hsl(var(--card));
-    border: 1px solid hsl(var(--border));
-    border-radius: var(--radius);
-    padding: 12px;
-}
-
-.alternative-platform {
-    font-weight: 600;
-    color: hsl(var(--foreground));
-    margin-bottom: 4px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.alternative-reason {
-    font-size: 13px;
-    color: hsl(var(--muted-foreground));
-    line-height: 1.4;
-}
 
 /* Reasoning Section */
 .reasoning-section {
@@ -1065,6 +1104,60 @@ body {
                     </div>
                 </div>
 
+                <!-- Pre-built Agents Section -->
+                <div id="prebuilt-agents-section" class="fade-in hidden">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="prebuilt-agents-content">
+                                <h2 class="section-title">Explore Pre-Built Agents First</h2>
+                                
+                                <div class="prebuilt-agents-text">
+                                    <p>Pre-built agents in Microsoft 365 Copilot are purpose-built AI assistants developed by Microsoft to enhance collaboration, productivity, and decision-making across the Microsoft 365 ecosystem. They are designed primarily for B2E (business-to-employee) scenarios. The pre-built agents work with organizational data through Microsoft Graph, respecting permissions and security controls.</p>
+                                    
+                                    <p>Before diving into building an agent from scratch, take a moment to review the pre-built agents available in Microsoft 365 Copilot. Many common scenarios, like HR questions, meeting prep, writing assistance, and summarization, already have ready-to-use agents that may fully meet your needs.</p>
+                                    
+                                    <div class="question-prompt">
+                                        <h3>Ask yourself:</h3>
+                                        <ul class="question-list">
+                                            <li>Does one of the pre-built agents already cover most of my scenario?</li>
+                                            <li>Could I start with a pre-built agent and lightly customize it rather than building entirely new?</li>
+                                            <li>Does the way the pre-built agent handles permissions, knowledge, or actions fit my organization's requirements?</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <p><strong>If the answer is yes, you can save time and effort by starting there.</strong></p>
+                                    
+                                    <p><strong>If the answer is no, or if your use case requires deeper integration with business systems or more customization, then proceed to the platform questionnaire to identify the right path for your scenario.</strong></p>
+                                </div>
+                                
+                                <div class="prebuilt-agents-navigation">
+                                    <div class="nav-question">
+                                        <h3>Do the pre-built agents in Microsoft 365 Copilot meet your needs?</h3>
+                                    </div>
+                                    <div class="nav-buttons">
+                                        <button
+                                            class="btn btn-primary btn-lg"
+                                            id="prebuilt-yes-btn"
+                                            data-testid="button-prebuilt-yes"
+                                        >
+                                            Yes - Use Microsoft 365 Copilot
+                                            <span class="icon icon-check"></span>
+                                        </button>
+                                        <button
+                                            class="btn btn-secondary btn-lg"
+                                            id="prebuilt-no-btn"
+                                            data-testid="button-prebuilt-no"
+                                        >
+                                            No - Help me choose
+                                            <span class="icon icon-chevron-right"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Questionnaire Section -->
                 <div id="assessment-section" class="fade-in hidden">
                     <div class="card">
@@ -1096,7 +1189,7 @@ body {
 
                                 <div class="question-counter">
                                     <span id="current-question">1</span> of
-                                    <span id="total-questions">5</span>
+                                    <span id="total-questions">4</span>
                                 </div>
 
                                 <button
@@ -1209,15 +1302,6 @@ body {
                                     <!-- Reasoning will be dynamically added here -->
                                 </ul>
 
-                                <!-- Why Other Platforms Weren't Selected -->
-                                <div class="alternatives-section" data-testid="alternatives-section">
-                                    <h4 class="alternatives-title">
-                                        <span class="icon">❌</span> Why Other Platforms Weren't Selected
-                                    </h4>
-                                    <div class="alternatives-list" id="alternatives-list">
-                                        <!-- Alternative explanations will be dynamically added here -->
-                                    </div>
-                                </div>
 
                                 <div class="next-steps-card">
                                     <h4 class="next-steps-title">
@@ -1362,12 +1446,6 @@ body {
                         "This helps determine which platform aligns with your core objectives",
                     options: [
                         {
-                            id: "productivity",
-                            label: "Personal productivity assistance",
-                            description:
-                                "Writing assistance, data analysis, and information retrieval within Office workflows",
-                        },
-                        {
                             id: "organizational",
                             label: "Organizational knowledge and simple tasks",
                             description:
@@ -1377,7 +1455,7 @@ body {
                             id: "business_process",
                             label: "Custom business process automation",
                             description:
-                                "Specific workflow automation with conversational interfaces, autonomous triggers, and action-taking capabilities",
+                                "Specific workflow automation with conversational interfaces, autonomous triggers, orchestration, and action-taking capabilities",
                         },
                         {
                             id: "enterprise_ai",
@@ -1388,60 +1466,22 @@ body {
                     ],
                 },
                 {
-                    id: "targetAudience",
-                    title: "Who will build the agents?",
-                    subtitle:
-                        "Consider the technical skill level and role of the people who will create agents",
-                    options: [
-                        {
-                            id: "end_users",
-                            label: "End-users & knowledge workers",
-                            description:
-                                "Non-technical users who primarily get AI assistance for productivity tasks in Microsoft 365",
-                        },
-                        {
-                            id: "business_users",
-                            label: "Business users",
-                            description:
-                                "People without coding knowledge who have the need to expand to company-specific knowledge or incorporate simple automation",
-                        },
-                        {
-                            id: "business_analysts",
-                            label: "Business analysts, makers, IT teams",
-                            description:
-                                "Users who are comfortable with development nad can create custom departmental or line-of-business agents incorporating business logic",
-                        },
-                        {
-                            id: "developers",
-                            label: "Professional developers, data scientists, AI/ML engineers, and enterprise teams",
-                            description:
-                                "Highly technical users who require control over infrastructure, models, and advanced integrations for bespoke AI solutions",
-                        },
-                    ],
-                },
-                {
                     id: "complexityLevel",
                     title: "What level of complexity does your use case require?",
                     subtitle:
                         "Consider development effort, customization, and technical requirements",
                     options: [
                         {
-                            id: "lowest",
-                            label: "Lowest - Turn it on and use",
-                            description:
-                                "No customization needed, pre-defined behavior and scope",
-                        },
-                        {
                             id: "low",
                             label: "Low - Configure with your content",
                             description:
-                                "Add connectors or knowledge sources with guided setup process",
+                                "Add knowledge sources with guided setup process",
                         },
                         {
                             id: "moderate",
                             label: "Moderate - Custom workflows and logic",
                             description:
-                                "Build with multi-step workflows, automated triggers, custom behaviors, integrations, and business logic",
+                                "Build with multi-step workflows, automated triggers, custom behaviors, integrations, orchestration, and business logic",
                         },
                         {
                             id: "highest",
@@ -1457,12 +1497,6 @@ body {
                     subtitle:
                         "Consider your data sources and system connectivity needs",
                     options: [
-                        {
-                            id: "microsoft_graph",
-                            label: "Microsoft 365 and Graph data only",
-                            description:
-                                "Work with emails, Teams, SharePoint, OneDrive within Microsoft 365 permissions",
-                        },
                         {
                             id: "extended_microsoft",
                             label: "Extended Microsoft ecosystem",
@@ -1490,28 +1524,22 @@ body {
                         "Consider deployment channels and user access patterns",
                     options: [
                         {
-                            id: "microsoft365_apps",
-                            label: "Within Microsoft 365 apps only",
-                            description:
-                                "Users access the agent directly in Teams chat, Outlook, Word, Excel, PowerPoint as a sidebar or chat interface",
-                        },
-                        {
                             id: "copilot_chat",
-                            label: "Through Microsoft 365 Copilot Chat interfaces",
+                            label: "Within Microsoft 365 Copilot and applications only",
                             description:
-                                "Custom capabilities appear within the Copilot experience in M365 apps, with organizational knowledge seamlessly integrated",
+                                "Access directly within Microsoft 365 apps such as Teams, Outlook, Word, Excel, and PowerPoint, through the Copilot chat and sidebar interfaces",
                         },
                         {
                             id: "multiple_channels",
-                            label: "Multiple channels (Teams, SharePoint, web)",
+                            label: "Wide range of internal and external channels",
                             description:
-                                "Deploy to specific interfaces like Teams channels, SharePoint sites, or embedded web chat widgets",
+                                "Microsoft 365 Copilot, Microsoft Teams, SharePoint, , websites, portals, mobile apps, Azure Bot Service channels, custom channels via APIs and connectors",
                         },
                         {
                             id: "custom_applications",
                             label: "Custom applications and anywhere access",
                             description:
-                                "Web applications, mobile apps, custom integrations, or any interface through APIs and SDKs",
+                                "Web applications, mobile apps, enterprise software, internal systems, and any platform that can call APIs",
                         },
                     ],
                 },
@@ -2050,16 +2078,7 @@ body {
                     indicatedPlatforms.add("azureai");
                 }
 
-                // Target Audience mapping
-                if (answers.targetAudience === "end_users") {
-                    indicatedPlatforms.add("microsoft365copilot");
-                } else if (answers.targetAudience === "business_users") {
-                    indicatedPlatforms.add("agentbuilder");
-                } else if (answers.targetAudience === "business_analysts") {
-                    indicatedPlatforms.add("copilotstudio");
-                } else if (answers.targetAudience === "developers") {
-                    indicatedPlatforms.add("azureai");
-                }
+                // Target Audience mapping removed
 
                 // Complexity Level mapping
                 if (answers.complexityLevel === "lowest") {
@@ -2321,151 +2340,8 @@ body {
                     reasoningList.appendChild(li);
                 });
 
-                // Generate explanations for why other platforms weren't selected
-                renderAlternatives(recommendedPlatform.id, answers);
             }
 
-            function renderAlternatives(selectedPlatformId, userAnswers) {
-                const alternativesList = document.getElementById("alternatives-list");
-                alternativesList.innerHTML = "";
-
-                const allPlatforms = ["microsoft365copilot", "agentbuilder", "copilotstudio", "azureai"];
-                const alternativePlatforms = allPlatforms.filter(platform => platform !== selectedPlatformId);
-
-                alternativePlatforms.forEach(platformId => {
-                    const platform = platformOptions[platformId];
-                    const reasons = generateAlternativeReasons(platformId, userAnswers, selectedPlatformId);
-                    
-                    if (reasons.length > 0) {
-                        const alternativeDiv = document.createElement("div");
-                        alternativeDiv.className = "alternative-item";
-                        alternativeDiv.innerHTML = `
-                            <div class="alternative-platform">
-                                <span>❌</span> ${platform.name}
-                            </div>
-                            <div class="alternative-reason">${reasons.join(" ")}</div>
-                        `;
-                        alternativesList.appendChild(alternativeDiv);
-                    }
-                });
-            }
-
-            function generateAlternativeReasons(platformId, userAnswers, selectedPlatformId) {
-                const reasons = [];
-
-                switch (platformId) {
-                    case "microsoft365copilot":
-                        if (userAnswers.primaryPurpose !== "productivity") {
-                            if (userAnswers.primaryPurpose === "organizational") {
-                                reasons.push("Your organizational knowledge needs go beyond basic productivity assistance.");
-                            } else if (userAnswers.primaryPurpose === "business_process") {
-                                reasons.push("Business process automation requires more advanced capabilities than basic productivity features.");
-                            } else if (userAnswers.primaryPurpose === "enterprise_ai") {
-                                reasons.push("Enterprise AI/ML platform needs require much more advanced capabilities than productivity tools.");
-                            }
-                        }
-                        if (userAnswers.targetAudience !== "end_users") {
-                            if (userAnswers.targetAudience === "business_users") {
-                                reasons.push("Your business user audience needs custom organizational knowledge beyond standard Copilot features.");
-                            } else if (userAnswers.targetAudience === "business_analysts") {
-                                reasons.push("Business analysts need workflow automation tools beyond basic productivity assistance.");
-                            } else if (userAnswers.targetAudience === "developers") {
-                                reasons.push("Developer audiences require full platform control and customization capabilities.");
-                            }
-                        }
-                        if (userAnswers.complexityLevel !== "lowest") {
-                            reasons.push("Your complexity requirements exceed the out-of-the-box capabilities of Microsoft 365 Copilot.");
-                        }
-                        if (userAnswers.integrationScope !== "microsoft_graph") {
-                            if (userAnswers.integrationScope === "extended_microsoft") {
-                                reasons.push("Extended Microsoft ecosystem integration needs custom configuration capabilities.");
-                            } else if (userAnswers.integrationScope === "power_platform") {
-                                reasons.push("Power Platform integration requires specialized workflow automation tools.");
-                            } else if (userAnswers.integrationScope === "unlimited") {
-                                reasons.push("Unlimited integration scope requires enterprise development platform capabilities.");
-                            }
-                        }
-                        break;
-
-                    case "agentbuilder":
-                        if (userAnswers.primaryPurpose === "productivity") {
-                            reasons.push("Basic productivity needs are better served by standard Microsoft 365 Copilot without custom configuration.");
-                        } else if (userAnswers.primaryPurpose === "business_process") {
-                            reasons.push("Business process automation needs advanced workflow capabilities beyond Copilot Studio Lite's scope.");
-                        } else if (userAnswers.primaryPurpose === "enterprise_ai") {
-                            reasons.push("Enterprise AI development requires full platform capabilities beyond guided configuration.");
-                        }
-                        if (userAnswers.targetAudience === "end_users") {
-                            reasons.push("End-users are better served by out-of-the-box Copilot features without custom configuration.");
-                        } else if (userAnswers.targetAudience === "business_analysts") {
-                            reasons.push("Business analysts need visual workflow design capabilities beyond Copilot Studio Lite's focus.");
-                        } else if (userAnswers.targetAudience === "developers") {
-                            reasons.push("Developers require full control and coding capabilities beyond guided configuration.");
-                        }
-                        if (userAnswers.complexityLevel === "lowest") {
-                            reasons.push("Your low complexity needs are better met by standard Microsoft 365 Copilot.");
-                        } else if (userAnswers.complexityLevel === "moderate" || userAnswers.complexityLevel === "highest") {
-                            reasons.push("Your complexity requirements need more advanced development capabilities.");
-                        }
-                        break;
-
-                    case "copilotstudio":
-                        if (userAnswers.primaryPurpose === "productivity") {
-                            reasons.push("Personal productivity is better served by Microsoft 365 Copilot without complex workflow design.");
-                        } else if (userAnswers.primaryPurpose === "organizational") {
-                            reasons.push("Organizational knowledge needs are better addressed through Copilot Studio Lite's guided approach.");
-                        } else if (userAnswers.primaryPurpose === "business_process") {
-                            reasons.push("Your business process automation requirements need enterprise-grade development capabilities beyond Copilot Studio's visual design tools.");
-                        } else if (userAnswers.primaryPurpose === "enterprise_ai") {
-                            reasons.push("Enterprise AI development needs require full platform capabilities beyond visual conversation design.");
-                        }
-                        if (userAnswers.targetAudience === "end_users") {
-                            reasons.push("End-users benefit more from simple productivity tools than complex workflow automation.");
-                        } else if (userAnswers.targetAudience === "business_users") {
-                            reasons.push("Business users need guided configuration for organizational knowledge rather than workflow design.");
-                        } else if (userAnswers.targetAudience === "business_analysts") {
-                            reasons.push("Business analysts with moderate complexity needs require enterprise development platform capabilities beyond visual conversation design.");
-                        } else if (userAnswers.targetAudience === "developers") {
-                            reasons.push("Developers require full coding control beyond visual conversation design tools.");
-                        }
-                        if (userAnswers.complexityLevel === "lowest" || userAnswers.complexityLevel === "low") {
-                            reasons.push("Your low complexity needs don't require advanced workflow automation capabilities.");
-                        } else if (userAnswers.complexityLevel === "moderate") {
-                            reasons.push("Your moderate complexity requirements benefit from enterprise platform capabilities rather than visual workflow design.");
-                        } else if (userAnswers.complexityLevel === "highest") {
-                            reasons.push("Your highest complexity requirements need enterprise development platform capabilities.");
-                        }
-                        if (userAnswers.integrationScope === "unlimited") {
-                            reasons.push("Unlimited integration scope requires enterprise development platform capabilities beyond Copilot Studio's connector ecosystem.");
-                        }
-                        break;
-
-                    case "azureai":
-                        if (userAnswers.primaryPurpose === "productivity") {
-                            reasons.push("Basic productivity needs don't require enterprise AI development platform capabilities.");
-                        } else if (userAnswers.primaryPurpose === "organizational") {
-                            reasons.push("Organizational knowledge needs are better served by guided configuration tools.");
-                        } else if (userAnswers.primaryPurpose === "business_process") {
-                            reasons.push("Business process automation is better handled by visual workflow design tools.");
-                        }
-                        if (userAnswers.targetAudience === "end_users") {
-                            reasons.push("End-users don't need enterprise development platform complexity for productivity tasks.");
-                        } else if (userAnswers.targetAudience === "business_users") {
-                            reasons.push("Business users benefit more from guided configuration than enterprise development platforms.");
-                        } else if (userAnswers.targetAudience === "business_analysts") {
-                            reasons.push("Business analysts are better served by visual workflow design tools than development platforms.");
-                        }
-                        if (userAnswers.complexityLevel !== "highest") {
-                            reasons.push("Your complexity requirements don't justify the enterprise development platform overhead.");
-                        }
-                        if (userAnswers.integrationScope !== "unlimited") {
-                            reasons.push("Your integration needs don't require unlimited enterprise platform capabilities.");
-                        }
-                        break;
-                }
-
-                return reasons;
-            }
 
             function renderStructure() {
                 const platformStructure =
@@ -2605,7 +2481,6 @@ body {
             function exportPlan() {
                 const questionTitles = {
                     primaryPurpose: "Primary Purpose",
-                    targetAudience: "Target Audience",
                     integrationScope: "Integration Scope", 
                     complexityLevel: "Complexity Level",
                     deploymentOptions: "Deployment Options",
@@ -2728,6 +2603,24 @@ body {
                 // Welcome section
                 document
                     .getElementById("start-assessment")
+                    .addEventListener("click", function () {
+                        showSection("prebuilt-agents-section");
+                    });
+
+                // Pre-built agents section
+                document
+                    .getElementById("prebuilt-yes-btn")
+                    .addEventListener("click", function () {
+                        // Directly recommend Microsoft 365 Copilot
+                        recommendedPlatform = platformOptions["microsoft365copilot"];
+                        currentStep = 2;
+                        updateProgressIndicator();
+                        renderRecommendation();
+                        showSection("recommendation-section");
+                    });
+
+                document
+                    .getElementById("prebuilt-no-btn")
                     .addEventListener("click", function () {
                         currentStep = 1;
                         currentQuestionIndex = 0;
