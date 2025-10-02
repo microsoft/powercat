@@ -2251,8 +2251,7 @@ body {
                 });
 
                 // Update navigation buttons
-                document.getElementById("prev-btn").disabled =
-                    currentQuestionIndex === 0;
+                document.getElementById("prev-btn").disabled = false;
                 document.getElementById("next-btn").disabled =
                     !answers[question.id];
                 document.getElementById("next-btn").textContent =
@@ -2615,6 +2614,11 @@ body {
                         if (currentQuestionIndex > 0) {
                             currentQuestionIndex--;
                             renderQuestion();
+                        } else {
+                            // Go back to pre-built agents section
+                            currentStep = 0;
+                            updateProgressIndicator();
+                            showSection("prebuilt-agents-section");
                         }
                     });
 
