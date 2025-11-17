@@ -22,13 +22,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Comic Neue", "Comic Sans MS", "Comic Sans", cursive;
+            margin: 0;
+            padding: 1rem;
+            max-width: 100%;
+        }
+
         .centered {
             text-align: center;
         }
-        body {
 
-            font-family: "Comic Neue", "Comic Sans MS", "Comic Sans", cursive;
+        h2 {
+            text-align: center;
+            padding: 0 1rem;
+        }
 
+        p {
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Tablet and larger screens */
+        @media (min-width: 768px) {
+            body {
+                padding: 2rem;
+            }
+
+            img {
+                max-width: 90%;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            img {
+                max-width: 800px;
+            }
+        }
+
+        /* Large desktop screens */
+        @media (min-width: 1440px) {
+            img {
+                max-width: 1000px;
+            }
         }
     </style>
 </head>
