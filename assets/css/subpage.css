@@ -276,6 +276,137 @@ summary {
     background-color: var(--ms-dark-blue);
 }
 
+/* Accordion styles */
+.accordion-item {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    background: white;
+    border: none;
+    padding: 1rem;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.accordion-header:hover {
+    background-color: var(--ms-grey);
+}
+
+.accordion-header:focus {
+    outline: 2px solid var(--ms-blue);
+    outline-offset: -2px;
+}
+
+.accordion-header::after {
+    content: '+';
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion-header[aria-expanded="true"]::after {
+    content: '−';
+}
+
+.accordion-panel {
+    display: none;
+    padding: 1rem;
+    background-color: #fafafa;
+}
+
+.accordion-panel[aria-hidden="false"] {
+    display: block;
+}
+
+.session-list {
+    list-style: none;
+    padding: 0;
+}
+
+.session-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+}
+
+.session-item:last-child {
+    border-bottom: none;
+}
+
+.session-title {
+    font-weight: bold;
+}
+
+.session-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-primary, .btn-outline {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    min-height: 44px;
+    min-width: 44px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--ms-blue);
+    color: white;
+    border: 1px solid var(--ms-blue);
+}
+
+.btn-primary:hover {
+    background-color: var(--ms-dark-blue);
+}
+
+.btn-outline {
+    background: white;
+    color: var(--ms-blue);
+    border: 1px solid var(--ms-blue);
+}
+
+.btn-outline:hover {
+    background-color: var(--ms-blue);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .session-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    .session-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-header, .btn-primary, .btn-outline {
+        transition: none;
+    }
+    .accordion-header::after {
+        transition: none;
+    }
+}
+
 .footer {
     background-color: var(--ms-dark-grey);
     color: white;
