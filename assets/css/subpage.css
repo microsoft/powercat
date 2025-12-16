@@ -128,11 +128,7 @@ body {
 }
 
 .about-section {
-    background-color: white;
-    border-radius: var(--border-radius);
-    padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: var(--card-shadow);
 }
 
 .section-title {
@@ -159,11 +155,7 @@ body {
 }
 
 .what-to-expect {
-    background-color: white;
-    border-radius: var(--border-radius);
-    padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: var(--card-shadow);
 }
 
 .expect-list {
@@ -196,18 +188,29 @@ table, th, td {
 
 .sessions-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
 }
 
+@media (min-width: 1200px) {
+    .sessions-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+    .sessions-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .session-card {
-    background-color: white;
+    background-color: #f0f8ff;
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--card-shadow);
     transition: var(--transition);
-    border-top: 4px solid var(--ms-blue);
 }
 
 .session-card:hover {
@@ -227,18 +230,20 @@ table, th, td {
 
 .session-title {
     color: var(--ms-dark-grey);
-    font-size: 1.2rem;
+    font-size: 20px;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     min-height: 3.5rem;
+    line-height: 1.2;
 }
 
 .session-date {
     display: flex;
     align-items: center;
     margin-bottom: 0.8rem;
-    color: var(--ms-dark-grey);
-    font-size: 0.9rem;
+    color: #1A3985;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .session-date-icon {
@@ -260,7 +265,7 @@ summary {
 
 .register-btn {
     display: inline-block;
-    background-color: var(--ms-blue);
+    background-color: #1A3985;
     color: white;
     padding: 0.7rem 1.5rem;
     border-radius: var(--border-radius);
@@ -279,20 +284,17 @@ summary {
 /* Accordion styles */
 .accordion-item {
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
-    overflow: hidden;
 }
 
 .accordion-header {
     width: 100%;
-    background: white;
+    background: none;
     border: none;
-    padding: 1rem;
+    padding: 0.25rem 0;
     text-align: left;
     cursor: pointer;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 500;
     transition: var(--transition);
     display: flex;
     align-items: center;
@@ -309,23 +311,27 @@ summary {
 }
 
 .accordion-header::after {
-    content: '+';
-    font-size: 1.5rem;
+    content: '>';
+    font-size: 2rem;
+    color: #0C55B8;
     transition: transform 0.3s ease;
 }
 
 .accordion-header[aria-expanded="true"]::after {
-    content: '−';
+    content: '↓';
 }
 
 .accordion-panel {
     display: none;
-    padding: 1rem;
-    background-color: #fafafa;
+    padding: 1rem 0;
 }
 
-.accordion-panel[aria-hidden="false"] {
-    display: block;
+.accordion-header h3 {
+    font-weight: 550;
+}
+
+.accordion-header h3.bolder {
+    font-weight: 550;
 }
 
 .session-list {
@@ -344,10 +350,6 @@ summary {
 
 .session-item:last-child {
     border-bottom: none;
-}
-
-.session-title {
-    font-weight: bold;
 }
 
 .session-actions {
