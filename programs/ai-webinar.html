@@ -1065,10 +1065,10 @@
               const displayDate = new Date(year, month - 1, day);
               displayDate.setHours(0, 0, 0, 0);
               
-              // Create a cutoff date (session time + 2 hours)
-              const cutoffDate = new Date(year, month - 1, day);
-              // Set session time to 9 AM PT + 2 hours = 11 AM PT
-              cutoffDate.setHours(11, 0, 0, 0);
+              // Create a cutoff date (session time + 2 hours = 11 AM PT)
+              // Format: YYYY-MM-DDTHH:MM:SS-08:00 (PT timezone)
+              const cutoffDateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T11:00:00-08:00`;
+              const cutoffDate = new Date(cutoffDateStr);
               
               console.log('Session:', session.getAttribute('data-title'), 'Cutoff:', cutoffDate);
               
