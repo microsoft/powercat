@@ -186,7 +186,7 @@ table, th, td {
     border-radius: 50%;
 }
 
-.sessions-container {
+main .sessions-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
@@ -194,18 +194,18 @@ table, th, td {
 }
 
 @media (min-width: 1200px) {
-    .sessions-container {
+    main .sessions-container {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media (min-width: 769px) and (max-width: 1199px) {
-    .sessions-container {
+    main .sessions-container {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-.session-card {
+main .session-card {
     background-color: #f0f8ff;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -213,7 +213,7 @@ table, th, td {
     transition: var(--transition);
 }
 
-.session-card:hover {
+main .session-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
@@ -224,11 +224,11 @@ table, th, td {
       margin-bottom: 20px;
       border-left: 4px solid #0078d4;
     }
-.session-content {
+main .session-card .session-content {
     padding: 1.5rem;
 }
 
-.session-title {
+main .session-card .session-title {
     color: var(--ms-dark-grey);
     font-size: 20px;
     font-weight: 600;
@@ -237,7 +237,7 @@ table, th, td {
     line-height: 1.2;
 }
 
-.session-date {
+main .session-card .session-date {
     display: flex;
     align-items: center;
     margin-bottom: 0.8rem;
@@ -246,24 +246,24 @@ table, th, td {
     font-weight: 600;
 }
 
-.session-date-icon {
+main .session-card .session-date-icon {
     margin-right: 0.5rem;
     color: var(--ms-blue);
 }
 
-details {
+main .session-card details {
     padding: 5px; 
     border: 5px solid #f7f7f7;
     border-radius: 3px;
 }
-summary {
+main .session-card summary {
     list-style-position: outside;
     margin-left: 30px;
     padding: 5px 5px 5px 10px;
     border-radius: 5px;
 }
 
-.register-btn {
+main .session-card .register-btn {
     display: inline-block;
     background-color: #1A3985;
     color: white;
@@ -277,69 +277,71 @@ summary {
     cursor: pointer;
 }
 
-.register-btn:hover {
+main .session-card .register-btn:hover {
     background-color: var(--ms-dark-blue);
 }
 
 /* Accordion styles */
-.accordion-item {
+main .accordion-item {
     margin-bottom: 1rem;
 }
 
-.accordion-header {
+main .accordion-header {
     width: 100%;
-    background: none;
+    background: #0C55B8;
     border: none;
-    padding: 0.25rem 0;
+    padding: 0.25rem 1rem;
     text-align: left;
     cursor: pointer;
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 400;
     transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: var(--border-radius);
+    color: white;
 }
 
-.accordion-header:hover {
-    background-color: var(--ms-grey);
+main .accordion-header:hover {
+    background-color: #0A4499;
 }
 
-.accordion-header:focus {
+main .accordion-header:focus {
     outline: 2px solid var(--ms-blue);
     outline-offset: -2px;
 }
 
-.accordion-header::after {
+main .accordion-header::after {
     content: '>';
     font-size: 2rem;
-    color: #0C55B8;
+    color: white;
     transition: transform 0.3s ease;
 }
 
-.accordion-header[aria-expanded="true"]::after {
+main .accordion-header[aria-expanded="true"]::after {
     content: '↓';
 }
 
-.accordion-panel {
+main .accordion-panel {
     display: none;
     padding: 1rem 0;
 }
 
-.accordion-header h3 {
-    font-weight: 550;
+main .accordion-header h3 {
+    font-weight: 400;
 }
 
 .accordion-header h3.bolder {
     font-weight: 550;
 }
 
-.session-list {
+main .session-list {
     list-style: none;
     padding: 0;
 }
 
-.session-item {
+main .session-item {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 1rem;
@@ -348,16 +350,16 @@ summary {
     align-items: center;
 }
 
-.session-item:last-child {
+main .session-item:last-child {
     border-bottom: none;
 }
 
-.session-actions {
+main .session-actions {
     display: flex;
     gap: 0.5rem;
 }
 
-.btn-primary, .btn-outline {
+main .btn-primary, main .btn-outline {
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     text-decoration: none;
@@ -368,43 +370,43 @@ summary {
     text-align: center;
 }
 
-.btn-primary {
+main .btn-primary {
     background-color: var(--ms-blue);
     color: white;
     border: 1px solid var(--ms-blue);
 }
 
-.btn-primary:hover {
+main .btn-primary:hover {
     background-color: var(--ms-dark-blue);
 }
 
-.btn-outline {
+main .btn-outline {
     background: white;
     color: var(--ms-blue);
     border: 1px solid var(--ms-blue);
 }
 
-.btn-outline:hover {
+main .btn-outline:hover {
     background-color: var(--ms-blue);
     color: white;
 }
 
 @media (max-width: 768px) {
-    .session-item {
+    main .session-item {
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
-    .session-actions {
+    main .session-actions {
         justify-content: flex-start;
         flex-wrap: wrap;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .accordion-header, .btn-primary, .btn-outline {
+    main .accordion-header, main .btn-primary, main .btn-outline {
         transition: none;
     }
-    .accordion-header::after {
+    main .accordion-header::after {
         transition: none;
     }
 }
@@ -461,7 +463,7 @@ summary {
         opacity: 0.1;
     }
     
-    .sessions-container {
+    main .sessions-container {
         grid-template-columns: 1fr;
     }
     

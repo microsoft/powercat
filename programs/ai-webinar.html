@@ -12,6 +12,30 @@
     />
     <link rel="stylesheet" href="../assets/css/subpage.css" />
     <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon">
+    <style>
+      .play-icon {
+        display: inline-block;
+        width: 1.2em;
+        height: 1.2em;
+        background-color: #0C55B8;
+        border-radius: 50%;
+        position: relative;
+        vertical-align: middle;
+        margin-right: 0.5em;
+      }
+      .play-icon::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 52%;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        border-left: 0.5em solid white;
+        border-top: 0.3em solid transparent;
+        border-bottom: 0.3em solid transparent;
+      }
+    </style>
   </head>
 
   <body>
@@ -61,51 +85,130 @@
             </p>
           </div>
         </div>
-        <div class="session-card" style="aspect-ratio: auto; background-color: #f0f8ff;">
+        <div class="session-card" style="aspect-ratio: auto; background-color: #f0f8ff;" id="next-session-card">
           <div class="session-content">
             <div class="session-date">
               <span class="session-date-icon">📅</span>
               <span>Next Session</span>
             </div>
-            <h3 class="session-title" style="font-size: 1.8rem;">
+            <h3 class="session-title" style="font-size: 1.8rem;" id="next-session-title">
               Everything to know about Agent 365
             </h3>
-            <p>
+            <p id="next-session-description">
               December 17th • 9AM PT<br><br>
               Join us for an engaging introduction to Microsoft Agent 365, with Nirav Shah, 
               CVP, BIC Agent Cloud!
             </p>
             <p>
             </p>
-            <a href="https://aka.ms/aiWebinars/agent365" class="register-btn" style="background-color: white; color: #1A3985; border: 2px solid #1A3985;"
+            <a href="https://aka.ms/aiWebinars/agent365" class="register-btn" style="background-color: white; color: #1A3985; border: 2px solid #1A3985;" id="next-session-link"
               >Register Now</a
             >
           </div>
         </div>
       </div>
-      <section class="what-to-expect" style="margin-top: 3rem;">
-        <h2 class="section-title">What to Expect</h2>
-        <ul class="expect-list">
-          <li class="expect-item">
-            Gain the tactical and strategic expertise needed to succeed with
-            Microsoft Copilot and agents in your organization.
-          </li>
-          <li class="expect-item">
-            You'll explore the possibilities of Microsoft Copilot,
-            upcoming advancements with autonomous agents, how to extend with
-            Azure AI Foundry, and more.
-          </li>
-          <li class="expect-item">
-            Each workshop includes interactive exercises that allow you to
-            engage and learn from others.
-          </li>
+      <h2 class="section-title" style="margin-top: 4rem;">Upcoming Sessions</h2>
+      <div class="sessions-container" id="upcoming-sessions-container">
+        <div class="session-card upcoming-session" data-date="2025-12-17" data-time="9:00 AM PT" data-title="Everything to know about Agent 365" data-description="Join us for an engaging introduction to Microsoft Agent 365, with Nirav Shah, CVP, BIC Agent Cloud!" data-link="https://aka.ms/aiWebinars/agent365">
+          <div class="session-content">
+            <div class="session-date">
+              <span>Dec 17 • 9AM PT</span>
+            </div>
+            <h3 class="session-title">
+              Everything to know about Agent 365
+            </h3>
+            <p>
 
-        </ul>
-      </section>
-      <h2 class="section-title">Upcoming Sessions</h2>
+              Join us for an engaging introduction to Microsoft Agent 365, with Nirav Shah, 
+              CVP, BIC Agent Cloud!
+
+            </p>
+            <p>
+            </p>
+            <a href="https://aka.ms/aiWebinars/agent365" class="register-btn" style="background-color: #0C55B8;"
+              >Register Now</a
+            >
+          </div>
+        </div>
+      </div>
+      <h3 id="agent365-title" style="color: #506CD4; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 0.5rem; display: none;">Agent 365 Series!</h3>
+      <div class="sessions-container" id="agent365-sessions-container" style="display: none;">
+        <div class="session-card upcoming-session" data-date="2026-01-15" data-time="9:00 AM PT" data-title="Agent 365 - Discover, Govern, and Secure Agents with Registry and Agent Map" data-description="Agent Map gives you a single place to understand every agent in their tenant." data-link="https://aka.ms/a365/registry" style="background-color: #EDEFFD;">
+          <div class="session-content">
+            <div class="session-date">
+              <span>Jan 15 • 9AM PT</span>
+            </div>
+            <h3 class="session-title">
+              Agent 365 - Discover, Govern, and Secure Agents with Registry and Agent Map
+            </h3>
+            <p>
+              Agent Map gives you a single place to understand every agent in their tenant.
+            </p>
+            <p>
+            </p>
+            <a href="https://aka.ms/a365/registry" class="register-btn" style="background-color: #0C55B8;"
+              >Register Now</a
+            >
+          </div>
+        </div>
+        <div class="session-card upcoming-session" data-date="2026-01-20" data-time="9:00 AM PT" data-title="Agent 365 - Access Control for Agents" data-description="In this session you will learn about all the governance and access controls you have at your disposal." data-link="https://aka.ms/a365/access" style="background-color: #EDEFFD;">
+          <div class="session-content">
+            <div class="session-date">
+              <span>Jan 20 • 9AM PT</span>
+            </div>
+            <h3 class="session-title">
+              Agent 365 - Access Control for Agents
+            </h3>
+            <p>
+              In this session you will learn about all the governance and access controls you have at your disposal.
+            </p>
+            <p>
+            </p>
+            <a href="https://aka.ms/a365/access" class="register-btn" style="background-color: #0C55B8;"
+              >Register Now</a
+            >
+          </div>
+        </div>
+        <div class="session-card upcoming-session" data-date="2026-01-27" data-time="9:00 AM PT" data-title="Agent 365 Tools: Identity, Observability & Interoperability" data-description="Discover how Agent 365 unifies identity, observability, and interoperability to safely scale AI agents across Microsoft 365." data-link="https://aka.ms/a365/interop" style="background-color: #EDEFFD;">
+          <div class="session-content">
+            <div class="session-date">
+              <span>Jan 27 • 9AM PT</span>
+            </div>
+            <h3 class="session-title">
+              Agent 365 Tools: Identity, Observability & Interoperability
+            </h3>
+            <p>
+              Discover how Agent 365 unifies identity, observability, and interoperability to safely scale AI agents across Microsoft 365.
+            </p>
+            <p>
+            </p>
+            <a href="https://aka.ms/a365/interop" class="register-btn" style="background-color: #0C55B8;"
+              >Register Now</a
+            >
+          </div>
+        </div>
+        <div class="session-card upcoming-session" data-date="2026-01-29" data-time="9:00 AM PT" data-title="Unlocking Agent 365 Security and Governance" data-description="Learn how Microsoft Agent 365 delivers an end‑to‑end security and governance framework designed for enterprise‑grade agentic adoption." data-link="https://aka.ms/a365/security" style="background-color: #EDEFFD;">
+          <div class="session-content">
+            <div class="session-date">
+              <span>Jan 29 • 9AM PT</span>
+            </div>
+            <h3 class="session-title">
+              Unlocking Agent 365 Security and Governance
+            </h3>
+            <p>
+              Learn how Microsoft Agent 365 delivers an end‑to‑end security and governance framework designed for enterprise‑grade agentic adoption.
+            </p>
+            <p>
+            </p>
+            <a href="https://aka.ms/a365/security" class="register-btn" style="background-color: #0C55B8;"
+              >Register Now</a
+            >
+          </div>
+        </div>
+      </div>
       <h3 style="color: var(--ms-blue); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 2rem;">January Sessions</h3>
-      <div class="sessions-container">
-        <div class="session-card">
+      <div class="sessions-container" id="upcoming-sessions-container">
+        <div class="session-card upcoming-session" data-date="2026-01-07" data-time="9:00 AM PT" data-title="Copilot Studio Business Canvas" data-description="Ever wondered how to turn a business challenge into a fully functional Agent? Join us as we demystify the agent design process in Copilot Studio." data-link="https://aka.ms/aiwebinars/agentCanvas">
           <div class="session-content">
             <div class="session-date">
               <span>Jan 7 • 9AM PT</span>
@@ -126,7 +229,7 @@
             >
           </div>
         </div>
-        <div class="session-card">
+        <div class="session-card upcoming-session" data-date="2026-01-21" data-time="9:00 AM PT" data-title="Real‑World Agent Case Studies" data-description="Join our interactive webinar to hear 2-3 customers share their journey in building agentic solutions that drive real business transformation." data-link="https://aka.ms/AIwebinar/caseStudies">
           <div class="session-content">
             <div class="session-date">
               <span>Jan 21 • 9AM PT</span>
@@ -148,7 +251,7 @@
             >
           </div>
         </div>
-        <div class="session-card">
+        <div class="session-card upcoming-session" data-date="2026-01-28" data-time="9:00 AM PT" data-title="Agent Evaluation in Copilot Studio" data-description="We will introduce the new Agent Evaluation capabilities in Copilot Studio that empower makers!" data-link="https://aka.ms/AIWebinars/agentEval">
           <div class="session-content">
             <div class="session-date">
               <span>Jan 28 • 9AM PT</span>
@@ -172,7 +275,7 @@
       </div>
       <h3 style="color: var(--ms-blue); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 2rem;">February Sessions</h3>
       <div class="sessions-container">
-        <div class="session-card">
+        <div class="session-card upcoming-session" data-date="2026-02-04" data-time="9:00 AM PT" data-title="Grounding Agents in the Most Relevant Knowledge" data-description="In this session, we'll discuss the Top 5 tips for Makers seeking to optimize Knowledge Sources in Microsoft Copilot Studio." data-link="https://aka.ms/AIWebinars/agentKnowledge">
           <div class="session-content">
             <div class="session-date">
               <span>Feb 4 • 9AM PT</span>
@@ -194,7 +297,7 @@
             >
           </div>
         </div>
-        <div class="session-card">
+        <div class="session-card upcoming-session" data-date="2026-02-18" data-time="9:00 AM PT" data-title="Agent Governance in M365 Admin Center" data-description="Join us as we dive into Copilot Control Systems in Microsoft 365 Admin Center (MAC), which allows Tenant Administrators to manage and govern Copilot and Agents!" data-link="https://aka.ms/AIWebinars/m365Governance">
           <div class="session-content">
             <div class="session-date">
               <span>Feb 18 • 9AM PT</span>
@@ -215,7 +318,7 @@
             >
           </div>
         </div>
-        <div class="session-card">
+        <div class="session-card upcoming-session" data-date="2026-02-25" data-time="9:00 AM PT" data-title="Leverage Instructions & Tools to Build Agents" data-description="Discover the latest components and learn how to use them for greater flexibility than traditional agent-building approaches." data-link="https://aka.ms/AIWebinars/dynamicAgents">
           <div class="session-content">
             <div class="session-date">
               <span>Feb 25 • 9AM PT</span>
@@ -239,24 +342,41 @@
         </div>
       </div>
 
-      <section class="about-section" style="margin-top: 4rem;"> 
-      <div class="session-card" style="aspect-ratio: auto; background-color: white; padding: 1rem 2rem 0rem 2rem;">
-      <h2 class="section-title">Previous Sessions</h2>
-        <p class="about-text" style="border-bottom: 2px solid #C5DBEF; padding-bottom: 1rem;">
-          Watch the recordings and download the presentations of previous
-          sessions.
-        </p>
+      <div class="sessions-container" style="margin-top: 4rem; grid-template-columns: repeat(2, 1fr);">
+        <div>
+          <h2 class="section-title">What to Expect</h2>
+          <ul class="expect-list">
+            <li class="expect-item">
+              Gain the strategic expertise your organizations needs to succeed with
+              Microsoft Copilot.
+            </li>
+            <li class="expect-item">
+              Explore the possibilities of Microsoft Copilot,
+              advancements with autonomous agents, and more.
+            </li>
+            <li class="expect-item">
+              Engage in interactive exercises that allow you to
+              learn from others.
+            </li>
+          </ul>
+        </div>
+        <div class="session-card" style="aspect-ratio: auto; background-color: white; padding: 1rem 2rem 0rem 2rem;">
+          <h2 class="section-title"><span class="play-icon"></span>Previous Sessions</h2>
+          <p class="about-text" style="border-bottom: 2px solid #C5DBEF; padding-bottom: 1rem;">
+            Watch the recordings and download the presentations of previous
+            sessions.
+          </p>
 
-        <div class="accordion">
+          <div class="accordion">
           <div class="accordion-item">
             <button class="accordion-header" id="temp-label" aria-expanded="false" aria-controls="panel-temp-label">
-              <h3>Check out past sessions here!</h3>
+              <h3>Browse past sessions</h3>
             </button>
             <div class="accordion-panel" id="panel-temp-label" role="region" aria-labelledby="temp-label" aria-hidden="true">
               
         <details>
           <summary>
-            <h3>Unlocking the Potential of Copilot Studio</h3>
+            <h3>▶️ Unlocking the Potential of Copilot Studio</h3>
           </summary>
           Discover the power of autonomous agents and AI tools through
           real-world examples and interactive activities.
@@ -273,7 +393,7 @@
         </details>
 
         <details>
-          <summary><h3>Where Agents Meet Opportunity</h3></summary>
+          <summary><h3>▶️ Where Agents Meet Opportunity</h3></summary>
 
           Uncover high-value opportunities for AI implementation in your
           organization.
@@ -291,7 +411,7 @@
         </details>
 
         <details>
-          <summary><h3>Navigating AI Risks: A Practical Guide</h3></summary>
+          <summary><h3>▶️ Navigating AI Risks: A Practical Guide</h3></summary>
           Learn to identify, assess, and mitigate risks associated with
           implementing AI in your organization.
           <p>
@@ -303,7 +423,7 @@
         </details>
 
         <details>
-          <summary><h3>Evolving Governance for AI</h3></summary>
+          <summary><h3>▶️ Evolving Governance for AI</h3></summary>
           Establish governance frameworks that enable innovation while
           maintaining compliance and trust.
 
@@ -336,7 +456,7 @@
         </details>
 
         <details>
-          <summary><h3>Data Foundations for AI</h3></summary>
+          <summary><h3>▶️ Data Foundations for AI</h3></summary>
           Build robust data architectures to power effective AI solutions within
           your organization.
           <p>
@@ -348,7 +468,7 @@
         </details>
 
         <details>
-          <summary><h3>Application Lifecycle Management</h3></summary>
+          <summary><h3>▶️ Application Lifecycle Management</h3></summary>
           Wondering how to move your Copilot Studio agents from dev to test to
           prod the right way? In this session, we'll guide you through
           Application Lifecycle Management (ALM) options – from the simplest to
@@ -382,7 +502,7 @@
         </details>
 
         <details>
-          <summary><h3>Deep Dive into Autonomous Agents</h3></summary>
+          <summary><h3>▶️ Deep Dive into Autonomous Agents</h3></summary>
 
           Explore the world of Autonomous Agents and gain a comprehensive
           understanding of their terminology, differentiation, and operational
@@ -398,7 +518,7 @@
           </p>
         </details>
         <details>
-          <summary><h3>Copilot Studio Licensing</h3></summary>
+          <summary><h3>▶️ Copilot Studio Licensing</h3></summary>
           Join us as we provide clarity on Copilot Studio licensing and message
           consumption and dive into practical scenarios where these solutions
           can be leveraged effectively.
@@ -414,7 +534,7 @@
           </p>
         </details>
         <details>
-          <summary><h3>Elevate your Copilot Adoption</h3></summary>
+          <summary><h3>▶️ Elevate your Copilot Adoption</h3></summary>
           Curious about boosting Copilot adoption in your organization? Join our
           upcoming webinar to discover how Microsoft's Customer and Partner
           Solutions organization is driving successful adoption and
@@ -432,7 +552,7 @@
           </p>
         </details>
         <details>
-          <summary><h3>Deep Dive Into Agentic Governance</h3></summary>
+          <summary><h3>▶️ Deep Dive Into Agentic Governance</h3></summary>
 
             From Chaos to Control: Learn proven frameworks and tools to manage
             hundreds of Copilot Studio agents securely and efficiently.
@@ -448,7 +568,7 @@
           <p>
         </details>
         <details>
-          <summary><h3>Extending Copilot Studio with Azure AI Foundry</h3></summary>
+          <summary><h3>▶️ Extending Copilot Studio with Azure AI Foundry</h3></summary>
           
             Unlock the full potential of your conversational agents with
             Microsoft Copilot Studio by integrating capabilities from Azure AI
@@ -481,7 +601,7 @@
           </p>
         </details>
         <details>
-          <summary><h3>Deep Dive into Generative Orchestration (part 1)</h3></summary>
+          <summary><h3>▶️ Deep Dive into Generative Orchestration (part 1)</h3></summary>
           
             In this session, we'll explore these three orchestration modes, 
             demonstrate how they work through quick demos, and then dive 
@@ -497,7 +617,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Part 2 of Generative Orchestration - Enterprise Grade Agent Design in Copilot Studio</h3></summary>
+          <summary><h3>▶️ Part 2 of Generative Orchestration - Enterprise Grade Agent Design in Copilot Studio</h3></summary>
           
             In this part two of the Generative Orchestration session, 
             we will delve into the added value that Copilot Studio 
@@ -514,7 +634,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Copilot Studio Kit in Action - Validate, Monitor, and Optimize your Agents </h3></summary>
+          <summary><h3>▶️ Copilot Studio Kit in Action - Validate, Monitor, and Optimize your Agents </h3></summary>
           
             In this session, we will explore the Copilot Studio Kit, 
             a comprehensive set of tools and best practices designed to help you 
@@ -530,7 +650,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Copilot Studio - Demystifying Multi-Agent & Component Collections</h3></summary>
+          <summary><h3>▶️ Copilot Studio - Demystifying Multi-Agent & Component Collections</h3></summary>
           
             Join us for an in-depth session on using multi-agents in Copilot Studio. 
             We'll explore when and how to apply both focused agents and connected 
@@ -547,7 +667,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Empower your Copilot Studio agent with Azure AI Services</h3></summary>
+          <summary><h3>▶️ Empower your Copilot Studio agent with Azure AI Services</h3></summary>
           
             Discover the power of Azure AI Services and how they can add significant capabilities 
             to your Copilot Studio agents, including analyzing content in images, adding speech
@@ -563,7 +683,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Real World Stories: Agentic Solutions with Copilot Studio and Power Platform</h3></summary>
+          <summary><h3>▶️ Real World Stories: Agentic Solutions with Copilot Studio and Power Platform</h3></summary>
           
               Join us for an inspiring and practical session where customers share real-world 
               stories of how they're transforming their organizations using Microsoft Copilot 
@@ -579,7 +699,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Build AI Agents for WhatsApp with Copilot Studio</h3></summary>
+          <summary><h3>▶️ Build AI Agents for WhatsApp with Copilot Studio</h3></summary>
           
               Discover how Copilot Studio empowers businesses to launch AI agents directly 
               on WhatsApp—the world’s most popular messaging platform—without third-party 
@@ -596,7 +716,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Building Agents in Copilot Studio 101</h3></summary>
+          <summary><h3>▶️ Building Agents in Copilot Studio 101</h3></summary>
           
               Join us to learn the basics of the way to build your own Agents 
               in Copilot Studio.  We will explore all the different pieces of 
@@ -613,7 +733,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Build a Copilot agent using Copilot Studio agent templates</h3></summary>
+          <summary><h3>▶️ Build a Copilot agent using Copilot Studio agent templates</h3></summary>
           
               Join us to learn how to use the Copilot Studio agent templates - included 
               for free in Copilot Studio lite experience.  
@@ -626,7 +746,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Ignite Recap: Top Innovations and Takeaways</h3></summary>
+          <summary><h3>▶️ Ignite Recap: Top Innovations and Takeaways</h3></summary>
           
               Join us for a recap of the key announcements and innovations shaping 
               the future of Copilot. We’ll share new capabilities, and practical 
@@ -640,7 +760,7 @@
           </p>  
         </details>
         <details>
-          <summary><h3>Copilot Studio Governance Unpacked – Ignite Recap & Live Q&A</h3></summary>
+          <summary><h3>▶️ Copilot Studio Governance Unpacked – Ignite Recap & Live Q&A</h3></summary>
           
               Join us for a focused session on Agent Governance in Copilot Studio, featuring 
               key highlights from Microsoft Ignite and an interactive Q&A.  
@@ -656,7 +776,7 @@
         </div>
         </div>
       </div>
-      </section>
+      </div>
       <!-- <h2 class="section-title">Watch Previous Sessions</h2>
       <p class="about-text">
         Watch the recordings and download the presentations of previous
@@ -922,6 +1042,124 @@
             }
           });
         });
+      });
+
+      // Dynamic session management
+      document.addEventListener('DOMContentLoaded', () => {
+        function updateNextSession() {
+          const now = new Date();
+          console.log('Current time:', now);
+          
+          // Get all upcoming session cards
+          const upcomingSessions = Array.from(document.querySelectorAll('.upcoming-session'));
+          console.log('Found upcoming sessions:', upcomingSessions.length);
+          
+          // Filter and sort sessions that haven't passed yet (2 hours past session time)
+          const futureSessions = upcomingSessions
+            .map(session => {
+              const dateStr = session.getAttribute('data-date');
+              // Parse date as local time to avoid timezone issues
+              const [year, month, day] = dateStr.split('-').map(Number);
+              
+              // Create a display date (for showing to users)
+              const displayDate = new Date(year, month - 1, day);
+              displayDate.setHours(0, 0, 0, 0);
+              
+              // Create a cutoff date (session time + 2 hours)
+              const cutoffDate = new Date(year, month - 1, day);
+              // Set session time to 9 AM PT + 2 hours = 11 AM PT
+              cutoffDate.setHours(11, 0, 0, 0);
+              
+              console.log('Session:', session.getAttribute('data-title'), 'Cutoff:', cutoffDate);
+              
+              return {
+                element: session,
+                cutoffDate: cutoffDate,
+                displayDate: displayDate,
+                title: session.getAttribute('data-title'),
+                description: session.getAttribute('data-description'),
+                time: session.getAttribute('data-time'),
+                link: session.getAttribute('data-link'),
+                dateStr: dateStr
+              };
+            })
+            .filter(session => {
+              const isPast = session.cutoffDate > now;
+              console.log('Session', session.title, 'is future?', isPast);
+              return isPast;
+            })
+            .sort((a, b) => a.cutoffDate - b.cutoffDate);
+          
+          console.log('Future sessions found:', futureSessions.length);
+          
+          if (futureSessions.length > 0) {
+            const nextSession = futureSessions[0];
+            console.log('Next session:', nextSession.title);
+            
+            // Update the "Next Session" card
+            const nextSessionTitle = document.getElementById('next-session-title');
+            const nextSessionDescription = document.getElementById('next-session-description');
+            const nextSessionLink = document.getElementById('next-session-link');
+            
+            console.log('Elements found:', nextSessionTitle, nextSessionDescription, nextSessionLink);
+            
+            if (nextSessionTitle && nextSessionDescription && nextSessionLink) {
+              // Format the date nicely using the display date
+              const options = { month: 'long', day: 'numeric' };
+              const formattedDate = nextSession.displayDate.toLocaleDateString('en-US', options);
+              
+              nextSessionTitle.textContent = nextSession.title;
+              nextSessionDescription.innerHTML = `${formattedDate} • ${nextSession.time}<br><br>${nextSession.description}`;
+              nextSessionLink.href = nextSession.link;
+              
+              // Show the register button in case it was hidden
+              nextSessionLink.style.display = '';
+              
+              console.log('Updated next session card');
+              
+              // Hide the next session from the upcoming sessions list
+              nextSession.element.style.display = 'none';
+            }
+          } else {
+            console.log('No future sessions');
+            // If no future sessions, hide the next session card or show a message
+            const nextSessionCard = document.getElementById('next-session-card');
+            if (nextSessionCard) {
+              const nextSessionTitle = document.getElementById('next-session-title');
+              const nextSessionDescription = document.getElementById('next-session-description');
+              const nextSessionLink = document.getElementById('next-session-link');
+              
+              nextSessionTitle.textContent = 'No Upcoming Sessions';
+              nextSessionDescription.textContent = 'Check back soon for new session announcements!';
+              nextSessionLink.style.display = 'none';
+            }
+          }
+        }
+        
+        // Run on page load
+        updateNextSession();
+        
+        // Show Agent 365 section after 9:30 AM PT on Dec 17, 2025
+        function showAgent365Section() {
+          const now = new Date();
+          
+          // Create release date: Dec 17, 2025 at 9:30 AM PT (UTC-8)
+          const releaseDate = new Date('2025-12-17T09:30:00-08:00');
+          
+          console.log('Current time:', now);
+          console.log('Release time:', releaseDate);
+          console.log('Should show Agent 365:', now >= releaseDate);
+          
+          if (now >= releaseDate) {
+            const title = document.getElementById('agent365-title');
+            const container = document.getElementById('agent365-sessions-container');
+            if (title) title.style.display = 'block';
+            if (container) container.style.display = 'grid';
+          }
+        }
+        
+        // Run on page load
+        showAgent365Section();
       });
     </script>
   </body>
