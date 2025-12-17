@@ -1046,6 +1046,12 @@
 
       // Dynamic session management
       document.addEventListener('DOMContentLoaded', () => {
+        // Make all register buttons open in new tab
+        document.querySelectorAll('.register-btn').forEach(btn => {
+          btn.setAttribute('target', '_blank');
+          btn.setAttribute('rel', 'noopener noreferrer');
+        });
+        
         function updateNextSession() {
           const now = new Date();
           console.log('Current time:', now);
