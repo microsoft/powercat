@@ -1060,6 +1060,9 @@
           const upcomingSessions = Array.from(document.querySelectorAll('.upcoming-session'));
           console.log('Found upcoming sessions:', upcomingSessions.length);
           
+          // Move past sessions to Previous Sessions accordion
+          const previousSessionsPanel = document.getElementById('panel-temp-label');
+          
           // Filter and sort sessions that haven't passed yet (2 hours past session time)
           const futureSessions = upcomingSessions
             .map(session => {
@@ -1092,6 +1095,35 @@
             .filter(session => {
               const isPast = session.cutoffDate > now;
               console.log('Session', session.title, 'is future?', isPast);
+              
+              // Move past sessions to accordion
+              if (!isPast && previousSessionsPanel) {
+                const details = document.createElement('details');
+                const summary = document.createElement('summary');
+                summary.innerHTML = `<h3>▶️ ${session.title}</h3>`;
+                details.appendChild(summary);
+                
+                const description = document.createElement('p');
+                description.textContent = session.description;
+                details.appendChild(description);
+                
+                const buttonContainer = document.createElement('p');
+                const button = document.createElement('button');
+                button.className = 'register-btn';
+                button.textContent = 'Deck & Recording Coming Soon!';
+                button.style.backgroundColor = '#6c757d';
+                button.style.cursor = 'not-allowed';
+                button.disabled = true;
+                buttonContainer.appendChild(button);
+                details.appendChild(buttonContainer);
+                
+                // Insert at the end of the accordion
+                previousSessionsPanel.appendChild(details);
+                
+                // Remove from upcoming sessions
+                session.element.remove();
+              }
+              
               return isPast;
             })
             .sort((a, b) => a.cutoffDate - b.cutoffDate);
