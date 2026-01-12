@@ -281,6 +281,20 @@ main .session-card .register-btn:hover {
     background-color: var(--ms-dark-blue);
 }
 
+main .session-box .register-btn {
+    display: inline-block;
+    background-color: #1A3985;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    margin-top: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
 /* Accordion styles */
 main .accordion-item {
     margin-bottom: 1rem;
