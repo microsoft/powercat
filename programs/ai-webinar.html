@@ -206,8 +206,8 @@
           </div>
         </div>
       </div>
-      <h3 style="color: var(--ms-blue); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 2rem;">January Sessions</h3>
-      <div class="sessions-container" id="upcoming-sessions-container">
+      <h3 id="january-title" style="color: var(--ms-blue); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 2rem;">January Sessions</h3>
+      <div class="sessions-container" id="january-sessions-container">
         <div class="session-card upcoming-session" data-date="2026-01-07" data-time="9:00 AM PT" data-title="Copilot Studio Business Canvas" data-description="Ever wondered how to turn a business challenge into a fully functional Agent? Join us as we demystify the agent design process in Copilot Studio." data-link="https://aka.ms/aiwebinars/agentCanvas">
           <div class="session-content">
             <div class="session-date">
@@ -273,8 +273,8 @@
           </div>
         </div>
       </div>
-      <h3 style="color: var(--ms-blue); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 2rem;">February Sessions</h3>
-      <div class="sessions-container">
+      <h3 id="february-title" style="color: var(--ms-blue); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 2rem;">February Sessions</h3>
+      <div class="sessions-container" id="february-sessions-container">
         <div class="session-card upcoming-session" data-date="2026-02-04" data-time="9:00 AM PT" data-title="Grounding Agents in the Most Relevant Knowledge" data-description="In this session, we'll discuss the Top 5 tips for Makers seeking to optimize Knowledge Sources in Microsoft Copilot Studio." data-link="https://aka.ms/AIWebinars/agentKnowledge">
           <div class="session-content">
             <div class="session-date">
@@ -1040,6 +1040,33 @@
               
               // Hide the next session from the upcoming sessions list
               nextSession.element.style.display = 'none';
+              
+              // Check if we need to hide the section this session belonged to
+              const parentContainer = nextSession.element.parentElement;
+              if (parentContainer) {
+                const visibleSessions = Array.from(parentContainer.querySelectorAll('.upcoming-session'))
+                  .filter(s => s.style.display !== 'none');
+                
+                // If this was the only visible session, hide the section
+                if (visibleSessions.length === 0) {
+                  const containerId = parentContainer.id;
+                  let titleId = null;
+                  
+                  if (containerId === 'agent365-sessions-container') {
+                    titleId = 'agent365-title';
+                  } else if (containerId === 'january-sessions-container') {
+                    titleId = 'january-title';
+                  } else if (containerId === 'february-sessions-container') {
+                    titleId = 'february-title';
+                  }
+                  
+                  if (titleId) {
+                    const title = document.getElementById(titleId);
+                    if (title) title.style.display = 'none';
+                  }
+                  parentContainer.style.display = 'none';
+                }
+              }
             }
           } else {
             console.log('No future sessions');
@@ -1081,6 +1108,37 @@
         
         // Run on page load
         showAgent365Section();
+        
+        // Hide sections where all sessions have passed
+        function hidePastSections() {
+          const sections = [
+            { titleId: 'agent365-title', containerId: 'agent365-sessions-container' },
+            { titleId: 'january-title', containerId: 'january-sessions-container' },
+            { titleId: 'february-title', containerId: 'february-sessions-container' }
+          ];
+          
+          sections.forEach(section => {
+            const container = document.getElementById(section.containerId);
+            const title = document.getElementById(section.titleId);
+            
+            if (container) {
+              const sessionsInContainer = container.querySelectorAll('.upcoming-session');
+              const visibleSessions = Array.from(sessionsInContainer).filter(s => s.style.display !== 'none');
+              
+              console.log(`Section ${section.containerId}: ${visibleSessions.length} visible sessions`);
+              
+              // If container has no visible sessions, hide the section
+              if (visibleSessions.length === 0) {
+                console.log(`Hiding section: ${section.containerId}`);
+                if (container) container.style.display = 'none';
+                if (title) title.style.display = 'none';
+              }
+            }
+          });
+        }
+        
+        // Run after everything else completes
+        setTimeout(hidePastSections, 200);
       });
     </script>
   </body>
