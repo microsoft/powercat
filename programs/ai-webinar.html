@@ -981,6 +981,60 @@
                   pptLink.setAttribute('target', '_blank');
                   pptLink.setAttribute('rel', 'noopener noreferrer');
                   buttonContainer.appendChild(pptLink);
+                } else if (session.title === 'Agent 365 - Access Control for Agents') {
+                  const recordingLink = document.createElement('a');
+                  recordingLink.href = 'https://aka.ms/A365/Access';
+                  recordingLink.className = 'register-btn';
+                  recordingLink.textContent = 'Recording';
+                  recordingLink.setAttribute('target', '_blank');
+                  recordingLink.setAttribute('rel', 'noopener noreferrer');
+                  buttonContainer.appendChild(recordingLink);
+                  
+                  buttonContainer.appendChild(document.createTextNode('\n            '));
+                  
+                  const pptLink = document.createElement('a');
+                  pptLink.href = '../resources/Agent 365 - Access Control for Agents - Customer Facing.zip';
+                  pptLink.className = 'register-btn';
+                  pptLink.textContent = 'Presentation (PPT)';
+                  pptLink.setAttribute('target', '_blank');
+                  pptLink.setAttribute('rel', 'noopener noreferrer');
+                  buttonContainer.appendChild(pptLink);
+                } else if (session.title === 'Agent 365 Tools: Identity, Observability & Interoperability') {
+                  const recordingLink = document.createElement('a');
+                  recordingLink.href = 'https://aka.ms/A365/Interop';
+                  recordingLink.className = 'register-btn';
+                  recordingLink.textContent = 'Recording';
+                  recordingLink.setAttribute('target', '_blank');
+                  recordingLink.setAttribute('rel', 'noopener noreferrer');
+                  buttonContainer.appendChild(recordingLink);
+                  
+                  buttonContainer.appendChild(document.createTextNode('\n            '));
+                  
+                  const pptLink = document.createElement('a');
+                  pptLink.href = '../resources/Agent 365 - Identity, Observability & Interoperability for Enterprise Agents - Customer Facing.zip';
+                  pptLink.className = 'register-btn';
+                  pptLink.textContent = 'Presentation (PPT)';
+                  pptLink.setAttribute('target', '_blank');
+                  pptLink.setAttribute('rel', 'noopener noreferrer');
+                  buttonContainer.appendChild(pptLink);
+                } else if (session.title === 'Unlocking Agent 365 Security and Governance') {
+                  const recordingLink = document.createElement('a');
+                  recordingLink.href = 'https://aka.ms/A365/Security';
+                  recordingLink.className = 'register-btn';
+                  recordingLink.textContent = 'Recording';
+                  recordingLink.setAttribute('target', '_blank');
+                  recordingLink.setAttribute('rel', 'noopener noreferrer');
+                  buttonContainer.appendChild(recordingLink);
+                  
+                  buttonContainer.appendChild(document.createTextNode('\n            '));
+                  
+                  const pptLink = document.createElement('a');
+                  pptLink.href = '../resources/Agent 365 - Unlocking Agent 365 Security and Governance - Customer Facing.zip';
+                  pptLink.className = 'register-btn';
+                  pptLink.textContent = 'Presentation (PPT)';
+                  pptLink.setAttribute('target', '_blank');
+                  pptLink.setAttribute('rel', 'noopener noreferrer');
+                  buttonContainer.appendChild(pptLink);
                 } else {
                   // For other sessions, use placeholder button with comment
                   const comment = document.createComment(` TODO: Update links when available for "${session.title}" - Replace button below with:
