@@ -1154,6 +1154,24 @@
                   recordingButton.style.cursor = 'not-allowed';
                   recordingButton.disabled = true;
                   buttonContainer.appendChild(recordingButton);
+                } else if (session.title === 'Agent Evaluation in Copilot Studio') {
+                  const pptLink = document.createElement('a');
+                  pptLink.href = '../resources/Agent Evaluation in Copilot Studio - Customer Facing.zip';
+                  pptLink.className = 'register-btn';
+                  pptLink.textContent = 'Presentation (PPT)';
+                  pptLink.setAttribute('target', '_blank');
+                  pptLink.setAttribute('rel', 'noopener noreferrer');
+                  buttonContainer.appendChild(pptLink);
+
+                  buttonContainer.appendChild(document.createTextNode('\n            '));
+
+                  const recordingButton = document.createElement('button');
+                  recordingButton.className = 'register-btn';
+                  recordingButton.textContent = 'Recording Coming Soon';
+                  recordingButton.style.backgroundColor = '#6c757d';
+                  recordingButton.style.cursor = 'not-allowed';
+                  recordingButton.disabled = true;
+                  buttonContainer.appendChild(recordingButton);
                 } else {
                   // For other sessions, use placeholder button with comment
                   const comment = document.createComment(` TODO: Update links when available for "${session.title}" - Replace button below with:
