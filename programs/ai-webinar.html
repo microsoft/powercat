@@ -18,7 +18,8 @@
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "v9n3ih0g0q");
-</script>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <style>
       .play-icon {
         display: inline-block;
@@ -52,7 +53,7 @@
           <div class="logo-line"></div>
           <div class="logo-text">
             Microsoft<br />Copilot Acceleration Team
-          </div> 
+          </div>
         </div>
       </div>
     </header>
@@ -76,6 +77,7 @@
           </div>
         </div>
       </section>
+
       <div class="sessions-container" style="margin-top: 2rem; grid-template-columns: repeat(2, 1fr);">
         <div class="session-card" style="aspect-ratio: auto; background-color: white;">
           <div class="session-content">
@@ -99,702 +101,48 @@
               <span>Next Session</span>
             </div>
             <h3 class="session-title" style="font-size: 1.8rem;" id="next-session-title">
-              Everything to know about Microsoft Agent 365
+              Loading...
             </h3>
-            <p id="next-session-description">
-              December 17th • 9AM PT<br><br>
-              Join us for an engaging introduction to Microsoft Agent 365, with Nirav Shah, 
-              CVP, BIC Agent Cloud!
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/aiWebinars/agent365" class="register-btn" style="background-color: white; color: #1A3985; border: 2px solid #1A3985;" id="next-session-link"
+            <p id="next-session-description"></p>
+            <a href="#" class="register-btn" style="background-color: white; color: #1A3985; border: 2px solid #1A3985; display: none;" id="next-session-link" target="_blank" rel="noopener noreferrer"
               >Register Now</a
             >
           </div>
         </div>
       </div>
+
+      <div style="margin-top: 4rem;">
+        <h2 class="section-title">What to Expect</h2>
+        <ul class="expect-list">
+          <li class="expect-item">
+            Gain the strategic expertise your organizations needs to succeed with
+            Microsoft Copilot.
+          </li>
+          <li class="expect-item">
+            Explore the possibilities of Microsoft Copilot,
+            advancements with autonomous agents, and more.
+          </li>
+          <li class="expect-item">
+            Engage in interactive exercises that allow you to
+            learn from others.
+          </li>
+        </ul>
+      </div>
+
       <h2 class="section-title" style="margin-top: 4rem;">Upcoming Sessions</h2>
       <div class="sessions-container" id="upcoming-sessions-container">
-        <div class="session-card upcoming-session" data-date="2025-12-17" data-time="9:00 AM PT" data-title="Everything to know about Microsoft Agent 365" data-description="Join us for an engaging introduction to Microsoft Agent 365, with Nirav Shah, CVP, BIC Agent Cloud!" data-link="https://aka.ms/aiWebinars/agent365">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Dec 17 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Everything to know about Microsoft Agent 365
-            </h3>
-            <p>
-
-              Join us for an engaging introduction to Microsoft Agent 365, with Nirav Shah, 
-              CVP, BIC Agent Cloud!
-
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/aiWebinars/agent365" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-      </div>
-      <h3 id="agent365-title" style="color: #506CD4; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 0.5rem; display: none;">Agent 365 Series!</h3>
-      <div class="sessions-container" id="agent365-sessions-container" style="display: none;">
-        <div class="session-card upcoming-session" data-date="2026-01-15" data-time="9:00 AM PT" data-title="Agent 365 - Discover, Govern, and Secure Agents with Registry and Agent Map" data-description="Agent Map gives you a single place to understand every agent in their tenant." data-link="https://aka.ms/a365/registry" style="background-color: #EDEFFD;">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Jan 15 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Agent 365 - Discover, Govern, and Secure Agents with Registry and Agent Map
-            </h3>
-            <p>
-              Agent Map gives you a single place to understand every agent in their tenant.
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/a365/registry" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-        <div class="session-card upcoming-session" data-date="2026-01-20" data-time="9:00 AM PT" data-title="Agent 365 - Access Control for Agents" data-description="In this session you will learn about all the governance and access controls you have at your disposal." data-link="https://aka.ms/a365/access" style="background-color: #EDEFFD;">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Jan 20 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Agent 365 - Access Control for Agents
-            </h3>
-            <p>
-              In this session you will learn about all the governance and access controls you have at your disposal.
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/a365/access" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-        <div class="session-card upcoming-session" data-date="2026-01-27" data-time="9:00 AM PT" data-title="Agent 365 Tools: Identity, Observability & Interoperability" data-description="Discover how Agent 365 unifies identity, observability, and interoperability to safely scale AI agents across Microsoft 365." data-link="https://aka.ms/a365/interop" style="background-color: #EDEFFD;">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Jan 27 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Agent 365 Tools: Identity, Observability & Interoperability
-            </h3>
-            <p>
-              Discover how Agent 365 unifies identity, observability, and interoperability to safely scale AI agents across Microsoft 365.
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/a365/interop" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-        <div class="session-card upcoming-session" data-date="2026-01-29" data-time="9:00 AM PT" data-title="Unlocking Agent 365 Security and Governance" data-description="Learn how Microsoft Agent 365 delivers an end‑to‑end security and governance framework designed for enterprise‑grade agentic adoption." data-link="https://aka.ms/a365/security" style="background-color: #EDEFFD;">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Jan 29 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Unlocking Agent 365 Security and Governance
-            </h3>
-            <p>
-              Learn how Microsoft Agent 365 delivers an end‑to‑end security and governance framework designed for enterprise‑grade agentic adoption.
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/a365/security" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-      </div>
-      <h3 id="january-title" style="color: var(--ms-blue); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 2rem;">January Sessions</h3>
-      <div class="sessions-container" id="january-sessions-container">
-        <div class="session-card upcoming-session" data-date="2026-01-07" data-time="9:00 AM PT" data-title="Copilot Studio Business Canvas" data-description="Ever wondered how to turn a business challenge into a fully functional Agent? Join us as we demystify the agent design process in Copilot Studio." data-link="https://aka.ms/aiwebinars/agentCanvas">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Jan 7 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Copilot Studio Business Canvas
-            </h3>
-            <p>
-
-              Ever wondered how to turn a business challenge into a fully functional Agent?
-              Join us as we demystify the agent design process in Copilot Studio. 
-
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/aiwebinars/agentCanvas" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-        <div class="session-card upcoming-session" data-date="2026-01-21" data-time="9:00 AM PT" data-title="Real‑World Agent Case Studies" data-description="Join our interactive webinar to hear 2-3 customers share their journey in building agentic solutions that drive real business transformation." data-link="https://aka.ms/AIwebinar/caseStudies">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Jan 21 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Real‑World Agent Case Studies
-            </h3>
-            <p>
-
-              Join our interactive webinar to hear 2-3 customers share their 
-              journey in building agentic solutions that drive real business transformation. 
-
-            </p>
-            <p>
-          
-            </p>
-            <a href="https://aka.ms/AIwebinar/caseStudies" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-        <div class="session-card upcoming-session" data-date="2026-01-28" data-time="9:00 AM PT" data-title="Agent Evaluation in Copilot Studio" data-description="We will introduce the new Agent Evaluation capabilities in Copilot Studio that empower makers!" data-link="https://aka.ms/AIWebinars/agentEval">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Jan 28 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Agent Evaluation in Copilot Studio
-            </h3>
-            <p>
-
-              We will introduce the new Agent Evaluation capabilities in Copilot 
-              Studio that empower makers!
-
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/AIWebinars/agentEval" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-      </div>
-      <h3 id="february-title" style="color: var(--ms-blue); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; margin-top: 2rem;">February Sessions</h3>
-      <div class="sessions-container" id="february-sessions-container">
-        <div class="session-card upcoming-session" data-date="2026-02-04" data-time="9:00 AM PT" data-title="Grounding Agents in the Most Relevant Knowledge" data-description="In this session, we'll discuss the Top 5 tips for Makers seeking to optimize Knowledge Sources in Microsoft Copilot Studio." data-link="https://aka.ms/AIWebinars/agentKnowledge">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Feb 4 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Grounding Agents in the Most Relevant Knowledge
-            </h3>
-            <p>
-
-              In this session, we'll discuss the Top 5 tips for Makers 
-              seeking to optimize Knowledge Sources in Microsoft Copilot 
-              Studio.
-
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/AIWebinars/agentKnowledge" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-        <div class="session-card upcoming-session" data-date="2026-02-18" data-time="9:00 AM PT" data-title="Agent Governance in M365 Admin Center" data-description="Join us as we dive into Copilot Control Systems in Microsoft 365 Admin Center (MAC), which allows Tenant Administrators to manage and govern Copilot and Agents!" data-link="https://aka.ms/AIWebinars/m365Governance">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Feb 18 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Agent Governance in M365 Admin Center
-            </h3>
-            <p>
-
-              Join us as we dive into Copilot Control Systems in Microsoft 365 Admin Center (MAC), 
-              which allows Tenant Administrators to manage and govern Copilot and Agents!
-
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/AIWebinars/m365Governance" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
-        <div class="session-card upcoming-session" data-date="2026-02-25" data-time="9:00 AM PT" data-title="Leverage Instructions & Tools to Build Agents" data-description="Discover the latest components and learn how to use them for greater flexibility than traditional agent-building approaches." data-link="https://aka.ms/AIWebinars/dynamicAgents">
-          <div class="session-content">
-            <div class="session-date">
-              <span>Feb 25 • 9AM PT</span>
-            </div>
-            <h3 class="session-title">
-              Leverage Instructions & Tools to Build Agents
-            </h3>
-            <p>
-
-              Discover the latest components and learn how to use them 
-              for greater flexibility than traditional agent-building 
-              approaches. 
-
-            </p>
-            <p>
-            </p>
-            <a href="https://aka.ms/AIWebinars/dynamicAgents" class="register-btn" style="background-color: #0C55B8;"
-              >Register Now</a
-            >
-          </div>
-        </div>
+        <!-- Populated by JavaScript -->
       </div>
 
-      <div class="sessions-container" style="margin-top: 4rem; grid-template-columns: repeat(2, 1fr);">
-        <div>
-          <h2 class="section-title">What to Expect</h2>
-          <ul class="expect-list">
-            <li class="expect-item">
-              Gain the strategic expertise your organizations needs to succeed with
-              Microsoft Copilot.
-            </li>
-            <li class="expect-item">
-              Explore the possibilities of Microsoft Copilot,
-              advancements with autonomous agents, and more.
-            </li>
-            <li class="expect-item">
-              Engage in interactive exercises that allow you to
-              learn from others.
-            </li>
-          </ul>
-        </div>
-        <div class="session-card" style="aspect-ratio: auto; background-color: white; padding: 1rem 2rem 0rem 2rem;">
-          <h2 class="section-title"><span class="play-icon"></span>Previous Sessions</h2>
-          <p class="about-text" style="border-bottom: 2px solid #C5DBEF; padding-bottom: 1rem;">
-            Watch the recordings and download the presentations of previous
-            sessions.
-          </p>
-
-          <div class="accordion">
-          <div class="accordion-item">
-            <button class="accordion-header" id="temp-label" aria-expanded="false" aria-controls="panel-temp-label">
-              <h3>Browse past sessions</h3>
-            </button>
-            <div class="accordion-panel" id="panel-temp-label" role="region" aria-labelledby="temp-label" aria-hidden="true">
-              
-        <details>
-          <summary>
-            <h3>▶️ Unlocking the Potential of Copilot Studio</h3>
-          </summary>
-          Discover the power of autonomous agents and AI tools through
-          real-world examples and interactive activities.
-          <p>
-            <a href="https://aka.ms/IntroToAgents" class="register-btn"
-              >Recording</a
-            >
-            <a
-              href="../resources/introduction-to-copilot-studio-webinar.pdf"
-              class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-
-        <details>
-          <summary><h3>▶️ Where Agents Meet Opportunity</h3></summary>
-
-          Uncover high-value opportunities for AI implementation in your
-          organization.
-
-          <p>
-            <a href="https://aka.ms/AIVisionValue" class="register-btn"
-              >Recording</a
-            >
-            <a
-              href="../resources/where-agents-meet-opportunity.pdf"
-              class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-
-        <details>
-          <summary><h3>▶️ Navigating AI Risks: A Practical Guide</h3></summary>
-          Learn to identify, assess, and mitigate risks associated with
-          implementing AI in your organization.
-          <p>
-            <a href="https://aka.ms/AIRisks" class="register-btn">Recording</a>
-            <a href="../resources/navigating-risks.pdf" class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-
-        <details>
-          <summary><h3>▶️ Evolving Governance for AI</h3></summary>
-          Establish governance frameworks that enable innovation while
-          maintaining compliance and trust.
-
-          <p>
-            <a href="https://aka.ms/AIEvolvingGovernance" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Evolving-Governance.pdf" class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-
-        <details>
-          <summary>
-            <h3>Unlocking the Potential of Copilot Studio (EMEA)</h3>
-          </summary>
-          Discover the power of autonomous agents and AI tools through
-          real-world examples and interactive activities.
-          <p>
-            <a href="https://aka.ms/IntroToAgents/EMEA" class="register-btn"
-              >Recording</a
-            >
-            <a
-              href="../resources/Unlocking the Potential of Copilot Studio EMEA.pdf"
-              class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-
-        <details>
-          <summary><h3>▶️ Data Foundations for AI</h3></summary>
-          Build robust data architectures to power effective AI solutions within
-          your organization.
-          <p>
-            <a href="https://aka.ms/AIData" class="register-btn">Recording</a>
-            <a href="../resources/Data readiness.pdf" class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-
-        <details>
-          <summary><h3>▶️ Application Lifecycle Management</h3></summary>
-          Wondering how to move your Copilot Studio agents from dev to test to
-          prod the right way? In this session, we'll guide you through
-          Application Lifecycle Management (ALM) options – from the simplest to
-          the most advanced – so you can adopt to what fits your team today and
-          grow as your needs evolve.
-          <p>
-            <a href="https://aka.ms/MCS/ALM" class="register-btn">Recording</a>
-            <a href="../resources/MCS ALM.pdf" class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-
-        <details>
-          <summary>
-            <h3>Microsoft Build 2025 - Copilot Studio recap</h3>
-          </summary>
-
-          Join us for an exciting webinar where we share the latest
-          announcements from Microsoft Build 2025 related to Copilot Studio.
-          Learn about new features, enhancements, and capabilities designed to
-          ease your organization's Copilot Studio journey.
-          <p>
-            <a href="https://aka.ms/mcs/buildrecap" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/whats-new-in-mcs.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>
-        </details>
-
-        <details>
-          <summary><h3>▶️ Deep Dive into Autonomous Agents</h3></summary>
-
-          Explore the world of Autonomous Agents and gain a comprehensive
-          understanding of their terminology, differentiation, and operational
-          mechanisms. Witness live demonstrations that will inspire you to
-          prioritize building autonomous agents now.
-          <p>
-            <a href="https://aka.ms/mcs/AutoAgents" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/autonomous-deep-dive.pdf" class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-        <details>
-          <summary><h3>▶️ Copilot Studio Licensing</h3></summary>
-          Join us as we provide clarity on Copilot Studio licensing and message
-          consumption and dive into practical scenarios where these solutions
-          can be leveraged effectively.
-          <p>
-            <a href="https://aka.ms/mcs/licensing" class="register-btn"
-              >Recording</a
-            >
-            <a
-              href="../resources/copilot-studio-licensing.pdf"
-              class="register-btn"
-              >Presentation (PDF)</a
-            >
-          </p>
-        </details>
-        <details>
-          <summary><h3>▶️ Elevate your Copilot Adoption</h3></summary>
-          Curious about boosting Copilot adoption in your organization? Join our
-          upcoming webinar to discover how Microsoft's Customer and Partner
-          Solutions organization is driving successful adoption and
-          transformation with Copilot. Learn proven strategies and change
-          management techniques that can enhance your journey.
-          <p>
-            <a href="https://aka.ms/mcs/adoption" class="register-btn"
-              >Recording</a
-            >
-            <a
-              href="../resources/Copilot Adoption In A Box Customer Lite.pdf"
-              class="register-btn"
-              >Adoption Kit (PDF)</a
-            >
-          </p>
-        </details>
-        <details>
-          <summary><h3>▶️ Deep Dive Into Agentic Governance</h3></summary>
-
-            From Chaos to Control: Learn proven frameworks and tools to manage
-            hundreds of Copilot Studio agents securely and efficiently.
-
-          <p>
-            <a href="https://aka.ms/mcs/agentGovernance" class="register-btn"
-              >Recording</a
-            >
-            <a 
-              href="../resources/Deep Dive into Agentic Governance.zip" class="register-btn"
-              >Presentation (PPTX)</a
-            >
-          <p>
-        </details>
-        <details>
-          <summary><h3>▶️ Extending Copilot Studio with Azure AI Foundry</h3></summary>
-          
-            Unlock the full potential of your conversational agents with
-            Microsoft Copilot Studio by integrating capabilities from Azure AI
-            Foundry and Azure AI Services.
-          
-          <p>
-            <a href="https://aka.ms/mcs/azureAI" class="register-btn"
-              >Recording</a
-            >
-          
-            <a href="../resources/Extending MCS with Azure AI Foundry.pptx" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary>
-            <h3>Copilot Studio - Better together with Azure</h3>
-          </summary>
-            Learn about the best ways to leverage Azure and Copilot Studio 
-            together to get the most out of your agents, including 
-            multi-agent capability.
-          <p>
-            <a href="https://aka.ms/mcs/azureAI2" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/CopilotStudioAzureBetterTogether.pptx" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>
-        </details>
-        <details>
-          <summary><h3>▶️ Deep Dive into Generative Orchestration (part 1)</h3></summary>
-          
-            In this session, we'll explore these three orchestration modes, 
-            demonstrate how they work through quick demos, and then dive 
-            deep into Generative Orchestration.
-          
-          <p>
-            <a href="https://aka.ms/mcs/orchestration" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Mastering Generative Orchestration Insights and Best Practices.pptx" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Part 2 of Generative Orchestration - Enterprise Grade Agent Design in Copilot Studio</h3></summary>
-          
-            In this part two of the Generative Orchestration session, 
-            we will delve into the added value that Copilot Studio 
-            provides for Enterprise grade design by allowing the business 
-            to strategically utilize generative AI.
-          
-          <p>
-            <a href="https://aka.ms/mcs/orchestration2" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/AI Webinar - Gen orch 2- Karima Kanji copy.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Copilot Studio Kit in Action - Validate, Monitor, and Optimize your Agents </h3></summary>
-          
-            In this session, we will explore the Copilot Studio Kit, 
-            a comprehensive set of tools and best practices designed to help you 
-            validate, monitor, and optimize your agents effectively.
-          
-          <p>
-            <a href="https://aka.ms/mcs/Kit" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Copilot Studio Kit in Action copy.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Copilot Studio - Demystifying Multi-Agent & Component Collections</h3></summary>
-          
-            Join us for an in-depth session on using multi-agents in Copilot Studio. 
-            We'll explore when and how to apply both focused agents and connected 
-            agents and clarify how these differ from Component Collections and Topics 
-            within Copilot Studio. 
-          
-          <p>
-            <a href="https://aka.ms/mcs/multi-agent" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Copilot Studio - Demystifying Multi-Agent and Component Collections copy.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Empower your Copilot Studio agent with Azure AI Services</h3></summary>
-          
-            Discover the power of Azure AI Services and how they can add significant capabilities 
-            to your Copilot Studio agents, including analyzing content in images, adding speech
-            recognition, summarizing text, extracting fields from complex documents, and more. 
-          
-          <p>
-            <a href="https://aka.ms/mcs/AzureAiServices" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Expand Copilot Studio Agent Capabilities with Azure AI Services copy.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Real World Stories: Agentic Solutions with Copilot Studio and Power Platform</h3></summary>
-          
-              Join us for an inspiring and practical session where customers share real-world 
-              stories of how they're transforming their organizations using Microsoft Copilot 
-              Studio and the Power Platform. 
-          
-          <p>
-            <a href="https://aka.ms/mcs/storytelling" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Storytelling AI Webinars Oct 15 copy.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Build AI Agents for WhatsApp with Copilot Studio</h3></summary>
-          
-              Discover how Copilot Studio empowers businesses to launch AI agents directly 
-              on WhatsApp—the world’s most popular messaging platform—without third-party 
-              dependencies. In this webinar, learn to deploy agents in just a few clicks, 
-              deliver rich customer experiences, and authenticate users securely by phone number. 
-          
-          <p>
-            <a href="https://aka.ms/mcs/whatsApp" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Power CAT WhatsApp webinar session deck copy.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Building Agents in Copilot Studio 101</h3></summary>
-          
-              Join us to learn the basics of the way to build your own Agents 
-              in Copilot Studio.  We will explore all the different pieces of 
-              Copilot Studio and how you combine them to get the scenarios you 
-              are looking for in your agent experience. 
-          
-          <p>
-            <a href="https://aka.ms/mcs/buildingAgents" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Copy Power CAT AI Webinars Copilot Studio 101.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Build a Copilot agent using Copilot Studio agent templates</h3></summary>
-          
-              Join us to learn how to use the Copilot Studio agent templates - included 
-              for free in Copilot Studio lite experience.  
-          
-          <p>
-
-            <a href="https://aka.ms/mcs/agentTemplates" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Copy Agent Templates Webinar.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Ignite Recap: Top Innovations and Takeaways</h3></summary>
-          
-              Join us for a recap of the key announcements and innovations shaping 
-              the future of Copilot. We’ll share new capabilities, and practical 
-              insights to help you leverage these tools for AI-driven productivity, 
-              and business transformation.  
-          
-          <p>
-            <a href="https://aka.ms/aiWebinars/igniteRecap" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Copy Ignite Recap - CAT AI Webinars.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-        <details>
-          <summary><h3>▶️ Copilot Studio Governance Unpacked – Ignite Recap & Live Q&A</h3></summary>
-          
-              Join us for a focused session on Agent Governance in Copilot Studio, featuring 
-              key highlights from Microsoft Ignite and an interactive Q&A.  
-          
-          <p>
-            <a href="https://aka.ms/mcs/GovernanceQA" class="register-btn"
-              >Recording</a
-            >
-            <a href="../resources/Copy Governance Q&A - CAT AI Webinars.zip" class="register-btn"
-              >Presentation (PPT)</a
-            >
-          </p>  
-        </details>
-
-            </div>
-          </div>
-        </div>
-        </div>
-      </div>
+      <h2 class="section-title" style="margin-top: 4rem;"><span class="play-icon"></span>Past Sessions</h2>
+      <p class="about-text" style="margin-bottom: 1.5rem;">
+        Watch the recordings and download the presentations of previous sessions.
+      </p>
+      <div id="past-sessions-container">
+        <!-- Populated by JavaScript -->
       </div>
     </main>
+
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-logo">
@@ -808,547 +156,125 @@
     </footer>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Accordion functionality
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-        accordionHeaders.forEach(header => {
-          header.addEventListener('click', () => {
-            const expanded = header.getAttribute('aria-expanded') === 'true';
-            // Close all panels
-            accordionHeaders.forEach(h => {
-              h.setAttribute('aria-expanded', 'false');
-              const panel = document.getElementById(h.getAttribute('aria-controls'));
-              panel.setAttribute('aria-hidden', 'true');
-              panel.style.display = 'none';
-            });
-            if (!expanded) {
-              header.setAttribute('aria-expanded', 'true');
-              const panel = document.getElementById(header.getAttribute('aria-controls'));
-              panel.setAttribute('aria-hidden', 'false');
-              panel.style.display = 'block';
-            }
-          });
-
-          header.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              header.click();
-            }
-          });
-        });
-
-        // Keyboard navigation
-        const accordionItems = document.querySelectorAll('.accordion-item');
-        accordionItems.forEach((item, index) => {
-          const header = item.querySelector('.accordion-header');
-          header.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowDown') {
-              e.preventDefault();
-              const next = accordionItems[index + 1];
-              if (next) next.querySelector('.accordion-header').focus();
-            } else if (e.key === 'ArrowUp') {
-              e.preventDefault();
-              const prev = accordionItems[index - 1];
-              if (prev) prev.querySelector('.accordion-header').focus();
-            } else if (e.key === 'Home') {
-              e.preventDefault();
-              accordionItems[0].querySelector('.accordion-header').focus();
-            } else if (e.key === 'End') {
-              e.preventDefault();
-              accordionItems[accordionItems.length - 1].querySelector('.accordion-header').focus();
-            }
-          });
-        });
-      });
-
-      // Dynamic session management
-      document.addEventListener('DOMContentLoaded', () => {
-        // Make all register buttons open in new tab
-        document.querySelectorAll('.register-btn').forEach(btn => {
-          btn.setAttribute('target', '_blank');
-          btn.setAttribute('rel', 'noopener noreferrer');
-        });
-        
-        function updateNextSession() {
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          const response = await fetch('ai-webinar-sessions.yml');
+          if (!response.ok) throw new Error('Failed to fetch sessions YAML');
+          const yamlText = await response.text();
+          const data = jsyaml.load(yamlText);
+          const sessions = data.sessions;
           const now = new Date();
-          console.log('Current time:', now);
-          
-          // Get all upcoming session cards
-          const upcomingSessions = Array.from(document.querySelectorAll('.upcoming-session'));
-          console.log('Found upcoming sessions:', upcomingSessions.length);
-          
-          // Move past sessions to Previous Sessions accordion
-          const previousSessionsPanel = document.getElementById('panel-temp-label');
-          
-          // Map all sessions with their data
-          const allSessions = upcomingSessions
-            .map(session => {
-              const dateStr = session.getAttribute('data-date');
-              // Parse date as local time to avoid timezone issues
-              const [year, month, day] = dateStr.split('-').map(Number);
-              
-              // Create a display date (for showing to users)
-              const displayDate = new Date(year, month - 1, day);
-              displayDate.setHours(0, 0, 0, 0);
-              
-              // Create a cutoff date (session time + 2 hours = 11 AM PT)
-              // Format: YYYY-MM-DDTHH:MM:SS-08:00 (PT timezone)
-              const cutoffDateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T11:00:00-08:00`;
-              const cutoffDate = new Date(cutoffDateStr);
-              
-              console.log('Session:', session.getAttribute('data-title'), 'Cutoff:', cutoffDate);
-              
-              return {
-                element: session,
-                cutoffDate: cutoffDate,
-                displayDate: displayDate,
-                title: session.getAttribute('data-title'),
-                description: session.getAttribute('data-description'),
-                time: session.getAttribute('data-time'),
-                link: session.getAttribute('data-link'),
-                dateStr: dateStr
-              };
-            });
-          
-          // Separate past and future sessions
-          const pastSessions = allSessions.filter(session => session.cutoffDate <= now);
-          const futureSessions = allSessions.filter(session => session.cutoffDate > now);
-          
-          // Sort past sessions by date (oldest first)
-          pastSessions.sort((a, b) => a.cutoffDate - b.cutoffDate);
-          
-          // Separate Agent 365 sessions from other sessions
-          const agent365Sessions = [];
-          const otherSessions = [];
-          
-          pastSessions.forEach(session => {
-            if (session.title.includes('Agent 365')) {
-              agent365Sessions.push(session);
-            } else {
-              otherSessions.push(session);
-            }
+
+          // Parse dates and classify each session
+          const sessionData = sessions.map(session => {
+            const [year, month, day] = session.date.split('-').map(Number);
+            const displayDate = new Date(year, month - 1, day);
+            // Session expires 2 hours after the 9 AM PT start = 11 AM PT
+            const cutoffStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T11:00:00-08:00`;
+            const cutoffDate = new Date(cutoffStr);
+            return { ...session, displayDate, cutoffDate };
           });
-          
-          // Create Agent 365 group if there are any Agent 365 sessions
-          if (agent365Sessions.length > 0 && previousSessionsPanel) {
-            const agent365Details = document.createElement('details');
-            const agent365Summary = document.createElement('summary');
-            agent365Summary.innerHTML = '<h3>▶️ 5-part Agent 365 series</h3>';
-            agent365Details.appendChild(agent365Summary);
-            
-            // Add a container div for all Agent 365 sessions
-            const agent365Container = document.createElement('div');
-            agent365Container.style.marginLeft = '1.5rem';
-            
-            agent365Sessions.forEach(session => {
-              const sessionDiv = document.createElement('div');
-              sessionDiv.style.marginBottom = '1.5rem';
-              sessionDiv.style.borderLeft = '3px solid #0C55B8';
-              sessionDiv.style.paddingLeft = '1rem';
-              
-              const sessionTitle = document.createElement('h4');
-              sessionTitle.textContent = session.title;
-              sessionTitle.style.marginTop = '0.5rem';
-              sessionTitle.style.marginBottom = '0.5rem';
-              sessionTitle.style.color = '#0C55B8';
-              sessionDiv.appendChild(sessionTitle);
-              
-              const sessionDesc = document.createElement('p');
-              sessionDesc.textContent = session.description;
-              sessionDesc.style.marginBottom = '0.5rem';
-              sessionDiv.appendChild(sessionDesc);
-              
-              const buttonContainer = document.createElement('p');
-              buttonContainer.style.marginTop = '0.5rem';
-              
-              // Add links based on session title
-              if (session.title === 'Everything to know about Microsoft Agent 365') {
-                const recordingLink = document.createElement('a');
-                recordingLink.href = 'https://aka.ms/aiWebinars/agent365';
-                recordingLink.className = 'register-btn';
-                recordingLink.textContent = 'Recording';
-                recordingLink.setAttribute('target', '_blank');
-                recordingLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(recordingLink);
-                
-                buttonContainer.appendChild(document.createTextNode('\n            '));
-                
-                const pptLink = document.createElement('a');
-                pptLink.href = '../resources/Agent 365 - CAT AI Webinars copy.zip';
-                pptLink.className = 'register-btn';
-                pptLink.textContent = 'Presentation (PPT)';
-                pptLink.setAttribute('target', '_blank');
-                pptLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(pptLink);
-              } else if (session.title === 'Agent 365 - Discover, Govern, and Secure Agents with Registry and Agent Map') {
-                const recordingLink = document.createElement('a');
-                recordingLink.href = 'https://aka.ms/a365/registry';
-                recordingLink.className = 'register-btn';
-                recordingLink.textContent = 'Recording';
-                recordingLink.setAttribute('target', '_blank');
-                recordingLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(recordingLink);
-                
-                buttonContainer.appendChild(document.createTextNode('\n            '));
-                
-                const pptLink = document.createElement('a');
-                pptLink.href = '../resources/Copy Agent 365 - Powering modern work with discoverable, governed and secure agents.zip';
-                pptLink.className = 'register-btn';
-                pptLink.textContent = 'Presentation (PPT)';
-                pptLink.setAttribute('target', '_blank');
-                pptLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(pptLink);
-              } else if (session.title === 'Agent 365 - Access Control for Agents') {
-                const recordingLink = document.createElement('a');
-                recordingLink.href = 'https://aka.ms/A365/Access';
-                recordingLink.className = 'register-btn';
-                recordingLink.textContent = 'Recording';
-                recordingLink.setAttribute('target', '_blank');
-                recordingLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(recordingLink);
-                
-                buttonContainer.appendChild(document.createTextNode('\n            '));
-                
-                const pptLink = document.createElement('a');
-                pptLink.href = '../resources/Agent 365 - Access Control for Agents - Customer Facing.zip';
-                pptLink.className = 'register-btn';
-                pptLink.textContent = 'Presentation (PPT)';
-                pptLink.setAttribute('target', '_blank');
-                pptLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(pptLink);
-              } else if (session.title === 'Agent 365 Tools: Identity, Observability & Interoperability') {
-                const recordingLink = document.createElement('a');
-                recordingLink.href = 'https://aka.ms/A365/Interop';
-                recordingLink.className = 'register-btn';
-                recordingLink.textContent = 'Recording';
-                recordingLink.setAttribute('target', '_blank');
-                recordingLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(recordingLink);
-                
-                buttonContainer.appendChild(document.createTextNode('\n            '));
-                
-                const pptLink = document.createElement('a');
-                pptLink.href = '../resources/Agent 365 - Identity, Observability & Interoperability for Enterprise Agents - Customer Facing.zip';
-                pptLink.className = 'register-btn';
-                pptLink.textContent = 'Presentation (PPT)';
-                pptLink.setAttribute('target', '_blank');
-                pptLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(pptLink);
-              } else if (session.title === 'Unlocking Agent 365 Security and Governance') {
-                const recordingLink = document.createElement('a');
-                recordingLink.href = 'https://aka.ms/A365/Security';
-                recordingLink.className = 'register-btn';
-                recordingLink.textContent = 'Recording';
-                recordingLink.setAttribute('target', '_blank');
-                recordingLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(recordingLink);
-                
-                buttonContainer.appendChild(document.createTextNode('\n            '));
-                
-                const pptLink = document.createElement('a');
-                pptLink.href = '../resources/Agent 365 - Unlocking Agent 365 Security and Governance - Customer Facing.zip';
-                pptLink.className = 'register-btn';
-                pptLink.textContent = 'Presentation (PPT)';
-                pptLink.setAttribute('target', '_blank');
-                pptLink.setAttribute('rel', 'noopener noreferrer');
-                buttonContainer.appendChild(pptLink);
-              }
-              
-              sessionDiv.appendChild(buttonContainer);
-              agent365Container.appendChild(sessionDiv);
-              
-              // Remove from upcoming sessions
-              session.element.remove();
-            });
-            
-            agent365Details.appendChild(agent365Container);
-            previousSessionsPanel.appendChild(agent365Details);
-          }
-          
-          // Add other past sessions to accordion in order (oldest first)
-          otherSessions.forEach(session => {
-            if (previousSessionsPanel) {
-                const details = document.createElement('details');
-                const summary = document.createElement('summary');
-                summary.innerHTML = `<h3>▶️${session.title}</h3>`;
-                details.appendChild(summary);
-                
-                // Add session description
-                const descriptionText = document.createTextNode('\n          ' + session.description + '\n          ');
-                details.appendChild(descriptionText);
-                
-                // Add buttons with links
-                const buttonContainer = document.createElement('p');
-                
-                // Check if this is the Agent 365 session and add actual links
-                if (session.title === 'Everything to know about Microsoft Agent 365') {
-                  const recordingLink = document.createElement('a');
-                  recordingLink.href = 'https://aka.ms/aiWebinars/agent365';
-                  recordingLink.className = 'register-btn';
-                  recordingLink.textContent = 'Recording';
-                  recordingLink.setAttribute('target', '_blank');
-                  recordingLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(recordingLink);
-                  
-                  buttonContainer.appendChild(document.createTextNode('\n            '));
-                  
-                  const pptLink = document.createElement('a');
-                  pptLink.href = '../resources/Agent 365 - CAT AI Webinars copy.zip';
-                  pptLink.className = 'register-btn';
-                  pptLink.textContent = 'Presentation (PPT)';
-                  pptLink.setAttribute('target', '_blank');
-                  pptLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(pptLink);
-                } else if (session.title === 'Copilot Studio Business Canvas') {
-                  const recordingLink = document.createElement('a');
-                  recordingLink.href = 'https://aka.ms/aiwebinars/agentCanvas';
-                  recordingLink.className = 'register-btn';
-                  recordingLink.textContent = 'Recording';
-                  recordingLink.setAttribute('target', '_blank');
-                  recordingLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(recordingLink);
-                  
-                  buttonContainer.appendChild(document.createTextNode('\n            '));
-                  
-                  const pptLink = document.createElement('a');
-                  pptLink.href = '../resources/Copy Copilot Studio Canvas Blueprint.zip';
-                  pptLink.className = 'register-btn';
-                  pptLink.textContent = 'Presentation (PPT)';
-                  pptLink.setAttribute('target', '_blank');
-                  pptLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(pptLink);
-                } else if (session.title === 'Copilot Studio Business Canvas') {
-                  const recordingLink = document.createElement('a');
-                  recordingLink.href = 'https://aka.ms/aiwebinars/agentCanvas';
-                  recordingLink.className = 'register-btn';
-                  recordingLink.textContent = 'Recording';
-                  recordingLink.setAttribute('target', '_blank');
-                  recordingLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(recordingLink);
 
-                  buttonContainer.appendChild(document.createTextNode('\n            '));
+          // Sort all sessions chronologically
+          sessionData.sort((a, b) => a.cutoffDate - b.cutoffDate);
 
-                  const pptLink = document.createElement('a');
-                  pptLink.href = '../resources/Copy Copilot Studio Canvas Blueprint.zip';
-                  pptLink.className = 'register-btn';
-                  pptLink.textContent = 'Presentation (PPT)';
-                  pptLink.setAttribute('target', '_blank');
-                  pptLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(pptLink);
-                } else if (session.title === 'Grounding Agents in the Most Relevant Knowledge') {
-                  const pptLink = document.createElement('a');
-                  pptLink.href = '../resources/Optimizing Knowledge Sources for Agents - Customer Facing.zip';
-                  pptLink.className = 'register-btn';
-                  pptLink.textContent = 'Presentation (PPT)';
-                  pptLink.setAttribute('target', '_blank');
-                  pptLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(pptLink);
+          const upcoming = sessionData.filter(s => s.cutoffDate > now);
+          const past = sessionData.filter(s => s.cutoffDate <= now).reverse(); // most recent first
 
-                  buttonContainer.appendChild(document.createTextNode('\n            '));
-
-                  const recordingButton = document.createElement('button');
-                  recordingButton.className = 'register-btn';
-                  recordingButton.textContent = 'Recording Coming Soon';
-                  recordingButton.style.backgroundColor = '#6c757d';
-                  recordingButton.style.cursor = 'not-allowed';
-                  recordingButton.disabled = true;
-                  buttonContainer.appendChild(recordingButton);
-                } else if (session.title === 'Agent Evaluation in Copilot Studio') {
-                  const recordingLink = document.createElement('a');
-                  recordingLink.href = 'https://aka.ms/AIWebinars/agentEval';
-                  recordingLink.className = 'register-btn';
-                  recordingLink.textContent = 'Recording';
-                  recordingLink.setAttribute('target', '_blank');
-                  recordingLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(recordingLink);
-
-                  buttonContainer.appendChild(document.createTextNode('\n            '));
-
-                  const pptLink = document.createElement('a');
-                  pptLink.href = '../resources/Agent Evaluation in Copilot Studio - Customer Facing.zip';
-                  pptLink.className = 'register-btn';
-                  pptLink.textContent = 'Presentation (PPT)';
-                  pptLink.setAttribute('target', '_blank');
-                  pptLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(pptLink);
-                } else if (session.title === 'Real‑World Agent Case Studies') {
-                  const recordingLink = document.createElement('a');
-                  recordingLink.href = 'https://aka.ms/AiWebinar/casestudies';
-                  recordingLink.className = 'register-btn';
-                  recordingLink.textContent = 'Recording';
-                  recordingLink.setAttribute('target', '_blank');
-                  recordingLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(recordingLink);
-
-                  buttonContainer.appendChild(document.createTextNode('\n            '));
-
-                  const pptLink = document.createElement('a');
-                  pptLink.href = '../resources/Customer Storytelling Deck - Dunaway and Informatica - Customer Facing.zip';
-                  pptLink.className = 'register-btn';
-                  pptLink.textContent = 'Presentation (PPT)';
-                  pptLink.setAttribute('target', '_blank');
-                  pptLink.setAttribute('rel', 'noopener noreferrer');
-                  buttonContainer.appendChild(pptLink);
-                } else {
-                  // For other sessions, use placeholder button with comment
-                  const comment = document.createComment(` TODO: Update links when available for "${session.title}" - Replace button below with:
-            <a href="RECORDING_LINK_HERE" class="register-btn">Recording</a>
-            <a href="PRESENTATION_LINK_HERE" class="register-btn">Presentation (PPT)</a>
-          `);
-                  buttonContainer.appendChild(comment);
-                  
-                  const button = document.createElement('button');
-                  button.className = 'register-btn';
-                  button.textContent = 'Deck & Recording Coming Soon!';
-                  button.style.backgroundColor = '#6c757d';
-                  button.style.cursor = 'not-allowed';
-                  button.disabled = true;
-                  buttonContainer.appendChild(button);
-                }
-                
-                details.appendChild(buttonContainer);
-                
-                // Insert at the end of the accordion (oldest sessions first)
-                previousSessionsPanel.appendChild(details);
-                
-                // Remove from upcoming sessions
-                session.element.remove();
-            }
-          });
-          
-          // Sort future sessions by date (soonest first)
-          futureSessions.sort((a, b) => a.cutoffDate - b.cutoffDate);
-          
-          console.log('Future sessions found:', futureSessions.length);
-          
-          if (futureSessions.length > 0) {
-            const nextSession = futureSessions[0];
-            console.log('Next session:', nextSession.title);
-            
-            // Update the "Next Session" card
-            const nextSessionTitle = document.getElementById('next-session-title');
-            const nextSessionDescription = document.getElementById('next-session-description');
-            const nextSessionLink = document.getElementById('next-session-link');
-            
-            console.log('Elements found:', nextSessionTitle, nextSessionDescription, nextSessionLink);
-            
-            if (nextSessionTitle && nextSessionDescription && nextSessionLink) {
-              // Format the date nicely using the display date
-              const options = { month: 'long', day: 'numeric' };
-              const formattedDate = nextSession.displayDate.toLocaleDateString('en-US', options);
-              
-              nextSessionTitle.textContent = nextSession.title;
-              nextSessionDescription.innerHTML = `${formattedDate} • ${nextSession.time}<br><br>${nextSession.description}`;
-              nextSessionLink.href = nextSession.link;
-              
-              // Show the register button in case it was hidden
-              nextSessionLink.style.display = '';
-              
-              console.log('Updated next session card');
-              
-              // Hide the next session from the upcoming sessions list
-              nextSession.element.style.display = 'none';
-              
-              // Check if we need to hide the section this session belonged to
-              const parentContainer = nextSession.element.parentElement;
-              if (parentContainer) {
-                const visibleSessions = Array.from(parentContainer.querySelectorAll('.upcoming-session'))
-                  .filter(s => s.style.display !== 'none');
-                
-                // If this was the only visible session, hide the section
-                if (visibleSessions.length === 0) {
-                  const containerId = parentContainer.id;
-                  let titleId = null;
-                  
-                  if (containerId === 'agent365-sessions-container') {
-                    titleId = 'agent365-title';
-                  } else if (containerId === 'january-sessions-container') {
-                    titleId = 'january-title';
-                  } else if (containerId === 'february-sessions-container') {
-                    titleId = 'february-title';
-                  }
-                  
-                  if (titleId) {
-                    const title = document.getElementById(titleId);
-                    if (title) title.style.display = 'none';
-                  }
-                  parentContainer.style.display = 'none';
-                }
-              }
-            }
+          // --- Next Session card ---
+          const nextSessionLink = document.getElementById('next-session-link');
+          if (upcoming.length > 0) {
+            const next = upcoming[0];
+            document.getElementById('next-session-title').textContent = next.title;
+            const formattedDate = next.displayDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+            document.getElementById('next-session-description').innerHTML =
+              `${escapeHtml(formattedDate)} &bull; ${escapeHtml(next.time || '9AM PT')}<br><br>${escapeHtml(next.description)}`;
+            nextSessionLink.href = next.register_link || '#';
+            nextSessionLink.style.display = '';
           } else {
-            console.log('No future sessions');
-            // If no future sessions, hide the next session card or show a message
-            const nextSessionCard = document.getElementById('next-session-card');
-            if (nextSessionCard) {
-              const nextSessionTitle = document.getElementById('next-session-title');
-              const nextSessionDescription = document.getElementById('next-session-description');
-              const nextSessionLink = document.getElementById('next-session-link');
-              
-              nextSessionTitle.textContent = 'No Upcoming Sessions';
-              nextSessionDescription.textContent = 'Check back soon for new session announcements!';
-              nextSessionLink.style.display = 'none';
-            }
+            document.getElementById('next-session-title').textContent = 'No Upcoming Sessions';
+            document.getElementById('next-session-description').textContent = 'Check back soon for new session announcements!';
+            nextSessionLink.style.display = 'none';
           }
-        }
-        
-        // Run on page load
-        updateNextSession();
-        
-        // Show Agent 365 section after 9:30 AM PT on Dec 17, 2025
-        function showAgent365Section() {
-          const now = new Date();
-          
-          // Create release date: Dec 17, 2025 at 9:30 AM PT (UTC-8)
-          const releaseDate = new Date('2025-12-17T09:30:00-08:00');
-          
-          console.log('Current time:', now);
-          console.log('Release time:', releaseDate);
-          console.log('Should show Agent 365:', now >= releaseDate);
-          
-          if (now >= releaseDate) {
-            const title = document.getElementById('agent365-title');
-            const container = document.getElementById('agent365-sessions-container');
-            if (title) title.style.display = 'block';
-            if (container) container.style.display = 'grid';
+
+          // --- Upcoming Sessions (skip the first, already shown in Next Session card) ---
+          const upcomingContainer = document.getElementById('upcoming-sessions-container');
+          const upcomingToShow = upcoming.slice(1);
+          if (upcomingToShow.length === 0) {
+            upcomingContainer.innerHTML = '<p style="grid-column: 1 / -1; color: #666; padding: 0.5rem 0;">No additional upcoming sessions at this time. Check back soon!</p>';
+          } else {
+            upcomingToShow.forEach(session => {
+              upcomingContainer.appendChild(createUpcomingCard(session));
+            });
           }
+
+          // --- Past Sessions ---
+          const pastContainer = document.getElementById('past-sessions-container');
+          if (past.length === 0) {
+            pastContainer.innerHTML = '<p style="color: #666; padding: 0.5rem 0;">No past sessions yet.</p>';
+          } else {
+            past.forEach(session => {
+              pastContainer.appendChild(createPastRow(session));
+            });
+          }
+
+        } catch (error) {
+          console.error('Failed to load sessions:', error);
+          document.getElementById('next-session-title').textContent = 'Unable to load sessions';
+          document.getElementById('next-session-description').textContent = 'Please try refreshing the page.';
         }
-        
-        // Run on page load
-        showAgent365Section();
-        
-        // Hide sections where all sessions have passed
-        function hidePastSections() {
-          const sections = [
-            { titleId: 'agent365-title', containerId: 'agent365-sessions-container' },
-            { titleId: 'january-title', containerId: 'january-sessions-container' },
-            { titleId: 'february-title', containerId: 'february-sessions-container' }
-          ];
-          
-          sections.forEach(section => {
-            const container = document.getElementById(section.containerId);
-            const title = document.getElementById(section.titleId);
-            
-            if (container) {
-              const sessionsInContainer = container.querySelectorAll('.upcoming-session');
-              const visibleSessions = Array.from(sessionsInContainer).filter(s => s.style.display !== 'none');
-              
-              console.log(`Section ${section.containerId}: ${visibleSessions.length} visible sessions`);
-              
-              // If container has no visible sessions, hide the section
-              if (visibleSessions.length === 0) {
-                console.log(`Hiding section: ${section.containerId}`);
-                if (container) container.style.display = 'none';
-                if (title) title.style.display = 'none';
-              }
-            }
-          });
-        }
-        
-        // Run after everything else completes
-        setTimeout(hidePastSections, 200);
       });
+
+      function formatSessionDate(dateStr) {
+        const [year, month, day] = dateStr.split('-').map(Number);
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return `${monthNames[month - 1]} ${day}`;
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+      }
+
+      function createUpcomingCard(session) {
+        const card = document.createElement('div');
+        card.className = 'session-card';
+        const dateDisplay = formatSessionDate(session.date) + (session.time ? ' \u2022 ' + session.time : '');
+        const registerBtn = session.register_link
+          ? `<a href="${session.register_link}" class="register-btn" style="background-color: #0C55B8;" target="_blank" rel="noopener noreferrer">Register Now</a>`
+          : '';
+        card.innerHTML = `
+          <div class="session-content">
+            <div class="session-date"><span>${escapeHtml(dateDisplay)}</span></div>
+            <h3 class="session-title">${escapeHtml(session.title)}</h3>
+            <p>${escapeHtml(session.description)}</p>
+            ${registerBtn}
+          </div>`;
+        return card;
+      }
+
+      function createPastRow(session) {
+        const row = document.createElement('div');
+        row.style.cssText = 'display: flex; align-items: center; gap: 1.5rem; padding: 0.85rem 0; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap;';
+        let buttons = '';
+        if (session.recording_link) {
+          buttons += `<a href="${session.recording_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">Recording</a>`;
+        } else {
+          buttons += `<span style="color: #999; white-space: nowrap;">Recording Coming Soon</span>`;
+        }
+        if (session.presentation_link) {
+          const label = escapeHtml(session.presentation_label || 'Presentation');
+          buttons += ` &nbsp;|&nbsp; <a href="${session.presentation_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">${label}</a>`;
+        }
+        row.innerHTML = `
+          <span style="min-width: 5rem; color: #506CD4; font-weight: 600; font-size: 0.9rem;">${escapeHtml(formatSessionDate(session.date))}</span>
+          <span style="flex: 1; font-weight: 500;">${escapeHtml(session.title)}</span>
+          <span style="display: flex; gap: 0.5rem; flex-shrink: 0;">${buttons}</span>`;
+        return row;
+      }
     </script>
   </body>
 </html>
