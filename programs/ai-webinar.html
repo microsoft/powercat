@@ -111,6 +111,11 @@
         </div>
       </div>
 
+      <h2 class="section-title" style="margin-top: 4rem;">Upcoming Sessions</h2>
+      <div class="sessions-container" id="upcoming-sessions-container">
+        <!-- Populated by JavaScript -->
+      </div>
+
       <div style="margin-top: 4rem;">
         <h2 class="section-title">What to Expect</h2>
         <ul class="expect-list">
@@ -127,11 +132,6 @@
             learn from others.
           </li>
         </ul>
-      </div>
-
-      <h2 class="section-title" style="margin-top: 4rem;">Upcoming Sessions</h2>
-      <div class="sessions-container" id="upcoming-sessions-container">
-        <!-- Populated by JavaScript -->
       </div>
 
       <h2 class="section-title" style="margin-top: 4rem;"><span class="play-icon"></span>Past Sessions</h2>
@@ -213,7 +213,23 @@
           if (past.length === 0) {
             pastContainer.innerHTML = '<p style="color: #666; padding: 0.5rem 0;">No past sessions yet.</p>';
           } else {
-            past.forEach(session => {
+            const a365Past = past.filter(s => s.title.includes('Agent 365'));
+            const otherPast = past.filter(s => !s.title.includes('Agent 365'));
+
+            if (a365Past.length > 0) {
+              const groupHeader = document.createElement('div');
+              groupHeader.style.cssText = 'margin-bottom: 0; padding: 0.4rem 0.75rem; background-color: #EDEFFD; border-left: 3px solid #506CD4; font-weight: 600; color: #506CD4;';
+              groupHeader.textContent = 'Agent 365 Series';
+              pastContainer.appendChild(groupHeader);
+              a365Past.forEach(session => {
+                pastContainer.appendChild(createPastRow(session));
+              });
+              const divider = document.createElement('div');
+              divider.style.cssText = 'margin-top: 1.5rem;';
+              pastContainer.appendChild(divider);
+            }
+
+            otherPast.forEach(session => {
               pastContainer.appendChild(createPastRow(session));
             });
           }
@@ -270,7 +286,6 @@
           buttons += ` &nbsp;|&nbsp; <a href="${session.presentation_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">${label}</a>`;
         }
         row.innerHTML = `
-          <span style="min-width: 5rem; color: #506CD4; font-weight: 600; font-size: 0.9rem;">${escapeHtml(formatSessionDate(session.date))}</span>
           <span style="flex: 1; font-weight: 500;">${escapeHtml(session.title)}</span>
           <span style="display: flex; gap: 0.5rem; flex-shrink: 0;">${buttons}</span>`;
         return row;
