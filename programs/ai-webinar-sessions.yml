@@ -265,11 +265,10 @@ sessions:
   - date: "2026-03-11"
     time: "9:00 AM PT"
     title: "When Copilot Studio meets Dataverse: Supercharged AI Knowledge"
-    description: "When Copilot Studio meets Dataverse, structured data powers smarter AI agents. This session explores retrieval strategies based on the level of control and intelligence you need, showing when to use each approach. You’ll see how agents reliably find precise, contextual data and how Copilot Studio orchestrates these capabilities to build domain-aware agents over Dataverse tables."
+    description: "Learn how structured data with Dataverse powers smarter AI Agents"
     register_link: "https://aka.ms/AIWebinars/SuperchargedAIKnowledge"    
 
   - date: "2026-03-18"
     time: "9:00 AM PT"
     title: "From Prompt to Action: UI Automation with Copilot Studio's Computer Use"
-    description: "Many enterprise workflows still rely on legacy apps and portals without APIs, forcing manual, screen-by-screen work. In this session, you’ll learn how Computer Use Agents (CUA) in Copilot Studio automate any UI using natural language and AI-powered vision. We’ll cover how CUA works, show real demos, compare it to traditional RPA, and review the security and compliance guardrails that keep automations safe."
-    register_link: "https://aka.ms/AIWebinars/PrompttoAction" 
+    description: "In this session, you'll learn how Computer Use Agents (CUA) in Copilot Studio automate any UI using natural language and AI-powered vision." 
