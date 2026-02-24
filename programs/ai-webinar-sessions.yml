@@ -265,11 +265,11 @@ sessions:
   - date: "2026-03-11"
     time: "9:00 AM PT"
     title: "When Copilot Studio meets Dataverse: Supercharged AI Knowledge"
-    description: "Structured data becomes the fuel for powerful AI agents, when Copilot Studio meets Dataverse. This session breaks down how to work with various retrieval strategies, based on the level of control, result type, and agentic intelligence that you need. You'll learn when to use what and how to design smart, structured requests! We'll demonstrate how the agents can reliably find exact, relevant, and contextual data on demand; and you'll see how Copilot Studio can orchestrate these capabilities to create domain-aware AI agents that reason over relational Dataverse tables."
+    description: "When Copilot Studio meets Dataverse, structured data powers smarter AI agents. This session explores retrieval strategies based on the level of control and intelligence you need, showing when to use each approach. You’ll see how agents reliably find precise, contextual data and how Copilot Studio orchestrates these capabilities to build domain-aware agents over Dataverse tables."
     register_link: "https://aka.ms/AIWebinars/SuperchargedAIKnowledge"    
 
   - date: "2026-03-18"
     time: "9:00 AM PT"
     title: "From Prompt to Action: UI Automation with Copilot Studio's Computer Use"
-    description: "Many enterprise workflows still depend on legacy apps, supplier portals, and websites that lack APIs, leaving teams stuck with manual data entry and screen-by-screen navigation. In this session, learn how Computer Use Agents (CUA) in Copilot Studio let you automate virtually any UI using natural language prompts and AI-powered vision.We'll explore the mechanics behind CUA, walk through use case demos, and compare CUA with traditional RPA so you know when to use each. You'll also learn about enterprise guardrails, from DLP policies and credential management to allowlisting and audit logging, that keep your automation secure and compliant."
+    description: "Many enterprise workflows still rely on legacy apps and portals without APIs, forcing manual, screen-by-screen work. In this session, you’ll learn how Computer Use Agents (CUA) in Copilot Studio automate any UI using natural language and AI-powered vision. We’ll cover how CUA works, show real demos, compare it to traditional RPA, and review the security and compliance guardrails that keep automations safe."
     register_link: "https://aka.ms/AIWebinars/PrompttoAction" 
