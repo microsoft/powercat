@@ -272,4 +272,4 @@ sessions:
     time: "9:00 AM PT"
     title: "From Prompt to Action: UI Automation with Copilot Studio's Computer Use"
     description: "Many enterprise workflows still depend on legacy apps, supplier portals, and websites that lack APIs, leaving teams stuck with manual data entry and screen-by-screen navigation. In this session, learn how Computer Use Agents (CUA) in Copilot Studio let you automate virtually any UI using natural language prompts and AI-powered vision.We'll explore the mechanics behind CUA, walk through use case demos, and compare CUA with traditional RPA so you know when to use each. You'll also learn about enterprise guardrails, from DLP policies and credential management to allowlisting and audit logging, that keep your automation secure and compliant."
-    register_link: "https://aka.ms/AIWebinars/PrompttoAction"
+    register_link: "https://aka.ms/AIWebinars/PrompttoAction" 
