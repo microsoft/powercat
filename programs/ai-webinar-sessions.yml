@@ -256,3 +256,21 @@ sessions:
     title: "Leverage Instructions & Tools to Build Agents"
     description: "Discover the latest components and learn how to use them for greater flexibility than traditional agent-building approaches."
     register_link: "https://aka.ms/AIWebinars/dynamicAgents"
+
+  - date: "2026-03-04"
+    time: "9:00 AM PT"
+    title: "Real-World Agent Case Studies Through Storytelling"
+    description: "Join our interactive webinar to hear 2-3 customers share their journey in building agentic solutions that drive real business transformation."
+    register_link: "https://aka.ms/AIWebinars/CaseStudies2"
+   
+  - date: "2026-03-11"
+    time: "9:00 AM PT"
+    title: "When Copilot Studio meets Dataverse: Supercharged AI Knowledge"
+    description: "Learn how structured data with Dataverse powers smarter AI Agents"
+    register_link: "https://aka.ms/AIWebinars/SuperchargedAIKnowledge"    
+
+  - date: "2026-03-18"
+    time: "9:00 AM PT"
+    title: "From Prompt to Action: UI Automation with Copilot Studio's Computer Use"
+    description: "In this session, you'll learn how Computer Use Agents (CUA) in Copilot Studio automate any UI using natural language and AI-powered vision." 
+    register_link: "https://aka.ms/AIWebinars/PrompttoAction"
