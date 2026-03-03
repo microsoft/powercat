@@ -1,0 +1,499 @@
+# Microsoft Agent Platform Advisor — YAML Configuration
+# Source: https://microsoft.github.io/powercat/agent-platform-advisor/
+# Developed by Robert Standefer & Vasavi Bhaviri Setty
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# HYBRID SCORING MODEL
+#
+# Two mechanisms work together:
+#
+# 1. LEVEL (highest requirement wins)
+#    Each option declares `indicates` which maps to a platform capability level:
+#      1 = microsoft365copilot
+#      2 = agentbuilder
+#      3 = copilotstudio
+#      4 = foundry
+#    The platform with the highest indicated level across all answers becomes
+#    the PRIMARY recommendation. This preserves the original tool's intent:
+#    if any requirement exceeds a platform's capability, it can't do the job.
+#
+# 2. WEIGHTS (additive scoring)
+#    Each option also carries a `weights` map — signed integers added to each
+#    platform's running score. After the primary recommendation is determined
+#    by level, the platform with the next-highest SCORE (excluding the primary)
+#    becomes the RUNNER-UP recommendation.
+#    Weights can be negative to actively push users away from poor-fit platforms.
+#
+# ENGINE PSEUDOCODE:
+#   scores = { m365: 0, agentbuilder: 0, copilotstudio: 0, foundry: 0 }
+#   highestLevel = 0
+#
+#   for each answer:
+#     option = questions[q].options[answer]
+#     highestLevel = max(highestLevel, platformLevel[option.indicates])
+#     for each platform in option.weights:
+#       scores[platform] += option.weights[platform]
+#
+#   primary   = platform where level == highestLevel
+#   runner_up = platform with highest score, excluding primary
+#
+# BRANCHING:
+#   Each option can declare `next` to jump to a specific question id.
+#   Questions can declare `show_if` to only render when a named flag is active.
+#   Options set flags via `flags: [flag_name]`.
+#   Default flow (no `next`) proceeds to the next question in list order.
+# ─────────────────────────────────────────────────────────────────────────────
+
+metadata:
+  version: "2.0"
+  title: "Agent Platform Advisor"
+  description: >
+    Answer a few questions to discover which Microsoft agent platform is
+    recommended for your scenario and requirements, plan your agent structure,
+    and get guidance for implementation.
+  scoring_model: hybrid_level_plus_weights
+  reference_url: https://aka.ms/AgentPlatformAdvisor
+
+platforms:
+  - id: microsoft365copilot
+    level: 1
+    name: "Microsoft 365 Copilot"
+    description: "Built-in productivity assistant across Microsoft 365 apps."
+    benefits:
+      - "Immediate deployment"
+      - "No development required"
+      - "Works with existing Microsoft 365 data"
+      - "Standard security & compliance"
+    reasoning:
+      default:
+        - "Personal productivity focus aligns with Copilot's core purpose"
+        - "End-users benefit from zero-effort AI integration in Office apps"
+        - "Lowest complexity matches out-of-the-box functionality"
+      conditional:
+        - when: "deploymentOptions == copilot_chat"
+          text: "Perfect fit for deployment within Microsoft 365 apps where users already work"
+        - when: "firstPartyAgents == yes"
+          text: "Your use case is likely covered by existing 1st party Copilot agents"
+
+  - id: agentbuilder
+    level: 2
+    name: "Agent Builder"
+    description: >
+      Extend Microsoft 365 Copilot with custom organizational knowledge
+      and company-specific capabilities.
+    benefits:
+      - "Templates with design guidelines and best practices to get started quickly"
+      - "Lightweight customization without code for needs beyond 1st party agents"
+      - "Organizational Q&A from custom knowledge bases and internal documents"
+      - "Simple task execution through plugins and flows"
+      - "Stays within familiar Copilot UI for users"
+      - "Connect SharePoint libraries, internal systems, and specialized FAQ documents"
+    reasoning:
+      default:
+        - "Organizational needs require custom knowledge extension"
+        - "Business users benefit from custom AI capabilities within familiar Copilot UI"
+        - "Extended Microsoft ecosystem integration capabilities"
+      conditional:
+        - when: "deploymentOptions == copilot_chat"
+          text: "Seamlessly integrates custom capabilities within existing Copilot Chat experience"
+
+  - id: copilotstudio
+    level: 3
+    name: "Copilot Studio"
+    description: >
+      Intuitive, natural language building experience for creating custom
+      conversational and autonomous agents with advanced workflows and
+      multi-channel deployment.
+    benefits:
+      - "Full conversational agent capabilities with branching dialogues"
+      - "Access to 1400+ connectors"
+      - "Multi-channel deployment (Teams, custom websites & portals, SharePoint)"
+      - "Action-taking capabilities through Power Automate"
+      - "Visual conversation design and custom prompt engineering"
+      - "Generative AI to coordinate and manage multiple tools, knowledge, agents, or workflows"
+    reasoning:
+      default:
+        - "Business process automation requires Copilot Studio's advanced capabilities"
+        - "Moderate complexity needs visual conversation design tools"
+        - "Connectors provide extensive integration options"
+      conditional:
+        - when: "deploymentOptions == multiple_channels"
+          text: "Multi-channel deployment capabilities support Teams, SharePoint, and web integration"
+        - when: "deploymentScope == internal_and_external"
+          text: "Your need for both internal and external channels is a core Copilot Studio strength"
+
+  - id: foundry
+    level: 4
+    name: "Microsoft Foundry"
+    description: >
+      Enterprise AI/ML platform for building bespoke AI solutions with complete
+      development control and advanced capabilities.
+    benefits:
+      - "Unlimited integration freedom with any data source or system"
+      - "Custom model training, fine-tuning, and deployment"
+      - "Advanced features like RAG, custom decision logic, and autonomous agents"
+      - "Enterprise-grade scalability with comprehensive monitoring"
+      - "Full software development flexibility and control"
+    reasoning:
+      default:
+        - "Enterprise AI requirements need Microsoft Foundry's full capabilities"
+        - "Developer audience requires complete control and customization"
+        - "Highest complexity demands comprehensive development platform"
+        - "Unlimited integration scope requires enterprise-grade flexibility"
+      conditional:
+        - when: "deploymentOptions == custom_applications"
+          text: "Complete deployment flexibility supports custom applications and unlimited integration scenarios"
+        - when: "technicalBackground == data_scientist"
+          text: "Your ML/data science background makes Foundry's model training and evaluation tools a natural fit"
+        - when: "technicalBackground == pro_developer"
+          text: "Full SDK and API access gives your development team complete architectural control"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PRE-QUESTIONNAIRE GATE
+#
+# A "yes" answer short-circuits directly to microsoft365copilot.
+# A "no" answer proceeds to the main questionnaire.
+# ─────────────────────────────────────────────────────────────────────────────
+
+precheck:
+  id: firstPartyAgents
+  title: "Do the pre-built agents in Microsoft 365 Copilot meet your needs?"
+  subtitle: >
+    Pre-built agents in Microsoft 365 Copilot are purpose-built AI assistants
+    for collaboration, productivity, and decision-making. Before building from
+    scratch, check whether an existing agent already covers your scenario.
+  guidance:
+    - "Does one of the pre-built agents already cover most of my scenario?"
+    - "Could I start with a pre-built agent and lightly customize it rather than building entirely new?"
+    - "Does the way the pre-built agent handles permissions, knowledge, or actions fit my organization's requirements?"
+  options:
+    - id: "yes"
+      label: "Yes — Use Microsoft 365 Copilot"
+      result: microsoft365copilot       # Short-circuit: skip questionnaire entirely
+    - id: "no"
+      label: "No — Help me choose"
+      result: proceed_to_questionnaire
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MAIN QUESTIONNAIRE
+#
+# Flow overview:
+#
+#   primaryPurpose
+#     ├── organizational  ──────────────────────────────→ complexityLevel
+#     ├── business_process  → deploymentScope (branch) → complexityLevel
+#     └── enterprise_ai   → technicalBackground (branch) → complexityLevel
+#                                                           ↓
+#                                                    integrationScope
+#                                                           ↓
+#                                                    deploymentOptions
+#                                                           ↓
+#                                                          END
+#
+# Branch questions use show_if to guard against appearing out of context.
+# All paths converge at complexityLevel and continue linearly to END.
+# ─────────────────────────────────────────────────────────────────────────────
+
+questions:
+
+  # ── Q1: Entry point ──────────────────────────────────────────────────────────
+  - id: primaryPurpose
+    title: "What is your primary purpose for the AI agent?"
+    subtitle: "This helps determine which platform aligns with your core objectives"
+    options:
+      - id: organizational
+        label: "Organizational knowledge and simple tasks"
+        description: >
+          Handle internal FAQs, specialized queries, or basic integrations
+          for your organization
+        indicates: agentbuilder
+        weights:
+          microsoft365copilot: +1
+          agentbuilder: +3
+          copilotstudio: +1
+          foundry: 0
+        next: complexityLevel             # Linear — no branch question needed
+
+      - id: business_process
+        label: "Custom business process automation"
+        description: >
+          Specific workflow automation with conversational interfaces,
+          autonomous triggers, orchestration, and action-taking capabilities
+        indicates: copilotstudio
+        weights:
+          microsoft365copilot: 0
+          agentbuilder: +1
+          copilotstudio: +3
+          foundry: +1
+        next: deploymentScope             # Branch: clarify internal vs external scope
+        flags:
+          - needs_process_automation
+
+      - id: enterprise_ai
+        label: "Enterprise AI/ML platform capabilities"
+        description: >
+          Bespoke AI solutions, model training, complex multi-step agents,
+          and advanced analytics
+        indicates: foundry
+        weights:
+          microsoft365copilot: -1
+          agentbuilder: -1
+          copilotstudio: +1
+          foundry: +4
+        next: technicalBackground         # Branch: clarify developer vs data scientist
+        flags:
+          - needs_enterprise_ai
+
+  # ── Branch A: Deployment scope clarifier (business_process path only) ────────
+  - id: deploymentScope
+    title: "Who will use this agent and where?"
+    subtitle: "Helps determine whether you need single or multi-channel deployment"
+    show_if: needs_process_automation
+    options:
+      - id: internal_only
+        label: "Internal employees only, within Microsoft 365"
+        description: >
+          Staff-facing agent accessed through Teams, SharePoint,
+          or Copilot Chat
+        indicates: copilotstudio           # Still copilotstudio minimum
+        weights:
+          agentbuilder: +2
+          copilotstudio: +2
+          foundry: 0
+        next: complexityLevel
+
+      - id: internal_and_external
+        label: "Both internal staff and external users"
+        description: >
+          Agent must be accessible to customers, partners, or public
+          users outside your Microsoft 365 tenant
+        indicates: copilotstudio
+        weights:
+          agentbuilder: -1
+          copilotstudio: +3
+          foundry: +1
+        next: complexityLevel
+        flags:
+          - needs_external_channel
+
+      - id: fully_external
+        label: "Primarily external-facing (customers, partners, public)"
+        description: >
+          Public website, customer portal, or external app where
+          Microsoft 365 access is not assumed
+        indicates: copilotstudio
+        weights:
+          agentbuilder: -2
+          copilotstudio: +3
+          foundry: +2
+        next: complexityLevel
+        flags:
+          - needs_external_channel
+
+  # ── Branch B: Technical background clarifier (enterprise_ai path only) ───────
+  - id: technicalBackground
+    title: "What best describes your technical background?"
+    subtitle: "Ensures the recommended platform matches your team's skill set"
+    show_if: needs_enterprise_ai
+    options:
+      - id: low_code_maker
+        label: "Low-code maker or Power Platform developer"
+        description: >
+          Comfortable with visual tools, connectors, and configuration
+          but not deep software engineering
+        indicates: copilotstudio           # Pull back to studio if skills are lower
+        weights:
+          copilotstudio: +3
+          foundry: -1
+        next: complexityLevel
+
+      - id: pro_developer
+        label: "Professional software developer"
+        description: >
+          Confident writing code, working with APIs, SDKs, and
+          custom application architecture
+        indicates: foundry
+        weights:
+          copilotstudio: +1
+          foundry: +3
+        next: complexityLevel
+
+      - id: data_scientist
+        label: "Data scientist or ML engineer"
+        description: >
+          Focused on model training, fine-tuning, RAG pipelines,
+          vector indexes, and evaluation frameworks
+        indicates: foundry
+        weights:
+          copilotstudio: 0
+          foundry: +4
+        next: complexityLevel
+
+  # ── Q2: Complexity (all paths converge here) ─────────────────────────────────
+  - id: complexityLevel
+    title: "What level of complexity does your use case require?"
+    subtitle: "Consider development effort, customization, and technical requirements"
+    options:
+      - id: low
+        label: "Low — Configure with your content"
+        description: >
+          Use templates to get started quickly, add knowledge sources
+          with guided setup process
+        indicates: agentbuilder
+        weights:
+          microsoft365copilot: +2
+          agentbuilder: +3
+          copilotstudio: +1
+          foundry: -1
+        next: integrationScope
+
+      - id: moderate
+        label: "Moderate — Custom workflows and logic"
+        description: >
+          Build with multi-step workflows, automated triggers, custom behaviors,
+          integrations, orchestration, and business logic
+        indicates: copilotstudio
+        weights:
+          microsoft365copilot: 0
+          agentbuilder: +1
+          copilotstudio: +3
+          foundry: +1
+        next: integrationScope
+
+      - id: highest
+        label: "Highest — Full software development"
+        description: >
+          Custom architecture, fine-tune models, vector indexes, custom
+          orchestration, and enterprise-grade development
+        indicates: foundry
+        weights:
+          microsoft365copilot: -2
+          agentbuilder: -1
+          copilotstudio: +1
+          foundry: +4
+        next: integrationScope
+
+  # ── Q3: Integration scope ─────────────────────────────────────────────────────
+  - id: integrationScope
+    title: "What are your integration requirements?"
+    subtitle: "Consider your data sources and system connectivity needs"
+    options:
+      - id: extended_microsoft
+        label: "Extended Microsoft ecosystem"
+        description: >
+          Microsoft Graph + some internal knowledge bases and limited plugins
+        indicates: agentbuilder
+        weights:
+          microsoft365copilot: +2
+          agentbuilder: +3
+          copilotstudio: +1
+          foundry: 0
+        next: deploymentOptions
+
+      - id: power_platform
+        label: "Extended integrations with enterprise systems"
+        description: >
+          1400+ services through prebuilt connectors, Dataverse, REST APIs,
+          and workflows for process automation
+        indicates: copilotstudio
+        weights:
+          microsoft365copilot: 0
+          agentbuilder: +1
+          copilotstudio: +4
+          foundry: +1
+        next: deploymentOptions
+
+      - id: unlimited
+        label: "Unlimited integration freedom"
+        description: >
+          Any data source, API, database, or system that can be coded
+        indicates: foundry
+        weights:
+          microsoft365copilot: -2
+          agentbuilder: -1
+          copilotstudio: +1
+          foundry: +4
+        next: deploymentOptions
+
+  # ── Q4: Deployment options ────────────────────────────────────────────────────
+  - id: deploymentOptions
+    title: "Where and how do you want users to access your AI agent?"
+    subtitle: "Consider deployment channels and user access patterns"
+    options:
+      - id: copilot_chat
+        label: "Within Microsoft 365 Copilot and applications only"
+        description: >
+          Access directly within Microsoft 365 apps through the
+          Copilot chat interfaces
+        indicates: agentbuilder
+        weights:
+          microsoft365copilot: +2
+          agentbuilder: +3
+          copilotstudio: +1
+          foundry: 0
+        next: END
+
+      - id: multiple_channels
+        label: "Wide range of internal and external channels"
+        description: >
+          Microsoft 365 Copilot, Microsoft Teams, SharePoint, websites,
+          portals, mobile apps, Azure Bot Service channels, custom channels
+          via APIs and connectors
+        indicates: copilotstudio
+        weights:
+          microsoft365copilot: 0
+          agentbuilder: +1
+          copilotstudio: +4
+          foundry: +1
+        next: END
+
+      - id: custom_applications
+        label: "Custom applications and anywhere access"
+        description: >
+          On-premises options for enterprise solutions, web applications,
+          mobile apps, enterprise software, internal systems, and any platform
+          that can call APIs
+        indicates: foundry
+        weights:
+          microsoft365copilot: -2
+          agentbuilder: -1
+          copilotstudio: +2
+          foundry: +4
+        next: END
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WORKED EXAMPLES
+#
+# Example 1 — Pure organizational path (linear, no branches):
+#   primaryPurpose=organizational → complexityLevel=low → integrationScope=extended_microsoft → deploymentOptions=copilot_chat
+#   Levels indicated:  agentbuilder(2), agentbuilder(2), agentbuilder(2), agentbuilder(2) → max = 2
+#   Scores:            m365=+6, agentbuilder=+12, copilotstudio=+4, foundry=0
+#   Primary:    agentbuilder  (highest level = 2)
+#   Runner-up:  microsoft365copilot  (highest remaining score = 6)
+#
+# Example 2 — Mixed signals (business process + low complexity):
+#   primaryPurpose=business_process → deploymentScope=internal_only → complexityLevel=low → integrationScope=extended_microsoft → deploymentOptions=copilot_chat
+#   Levels indicated:  copilotstudio(3), copilotstudio(3), agentbuilder(2), agentbuilder(2), agentbuilder(2) → max = 3
+#   Scores:            m365=+5, agentbuilder=+12, copilotstudio=+10, foundry=0
+#   Primary:    copilotstudio  (highest level = 3, even though agentbuilder scored higher)
+#   Runner-up:  agentbuilder  (highest remaining score = 12)
+#   → This is the key insight: the runner-up score tells the user "if copilotstudio
+#     feels like overkill, agentbuilder is your closest alternative"
+#
+# Example 3 — Enterprise AI, data scientist path:
+#   primaryPurpose=enterprise_ai → technicalBackground=data_scientist → complexityLevel=highest → integrationScope=unlimited → deploymentOptions=custom_applications
+#   Levels indicated:  foundry(4), foundry(4), foundry(4), foundry(4), foundry(4) → max = 4
+#   Scores:            m365=-5, agentbuilder=-4, copilotstudio=+5, foundry=+19
+#   Primary:    foundry
+#   Runner-up:  copilotstudio  (only platform with positive remaining score)
+#
+# Example 4 — Enterprise AI but low-code maker (branch pulls back):
+#   primaryPurpose=enterprise_ai → technicalBackground=low_code_maker → complexityLevel=moderate → integrationScope=power_platform → deploymentOptions=multiple_channels
+#   Levels indicated:  foundry(4), copilotstudio(3), copilotstudio(3), copilotstudio(3), copilotstudio(3) → max = 4
+#   Scores:            m365=-1, agentbuilder=+3, copilotstudio=+13, foundry=+4
+#   Primary:    foundry  (level 4 still wins from primaryPurpose answer)
+#   Runner-up:  copilotstudio  (score 13, much higher than foundry's 4)
+#   → The high runner-up score for copilotstudio signals: "you indicated enterprise AI
+#     needs, but your skills and choices align more closely with Copilot Studio"
+#     This is a useful signal the original tool couldn't surface.
+# ─────────────────────────────────────────────────────────────────────────────
