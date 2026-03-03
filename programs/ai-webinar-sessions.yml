@@ -275,13 +275,13 @@ sessions:
     description: "In this session, you'll learn how Computer Use Agents (CUA) in Copilot Studio automate any UI using natural language and AI-powered vision." 
     register_link: "https://aka.ms/AIWebinars/PrompttoAction"
 
-    - date: "2026-04-08"
+  - date: "2026-04-08"
     time: "9:00 AM PT"
     title: "Choosing between Orchestrative and/or Deterministic in Copilot Studio"
     description: "In this session, you'll learn a practical framework for choosing between orchestrative, deterministic, and hybrid patterns, backed by real-world examples." 
     register_link: "https://aka.ms/AIWebinars/TheRightAgentPattern"
 
-    - date: "2026-04-22"
+  - date: "2026-04-22"
     time: "9:00 AM PT"
     title: "Cloud PC Pools in Copilot Studio"
     description: "In this session, we will explore how Cloud PC Pools, powered by Windows 365 for Agents, unlock secure, enterprise - ready UI automation inside Microsoft Copilot Studio." 
