@@ -260,8 +260,7 @@ sessions:
   - date: "2026-03-04"
     time: "9:00 AM PT"
     title: "Real-World Agent Case Studies Through Storytelling"
-    description: "Join this real‑world customer stories session to hear how customers and partners are using agentic AI to drive real business impact. Learn how Cuadra and Algoritmo transformed customer service with an AI‑powered agent, and gain insights from Templafy’s experience as an ISV helping enterprises move AI from experimentation to scalable, governed execution. Practical lessons, partner perspectives, and proven outcomes included."
-
+    description: "Join this session to learn how Cuadra partnered with Algoritmo to transform their customer service with an AI‑powered agent, and hear from Templafy’s experience as an ISV helping enterprises move AI from experimentation to scalable, governed execution."
     register_link: "https://aka.ms/AIWebinars/CaseStudies2"
    
   - date: "2026-03-11"
