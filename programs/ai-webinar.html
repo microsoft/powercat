@@ -179,7 +179,7 @@
           sessionData.sort((a, b) => a.cutoffDate - b.cutoffDate);
 
           const upcoming = sessionData.filter(s => s.cutoffDate > now);
-          const past = sessionData.filter(s => s.cutoffDate <= now).reverse(); // most recent first
+          const past = sessionData.filter(s => s.cutoffDate <= now); // oldest first
 
           // --- Next Session card ---
           const nextSessionLink = document.getElementById('next-session-link');
@@ -213,25 +213,103 @@
           if (past.length === 0) {
             pastContainer.innerHTML = '<p style="color: #666; padding: 0.5rem 0;">No past sessions yet.</p>';
           } else {
-            const a365Past = past.filter(s => s.title.includes('Agent 365'));
-            const otherPast = past.filter(s => !s.title.includes('Agent 365'));
+            // Define thematic groups with matching criteria
+            const groups = [
+              {
+                name: 'Agent 365 Series',
+                color: '#506CD4',
+                matches: s => s.title.includes('Agent 365')
+              },
+              {
+                name: 'Getting Started & Fundamentals',
+                color: '#0C55B8',
+                matches: s => /Unlocking the Potential|Building Agents.*101|agent templates|Business Canvas/i.test(s.title)
+              },
+              {
+                name: 'Governance, Security & Risk Management',
+                color: '#8B4513',
+                matches: s => /Governance|Security|Risk|Access Control/i.test(s.title) && !s.title.includes('Agent 365')
+              },
+              {
+                name: 'Technical Deep Dives',
+                color: '#2E7D32',
+                matches: s => /Deep Dive|Autonomous Agents|Generative Orchestration|Multi-Agent|Orchestrative.*Deterministic|Computer Use/i.test(s.title)
+              },
+              {
+                name: 'Azure & Advanced Integration',
+                color: '#0078D4',
+                matches: s => /Azure AI|Better together with Azure|Cloud PC Pools/i.test(s.title)
+              },
+              {
+                name: 'Data & Knowledge Management',
+                color: '#7B1FA2',
+                matches: s => /Data Foundations|Knowledge|Dataverse/i.test(s.title)
+              },
+              {
+                name: 'Strategy & Adoption',
+                color: '#D32F2F',
+                matches: s => /Agents Meet Opportunity|Adoption/i.test(s.title)
+              },
+              {
+                name: 'Tools & Operations',
+                color: '#F57C00',
+                matches: s => /Lifecycle Management|Licensing|Copilot Studio Kit|Agent Evaluation|Instructions.*Tools/i.test(s.title)
+              },
+              {
+                name: 'Real-World Case Studies',
+                color: '#C2185B',
+                matches: s => /Real World|Case Studies|Storytelling/i.test(s.title) && !/Ignite|Build/i.test(s.title)
+              },
+              {
+                name: 'Channel-Specific Sessions',
+                color: '#00796B',
+                matches: s => /WhatsApp/i.test(s.title)
+              },
+              {
+                name: 'Event Recaps',
+                color: '#5E35B1',
+                matches: s => /Build.*recap|Ignite Recap/i.test(s.title)
+              }
+            ];
 
-            if (a365Past.length > 0) {
+            // Categorize sessions and track which have been placed
+            const categorized = new Set();
+
+            groups.forEach(group => {
+              const groupSessions = past.filter(s => {
+                if (categorized.has(s.title)) return false;
+                return group.matches(s);
+              });
+
+              if (groupSessions.length > 0) {
+                const groupHeader = document.createElement('div');
+                groupHeader.style.cssText = `margin-bottom: 0; padding: 0.4rem 0.75rem; background-color: ${group.color}15; border-left: 3px solid ${group.color}; font-weight: 600; color: ${group.color};`;
+                groupHeader.textContent = group.name;
+                pastContainer.appendChild(groupHeader);
+
+                groupSessions.forEach(session => {
+                  categorized.add(session.title);
+                  pastContainer.appendChild(createPastRow(session));
+                });
+
+                const divider = document.createElement('div');
+                divider.style.cssText = 'margin-top: 1.5rem;';
+                pastContainer.appendChild(divider);
+              }
+            });
+
+            // Add any uncategorized sessions
+            const uncategorized = past.filter(s => !categorized.has(s.title));
+            if (uncategorized.length > 0) {
               const groupHeader = document.createElement('div');
-              groupHeader.style.cssText = 'margin-bottom: 0; padding: 0.4rem 0.75rem; background-color: #EDEFFD; border-left: 3px solid #506CD4; font-weight: 600; color: #506CD4;';
-              groupHeader.textContent = 'Agent 365 Series';
+              groupHeader.style.cssText = 'margin-bottom: 0; padding: 0.4rem 0.75rem; background-color: #75757515; border-left: 3px solid #757575; font-weight: 600; color: #757575;';
+              groupHeader.textContent = 'Other Sessions';
               pastContainer.appendChild(groupHeader);
-              a365Past.forEach(session => {
+
+              uncategorized.forEach(session => {
                 pastContainer.appendChild(createPastRow(session));
               });
-              const divider = document.createElement('div');
-              divider.style.cssText = 'margin-top: 1.5rem;';
-              pastContainer.appendChild(divider);
             }
-
-            otherPast.forEach(session => {
-              pastContainer.appendChild(createPastRow(session));
-            });
           }
 
         } catch (error) {
