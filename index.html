@@ -1,4 +1,5 @@
-<html data-wf-page="5ea5eb075186cf462b0d0585" data-wf-site="5ea49850af483731893627d2" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -9,454 +10,220 @@
   <meta content="Microsoft Power CAT" property="og:title">
   <meta name="image" property="og:image" content="https://microsoft.github.io/powercat/images/og-image.png">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <link href="assets/css/normalize.css" rel="stylesheet" type="text/css">
-  <link href="assets/css/components.css" rel="stylesheet" type="text/css">
-  <link href="assets/css/powercat-landing-page.css" rel="stylesheet" type="text/css">
-  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
-  <script
-    type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
+  <link href="assets/css/fluent-layout.css" rel="stylesheet" type="text/css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@fluentui/web-components@3/dist/web-components.min.js"></script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
-  <style>
-    iframe {
-      border-radius: 30px;
-    }
-
-    @media screen and (max-width: 991px) {
-      #headerimg {
-        display: none;
-      }
-    }
-  </style>
 </head>
 
-<body class="body">
+<body>
+
   <!-- BEGIN: Navigation -->
-  <div data-collapse="medium" data-animation="default" data-duration="400" class="nav05 w-nav">
-    <div class="nav05_wrap">
-      <a href="#home" data-ix="logo" class="logo-link w-clearfix w-nav-brand">
-        <div class="nav01_line"></div>
-        <div class="logo-text">Microsoft <BR>Power Customer Advisory Team</div>
-      </a>
-      <div class="nav04_right_wrap">
-        <div class="nav04_links">
-          <nav role="navigation" class="nav04_nav_menu w-nav-menu">
-            <!-- <a href="#spotlight" class="nav03_link w-nav-link">WHAT'S NEW</a> -->
-            <a href="#tools" class="nav03_link w-nav-link">TOOLS</a>
-            <a href="#programs" class="nav03_link w-nav-link">PROGRAMS</a>
-            <a href="#guidance" class="nav03_link w-nav-link">GUIDANCE</a>
-            <!-- <a href="#community" class="nav03_link w-nav-link">EVENTS</a> -->
-            <a href="#stories" class="nav03_link w-nav-link">STORIES</a>
-            <a href="#resources" class="nav03_link w-nav-link">RESOURCES</a>
-
-            <!-- <a href="resources.html" class="nav03_link w-nav-link">RESOURCES</a>
-            <a href="programs/ai-webinar.html" class="nav03_link w-nav-link">AI WEBINARS</a> -->
-        </div>
-        <div class="nav04_menu_button w-nav-button">
-          <div class="nav04_menu_icon w-icon-nav-menu"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- END: Navigation -->
-  <!-- BEGIN: Mobile navigation -->
-  <div data-collapse="medium" data-animation="default" data-duration="600" data-doc-height="1"
-    class="nav05-mobile w-nav">
-    <div class="navigation-wrapper">
-      <a href="#home" data-ix="logo" class="logo-link w-clearfix w-nav-brand">
-        <div class="logo-text">Microsoft<BR>Power Customer Advisory Team</div>
-      </a>
-      <nav role="navigation" class="nav-menu-5 w-nav-menu">
-        <div class="mobile-nav-wrapper w-hidden-main">
-          <a href="#tools" class="global-nav-button-2 w-inline-block">
-            <div>TOOLS</div>
-          </a>
-          <a href="#programs" class="global-nav-button-2 w-inline-block">
-            <div>PROGRAMS</div>
-          </a>
-          <a href="#guidance" class="global-nav-button-2 w-inline-block">
-            <div>GUIDANCE</div>
-          </a>
-
-          <a href="#stories" class="global-nav-button-2 w-inline-block">
-            <div>STORIES</div>
-          </a>
-          <a href="#resources" class="global-nav-button-2 w-inline-block">
-            <div>RESOURCES</div>
-          </a>
-
-        </div>
+  <header>
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">Microsoft<br>Power Customer Advisory Team</a>
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <fluent-anchor-button appearance="subtle" href="#tools">TOOLS</fluent-anchor-button>
+        <fluent-anchor-button appearance="subtle" href="#programs">PROGRAMS</fluent-anchor-button>
+        <fluent-anchor-button appearance="subtle" href="#guidance">GUIDANCE</fluent-anchor-button>
+        <fluent-anchor-button appearance="subtle" href="#stories">STORIES</fluent-anchor-button>
+        <fluent-anchor-button appearance="subtle" href="#resources">RESOURCES</fluent-anchor-button>
       </nav>
-      <div class="nav04_menu_button w-nav-button">
-        <div class="nav04_menu_icon w-icon-nav-menu"></div>
-      </div>
+      <fluent-button id="nav-toggle" appearance="subtle" class="nav-toggle" aria-label="Toggle navigation">&#9776;</fluent-button>
     </div>
-  </div>
-  <!-- END: Mobile navigation -->
+  </header>
+  <!-- END: Navigation -->
+
   <!-- BEGIN: Home -->
-  <div id="home" class="h06">
-    <div class="h06_container">
-      <div class="h06_block">
-
-        <p class="h06_text">We are the Power Customer Advisory Team (Power CAT), part of the Power Platform engineering
-          team at Microsoft. </p>
-
-        <p class="h06_text">Power CAT is dedicated to empowering organizations to achieve digital transformation at
-          scale with Microsoft Power Platform.</p>
-        <div class="lnd_button_wrap">
-        </div>
+  <section id="home">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1><fluent-text size="800" weight="semibold">Microsoft Power Customer Advisory Team</fluent-text></h1>
+        <p><fluent-text size="400">We are the Power Customer Advisory Team (Power CAT), part of the Power Platform engineering team at Microsoft.</fluent-text></p>
+        <p><fluent-text size="400">Power CAT is dedicated to empowering organizations to achieve digital transformation at scale with Microsoft Power Platform.</fluent-text></p>
       </div>
-      <div class="home-dark-wrap-section">
+      <div>
         <img id="headerimg" src="images/header.png" width="520"
-          sizes="(max-width: 479px) 92vw, (max-width: 767px) 83vw, (max-width: 991px) 575px, 42vw" alt="Power CAT"
-          class="h06_image" />
+          sizes="(max-width: 479px) 92vw, (max-width: 767px) 83vw, (max-width: 991px) 575px, 42vw"
+          alt="Power CAT" />
       </div>
-    </div>
-  </div>
-  <!-- BEGIN: Tools -->
-  <div id="tools" class="wrapper-2 m80-80">
-    <div class="section">
-      <div class="w-layout-grid product5-grid">
-        <div id="w-node-47a85e726b0e-2b0d0585" class="home-sections-label">
-
-          <div class="lnd_h2">Tools</div>
-          <p class="lnd_paragraph">Accelerate and enable successful adoption with tools developed by Power CAT, based on
-            real-world customer experience.
-          </p>
-        </div>
-
-        <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/powercattools.png" style="padding: 10px; width: 29%"
-                  alt="ALMAccelerator">
-                <h4 class="lnd_h6_white">Power CAT Tools</h4>
-                <h4 class="lnd_card_title_white">Enhance your development experience within Power Platform. Perform code
-                  reviews, use AI to document your solutions, evaluate risks in your solutions, and more.</h4>
-                <a href="https://aka.ms/PowerCATTools" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/creator.png" style="padding: 10px;" alt="creatorkit">
-                <h4 class="lnd_h6_white">Creator Kit</h4>
-                <h4 class="lnd_card_title_white">Create
-                  consistent, beautiful, and effective user experiences for custom business applications with a
-                  collection of 24+ Fluent UI controls and templates for Power Apps.</h4>
-                <a href="https://aka.ms/creatorkit" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/CoE.png" style="padding: 10px;" alt="CoE">
-                <h4 class="lnd_h6_white">CoE Starter Kit</h4>
-                <h4 class="lnd_card_title_white">Leverage a set of templates to help you develop a strategy for
-                  adopting, maintaining, and
-                  supporting Power Platform.<br /><br /></h4>
-                <a href="https://aka.ms/coestarterkit" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
-
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/automation.png" style="padding: 10px;"
-                  alt="automation">
-                <h4 class="lnd_h6_white">Automation Kit</h4>
-                <h4 class="lnd_card_title_white">Manage, govern, and scale automation platform adoption with Power
-                  Automate, based on industry best practices.</h4>
-                <a href="https://aka.ms/automationkit" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
-
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-  </div>
-  <!-- END: Tools -->
-  <!-- BEGIN: Programs -->
-  <section id="programs">
-    <div class="wrapper-2 m80-80 grey">
-      <div class="section">
-        <div class="w-layout-grid product5-grid">
-          <div id="w-node-dda75d76c9cb-2b0d0585" class="home-sections-label">
-
-            <div class="lnd_h2">Programs</div>
-            <p class="lnd_paragraph">Gain skills and knowledge to help you successfully adopt and deploy impactful
-              solutions using Power Platform with programs from Power CAT and our partner teams.</p>
-          </div>
-          <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
-            <div id="youtube">
-              <div class="lnd_card_template_cta youtube">
-                <div class="lnd_card_text_wrap_02"><img src="images/PowerUp.png" style="padding: 10px;" alt="Guidance">
-                  <h4 class="lnd_h6_white">Power Up</h4>
-                  <h4 class="lnd_card_title_white">Training for individuals and enterprise organizations to develop
-                    talent in low-code and AI with a comprehensive curriculum.
-                  </h4>
-                  <a href="https://aka.ms/powerup" target="_blank" class="lnd_btn_02 w-button">Learn
-                    More..</a>
-                </div><a href="#" class="lnd_card_link w-inline-block"></a>
-              </div>
-            </div>
-            
-            
-          </div>
-        </div>
-      </div>
-    </div>
     </div>
   </section>
-  <!-- END: Programs-->
-  <!-- BEGIN: Guidance -->
-  <div id="guidance" class="wrapper-2 m80-80">
-    <div class="section">
-      <div class="w-layout-grid product5-grid">
-        <div id="w-node-dda75d76c9cb-2b0d0585" class="home-sections-label">
+  <!-- END: Home -->
 
-          <div class="lnd_h2">Guidance</div>
-          <p class="lnd_paragraph">Ensure successful implementation of your Power Platform workloads
-            with comprehensive guidance and best practices.</p>
+  <!-- BEGIN: Tools -->
+  <div id="tools" class="section-wrapper">
+    <div class="section-inner">
+      <div class="section-label">
+        <h2><fluent-text size="700" weight="semibold">Tools</fluent-text></h2>
+        <p><fluent-text size="400">Accelerate and enable successful adoption with tools developed by Power CAT, based on real-world customer experience.</fluent-text></p>
+      </div>
+      <div class="card-grid">
+
+        <div class="card">
+          <img src="images/powercattools.png" alt="Power CAT Tools">
+          <h3><fluent-text size="500" weight="semibold">Power CAT Tools</fluent-text></h3>
+          <p><fluent-text size="300">Enhance your development experience within Power Platform. Perform code reviews, use AI to document your solutions, evaluate risks in your solutions, and more.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/PowerCATTools" target="_blank">Learn More</fluent-anchor-button>
         </div>
-        <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/arch-center.png" style="padding: 10px;"
-                  alt="Guidance">
-                <h4 class="lnd_h6_white">Architecture Center</h4>
-                <h4 class="lnd_card_title_white">Design solutions on Power Platform using established
-                  patterns and practices
-                </h4>
-                <a href="https://aka.ms/powerarchitecture" target="_blank" class="lnd_btn_02 w-button">Learn
-                  More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/powa.png" style="padding: 10px;"
-                  alt="Power Well-Architected">
-                <h4 class="lnd_h6_white">Power Well-Architected</h4>
-                <h4 class="lnd_card_title_white">Make informed decisions about the design, planning, and implementation
-                  of modern application workloads.</h4>
-                <a href="https://aka.ms/powa" target="_blank" class="lnd_btn_02 w-button">Learn More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
 
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/PowerPlatform.png" style="padding: 10px;"
-                  alt="Architecture Center">
-                <h4 class="lnd_h6_white">Power Platform Guidance</h4>
-                <h4 class="lnd_card_title_white">Create and implement the business and technology strategies necessary
-                  for successful adoption of Power Platform.</h4>
-                <a href="https://aka.ms/powerplatformguidance" target="_blank" class="lnd_btn_02 w-button">Learn
-                  More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
-
-
+        <div class="card">
+          <img src="images/creator.png" alt="Creator Kit">
+          <h3><fluent-text size="500" weight="semibold">Creator Kit</fluent-text></h3>
+          <p><fluent-text size="300">Create consistent, beautiful, and effective user experiences for custom business applications with a collection of 24+ Fluent UI controls and templates for Power Apps.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/creatorkit" target="_blank">Learn More</fluent-anchor-button>
         </div>
+
+        <div class="card">
+          <img src="images/CoE.png" alt="CoE Starter Kit">
+          <h3><fluent-text size="500" weight="semibold">CoE Starter Kit</fluent-text></h3>
+          <p><fluent-text size="300">Leverage a set of templates to help you develop a strategy for adopting, maintaining, and supporting Power Platform.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/coestarterkit" target="_blank">Learn More</fluent-anchor-button>
+        </div>
+
+        <div class="card">
+          <img src="images/automation.png" alt="Automation Kit">
+          <h3><fluent-text size="500" weight="semibold">Automation Kit</fluent-text></h3>
+          <p><fluent-text size="300">Manage, govern, and scale automation platform adoption with Power Automate, based on industry best practices.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/automationkit" target="_blank">Learn More</fluent-anchor-button>
+        </div>
+
       </div>
     </div>
   </div>
+  <!-- END: Tools -->
+
+  <!-- BEGIN: Programs -->
+  <div id="programs" class="section-wrapper grey">
+    <div class="section-inner">
+      <div class="section-label">
+        <h2><fluent-text size="700" weight="semibold">Programs</fluent-text></h2>
+        <p><fluent-text size="400">Gain skills and knowledge to help you successfully adopt and deploy impactful solutions using Power Platform with programs from Power CAT and our partner teams.</fluent-text></p>
+      </div>
+      <div class="card-grid">
+
+        <div class="card">
+          <img src="images/PowerUp.png" alt="Power Up">
+          <h3><fluent-text size="500" weight="semibold">Power Up</fluent-text></h3>
+          <p><fluent-text size="300">Training for individuals and enterprise organizations to develop talent in low-code and AI with a comprehensive curriculum.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powerup" target="_blank">Learn More</fluent-anchor-button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- END: Programs -->
+
+  <!-- BEGIN: Guidance -->
+  <div id="guidance" class="section-wrapper">
+    <div class="section-inner">
+      <div class="section-label">
+        <h2><fluent-text size="700" weight="semibold">Guidance</fluent-text></h2>
+        <p><fluent-text size="400">Ensure successful implementation of your Power Platform workloads with comprehensive guidance and best practices.</fluent-text></p>
+      </div>
+      <div class="card-grid">
+
+        <div class="card">
+          <img src="images/arch-center.png" alt="Architecture Center">
+          <h3><fluent-text size="500" weight="semibold">Architecture Center</fluent-text></h3>
+          <p><fluent-text size="300">Design solutions on Power Platform using established patterns and practices.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powerarchitecture" target="_blank">Learn More</fluent-anchor-button>
+        </div>
+
+        <div class="card">
+          <img src="images/powa.png" alt="Power Well-Architected">
+          <h3><fluent-text size="500" weight="semibold">Power Well-Architected</fluent-text></h3>
+          <p><fluent-text size="300">Make informed decisions about the design, planning, and implementation of modern application workloads.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powa" target="_blank">Learn More</fluent-anchor-button>
+        </div>
+
+        <div class="card">
+          <img src="images/PowerPlatform.png" alt="Power Platform Guidance">
+          <h3><fluent-text size="500" weight="semibold">Power Platform Guidance</fluent-text></h3>
+          <p><fluent-text size="300">Create and implement the business and technology strategies necessary for successful adoption of Power Platform.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powerplatformguidance" target="_blank">Learn More</fluent-anchor-button>
+        </div>
+
+      </div>
+    </div>
   </div>
   <!-- END: Guidance -->
+
   <!-- BEGIN: Stories -->
-  <div id="stories" class="wrapper-2 m80-80">
-    <div class="section">
-      <div class="w-layout-grid product5-grid">
-        <div id="w-node-dda75d76c9cb-2b0d0585" class="home-sections-label">
-          <div class="lnd_h2">Customer Stories</div>
-          <p class="lnd_paragraph">Hear compelling customer stories that highlight the diverse and creative ways in
-            which
-            Power Platform is used in the real world.</p>
+  <div id="stories" class="section-wrapper">
+    <div class="section-inner">
+      <div class="section-label">
+        <h2><fluent-text size="700" weight="semibold">Customer Stories</fluent-text></h2>
+        <p><fluent-text size="400">Hear compelling customer stories that highlight the diverse and creative ways in which Power Platform is used in the real world.</fluent-text></p>
+      </div>
+      <div class="card-grid">
+
+        <div class="card">
+          <img src="images/stories.png" alt="Power Platform Stories">
+          <h3><fluent-text size="500" weight="semibold">Power Platform Stories</fluent-text></h3>
+          <p><fluent-text size="300">Customer stories that showcase the ingenuity of individuals and organizations that have adopted Power Platform.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/PowerPlatformStories" target="_blank">Learn More</fluent-anchor-button>
         </div>
-        <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/stories.png" style="padding: 10px;" alt="Guidance">
-                <h4 class="lnd_h6_white" align="center">Power Platform Stories</h4>
-                <h4 class="lnd_card_title_white">Customer stories that showcase the ingenuity of individuals and
-                  organizations that have adopted Power Platform.
-                </h4>
-                <a href="https://aka.ms/PowerPlatformStories" target="_blank" class="lnd_btn_02 w-button">Learn
-                  More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/stories-youtube.png" style="padding: 10px;"
-                  alt="Customer story videos">
-                <h4 class="lnd_h6_white">Customer Story Videos<br /><br /><br /></h4>
-                <h4 class="lnd_card_title_white">Customer story videos that showcase how Power Platform is being used to
-                  transform businesses, careers and lives.</h4>
-                <a href="https://aka.ms/PowerPlatformVideos" target="_blank" class="lnd_btn_02 w-button">Learn
-                  More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-              <div class="lnd_card_text_wrap_02"><img src="images/story-nominate.png" style="padding: 10px;"
-                  alt="Customer story videos">
-                <h4 class="lnd_h6_white">Share Your Story<br /><br /><br /></h4>
-                <h4 class="lnd_card_title_white">Share your story to showcase within Microsoft, among our customers, and
-                  across the broader community. </h4>
-                <a href="https://aka.ms/CXGStoryNomination" target="_blank" class="lnd_btn_02 w-button">Learn
-                  More..</a>
-              </div><a href="#" class="lnd_card_link w-inline-block"></a>
-            </div>
-          </div>
+
+        <div class="card">
+          <img src="images/stories-youtube.png" alt="Customer Story Videos">
+          <h3><fluent-text size="500" weight="semibold">Customer Story Videos</fluent-text></h3>
+          <p><fluent-text size="300">Customer story videos that showcase how Power Platform is being used to transform businesses, careers and lives.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/PowerPlatformVideos" target="_blank">Learn More</fluent-anchor-button>
         </div>
+
+        <div class="card">
+          <img src="images/story-nominate.png" alt="Share Your Story">
+          <h3><fluent-text size="500" weight="semibold">Share Your Story</fluent-text></h3>
+          <p><fluent-text size="300">Share your story to showcase within Microsoft, among our customers, and across the broader community.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/CXGStoryNomination" target="_blank">Learn More</fluent-anchor-button>
+        </div>
+
       </div>
     </div>
   </div>
-  </div>
+  <!-- END: Stories -->
+
   <!-- BEGIN: Resources -->
-  <div id="resources"  class="wrapper-2 m80-80 grey">
-    <div class="section">
-      <div class="w-layout-grid product5-grid">
-        <div id="w-node-dda75d76c9cb-2b0d0585" class="home-sections-label">
-                    <div class="lnd_h2">Resources</div>
-          <p class="lnd_paragraph">These resources support you wherever you are in your Power Platform journey, whether
-            you're getting started or driving successful implementations. </p>
+  <div id="resources" class="section-wrapper grey">
+    <div class="section-inner">
+      <div class="section-label">
+        <h2><fluent-text size="700" weight="semibold">Resources</fluent-text></h2>
+        <p><fluent-text size="400">These resources support you wherever you are in your Power Platform journey, whether you're getting started or driving successful implementations.</fluent-text></p>
+      </div>
+      <div class="card-grid">
+
+        <div class="card">
+          <img src="images/PowerPlatform.png" alt="Power Platform Resources">
+          <h3><fluent-text size="500" weight="semibold">Power Platform Resources</fluent-text></h3>
+          <p><fluent-text size="300">Resources to help you on your Power Platform journey, curated by Power CAT and updated regularly.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/PowerPlatform/Resources" target="_blank">Learn More</fluent-anchor-button>
         </div>
-        <div id="w-node-dda75d76c9d2-2b0d0585" class="w-layout-grid homepage-layouts-grid">
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-            <div class="lnd_card_text_wrap_02"><img src="images/PowerPlatform.png" style="padding: 10px;"
-                alt="Customer story videos">
-              <h4 class="lnd_h6_white">Power Platform Resources</h4>
-              <h4 class="lnd_card_title_white">Resources to help you on your Power Platform journey, curated by Power
-                CAT and updated regularly.</h4>
-              <a href="https://aka.ms/PowerPlatform/Resources" target="_blank" class="lnd_btn_02 w-button">Learn
-                More..</a>
-            </div><a href="#" class="lnd_card_link w-inline-block"></a>
-          </div>
-          </div>
-          <div id="youtube">
-            <div class="lnd_card_template_cta youtube">
-            <div class="lnd_card_text_wrap_02"><img src="images/stories-youtube.png" style="padding: 10px;"
-                alt="videos">
-              <h4 class="lnd_h6_white">Power CAT Live</h4>
-              <h4 class="lnd_card_title_white">This video series showcases the solutions Power CAT is working on and
-                discusses features of Power Platform.</h4>
-              </h4>
-              <a href="https://aka.ms/powercatlive" target="_blank" class="lnd_btn_02 w-button">Learn
-                More..</a>
-            </div><a href="#" class="lnd_card_link w-inline-block"></a>
-          </div>
-         
+
+        <div class="card">
+          <img src="images/stories-youtube.png" alt="Power CAT Live videos">
+          <h3><fluent-text size="500" weight="semibold">Power CAT Live</fluent-text></h3>
+          <p><fluent-text size="300">This video series showcases the solutions Power CAT is working on and discusses features of Power Platform.</fluent-text></p>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powercatlive" target="_blank">Learn More</fluent-anchor-button>
         </div>
+
       </div>
     </div>
-  </div>
-  
-  </div>
   </div>
   <!-- END: Resources -->
 
-
-  <!-- END: Stories -->
-  <!-- BEGIN: Office Hours-->
-  <!-- <div id="community" class="m80-80 grey" style="padding-top:30px ;">
-    <div class="lnd_title_wrap">
-      <p data-w-id="b75b9195-428d-4a2c-6adf-a9b546c79a46" class="lnd_title">OFFICE HOURS</p>
-      <h3 data-w-id="b75b9195-428d-4a2c-6adf-a9b546c79a48" class="lnd_h3 center">Stay up-to-date with the latest
-        information about tools</h3>
-    </div>
-    <div class="section-5">
-      <div class="w-layout-grid grid-thirds gapless-columns gapless-rows" id="m365dev-call">
-        <div class="padded-grid-item-2">
-          <div class="centered-grid-item-2">
-            <img style="vertical-align: top; padding: 15px;" src="images/CoE.png" alt="CoE">
-            <h4 class="h4_event">CoE Starter Kit</h4>
-            <p class="lnd_paragraph_event">Second Wednesday of each month<br>7:00 AM PT / 4:00 PM GMT</p>
-            <div class="icon-events">
-              <a href="https://aka.ms/coeofficehours" aria-label="join call in teams">
-                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="CoEKit Office Hour"
-                    class="fe08_icon-copy"></div>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="padded-grid-item-2" id="spdev-spfx-call">
-          <div class="centered-grid-item-2">
-            <img style="vertical-align: top; padding: 15px;" src="images/automation.png" alt="AutomationKit">
-            <h4 class="h4_event">Automation Kit</h4>
-            <p class="lnd_paragraph_event">Second Tuesday of each month<br>7:00 AM - 8:00 AM PT</p>
-            <div class="icon-events">
-              <a href="https://aka.ms/ak4pp/officehours" aria-label="join call in teams">
-                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="AutomationKit Office Hour"
-                    class="fe08_icon-copy"></div>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="padded-grid-item-2 " id="spdev-sig-call">
-          <div class="centered-grid-item-2">
-            <img style="vertical-align: top; padding: 15px;" src="images/creator.png" alt="Creator Kit">
-            <h4 class="h4_event">Creator Kit</h4>
-            <p class="lnd_paragraph_event">Last Tuesday of each month<br>9:30 PM - 10:00 PM GMT</p>
-            <div class="icon-events">
-              <a href="https://aka.ms/creatorkitofficehours" aria-label="join call in teams">
-                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="CreatorKit Office Hour"
-                    class="fe08_icon-copy"></div>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="padded-grid-item-2" id="PowerPlatformMonthlyCall">
-          <div class="centered-grid-item-2">
-            <img style="vertical-align: top; padding: 15px;width: 33%;" src="images/ALMAccelerator.png"
-              alt="ALM Accelerator">
-            <h4 class="h4_event">ALM Accelerator</h4>
-            <p class="lnd_paragraph_event">Second Tuesday of each month<br>9:30 PM - 10:00 PM GMT</p>
-            <div class="icon-events">
-              <a href="https://aka.ms/aa4pp/officehours" aria-label="join call in teams">
-                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="ALMAccelerator Office Hour"
-                    class="fe08_icon-copy"></div>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="padded-grid-item-2" id="officeaddinscommunitycall">
-          <div class="centered-grid-item-2">
-            <img style="vertical-align: top; padding: 15px;" src="images/approvals-kit-logo.png" alt="Approval Kit">
-            <h4 class="h4_event">Approval Kit</h4>
-            <p class="lnd_paragraph_event">Second Monday of each month<br>7:00 AM - 8:00 AM PT</p>
-            <div class="icon-events">
-           <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="" class="fe08_icon-copy"></div> 
-              <a href="https://aka.ms/ApprovalsKit/OfficeHours" aria-label="join call in teams">
-                <div class="fe08_icon_wrap"><img src="images/ic-teams.svg" alt="Approval Kit Office Hours"
-                    class="fe08_icon-copy"></div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> END: Community -->
-
   <!-- BEGIN: Footer -->
-  <div class="">
-    <div class="wrapper">
-      <div class="centre-align"><img src="images/footer2.png" style="width: 30%; padding: 20px;" alt="Power CAT">
-      </div>
-    </div>
-  </div>
+  <footer>
+    <img src="images/footer2.png" alt="Power CAT">
+  </footer>
   <!-- END: Footer -->
-  <script src="assets/js/jquery.min.js" type="text/javascript"></script>
-  <script src="assets/js/powercat-landing-page.js" type="text/javascript"></script>
+
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+      document.querySelector('header').classList.toggle('nav-open');
+    });
+  </script>
+
 </body>
 
 </html>
