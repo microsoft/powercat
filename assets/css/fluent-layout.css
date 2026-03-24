@@ -1,0 +1,230 @@
+/* fluent-layout.css
+   Uses Fluent UI Web Components v3 CSS custom property tokens.
+   Tokens are injected into :root by the Fluent CDN script at runtime.
+   Fallback values provided for any pre-render flash. */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--colorNeutralBackground1, #ffffff);
+  color: var(--colorNeutralForeground1, #242424);
+}
+
+/* ------------------------------------------------------------------ */
+/* Navigation                                                           */
+/* ------------------------------------------------------------------ */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--colorNeutralBackground1, #ffffff);
+  border-bottom: 1px solid var(--colorNeutralStroke2, #e0e0e0);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacingHorizontalXXL, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.nav-logo {
+  font-size: var(--fontSizeBase400, 16px);
+  font-weight: 600;
+  color: var(--colorNeutralForeground1, #242424);
+  text-decoration: none;
+  line-height: 1.3;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--spacingHorizontalS, 8px);
+  align-items: center;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--spacingVerticalM, 12px) var(--spacingHorizontalXXL, 40px);
+    border-top: 1px solid var(--colorNeutralStroke2, #e0e0e0);
+    background-color: var(--colorNeutralBackground1, #ffffff);
+  }
+
+  header.nav-open .nav-links {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: var(--spacingVerticalS, 6px);
+    padding-bottom: var(--spacingVerticalS, 6px);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                                 */
+/* ------------------------------------------------------------------ */
+
+#home {
+  background-color: var(--colorNeutralBackground2, #f5f5f5);
+  padding: var(--spacingVerticalXXL, 40px) var(--spacingHorizontalXXL, 40px);
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacingHorizontalXXL, 40px);
+  align-items: center;
+}
+
+.hero-text h1 {
+  margin: 0 0 var(--spacingVerticalL, 20px);
+}
+
+.hero-text p {
+  margin: 0 0 var(--spacingVerticalM, 12px);
+}
+
+.hero-text p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+  #headerimg {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Content sections                                                     */
+/* ------------------------------------------------------------------ */
+
+.section-wrapper {
+  padding: var(--spacingVerticalXXL, 40px) var(--spacingHorizontalXXL, 40px);
+  background-color: var(--colorNeutralBackground1, #ffffff);
+}
+
+.section-wrapper.grey {
+  background-color: var(--colorNeutralBackground2, #f5f5f5);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--spacingHorizontalXXL, 40px);
+  align-items: start;
+}
+
+.section-label h2 {
+  margin: 0 0 var(--spacingVerticalM, 12px);
+}
+
+.section-label p {
+  margin: 0;
+  color: var(--colorNeutralForeground2, #616161);
+}
+
+/* ------------------------------------------------------------------ */
+/* Card grid                                                            */
+/* ------------------------------------------------------------------ */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacingHorizontalL, 16px);
+}
+
+.card {
+  background-color: var(--colorNeutralBackground1, #ffffff);
+  border-radius: var(--borderRadiusMedium, 4px);
+  box-shadow: var(--shadow4, 0 2px 4px rgba(0,0,0,0.14));
+  padding: var(--spacingVerticalL, 20px) var(--spacingHorizontalL, 16px);
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 80px;
+  height: auto;
+  margin-bottom: var(--spacingVerticalM, 12px);
+}
+
+.card h3 {
+  margin: 0 0 var(--spacingVerticalS, 6px);
+}
+
+.card p {
+  margin: 0 0 var(--spacingVerticalL, 20px);
+  flex: 1;
+  color: var(--colorNeutralForeground2, #616161);
+}
+
+/* ------------------------------------------------------------------ */
+/* Footer                                                               */
+/* ------------------------------------------------------------------ */
+
+footer {
+  padding: var(--spacingVerticalXXL, 40px) var(--spacingHorizontalXXL, 40px);
+  text-align: center;
+  background-color: var(--colorNeutralBackground1, #ffffff);
+}
+
+footer img {
+  width: 30%;
+  max-width: 300px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive: single column below 768px                               */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  .section-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #home,
+  .section-wrapper,
+  footer {
+    padding-left: var(--spacingHorizontalL, 16px);
+    padding-right: var(--spacingHorizontalL, 16px);
+  }
+
+  .nav-inner {
+    padding-left: var(--spacingHorizontalL, 16px);
+    padding-right: var(--spacingHorizontalL, 16px);
+  }
+}
