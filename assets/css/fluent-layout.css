@@ -112,6 +112,10 @@ header {
   margin-bottom: 0;
 }
 
+#headerimg {
+  filter: invert(1);
+}
+
 @media (max-width: 991px) {
   #headerimg {
     display: none;
