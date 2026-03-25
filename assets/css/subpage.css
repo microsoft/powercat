@@ -61,6 +61,30 @@ body {
     color: var(--ms-dark-grey);
 }
 
+.logo-text a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ms-dark-grey);
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
 .main-container {
     max-width: 1200px;
     margin: 120px auto 60px;
