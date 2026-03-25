@@ -122,7 +122,20 @@
       <div class="card-grid">
 
         <div class="card">
-          <img src="images/arch-center.png" alt="Architecture Center">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Architecture Center" role="img">
+            <!-- Left compass leg -->
+            <line x1="37" y1="22" x2="16" y2="66" stroke="#742774" stroke-width="4" stroke-linecap="round"/>
+            <!-- Right compass leg -->
+            <line x1="43" y1="22" x2="64" y2="66" stroke="#742774" stroke-width="4" stroke-linecap="round"/>
+            <!-- Hinge -->
+            <circle cx="40" cy="18" r="6" fill="#742774"/>
+            <!-- Left foot (pencil tip) -->
+            <circle cx="16" cy="66" r="3" fill="#9b4f9b"/>
+            <!-- Right foot (pin point) -->
+            <circle cx="64" cy="66" r="3" fill="#742774"/>
+            <!-- Arc being drawn -->
+            <path d="M 16 66 A 54 54 0 0 1 64 66" stroke="#9b4f9b" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </svg>
           <h3>Architecture Center</h3>
           <p>Design solutions on Power Platform using established patterns and practices.</p>
           <fluent-anchor appearance="accent" href="https://aka.ms/powerarchitecture" target="_blank" rel="noopener noreferrer">Learn More</fluent-anchor>
