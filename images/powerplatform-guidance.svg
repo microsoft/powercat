@@ -1,0 +1,8 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pole -->
+  <rect x="38" y="8" width="4" height="66" rx="2" fill="#78909C"/>
+  <!-- Sign 1: right-pointing (yellow) -->
+  <path d="M 40 14 L 62 14 L 69 23 L 62 32 L 40 32 Z" fill="#FFD740"/>
+  <!-- Sign 2: left-pointing (teal) -->
+  <path d="M 40 40 L 18 40 L 11 49 L 18 58 L 40 58 Z" fill="#26C6DA"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left cover -->
+  <path d="M 10 18 Q 8 18 8 20 L 8 64 Q 8 66 10 66 L 38 66 L 38 18 Z" fill="#42A5F5"/>
+  <!-- Right cover -->
+  <path d="M 42 18 L 42 66 L 70 66 Q 72 66 72 64 L 72 20 Q 72 18 70 18 Z" fill="#42A5F5"/>
+  <!-- Pages (white) -->
+  <rect x="14" y="22" width="20" height="40" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="46" y="22" width="20" height="40" fill="#FFFFFF" opacity="0.9"/>
+  <!-- Spine -->
+  <rect x="37" y="16" width="6" height="50" rx="1" fill="#1565C0"/>
+  <!-- Text lines left -->
+  <line x1="17" y1="30" x2="31" y2="30" stroke="#90A4AE" stroke-width="2" stroke-linecap="round"/>
+  <line x1="17" y1="37" x2="31" y2="37" stroke="#90A4AE" stroke-width="2" stroke-linecap="round"/>
+  <line x1="17" y1="44" x2="31" y2="44" stroke="#90A4AE" stroke-width="2" stroke-linecap="round"/>
+  <line x1="17" y1="51" x2="26" y2="51" stroke="#90A4AE" stroke-width="2" stroke-linecap="round"/>
+  <!-- Text lines right -->
+  <line x1="49" y1="30" x2="63" y2="30" stroke="#90A4AE" stroke-width="2" stroke-linecap="round"/>
+  <line x1="49" y1="37" x2="63" y2="37" stroke="#90A4AE" stroke-width="2" stroke-linecap="round"/>
+  <line x1="49" y1="44" x2="63" y2="44" stroke="#90A4AE" stroke-width="2" stroke-linecap="round"/>
+  <line x1="49" y1="51" x2="58" y2="51" stroke="#90A4AE" stroke-width="2" stroke-linecap="round"/>
+</svg>

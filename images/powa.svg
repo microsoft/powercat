@@ -1,0 +1,13 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pediment / roof -->
+  <polygon points="40,8 72,28 8,28" fill="#26C6DA"/>
+  <!-- Entablature -->
+  <rect x="10" y="26" width="60" height="6" rx="1" fill="#00ACC1"/>
+  <!-- Columns -->
+  <rect x="16" y="32" width="8" height="28" rx="2" fill="#42A5F5"/>
+  <rect x="36" y="32" width="8" height="28" rx="2" fill="#42A5F5"/>
+  <rect x="56" y="32" width="8" height="28" rx="2" fill="#42A5F5"/>
+  <!-- Stylobate (base) -->
+  <rect x="8" y="60" width="64" height="6" rx="2" fill="#78909C"/>
+  <rect x="12" y="66" width="56" height="5" rx="2" fill="#90A4AE"/>
+</svg>

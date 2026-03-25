@@ -1,0 +1,18 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mortarboard top (diamond) -->
+  <polygon points="40,10 70,26 40,42 10,26" fill="#42A5F5"/>
+  <!-- Depth edge of board -->
+  <polygon points="40,42 70,26 70,31 40,47" fill="#1E88E5"/>
+  <!-- Cap band -->
+  <rect x="27" y="38" width="26" height="16" rx="3" fill="#1565C0"/>
+  <!-- Cap brim bottom -->
+  <ellipse cx="40" cy="54" rx="13" ry="4" fill="#0D47A1"/>
+  <!-- Tassel cord -->
+  <line x1="70" y1="26" x2="70" y2="46" stroke="#FFD740" stroke-width="3" stroke-linecap="round"/>
+  <!-- Tassel knot -->
+  <circle cx="70" cy="47" r="4" fill="#FFD740"/>
+  <!-- Tassel fringe -->
+  <line x1="66" y1="49" x2="63" y2="60" stroke="#FFD740" stroke-width="2" stroke-linecap="round"/>
+  <line x1="70" y1="50" x2="70" y2="61" stroke="#FFD740" stroke-width="2" stroke-linecap="round"/>
+  <line x1="74" y1="49" x2="77" y2="60" stroke="#FFD740" stroke-width="2" stroke-linecap="round"/>
+</svg>

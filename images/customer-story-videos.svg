@@ -1,0 +1,14 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Monitor frame -->
+  <rect x="6" y="14" width="68" height="46" rx="5" fill="#B0BEC5"/>
+  <!-- Screen -->
+  <rect x="10" y="18" width="60" height="36" rx="3" fill="#ECEFF1"/>
+  <!-- Play button circle -->
+  <circle cx="40" cy="36" r="12" fill="#EF5350"/>
+  <!-- Play triangle -->
+  <polygon points="36,30 36,42 48,36" fill="white"/>
+  <!-- Stand stem -->
+  <rect x="37" y="60" width="6" height="6" rx="1" fill="#90A4AE"/>
+  <!-- Base -->
+  <rect x="26" y="66" width="28" height="5" rx="2" fill="#78909C"/>
+</svg>

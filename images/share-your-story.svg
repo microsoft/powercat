@@ -1,0 +1,10 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Clipboard body -->
+  <rect x="14" y="18" width="52" height="56" rx="4" fill="#B0BEC5"/>
+  <rect x="18" y="24" width="44" height="46" rx="2" fill="#ECEFF1"/>
+  <!-- Clipboard clip -->
+  <rect x="30" y="14" width="20" height="10" rx="3" fill="#78909C"/>
+  <rect x="34" y="12" width="12" height="6" rx="3" fill="#90A4AE"/>
+  <!-- Heart -->
+  <path d="M 40 56 C 40 56 26 47 26 38 C 26 33 30 30 34 30 C 37 30 39 32 40 34 C 41 32 43 30 46 30 C 50 30 54 33 54 38 C 54 47 40 56 40 56 Z" fill="#EF5350"/>
+</svg>
