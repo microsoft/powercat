@@ -260,6 +260,8 @@ footer img {
 .footer-copy a {
   color: var(--colorBrandForeground1, #0078D4);
   text-decoration: none;
+  padding: 4px 2px;
+  display: inline-block;
 }
 
 .footer-copy a:hover {
