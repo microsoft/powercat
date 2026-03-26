@@ -208,6 +208,28 @@ header {
 }
 
 /* ------------------------------------------------------------------ */
+/* Focus & Interaction States                                          */
+/* ------------------------------------------------------------------ */
+
+a:focus-visible,
+button:focus-visible,
+fluent-anchor:focus-visible,
+fluent-button:focus-visible {
+  outline: 2px solid var(--colorBrandForeground1, #0078D4);
+  outline-offset: 2px;
+  border-radius: var(--borderRadiusSmall, 2px);
+}
+
+.card {
+  transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.card:hover {
+  box-shadow: var(--shadow8, 0 4px 8px rgba(0,0,0,0.14));
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------------ */
 /* Footer                                                               */
 /* ------------------------------------------------------------------ */
 
