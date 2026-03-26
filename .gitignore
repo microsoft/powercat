@@ -3,3 +3,4 @@
 .github/
 .venv/
 .vscode/
+.vscode/settings.json

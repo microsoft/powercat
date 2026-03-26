@@ -1,3 +1,4 @@
 {
-    "sarif-viewer.connectToGithubCodeScanning": "on"
+    "sarif-viewer.connectToGithubCodeScanning": "on",
+    "codeQL.githubDatabase.update": "never"
 }
