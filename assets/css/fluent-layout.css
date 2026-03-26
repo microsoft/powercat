@@ -236,12 +236,33 @@ fluent-button:focus-visible {
 footer {
   padding: var(--spacingVerticalXXL, 40px) var(--spacingHorizontalXXL, 40px);
   text-align: center;
-  background-color: var(--colorNeutralBackground1, #ffffff);
+  background-color: var(--colorNeutralBackground2, #f5f5f5);
+  border-top: 1px solid var(--colorNeutralStroke2, #e0e0e0);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 footer img {
   width: 30%;
   max-width: 300px;
+}
+
+.footer-copy {
+  margin-top: var(--spacingVerticalM, 12px);
+  font-size: 13px;
+  color: var(--colorNeutralForeground2, #616161);
+}
+
+.footer-copy a {
+  color: var(--colorBrandForeground1, #0078D4);
+  text-decoration: none;
+}
+
+.footer-copy a:hover {
+  text-decoration: underline;
 }
 
 /* ------------------------------------------------------------------ */
