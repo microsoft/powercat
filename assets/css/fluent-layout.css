@@ -11,6 +11,7 @@ body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--colorNeutralBackground1, #ffffff);
   color: var(--colorNeutralForeground1, #242424);
+  line-height: 1.5;
 }
 
 /* ------------------------------------------------------------------ */
@@ -98,10 +99,11 @@ header {
 }
 
 .hero-text h1 {
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.15;
   margin: 0 0 var(--spacingVerticalL, 20px);
+  text-wrap: balance;
 }
 
 .hero-text p {
@@ -155,10 +157,11 @@ header {
 }
 
 .section-label h2 {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.25;
   margin: 0 0 var(--spacingVerticalM, 12px);
+  text-wrap: balance;
 }
 
 .section-label p {
@@ -192,9 +195,9 @@ header {
 }
 
 .card h3 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
   margin: 0 0 var(--spacingVerticalS, 6px);
 }
 
