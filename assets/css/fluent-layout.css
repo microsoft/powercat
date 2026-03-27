@@ -209,6 +209,98 @@ header {
 }
 
 /* ------------------------------------------------------------------ */
+/* Section layout variants                                             */
+/* ------------------------------------------------------------------ */
+
+/* Stacked: label on top, cards below (used for Guidance) */
+.section-inner--stacked {
+  grid-template-columns: 1fr;
+}
+
+.section-inner--stacked .section-label {
+  max-width: 640px;
+}
+
+.section-inner--stacked .card-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Featured: first card spans full width as highlight (used for Resources) */
+.card-grid--featured {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-grid--featured .card:first-child {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 4px 24px;
+  padding: 28px 24px;
+  align-items: start;
+}
+
+.card-grid--featured .card:first-child img {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  width: 100px;
+  margin-bottom: 0;
+  align-self: center;
+}
+
+.card-grid--featured .card:first-child h3 {
+  grid-column: 2;
+  font-size: 20px;
+}
+
+.card-grid--featured .card:first-child p {
+  grid-column: 2;
+  margin-bottom: 8px;
+}
+
+.card-grid--featured .card:first-child fluent-anchor {
+  grid-column: 2;
+}
+
+/* Horizontal list: cards as rows (used for Stories) */
+.card-grid--list {
+  grid-template-columns: 1fr;
+  gap: var(--spacingVerticalM, 12px);
+}
+
+.card-grid--list .card {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 2px 20px;
+  align-items: center;
+}
+
+.card-grid--list .card img {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  width: 64px;
+  margin-bottom: 0;
+}
+
+.card-grid--list .card h3 {
+  grid-column: 2;
+  grid-row: 1;
+  margin-bottom: 0;
+}
+
+.card-grid--list .card p {
+  grid-column: 2;
+  grid-row: 2;
+  margin-bottom: 0;
+}
+
+.card-grid--list .card fluent-anchor {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  align-self: center;
+}
+
+/* ------------------------------------------------------------------ */
 /* Focus & Interaction States                                          */
 /* ------------------------------------------------------------------ */
 
@@ -273,12 +365,41 @@ footer img {
 /* ------------------------------------------------------------------ */
 
 @media (max-width: 768px) {
-  .section-inner {
+  .section-inner,
+  .section-inner--stacked {
     grid-template-columns: 1fr;
   }
 
-  .card-grid {
+  .card-grid,
+  .section-inner--stacked .card-grid,
+  .card-grid--featured {
     grid-template-columns: 1fr;
+  }
+
+  .card-grid--featured .card:first-child {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid--featured .card:first-child img {
+    grid-column: 1;
+    grid-row: auto;
+    width: 80px;
+    margin-bottom: var(--spacingVerticalM, 12px);
+  }
+
+  .card-grid--featured .card:first-child h3,
+  .card-grid--featured .card:first-child p,
+  .card-grid--featured .card:first-child fluent-anchor {
+    grid-column: 1;
+  }
+
+  .card-grid--list .card {
+    grid-template-columns: 64px 1fr;
+  }
+
+  .card-grid--list .card fluent-anchor {
+    grid-column: 2;
+    grid-row: 3;
   }
 
   #home,
