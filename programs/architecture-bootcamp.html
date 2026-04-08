@@ -1,10 +1,1075 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="refresh" content="0; url=https://microsoft.github.io/cat/programs/architecture-bootcamp.html" />
-<link rel="canonical" href="https://microsoft.github.io/cat/programs/architecture-bootcamp.html" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="image" property="og:image" content="https://microsoft.github.io/cat/images/bootcamp-og.png" />
+  <meta name="image" property="og:image:width" content="1200" />
+  <meta name="image" property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Microsoft Copilot Studio Architecture Bootcamp" />
+  <meta name="title" property="og:title" content="Microsoft Copilot Studio Architecture Bootcamp" />
+  <meta name="description" property="og:description" content="A fast-paced 3-day intermediate-to-advanced program aligned to the Microsoft Copilot Studio Implementation Guidance, focused on proven patterns, de-risking complex projects, and under-the-hood architecture decisions." />
+  <meta name="url" property="og:url" content="https://microsoft.github.io/cat/programs/architecture-bootcamp.html" />
+  <meta name="type" property="og:type" content="article" />
+  <meta name="site_name" property="og:site_name" content="Microsoft Copilot Acceleration Team - Architecture Bootcamp" />
+  <meta name="locale" property="og:locale" content="en_US" />
+  <meta name="author" property="og:author" content="Microsoft Copilot Acceleration Team" />
+  <title>Microsoft Copilot Studio Architecture Bootcamp</title>
+  <style>
+    :root {
+      --ms-blue: #0078d4;
+      --ms-blue-dark: #005a9e;
+      --copilot-violet: #7c4dff;
+      --ink: #1f1f1f;
+      --muted: #605e5c;
+      --line: #e3e8f5;
+      --panel-soft: #f3f6ff;
+      --panel-tint: #eef2ff;
+      --accent-soft: #eef4ff;
+      --disabled: #8a8886;
+      --focus-ring: 0 0 0 3px rgba(0,120,212,.35);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(107,76,211,.18), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(0,120,212,.15), transparent 45%),
+        radial-gradient(circle at 50% 100%, rgba(124,77,255,.12), transparent 50%),
+        linear-gradient(180deg, #f6f8ff 0%, #ffffff 30%, #ffffff 100%);
+      line-height: 1.5;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 100;
+      transform: translateY(-140%);
+      background: #ffffff;
+      color: var(--ms-blue-dark);
+      border: 2px solid var(--ms-blue-dark);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+      box-shadow: var(--focus-ring);
+    }
+
+    a { color: var(--ms-blue-dark); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.95);
+      border-bottom: 1px solid rgba(225,223,221,.95);
+    }
+
+    .nav-container,
+    .main-container,
+    .footer-container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav-container {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo-container,
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .logo-line,
+    .footer-logo-line {
+      width: 4px;
+      height: 38px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--ms-blue-dark), #50b0ff);
+      flex: 0 0 4px;
+    }
+
+    .logo-text,
+    .footer-logo-text {
+      font-size: 14px;
+      line-height: 1.2;
+      color: #252423;
+      font-weight: 600;
+      letter-spacing: .1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      color: #323130;
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      text-decoration: none;
+      border-color: rgba(0,120,212,.35);
+      color: var(--ms-blue-dark);
+      background: #fff;
+    }
+
+    .main-container { padding: 28px 0 60px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .hero-card,
+    .hero-meta,
+    .about-section,
+    .session-box,
+    .quick-card,
+    .fit-panel,
+    .agenda-section {
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid #d8def0;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+      background: linear-gradient(135deg, rgba(0,120,212,.9), rgba(124,77,255,.85));
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.48) 38%, rgba(0,0,0,.18) 68%, rgba(0,0,0,0) 100%);
+    }
+
+    .hero-panel {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 28px;
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: clamp(34px,4vw,44px);
+      line-height: 1.15;
+      margin: 6px 0 14px;
+      letter-spacing: -.4px;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      font-weight: 700;
+      color: var(--ms-blue-dark);
+      margin-bottom: 6px;
+    }
+
+    .hero-copy {
+      font-size: 17px;
+      line-height: 1.6;
+      margin: 8px 0 18px;
+      max-width: 680px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .btn,
+    .register-btn,
+    .text-link-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--ms-blue-dark), var(--ms-blue));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(0,90,158,.22);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--ms-blue-dark);
+    }
+
+    .register-btn {
+      background: #ffffff;
+      color: #252423;
+      transition: background .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+      gap: 8px;
+    }
+
+    .register-btn.primary {
+      background: linear-gradient(135deg, var(--ms-blue-dark), var(--ms-blue));
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(0,90,158,.22);
+    }
+
+    .register-btn.primary:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,90,158,.24);
+    }
+
+    .register-btn.primary .mode-dot.inperson {
+      background: #ffffff;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.92);
+      box-shadow: none;
+    }
+
+    .register-btn.secondary {
+      background: #ffffff;
+      color: var(--ms-blue-dark);
+      border-color: #d7deef;
+      box-shadow: none;
+    }
+
+    .register-btn.secondary:hover {
+      text-decoration: none;
+      border-color: rgba(124,77,255,.30);
+      box-shadow: 0 4px 12px rgba(31,41,55,.06);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta,
+    .about-section,
+    .agenda-section { padding: 24px; }
+
+    .hero-meta {
+      background: linear-gradient(180deg, #ffffff, var(--panel-soft));
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 30px rgba(31,41,55,.06);
+    }
+
+    .meta-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .meta-title { margin: 0; font-size: 18px; line-height: 1.2; color: #252423; }
+
+    .meta-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #eef4ff;
+      border: 1px solid #d8e6ff;
+      color: var(--ms-blue-dark);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .quick-card {
+      position: relative;
+      padding: 16px 18px;
+      background: linear-gradient(180deg, #ffffff, var(--panel-soft));
+      border: 1px solid var(--line);
+      box-shadow: 0 6px 18px rgba(31,41,55,.05);
+      overflow: hidden;
+    }
+
+    .quick-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--copilot-violet), var(--ms-blue-dark));
+    }
+
+    .quick-label {
+      display: block;
+      color: #5b6476;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .55px;
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+
+    .quick-value {
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #1e2430;
+      padding-left: 4px;
+      text-wrap: balance;
+    }
+
+    .quick-subtext {
+      margin-top: 8px;
+      padding-left: 4px;
+      color: #5f6779;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .pill-row,
+    .foot-links,
+    .agenda-key {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .pill,
+    .agenda-key-item {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #f5f8ff;
+      border: 1px solid #dde6fb;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 600;
+      gap: 8px;
+    }
+
+    .content-grid { display: block; margin-top: 18px; }
+
+    h2.section-title { font-size: 26px; margin: 4px 0 12px; line-height: 1.25; }
+    .about-text, .agenda-intro { margin: 10px 0 14px; font-size: 15.5px; line-height: 1.65; color: #3a3a3a; }
+    .agenda-intro { max-width: 78ch; }
+
+    .fit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 12px 0 8px;
+    }
+
+    .fit-panel { padding: 20px; }
+    .fit-heading { margin: 0 0 10px; font-size: 16px; line-height: 1.3; color: #252423; }
+    .fit-list, .agenda-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+
+    .fit-item {
+      position: relative;
+      padding: 12px 14px 12px 38px;
+      background: #eef2ff;
+      border: 1px solid #d7deef;
+      border-radius: 14px;
+      font-weight: 600;
+      color: #222222;
+      line-height: 1.45;
+    }
+
+    .fit-item::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(180deg, var(--ms-blue-dark), #58b6ff);
+      box-shadow: 0 0 0 6px rgba(0,120,212,.14);
+    }
+
+    .session-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .session-header p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #484644;
+      font-weight: 600;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #f7f9fc;
+      border: 1px solid var(--line);
+    }
+
+    .session-list { display: grid; gap: 14px; margin-top: 8px; }
+
+    .session-box {
+      position: relative;
+      padding: 20px;
+      background: linear-gradient(180deg, #ffffff, var(--panel-soft));
+    }
+
+    .session-box + .session-box::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 8px;
+      right: 8px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e6ebf7, transparent);
+    }
+
+    .session-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .session-name { margin: 0; font-size: 21px; line-height: 1.15; color: #252423; }
+
+    .session-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: var(--panel-tint);
+      border: 1px solid rgba(0,120,212,.16);
+      color: var(--ms-blue-dark);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+
+    .session-meta { display: grid; gap: 6px; color: #484644; font-size: 15px; margin-bottom: 16px; }
+    .session-meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .meta-icon { width: 22px; text-align: center; opacity: .85; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .register-btn[aria-disabled="true"],
+    .register-btn.is-disabled {
+      color: #60656f;
+      background: #f3f5f8;
+      border-color: #dde3ea;
+      box-shadow: none;
+      pointer-events: none;
+    }
+
+    .register-btn.is-disabled .mode-dot.inperson,
+    .register-btn[aria-disabled="true"] .mode-dot.inperson {
+      background: var(--ms-blue-dark);
+      border: none;
+      box-shadow: 0 0 0 4px rgba(0,120,212,.10);
+      opacity: .55;
+    }
+
+    .register-btn.is-disabled .mode-dot.virtual,
+    .register-btn[aria-disabled="true"] .mode-dot.virtual {
+      background: var(--copilot-violet);
+      border: none;
+      box-shadow: 0 0 0 4px rgba(124,77,255,.12);
+      opacity: .55;
+    }
+
+    .register-btn.is-disabled .mode-dot.closed,
+    .register-btn[aria-disabled="true"] .mode-dot.closed {
+      background: var(--disabled);
+      box-shadow: 0 0 0 4px rgba(138,136,134,.12);
+    }
+
+    .mode-dot { width: 12px; height: 12px; display: inline-block; flex: 0 0 12px; }
+    .mode-dot.inperson { background: var(--ms-blue-dark); border-radius: 50%; border: none; box-shadow: 0 0 0 4px rgba(0,120,212,.12); }
+    .register-btn.secondary .mode-dot.inperson { background: var(--ms-blue-dark); border: none; box-shadow: 0 0 0 4px rgba(0,120,212,.10); }
+    .mode-dot.virtual { background: var(--copilot-violet); border-radius: 50%; border: none; box-shadow: 0 0 0 4px rgba(124,77,255,.14); }
+    .mode-dot.closed { background: var(--disabled); border-radius: 50%; box-shadow: 0 0 0 4px rgba(138,136,134,.12); }
+    .legend .mode-dot.inperson { background: var(--ms-blue-dark); border: none; box-shadow: 0 0 0 4px rgba(0,120,212,.12); }
+    .legend .mode-dot.virtual { background: var(--copilot-violet); border: none; box-shadow: 0 0 0 4px rgba(124,77,255,.14); }
+
+    .subtle-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      border: 1px solid var(--line);
+      color: #3b3f45;
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    .outcome-box {
+      margin: 18px 0 22px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff, var(--panel-soft));
+      border: 1px solid var(--line);
+      box-shadow: 0 6px 18px rgba(31,41,55,.05);
+    }
+
+    .outcome-title {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.3;
+      color: #1e2430;
+    }
+
+    .expect-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .expect-item {
+      position: relative;
+      padding: 12px 14px 12px 38px;
+      background: #eef2ff;
+      border: 1px solid #d7deef;
+      border-radius: 14px;
+      font-weight: 600;
+      color: #222222;
+      line-height: 1.45;
+    }
+
+    .expect-item::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(180deg, var(--copilot-violet), var(--ms-blue-dark));
+      box-shadow: 0 0 0 6px rgba(124,77,255,.10);
+    }
+
+    .agenda-accordion { display: grid; gap: 14px; margin-top: 16px; }
+
+    .agenda-details {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #ffffff, var(--panel-soft));
+      box-shadow: 0 6px 18px rgba(31,41,55,.05);
+    }
+
+    .agenda-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(0,120,212,.08), rgba(124,77,255,.10));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .agenda-summary::-webkit-details-marker { display: none; }
+    .agenda-summary-left { display: grid; gap: 6px; }
+
+    .agenda-day-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid #dbe6fb;
+      color: var(--ms-blue-dark);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      width: fit-content;
+    }
+
+    .agenda-day-title { margin: 0; font-size: 20px; line-height: 1.2; color: #1e2430; }
+
+    .agenda-chevron {
+      width: 18px;
+      height: 18px;
+      border-right: 2px solid var(--ms-blue-dark);
+      border-bottom: 2px solid var(--ms-blue-dark);
+      transform: rotate(45deg);
+      transition: transform .2s ease;
+      margin-right: 6px;
+      flex: 0 0 18px;
+    }
+
+    .agenda-details[open] .agenda-chevron { transform: rotate(225deg); margin-top: 8px; }
+    .agenda-list { padding: 10px 0; }
+
+    .agenda-item {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      padding: 12px 18px;
+      align-items: start;
+    }
+
+    .agenda-item + .agenda-item { border-top: 1px solid #edf1f8; }
+    .agenda-time { font-size: 12px; line-height: 1.35; font-weight: 700; color: var(--ms-blue-dark); letter-spacing: .2px; }
+    .agenda-title { font-size: 14px; line-height: 1.45; color: #252423; font-weight: 600; }
+    .agenda-title.module { color: #1f3b68; }
+    .agenda-title.lab { color: #5b3cc4; }
+    .agenda-title.break { color: #605e5c; }
+    .agenda-title.interactive { color: #0f6c52; }
+    .agenda-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: 0 0 10px; }
+    .agenda-dot.module { background: #1f5fbf; }
+    .agenda-dot.lab { background: #7c4dff; }
+    .agenda-dot.break { background: #8a8886; }
+    .agenda-dot.interactive { background: #0f6c52; }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .footer-container {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 18px 0;
+    }
+
+    .footer-copyright { font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .fit-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .meta-header { align-items: flex-start; flex-direction: column; }
+      .nav-container { padding: 12px 0; align-items: start; flex-direction: column; }
+      .nav-links { width: 100%; }
+      .nav-links a { min-height: 38px; }
+      .quick-grid { grid-template-columns: 1fr; }
+      .legend { width: 100%; }
+      .hero-card,
+      .hero-meta,
+      .about-section,
+      .session-box,
+      .fit-panel,
+      .agenda-section { padding: 20px; border-radius: 18px; }
+      .hero-card { min-height: 420px; background-position: center top; }
+      .hero-panel { padding: 22px; }
+      .hero-cta { flex-direction: column; align-items: stretch; }
+      .btn, .register-btn, .text-link-chip { width: 100%; }
+      .session-top, .session-header, .footer-container { align-items: start; }
+      h1 { font-size: 30px; letter-spacing: -.5px; }
+      .about-text, .agenda-intro { font-size: 15px; }
+      .agenda-summary { align-items: start; }
+      .agenda-item { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
 </head>
 <body>
-<p>If you are not redirected, <a href="https://microsoft.github.io/cat/programs/architecture-bootcamp.html">click here</a>.</p>
-</body>
-</html>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="header">
+    <div class="nav-container">
+      <div class="logo-container">
+        <div class="logo-line"></div>
+        <div class="logo-text">Microsoft<br />Copilot Acceleration Team</div>
+      </div>
+      <nav class="nav-links" aria-label="Section navigation">
+        <a href="#about">About</a>
+        <a href="#who">Who Should Attend</a>
+        <a href="#sessions">Upcoming Sessions</a>
+        <a href="#agenda">Bootcamp Schedule</a>
+        <a href="#cancellation">Cancellation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-container" id="main-content">
+    <section class="hero" aria-label="Bootcamp overview">
+      <div class="hero-card">
+        <div class="hero-panel">
+          <div class="eyebrow">Architecture-first training</div>
+          <h1>Microsoft Copilot Studio Architecture Bootcamp</h1>
+          <p class="hero-copy">
+            A fast-paced 3-day intermediate-to-advanced experience focused on proven patterns,
+            architecture decisions, and de-risking complex Copilot Studio implementations.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#sessions">View upcoming sessions</a>
+            <a class="btn btn-secondary" href="https://microsoft.github.io/cat/programs/architecture-bootcamp.html" target="_blank" rel="noopener">View current CAT page</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-meta" aria-label="At a glance">
+        <div class="meta-header">
+          <h2 class="meta-title">At a glance</h2>
+          <span class="meta-kicker">Program snapshot</span>
+        </div>
+
+        <div class="quick-grid">
+          <div class="quick-card">
+            <span class="quick-label">Duration</span>
+            <div class="quick-value">3 days</div>
+            <div class="quick-subtext">Focused, fast-paced architecture training</div>
+          </div>
+          <div class="quick-card">
+            <span class="quick-label">Level</span>
+            <div class="quick-value">Intermediate to Advanced</div>
+            <div class="quick-subtext">Built for experienced practitioners</div>
+          </div>
+          <div class="quick-card">
+            <span class="quick-label">Format</span>
+            <div class="quick-value">In-person + virtual</div>
+            <div class="quick-subtext">By session availability and region</div>
+          </div>
+          <div class="quick-card">
+            <span class="quick-label">Audience</span>
+            <div class="quick-value">Architects + technical leads</div>
+            <div class="quick-subtext">Enterprise solution and governance roles</div>
+          </div>
+        </div>
+
+        <div class="pill-row" aria-label="Program highlights">
+          <span class="pill">Implementation Guidance aligned</span>
+          <span class="pill">Hands-on architecture focus</span>
+          <span class="pill">Instructor-led</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="content-grid">
+      <section class="about-section" id="about">
+        <div class="section-kicker">About the program</div>
+        <h2 class="section-title">Architecture guidance with practical depth</h2>
+        <p class="about-text">
+          Copilot Studio Architecture Bootcamp is a fast-paced 3-day intermediate-to-advanced program aligned to the Microsoft Copilot Studio Implementation Guidance, focused on proven patterns, de-risking complex projects, and under-the-hood architecture decisions.
+        </p>
+        <div class="subtle-note">
+          <strong>Program update:</strong> The Copilot Studio Architecture Bootcamp has been re-launched with <strong>16 modules and 10 hands-on labs</strong>, focused on architecture, governance, and real-world implementation patterns.
+          <br><br>
+          Microsoft employees are invited to attend virtually. Please note that <strong>travel and expenses are not provided</strong>.
+        </div>
+        <p class="about-text">
+          We highly suggest attending in-person to meet with industry professionals and trainers.
+        </p>
+      </section>
+
+      <section class="about-section" id="who" aria-labelledby="who-title">
+        <div class="section-kicker">Audience fit</div>
+        <h2 class="section-title" id="who-title">Who this bootcamp is for</h2>
+        <p class="about-text">
+          Designed for technical professionals who architect, deliver, or govern Copilot Studio solutions in enterprise environments.
+        </p>
+
+        <div class="fit-grid">
+          <section class="fit-panel" aria-labelledby="typical-attendees-title">
+            <h3 class="fit-heading" id="typical-attendees-title">Typical attendees</h3>
+            <ul class="fit-list">
+              <li class="fit-item">Solution and Enterprise Architects</li>
+              <li class="fit-item">Delivery Consultants and Implementation Leads</li>
+              <li class="fit-item">Partner Technical Architects and Customer Engineers</li>
+              <li class="fit-item">Technical Strategists overseeing architecture or governance</li>
+            </ul>
+          </section>
+
+          <section class="fit-panel" aria-labelledby="best-value-title">
+            <h3 class="fit-heading" id="best-value-title">Best suited for participants who</h3>
+            <ul class="fit-list">
+              <li class="fit-item">Already have Power Platform or Copilot Studio experience</li>
+              <li class="fit-item">Own solution architecture, governance, or implementation strategy</li>
+              <li class="fit-item">Want deeper guidance on scalable patterns, security, and architecture decisions</li>
+            </ul>
+          </section>
+        </div>
+
+        <p><strong>Note:</strong> This program is not intended for beginners who are new to Power Platform or Copilot Studio.</p>
+        <p>Registration closes one week before each event. In-person seats are limited and subject to change based on demand.</p>
+        <p>Virtual events are open to Microsoft employees globally.</p>
+      </section>
+
+      <section class="about-section" id="sessions">
+        <div class="session-header">
+          <div>
+            <div class="section-kicker">Global delivery</div>
+            <h2 class="section-title" style="margin-bottom: 6px;">Upcoming sessions</h2>
+            <p>Explore upcoming bootcamp sessions by region and availability.</p>
+          </div>
+          <div class="legend" aria-label="Event legend">
+            <span class="legend-item"><span class="mode-dot inperson"></span> In-person</span>
+            <span class="legend-item"><span class="mode-dot virtual"></span> Virtual</span>
+            <span class="legend-item"><span class="mode-dot closed"></span> Closed / pending</span>
+          </div>
+        </div>
+
+        <div class="session-list">
+          <article class="session-box">
+            <div class="session-top">
+              <h3 class="session-name">🇺🇸 Redmond, Washington</h3>
+              <span class="session-badge">Closed</span>
+            </div>
+            <div class="session-meta">
+              <div class="session-meta-row"><span class="meta-icon">📅</span> Feb 24–26, 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Pacific Standard Time</div>
+            </div>
+            <div class="btn-group" aria-label="Redmond registration status">
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot inperson"></span>In-person</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
+            </div>
+          </article>
+
+          <article class="session-box">
+            <div class="session-top">
+              <h3 class="session-name">🇺🇸 Atlanta, Georgia</h3>
+              <span class="session-badge">Registration open</span>
+            </div>
+            <div class="session-meta">
+              <div class="session-meta-row"><span class="meta-icon">📅</span> Mar 31–Apr 2, 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Eastern Daylight Time</div>
+            </div>
+            <div class="btn-group" aria-label="Atlanta registration options">
+              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=3263257389"><span class="mode-dot inperson"></span>Register in-person</a>
+              <a class="register-btn secondary" href="https://aka.ms/BCVirtual" target="_blank" rel="noopener"><span class="mode-dot virtual"></span>Register virtual</a>
+            </div>
+          </article>
+
+          <article class="session-box">
+            <div class="session-top">
+              <h3 class="session-name">🇨🇦 Toronto, Ontario</h3>
+              <span class="session-badge">Registration open</span>
+            </div>
+            <div class="session-meta">
+              <div class="session-meta-row"><span class="meta-icon">📅</span> Apr 28–30, 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Eastern Daylight Time</div>
+            </div>
+            <div class="btn-group" aria-label="Toronto registration options">
+              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=1758945306"><span class="mode-dot inperson"></span>Register in-person</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
+            </div>
+          </article>
+
+          <article class="session-box">
+            <div class="session-top">
+              <h3 class="session-name">🇸🇬 Singapore</h3>
+              <span class="session-badge">Registration open</span>
+            </div>
+            <div class="session-meta">
+              <div class="session-meta-row"><span class="meta-icon">📅</span> May 12–14, 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Singapore Standard Time</div>
+            </div>
+            <div class="btn-group" aria-label="Singapore registration options">
+              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=827309318"><span class="mode-dot inperson"></span>Register in-person</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
+            </div>
+          </article>
+
+          <article class="session-box">
+            <div class="session-top">
+              <h3 class="session-name">🇪🇺 European Union Region · Location to be determined</h3>
+              <span class="session-badge">Coming soon</span>
+            </div>
+            <div class="session-meta">
+              <div class="session-meta-row"><span class="meta-icon">📅</span> May 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">📍</span> Final city pending</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM local time</div>
+            </div>
+            <div class="btn-group" aria-label="European Union registration status">
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot inperson"></span>In-person</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="subtle-note">
+          Looking for a specific date or region? Check back for regular updates. Keeping the European Union region visible here signals planned coverage without overcommitting before the final city is locked.
+        </div>
+      </section>
+
+      <section class="agenda-section" id="agenda" aria-labelledby="agenda-title">
+        <div class="section-kicker">Bootcamp schedule</div>
+        <h2 class="section-title" id="agenda-title">3-day agenda at a glance</h2>
+        <p class="agenda-intro">
+          The re-launched bootcamp includes 16 modules and 10 hands-on labs across three days, blending instruction, demos, labs, and review time. Day sections are collapsed by default for easier scanning.
+        </p>
+
+        <div class="outcome-box">
+          <strong class="outcome-title">You’ll leave with:</strong>
+          <ul class="expect-list">
+            <li class="expect-item">Clear architecture patterns for real Copilot Studio deployments</li>
+            <li class="expect-item">Hands-on experience with ALM, integrations, and governance</li>
+            <li class="expect-item">Confidence making design tradeoffs in complex environments</li>
+          </ul>
+        </div>
+
+        <div class="agenda-accordion">
+          <details class="agenda-details">
+            <summary class="agenda-summary">
+              <div class="agenda-summary-left">
+                <span class="agenda-day-label">Day 1</span>
+                <h3 class="agenda-day-title">Foundations + core concepts</h3>
+              </div>
+              <span class="agenda-chevron" aria-hidden="true"></span>
+            </summary>
+            <ol class="agenda-list">
+              <li class="agenda-item"><div class="agenda-time">09:00–09:15</div><div class="agenda-title interactive">Welcome</div></li>
+              <li class="agenda-item"><div class="agenda-time">09:15–09:30</div><div class="agenda-title interactive">Intro to hands-on labs</div></li>
+              <li class="agenda-item"><div class="agenda-time">09:30–10:00</div><div class="agenda-title module">Module 1 · M365 Agent Builder</div></li>
+              <li class="agenda-item"><div class="agenda-time">10:00–10:15</div><div class="agenda-title break">Coffee break</div></li>
+              <li class="agenda-item"><div class="agenda-time">10:15–10:30</div><div class="agenda-title lab">Lab 1 · M365 Agent Builder</div></li>
+              <li class="agenda-item"><div class="agenda-time">10:30–11:00</div><div class="agenda-title module">Module 2 · Copilot Studio Core Concepts, Part 1</div></li>
+              <li class="agenda-item"><div class="agenda-time">11:00–11:45</div><div class="agenda-title lab">Lab 2 · Creation, Topics, Knowledge, and Tools</div></li>
+              <li class="agenda-item"><div class="agenda-time">11:45–12:45</div><div class="agenda-title break">Lunch break</div></li>
+              <li class="agenda-item"><div class="agenda-time">12:45–13:00</div><div class="agenda-title interactive">Review</div></li>
+              <li class="agenda-item"><div class="agenda-time">13:00–13:30</div><div class="agenda-title module">Module 3 · Copilot Studio Core Concepts, Part 2</div></li>
+              <li class="agenda-item"><div class="agenda-time">13:30–14:15</div><div class="agenda-title lab">Lab 3 · Variables, Agents, and Channels</div></li>
+              <li class="agenda-item"><div class="agenda-time">14:15–14:45</div><div class="agenda-title module">Module 4 · Copilot Studio Core Concepts, Part 3</div></li>
+              <li class="agenda-item"><div class="agenda-time">14:45–15:00</div><div class="agenda-title break">Coffee break</div></li>
+              <li class="agenda-item"><div class="agenda-time">15:00–15:30</div><div class="agenda-title lab">Lab 4 · Analytics and Evaluations</div></li>
+              <li class="agenda-item"><div class="agenda-time">15:30–16:00</div><div class="agenda-title module">Module 5 · Licensing and consumption</div></li>
+              <li class="agenda-item"><div class="agenda-time">16:00–16:30</div><div class="agenda-title interactive">Open AMA</div></li>
+            </ol>
+          </details>
+
+          <details class="agenda-details">
+            <summary class="agenda-summary">
+              <div class="agenda-summary-left">
+                <span class="agenda-day-label">Day 2</span>
+                <h3 class="agenda-day-title">ALM + orchestration + tools</h3>
+              </div>
+              <span class="agenda-chevron" aria-hidden="true"></span>
+            </summary>
+            <ol class="agenda-list">
+              <li class="agenda-item"><div class="agenda-time">09:00–09:15</div><div class="agenda-title interactive">Welcome</div></li>
+              <li class="agenda-item"><div class="agenda-time">09:15–09:45</div><div class="agenda-title module">Module 6 · ALM: Solutions, Environment Variables, Connection References, and Pipelines</div></li>
+              <li class="agenda-item"><div class="agenda-time">09:45–10:30</div><div class="agenda-title lab">Lab 5 · Export / Import Solutions, Environment Variables, Connection References, and Pipelines</div></li>
+              <li class="agenda-item"><div class="agenda-time">10:30–10:45</div><div class="agenda-title break">Coffee break</div></li>
+              <li class="agenda-item"><div class="agenda-time">10:45–11:15</div><div class="agenda-title module">Module 7 · ALM: Component Collections</div></li>
+              <li class="agenda-item"><div class="agenda-time">11:15–11:45</div><div class="agenda-title lab">Lab 6 · Component Collections</div></li>
+              <li class="agenda-item"><div class="agenda-time">11:45–12:15</div><div class="agenda-title module">Module 8 · Orchestration and Dynamic Chaining Concepts with demos</div></li>
+              <li class="agenda-item"><div class="agenda-time">12:15–13:15</div><div class="agenda-title break">Lunch break</div></li>
+              <li class="agenda-item"><div class="agenda-time">13:00–13:15</div><div class="agenda-title interactive">Review</div></li>
+              <li class="agenda-item"><div class="agenda-time">13:15–14:45</div><div class="agenda-title module">Module 9 · Tools</div></li>
+              <li class="agenda-item"><div class="agenda-time">14:45–15:00</div><div class="agenda-title break">Coffee break</div></li>
+              <li class="agenda-item"><div class="agenda-time">15:00–16:00</div><div class="agenda-title lab">Lab 7 · Tools</div></li>
+              <li class="agenda-item"><div class="agenda-time">16:00–16:30</div><div class="agenda-title interactive">Open AMA</div></li>
+            </ol>
+          </details>
+
+          <details class="agenda-details">
+            <summary class="agenda-summary">
+              <div class="agenda-summary-left">
+                <span class="agenda-day-label">Day 3</span>
+                <h3 class="agenda-day-title">Governance + advanced agent architecture</h3>
+              </div>
+              <span class="agenda-chevron" aria-hidden="true"></span>
+            </summary>
+            <ol class="agenda-list">
+              <li class="agenda-item"><div class="agenda-time">09:00–09:15</div><div class="agenda-title interactive">Welcome</div></li>
+              <li class="agenda-item"><div class="agenda-time">09:15–09:30</div><div class="agenda-title module">Module 10 · Additional resources</div></li>
+              <li class="agenda-item"><div class="agenda-time">09:30–10:00</div><div class="agenda-title module">Module 11 · Governance</div></li>
+              <li class="agenda-item"><div class="agenda-time">10:00–10:30</div><div class="agenda-title lab">Lab 8 · Governance: DLP and Purview</div></li>
+              <li class="agenda-item"><div class="agenda-time">10:30–10:45</div><div class="agenda-title break">Coffee break</div></li>
+              <li class="agenda-item"><div class="agenda-time">10:45–11:00</div><div class="agenda-title module">Module 12 · SDK demo</div></li>
+              <li class="agenda-item"><div class="agenda-time">11:00–11:30</div><div class="agenda-title module">Module 13 · Multi-agent architecture</div></li>
+              <li class="agenda-item"><div class="agenda-time">11:30–12:00</div><div class="agenda-title lab">Lab 9 · Multi-agent</div></li>
+              <li class="agenda-item"><div class="agenda-time">12:00–13:00</div><div class="agenda-title break">Lunch break</div><
