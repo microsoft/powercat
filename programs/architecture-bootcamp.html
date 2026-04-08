@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="image" property="og:image" content="https://microsoft.github.io/cat/images/bootcamp-og.png" />
+  <meta name="image" property="og:image:width" content="1200" />
+  <meta name="image" property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Microsoft Copilot Studio Architecture Bootcamp" />
+  <meta name="title" property="og:title" content="Microsoft Copilot Studio Architecture Bootcamp" />
+  <meta name="description" property="og:description" content="A fast-paced 3-day intermediate-to-advanced program aligned to the Microsoft Copilot Studio Implementation Guidance, focused on proven patterns, de-risking complex projects, and under-the-hood architecture decisions." />
+  <meta name="url" property="og:url" content="https://microsoft.github.io/cat/programs/architecture-bootcamp.html" />
+  <meta name="type" property="og:type" content="article" />
+  <meta name="site_name" property="og:site_name" content="Microsoft Copilot Acceleration Team - Architecture Bootcamp" />
+  <meta name="locale" property="og:locale" content="en_US" />
+  <meta name="author" property="og:author" content="Microsoft Copilot Acceleration Team" />
   <title>Microsoft Copilot Studio Architecture Bootcamp</title>
   <style>
     :root {
@@ -22,6 +33,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
@@ -178,7 +190,7 @@
       position: relative;
       overflow: hidden;
       min-height: 420px;
-      background: url("../images/MCS-bootcamp-banner.png") center/cover no-repeat;
+      background: linear-gradient(135deg, rgba(0,120,212,.9), rgba(124,77,255,.85));
       display: flex;
       align-items: flex-end;
     }
@@ -270,6 +282,12 @@
       box-shadow: 0 6px 16px rgba(0,90,158,.22);
     }
 
+    .register-btn.primary:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,90,158,.24);
+    }
+
     .register-btn.primary .mode-dot.inperson {
       background: #ffffff;
       border-radius: 50%;
@@ -282,6 +300,13 @@
       color: var(--ms-blue-dark);
       border-color: #d7deef;
       box-shadow: none;
+    }
+
+    .register-btn.secondary:hover {
+      text-decoration: none;
+      border-color: rgba(124,77,255,.30);
+      box-shadow: 0 4px 12px rgba(31,41,55,.06);
+      transform: translateY(-1px);
     }
 
     .hero-meta,
@@ -527,8 +552,30 @@
       pointer-events: none;
     }
 
+    .register-btn.is-disabled .mode-dot.inperson,
+    .register-btn[aria-disabled="true"] .mode-dot.inperson {
+      background: var(--ms-blue-dark);
+      border: none;
+      box-shadow: 0 0 0 4px rgba(0,120,212,.10);
+      opacity: .55;
+    }
+
+    .register-btn.is-disabled .mode-dot.virtual,
+    .register-btn[aria-disabled="true"] .mode-dot.virtual {
+      background: var(--copilot-violet);
+      border: none;
+      box-shadow: 0 0 0 4px rgba(124,77,255,.12);
+      opacity: .55;
+    }
+
+    .register-btn.is-disabled .mode-dot.closed,
+    .register-btn[aria-disabled="true"] .mode-dot.closed {
+      background: var(--disabled);
+      box-shadow: 0 0 0 4px rgba(138,136,134,.12);
+    }
+
     .mode-dot { width: 12px; height: 12px; display: inline-block; flex: 0 0 12px; }
-    .mode-dot.inperson { background: #ffffff; border-radius: 50%; border: 2px solid rgba(255,255,255,.92); }
+    .mode-dot.inperson { background: var(--ms-blue-dark); border-radius: 50%; border: none; box-shadow: 0 0 0 4px rgba(0,120,212,.12); }
     .register-btn.secondary .mode-dot.inperson { background: var(--ms-blue-dark); border: none; box-shadow: 0 0 0 4px rgba(0,120,212,.10); }
     .mode-dot.virtual { background: var(--copilot-violet); border-radius: 50%; border: none; box-shadow: 0 0 0 4px rgba(124,77,255,.14); }
     .mode-dot.closed { background: var(--disabled); border-radius: 50%; box-shadow: 0 0 0 4px rgba(138,136,134,.12); }
@@ -867,7 +914,7 @@
             </div>
             <div class="btn-group" aria-label="Redmond registration status">
               <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot inperson"></span>In-person</a>
-              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot closed"></span>Virtual</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
             </div>
           </article>
 
@@ -888,31 +935,31 @@
 
           <article class="session-box">
             <div class="session-top">
-              <h3 class="session-name">🇸🇬 Singapore</h3>
+              <h3 class="session-name">🇨🇦 Toronto, Ontario</h3>
               <span class="session-badge">Registration open</span>
             </div>
             <div class="session-meta">
-              <div class="session-meta-row"><span class="meta-icon">📅</span> Apr 27–29, 2026</div>
-              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Singapore Standard Time</div>
+              <div class="session-meta-row"><span class="meta-icon">📅</span> Apr 28–30, 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Eastern Daylight Time</div>
             </div>
-            <div class="btn-group" aria-label="Singapore registration options">
-              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=827309318"><span class="mode-dot inperson"></span>Register in-person</a>
-              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot closed"></span>Virtual</a>
+            <div class="btn-group" aria-label="Toronto registration options">
+              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=1758945306"><span class="mode-dot inperson"></span>Register in-person</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
             </div>
           </article>
 
           <article class="session-box">
             <div class="session-top">
-              <h3 class="session-name">🇨🇦 Toronto, Ontario</h3>
+              <h3 class="session-name">🇸🇬 Singapore</h3>
               <span class="session-badge">Registration open</span>
             </div>
             <div class="session-meta">
-              <div class="session-meta-row"><span class="meta-icon">📅</span> May 12–15, 2026</div>
-              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Eastern Daylight Time</div>
+              <div class="session-meta-row"><span class="meta-icon">📅</span> May 12–14, 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Singapore Standard Time</div>
             </div>
-            <div class="btn-group" aria-label="Toronto registration options">
-              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=1758945306"><span class="mode-dot inperson"></span>Register in-person</a>
-              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot closed"></span>Virtual</a>
+            <div class="btn-group" aria-label="Singapore registration options">
+              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=827309318"><span class="mode-dot inperson"></span>Register in-person</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
             </div>
           </article>
 
@@ -927,8 +974,8 @@
               <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM local time</div>
             </div>
             <div class="btn-group" aria-label="European Union registration status">
-              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot closed"></span>In-person</a>
-              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot closed"></span>Virtual</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot inperson"></span>In-person</a>
+              <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
             </div>
           </article>
         </div>
@@ -1025,14 +1072,4 @@
               <li class="agenda-item"><div class="agenda-time">10:45–11:00</div><div class="agenda-title module">Module 12 · SDK demo</div></li>
               <li class="agenda-item"><div class="agenda-time">11:00–11:30</div><div class="agenda-title module">Module 13 · Multi-agent architecture</div></li>
               <li class="agenda-item"><div class="agenda-time">11:30–12:00</div><div class="agenda-title lab">Lab 9 · Multi-agent</div></li>
-              <li class="agenda-item"><div class="agenda-time">12:00–13:00</div><div class="agenda-title break">Lunch break</div></li>
-              <li class="agenda-item"><div class="agenda-time">13:00–13:15</div><div class="agenda-title interactive">Review</div></li>
-              <li class="agenda-item"><div class="agenda-time">13:15–13:45</div><div class="agenda-title module">Module 14 · Autonomous agents</div></li>
-              <li class="agenda-item"><div class="agenda-time">13:45–14:15</div><div class="agenda-title lab">Lab 10 · Autonomous agents</div></li>
-              <li class="agenda-item"><div class="agenda-time">14:15–14:45</div><div class="agenda-title module">Module 15 · Azure integration demo</div></li>
-              <li class="agenda-item"><div class="agenda-time">14:45–15:00</div><div class="agenda-title break">Coffee break</div></li>
-              <li class="agenda-item"><div class="agenda-time">15:00–15:30</div><div class="agenda-title module">Module 16 · Agent 365 demo</div></li>
-              <li class="agenda-item"><div class="agenda-time">15:30–16:00</div><div class="agenda-title interactive">Final review</div></li>
-            </ol>
-          </details>
-        </di
+              <li class="agenda-item"><div class="agenda-time">12:00–13:00</div><div class="agenda-title break">Lunch break</div><
