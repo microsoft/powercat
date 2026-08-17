@@ -5,199 +5,271 @@
   <meta charset="utf-8">
   <title>Microsoft Power Customer Advisory Team</title>
   <meta name="description"
-    content="Power CAT is dedicated to empowering organizations to achieve digital transformation at scale with Microsoft Power Platform."
+    content="Practical tools and field-tested guidance from Microsoft Power CAT for succeeding with Power Platform."
     property="og:description">
   <meta content="Microsoft Power CAT" property="og:title">
   <meta name="image" property="og:image" content="https://microsoft.github.io/powercat/images/og-image.png">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="assets/css/fluent-layout.css" rel="stylesheet" type="text/css">
-  <script type="module" src="https://unpkg.com/@fluentui/web-components@3.1.0/dist/web-components.min.js"></script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <!-- BEGIN: Navigation -->
-  <header>
+  <header class="site-header">
     <div class="nav-inner">
-      <a href="#home" class="nav-logo">Microsoft<br>Power Customer Advisory Team</a>
-      <nav class="nav-links" aria-label="Main navigation">
-        <fluent-anchor-button appearance="subtle" href="#tools">TOOLS</fluent-anchor-button>
-        <fluent-anchor-button appearance="subtle" href="#guidance">GUIDANCE</fluent-anchor-button>
-        <fluent-anchor-button appearance="subtle" href="#resources">RESOURCES</fluent-anchor-button>
-        <fluent-anchor-button appearance="subtle" href="#stories">STORIES</fluent-anchor-button>
+      <a href="#home" class="nav-logo">
+        Microsoft
+        <span>Power Customer Advisory Team</span>
+      </a>
+      <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false"
+        aria-controls="main-navigation">
+        <span class="nav-toggle-label">Menu</span>
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <nav id="main-navigation" class="nav-links" aria-label="Main navigation">
+        <a href="#tools">Tools</a>
+        <a href="#guidance">Guidance</a>
+        <a href="#resources">Resources</a>
+        <a href="#stories">Stories</a>
       </nav>
-      <fluent-button id="nav-toggle" appearance="subtle" class="nav-toggle" aria-label="Toggle navigation">&#9776;</fluent-button>
     </div>
   </header>
-  <!-- END: Navigation -->
 
-  <!-- BEGIN: Home -->
-  <section id="home">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <h1>Microsoft Power Customer Advisory Team</h1>
-        <p>We are the Power Customer Advisory Team (Power CAT), part of the Power Platform engineering team at Microsoft.</p>
-        <p>Power CAT is dedicated to empowering organizations to achieve digital transformation at scale with Microsoft Power Platform.</p>
+  <main id="main-content">
+    <section id="home" class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Microsoft Power Customer Advisory Team</p>
+          <h1>Succeed with Power Platform at enterprise scale.</h1>
+          <p class="hero-lede">Practical tools and field-tested guidance from the Microsoft team that helps
+            enterprise customers turn Power Platform ambition into durable outcomes.</p>
+        </div>
+
+        <aside class="start-here" aria-labelledby="start-here-title">
+          <p class="eyebrow">Start here</p>
+          <h2 id="start-here-title">What are you trying to do?</h2>
+          <a class="index-link" href="#guidance">
+            <span class="index-number">01</span>
+            <span>Govern at scale</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="index-link" href="#tools">
+            <span class="index-number">02</span>
+            <span>Build better solutions</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="index-link" href="#resources">
+            <span class="index-number">03</span>
+            <span>Develop capability</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="index-link" href="#stories">
+            <span class="index-number">04</span>
+            <span>Learn from customers</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </aside>
       </div>
-      <div>
-        <img id="headerimg" src="images/header.png" width="520" alt="Power CAT" />
-      </div>
+    </section>
+
+    <div class="evidence-strip" aria-label="About Power CAT">
+      <p>Microsoft-authored</p>
+      <p>Field-tested with customers</p>
+      <p><time datetime="2026-08">Updated August 2026</time></p>
     </div>
-  </section>
-  <!-- END: Home -->
 
-  <!-- BEGIN: Tools -->
-  <div id="tools" class="section-wrapper">
-    <div class="section-inner">
-      <div class="section-label">
-        <h2>Tools</h2>
-        <p>Accelerate and enable successful adoption with tools developed by Power CAT, based on real-world customer experience.</p>
+    <section id="tools" class="content-section">
+      <div class="content-inner">
+        <div class="section-intro">
+          <p class="section-kicker">Tools</p>
+          <h2>Build with proven foundations.</h2>
+          <p>Tools shaped by real enterprise engagements, ready to accelerate delivery and reduce avoidable risk.</p>
+        </div>
+        <div class="resource-list">
+          <a class="resource-row" href="https://aka.ms/PowerCATTools" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/powercattools.png" alt=""></span>
+            <span class="resource-copy">
+              <strong>Power CAT Tools</strong>
+              <span>Review solutions, document with AI, and evaluate delivery risk.</span>
+            </span>
+            <span class="resource-cta">Explore <span aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="resource-row" href="https://aka.ms/creatorkit" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/creator.png" alt=""></span>
+            <span class="resource-copy">
+              <strong>Creator Kit</strong>
+              <span>Create consistent Fluent experiences with reusable Power Apps controls.</span>
+            </span>
+            <span class="resource-cta">Get the Kit <span aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="resource-row" href="https://aka.ms/automationkit" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/automation.png" alt=""></span>
+            <span class="resource-copy">
+              <strong>Automation Kit</strong>
+              <span>Manage and scale enterprise automation on Power Automate.</span>
+            </span>
+            <span class="resource-cta">Get Started <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
       </div>
-      <div class="card-grid">
+    </section>
 
-        <a class="card" href="https://aka.ms/PowerCATTools" target="_blank" rel="noopener noreferrer">
-          <img src="images/powercattools.png" alt="Power CAT Tools">
-          <h3>Power CAT Tools</h3>
-          <p>Enhance your development experience within Power Platform. Perform code reviews, use AI to document your solutions, evaluate risks in your solutions, and more.</p>
-          <span class="card-cta">Explore <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card" href="https://aka.ms/creatorkit" target="_blank" rel="noopener noreferrer">
-          <img src="images/creator.png" alt="Creator Kit">
-          <h3>Creator Kit</h3>
-          <p>Create consistent, beautiful, and effective user experiences for custom business applications with a collection of 24+ Fluent UI controls and templates for Power Apps.</p>
-          <span class="card-cta">Get the Kit <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card" href="https://aka.ms/automationkit" target="_blank" rel="noopener noreferrer">
-          <img src="images/automation.png" alt="Automation Kit">
-          <h3>Automation Kit</h3>
-          <p>Manage, govern, and scale automation platform adoption with Power Automate, based on industry best practices.</p>
-          <span class="card-cta">Get Started <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
+    <section id="guidance" class="content-section">
+      <div class="content-inner">
+        <div class="section-intro">
+          <p class="section-kicker">Guidance</p>
+          <h2>Make decisions that hold up.</h2>
+          <p>Architecture and operating guidance for teams building Power Platform into the fabric of the enterprise.</p>
+        </div>
+        <div class="resource-list">
+          <a class="resource-row" href="https://aka.ms/powerarchitecture" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/arch-center.svg" alt=""></span>
+            <span class="resource-copy">
+              <strong>Architecture Center</strong>
+              <span>Use established patterns and reference architectures for Power Platform.</span>
+            </span>
+            <span class="resource-cta">View Architectures <span aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="resource-row" href="https://aka.ms/powa" target="_blank" rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/powa.svg" alt=""></span>
+            <span class="resource-copy">
+              <strong>Power Platform Well-Architected</strong>
+              <span>Design workloads for reliability, security, and operational excellence.</span>
+            </span>
+            <span class="resource-cta">View the Framework <span aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="resource-row" href="https://aka.ms/powerplatformguidance" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/powerplatform-guidance.svg" alt=""></span>
+            <span class="resource-copy">
+              <strong>Power Platform Guidance</strong>
+              <span>Translate platform strategy into an actionable adoption approach.</span>
+            </span>
+            <span class="resource-cta">Read Guidance <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
       </div>
-    </div>
-  </div>
-  <!-- END: Tools -->
+    </section>
 
-  <!-- BEGIN: Guidance -->
-  <div id="guidance" class="section-wrapper">
-    <div class="section-inner">
-      <div class="section-label">
-        <h2>Guidance</h2>
-        <p>Ensure successful implementation of your Power Platform workloads with comprehensive guidance and best practices.</p>
+    <section id="resources" class="content-section">
+      <div class="content-inner">
+        <div class="section-intro">
+          <p class="section-kicker">Resources</p>
+          <h2>Develop capability that lasts.</h2>
+          <p>Focused resources that help teams grow practical Power Platform skills and apply them with confidence.</p>
+        </div>
+        <div class="resource-list">
+          <a class="resource-row" href="https://aka.ms/PowerPlatform/Resources" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/PowerPlatform.png" alt=""></span>
+            <span class="resource-copy">
+              <strong>Power Platform Resources</strong>
+              <span>Find curated resources for every stage of your Power Platform journey.</span>
+            </span>
+            <span class="resource-cta">Browse Resources <span aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="resource-row" href="https://www.microsoft.com/power-platform/training-workshops"
+            target="_blank" rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/microsoft-in-a-day.svg" alt=""></span>
+            <span class="resource-copy">
+              <strong>Microsoft in a Day</strong>
+              <span>Build practical skills through hands-on, instructor-led workshops.</span>
+            </span>
+            <span class="resource-cta">Find Workshops <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
       </div>
-      <div class="card-grid">
+    </section>
 
-        <a class="card" href="https://aka.ms/powerarchitecture" target="_blank" rel="noopener noreferrer">
-          <img src="images/arch-center.svg" alt="Architecture Center" width="80" height="80">
-          <h3>Architecture Center</h3>
-          <p>Design solutions on Power Platform using established patterns and practices.</p>
-          <span class="card-cta">View Architectures <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card" href="https://aka.ms/powa" target="_blank" rel="noopener noreferrer">
-          <img src="images/powa.svg" alt="Power Well-Architected" width="80" height="80">
-          <h3>Power Platform Well-Architected</h3>
-          <p>Make informed decisions about the design, planning, and implementation of modern application workloads.</p>
-          <span class="card-cta">View the Framework <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card" href="https://aka.ms/powerplatformguidance" target="_blank" rel="noopener noreferrer">
-          <img src="images/powerplatform-guidance.svg" alt="Power Platform Guidance" width="80" height="80">
-          <h3>Power Platform Guidance</h3>
-          <p>Create and implement the business and technology strategies necessary for successful adoption of Power Platform.</p>
-          <span class="card-cta">Read Guidance <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
+    <section id="stories" class="content-section">
+      <div class="content-inner">
+        <div class="section-intro">
+          <p class="section-kicker">Customer Stories</p>
+          <h2>Learn from work already in motion.</h2>
+          <p>See how people and organizations use Power Platform to change processes, careers, and customer outcomes.</p>
+        </div>
+        <div class="resource-list">
+          <a class="resource-row" href="https://aka.ms/PowerPlatformStories" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/stories.svg" alt=""></span>
+            <span class="resource-copy">
+              <strong>Power Platform Stories</strong>
+              <span>Explore customer stories from across the Power Platform community.</span>
+            </span>
+            <span class="resource-cta">Read Stories <span aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="resource-row" href="https://aka.ms/PowerPlatformVideos" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/customer-story-videos.svg" alt=""></span>
+            <span class="resource-copy">
+              <strong>Customer Story Videos</strong>
+              <span>Watch customers explain what they built and what changed.</span>
+            </span>
+            <span class="resource-cta">Watch Stories <span aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="resource-row" href="https://aka.ms/CXGStoryNomination" target="_blank"
+            rel="noopener noreferrer">
+            <span class="resource-mark"><img src="images/share-your-story.svg" alt=""></span>
+            <span class="resource-copy">
+              <strong>Share Your Story</strong>
+              <span>Nominate work that can help others learn from your experience.</span>
+            </span>
+            <span class="resource-cta">Submit Your Story <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
       </div>
-    </div>
-  </div>
-  <!-- END: Guidance -->
+    </section>
+  </main>
 
-  <!-- BEGIN: Resources -->
-  <div id="resources" class="section-wrapper grey">
-    <div class="section-inner">
-      <div class="section-label">
-        <h2>Resources</h2>
-        <p>Gain skills and knowledge to help you successfully adopt and deploy impactful solutions using Power Platform with programs from Power CAT and our partner teams.</p>
-      </div>
-      <div class="card-grid">
-
-        <a class="card" href="https://aka.ms/PowerPlatform/Resources" target="_blank" rel="noopener noreferrer">
-          <img src="images/PowerPlatform.png" alt="Power Platform Resources">
-          <h3>Power Platform Resources</h3>
-          <p>Resources to help you on your Power Platform journey, curated by Power CAT and updated regularly.</p>
-          <span class="card-cta">Browse Resources <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card" href="https://www.microsoft.com/power-platform/training-workshops" target="_blank" rel="noopener noreferrer">
-          <img src="images/microsoft-in-a-day.svg" alt="Microsoft in a Day" width="80" height="80">
-          <h3>Microsoft in a Day</h3>
-          <p>Hands-on, step-by-step exercises led by an instructor to teach you how to build apps with Power Platform.</p>
-          <span class="card-cta">Find Workshops <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-      </div>
-    </div>
-  </div>
-  <!-- END: Resources -->
-
-  <!-- BEGIN: Stories -->
-  <div id="stories" class="section-wrapper">
-    <div class="section-inner">
-      <div class="section-label">
-        <h2>Customer Stories</h2>
-        <p>Hear compelling customer stories that highlight the diverse and creative ways in which Power Platform is used in the real world.</p>
-      </div>
-      <div class="card-grid">
-
-        <a class="card" href="https://aka.ms/PowerPlatformStories" target="_blank" rel="noopener noreferrer">
-          <img src="images/stories.svg" alt="Power Platform Stories" width="80" height="80">
-          <h3>Power Platform Stories</h3>
-          <p>Customer stories that showcase the ingenuity of individuals and organizations that have adopted Power Platform.</p>
-          <span class="card-cta">Read Stories <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card" href="https://aka.ms/PowerPlatformVideos" target="_blank" rel="noopener noreferrer">
-          <img src="images/customer-story-videos.svg" alt="Customer Story Videos" width="80" height="80">
-          <h3>Customer Story Videos</h3>
-          <p>Customer story videos that showcase how Power Platform is being used to transform businesses, careers and lives.</p>
-          <span class="card-cta">Watch Stories <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a class="card" href="https://aka.ms/CXGStoryNomination" target="_blank" rel="noopener noreferrer">
-          <img src="images/share-your-story.svg" alt="Share Your Story" width="80" height="80">
-          <h3>Share Your Story</h3>
-          <p>Share your story to showcase within Microsoft, among our customers, and across the broader community.</p>
-          <span class="card-cta">Submit Your Story <span aria-hidden="true">&rarr;</span></span>
-        </a>
-
-      </div>
-    </div>
-  </div>
-  <!-- END: Stories -->
-
-  <!-- BEGIN: Footer -->
   <footer>
     <div class="footer-inner">
-      <p class="footer-copy">&copy; 2026 Microsoft. All rights reserved. |
-        <a href="https://go.microsoft.com/fwlink/?LinkId=521839" target="_blank" rel="noopener noreferrer">Privacy</a> |
-        <a href="https://go.microsoft.com/fwlink/?LinkID=206977" target="_blank" rel="noopener noreferrer">Terms of Use</a>
-      </p>
+      <a class="footer-brand" href="#home">Microsoft Power Customer Advisory Team</a>
+      <p>&copy; 2026 Microsoft. All rights reserved.</p>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="https://go.microsoft.com/fwlink/?LinkId=521839" target="_blank"
+          rel="noopener noreferrer">Privacy</a>
+        <a href="https://go.microsoft.com/fwlink/?LinkID=206977" target="_blank"
+          rel="noopener noreferrer">Terms of Use</a>
+      </nav>
     </div>
   </footer>
-  <!-- END: Footer -->
 
   <script>
-    document.getElementById('nav-toggle').addEventListener('click', function () {
-      document.querySelector('header').classList.toggle('nav-open');
+    const header = document.querySelector('.site-header');
+    const toggle = document.getElementById('nav-toggle');
+    const navigation = document.getElementById('main-navigation');
+
+    function closeNavigation() {
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function () {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      header.classList.toggle('nav-open', !expanded);
+      toggle.setAttribute('aria-expanded', String(!expanded));
+    });
+
+    navigation.addEventListener('click', function (event) {
+      if (event.target.closest('a')) {
+        closeNavigation();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeNavigation();
+        toggle.focus();
+      }
     });
   </script>
-
 </body>
 
 </html>

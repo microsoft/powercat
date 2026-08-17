@@ -4,58 +4,97 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FLUENT_SCRIPT = (
-    "https://unpkg.com/@fluentui/web-components@3.1.0/"
-    "dist/web-components.min.js"
-)
+FONT_FILES = {
+    "newsreader-latin-600-normal.woff2",
+    "source-sans-3-latin-400-normal.woff2",
+    "source-sans-3-latin-600-normal.woff2",
+    "source-sans-3-latin-700-normal.woff2",
+    "cascadia-mono-latin-600-normal.woff2",
+}
 
 
 class IndexParser(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.anchors = []
-        self.cards = []
+        self.custom_elements = []
+        self.external_links = []
+        self.ids = set()
+        self.resource_rows = []
         self.scripts = []
-        self.unsupported_anchors = []
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
-        if tag == "fluent-anchor-button":
-            self.anchors.append(attributes)
-        elif tag == "a" and "card" in attributes.get("class", "").split():
-            self.cards.append(attributes)
-        elif tag == "fluent-anchor":
-            self.unsupported_anchors.append(attributes)
+        element_id = attributes.get("id")
+        if element_id:
+            self.ids.add(element_id)
+        if "-" in tag:
+            self.custom_elements.append(tag)
+        if tag == "a":
+            href = attributes.get("href", "")
+            if href.startswith(("http://", "https://")):
+                self.external_links.append(attributes)
+            if "resource-row" in attributes.get("class", "").split():
+                self.resource_rows.append(attributes)
         elif tag == "script":
             self.scripts.append(attributes)
 
 
-class IndexLinkTests(unittest.TestCase):
+class HomepageDesignTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        cls.html = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.css = (ROOT / "assets/css/fluent-layout.css").read_text(encoding="utf-8")
         cls.parser = IndexParser()
-        cls.parser.feed((ROOT / "index.html").read_text(encoding="utf-8"))
+        cls.parser.feed(cls.html)
 
-    def test_uses_pinned_fluent_v3_bundle(self):
-        module_sources = {
-            script.get("src")
-            for script in self.parser.scripts
-            if script.get("type") == "module"
-        }
-        self.assertIn(FLUENT_SCRIPT, module_sources)
+    def test_uses_native_elements_without_external_scripts(self):
+        self.assertFalse(self.parser.custom_elements)
+        self.assertTrue(all(not script.get("src") for script in self.parser.scripts))
 
-    def test_uses_supported_fluent_anchor_component(self):
-        self.assertFalse(self.parser.unsupported_anchors)
-        self.assertEqual(4, len(self.parser.anchors))
-        self.assertTrue(all(anchor.get("href") for anchor in self.parser.anchors))
-        self.assertEqual({"subtle"}, {anchor.get("appearance") for anchor in self.parser.anchors})
+    def test_contains_complete_editorial_structure(self):
+        self.assertTrue(
+            {"home", "tools", "guidance", "resources", "stories"}.issubset(
+                self.parser.ids
+            )
+        )
+        self.assertIn("Microsoft Power Customer Advisory Team", self.html)
+        self.assertIn("evidence-strip", self.html)
+        self.assertEqual(4, self.html.count('class="section-kicker"'))
 
-    def test_cards_are_complete_safe_links(self):
-        self.assertEqual(11, len(self.parser.cards))
-        for card in self.parser.cards:
-            self.assertTrue(card.get("href", "").startswith("https://"))
-            self.assertEqual("_blank", card.get("target"))
-            self.assertEqual({"noopener", "noreferrer"}, set(card.get("rel", "").split()))
+    def test_resource_rows_are_complete_safe_links(self):
+        self.assertEqual(11, len(self.parser.resource_rows))
+        for resource in self.parser.resource_rows:
+            self.assertTrue(resource["href"].startswith("https://"))
+            self.assertEqual("_blank", resource.get("target"))
+            self.assertEqual(
+                {"noopener", "noreferrer"},
+                set(resource.get("rel", "").split()),
+            )
+
+    def test_all_external_links_open_safely(self):
+        self.assertTrue(self.parser.external_links)
+        for link in self.parser.external_links:
+            self.assertEqual("_blank", link.get("target"))
+            self.assertEqual(
+                {"noopener", "noreferrer"},
+                set(link.get("rel", "").split()),
+            )
+
+    def test_self_hosts_approved_fonts(self):
+        font_directory = ROOT / "assets/fonts"
+        self.assertEqual(
+            FONT_FILES,
+            {path.name for path in font_directory.glob("*.woff2")},
+        )
+        for font in FONT_FILES:
+            self.assertIn(font, self.css)
+
+    def test_includes_accessibility_and_responsive_contracts(self):
+        self.assertIn('class="skip-link"', self.html)
+        self.assertIn('aria-expanded="false"', self.html)
+        self.assertIn("@media (prefers-reduced-motion: reduce)", self.css)
+        self.assertIn("a:focus-visible", self.css)
+        self.assertIn("@media (max-width: 540px)", self.css)
 
 
 if __name__ == "__main__":

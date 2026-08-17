@@ -1,6 +1,7 @@
 .DS_Store
 .claude/
-.github/
+.github/*
+!.github/copilot-instructions.md
 .venv/
 .vscode/
 .vscode/settings.json
