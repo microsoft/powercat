@@ -1,6 +1,6 @@
 /* fluent-layout.css
-   Uses Fluent UI Web Components v2 (@fluentui/web-components).
-   Fallback values provided for tokens not injected by the v2 script. */
+   Uses Fluent UI Web Components v3 (@fluentui/web-components).
+   Fallback values provided for tokens not injected by the v3 script. */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -214,7 +214,7 @@ header {
 
 a:focus-visible,
 button:focus-visible,
-fluent-anchor:focus-visible,
+fluent-anchor-button:focus-visible,
 fluent-button:focus-visible {
   outline: 2px solid var(--colorBrandForeground1, #0078D4);
   outline-offset: 2px;

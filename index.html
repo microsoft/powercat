@@ -11,7 +11,7 @@
   <meta name="image" property="og:image" content="https://microsoft.github.io/powercat/images/og-image.png">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="assets/css/fluent-layout.css" rel="stylesheet" type="text/css">
-  <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+  <script type="module" src="https://unpkg.com/@fluentui/web-components@3.1.0/dist/web-components.min.js"></script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
@@ -23,12 +23,12 @@
     <div class="nav-inner">
       <a href="#home" class="nav-logo">Microsoft<br>Power Customer Advisory Team</a>
       <nav class="nav-links" aria-label="Main navigation">
-        <fluent-anchor appearance="stealth" href="#tools">TOOLS</fluent-anchor>
-        <fluent-anchor appearance="stealth" href="#guidance">GUIDANCE</fluent-anchor>
-        <fluent-anchor appearance="stealth" href="#resources">RESOURCES</fluent-anchor>
-        <fluent-anchor appearance="stealth" href="#stories">STORIES</fluent-anchor>
+        <fluent-anchor-button appearance="subtle" href="#tools">TOOLS</fluent-anchor-button>
+        <fluent-anchor-button appearance="subtle" href="#guidance">GUIDANCE</fluent-anchor-button>
+        <fluent-anchor-button appearance="subtle" href="#resources">RESOURCES</fluent-anchor-button>
+        <fluent-anchor-button appearance="subtle" href="#stories">STORIES</fluent-anchor-button>
       </nav>
-      <fluent-button id="nav-toggle" appearance="stealth" class="nav-toggle" aria-label="Toggle navigation">&#9776;</fluent-button>
+      <fluent-button id="nav-toggle" appearance="subtle" class="nav-toggle" aria-label="Toggle navigation">&#9776;</fluent-button>
     </div>
   </header>
   <!-- END: Navigation -->
@@ -61,28 +61,28 @@
           <img src="images/powercattools.png" alt="Power CAT Tools">
           <h3>Power CAT Tools</h3>
           <p>Enhance your development experience within Power Platform. Perform code reviews, use AI to document your solutions, evaluate risks in your solutions, and more.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/PowerCATTools" target="_blank" rel="noopener noreferrer">Explore</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/PowerCATTools" target="_blank" rel="noopener noreferrer">Explore</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/creator.png" alt="Creator Kit">
           <h3>Creator Kit</h3>
           <p>Create consistent, beautiful, and effective user experiences for custom business applications with a collection of 24+ Fluent UI controls and templates for Power Apps.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/creatorkit" target="_blank" rel="noopener noreferrer">Get the Kit</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/creatorkit" target="_blank" rel="noopener noreferrer">Get the Kit</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/CoE.png" alt="CoE Starter Kit">
           <h3>CoE Starter Kit</h3>
           <p>Leverage a set of templates to help you develop a strategy for adopting, maintaining, and supporting Power Platform.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/coestarterkit" target="_blank" rel="noopener noreferrer">Get Started</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/coestarterkit" target="_blank" rel="noopener noreferrer">Get Started</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/automation.png" alt="Automation Kit">
           <h3>Automation Kit</h3>
           <p>Manage, govern, and scale automation platform adoption with Power Automate, based on industry best practices.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/automationkit" target="_blank" rel="noopener noreferrer">Get Started</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/automationkit" target="_blank" rel="noopener noreferrer">Get Started</fluent-anchor-button>
         </div>
 
       </div>
@@ -103,21 +103,21 @@
           <img src="images/arch-center.svg" alt="Architecture Center" width="80" height="80">
           <h3>Architecture Center</h3>
           <p>Design solutions on Power Platform using established patterns and practices.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/powerarchitecture" target="_blank" rel="noopener noreferrer">View Architectures</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powerarchitecture" target="_blank" rel="noopener noreferrer">View Architectures</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/powa.svg" alt="Power Well-Architected" width="80" height="80">
           <h3>Power Platform Well-Architected</h3>
           <p>Make informed decisions about the design, planning, and implementation of modern application workloads.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/powa" target="_blank" rel="noopener noreferrer">View the Framework</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powa" target="_blank" rel="noopener noreferrer">View the Framework</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/powerplatform-guidance.svg" alt="Power Platform Guidance" width="80" height="80">
           <h3>Power Platform Guidance</h3>
           <p>Create and implement the business and technology strategies necessary for successful adoption of Power Platform.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/powerplatformguidance" target="_blank" rel="noopener noreferrer">Read Guidance</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powerplatformguidance" target="_blank" rel="noopener noreferrer">Read Guidance</fluent-anchor-button>
         </div>
 
       </div>
@@ -138,28 +138,28 @@
           <img src="images/PowerUp.png" alt="Power Up">
           <h3>Power Up</h3>
           <p>Training for individuals and enterprise organizations to develop talent in low-code and AI with a comprehensive curriculum.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/powerup" target="_blank" rel="noopener noreferrer">Start Training</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powerup" target="_blank" rel="noopener noreferrer">Start Training</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/microsoft-in-a-day.svg" alt="Microsoft in a Day" width="80" height="80">
           <h3>Microsoft in a Day</h3>
           <p>Hands-on, step-by-step exercises led by an instructor to teach you how to build apps with Power Platform.</p>
-          <fluent-anchor appearance="accent" href="https://www.microsoft.com/power-platform/training-workshops" target="_blank" rel="noopener noreferrer">Find Workshops</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://www.microsoft.com/power-platform/training-workshops" target="_blank" rel="noopener noreferrer">Find Workshops</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/PowerPlatform.png" alt="Power Platform Resources">
           <h3>Power Platform Resources</h3>
           <p>Resources to help you on your Power Platform journey, curated by Power CAT and updated regularly.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/PowerPlatform/Resources" target="_blank" rel="noopener noreferrer">Browse Resources</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/PowerPlatform/Resources" target="_blank" rel="noopener noreferrer">Browse Resources</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/stories-youtube.png" alt="Power CAT Live videos">
           <h3>Power CAT Live</h3>
           <p>This video series showcases the solutions Power CAT is working on and discusses features of Power Platform.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/powercatlive" target="_blank" rel="noopener noreferrer">Watch Videos</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/powercatlive" target="_blank" rel="noopener noreferrer">Watch Videos</fluent-anchor-button>
         </div>
 
       </div>
@@ -180,21 +180,21 @@
           <img src="images/stories.svg" alt="Power Platform Stories" width="80" height="80">
           <h3>Power Platform Stories</h3>
           <p>Customer stories that showcase the ingenuity of individuals and organizations that have adopted Power Platform.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/PowerPlatformStories" target="_blank" rel="noopener noreferrer">Read Stories</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/PowerPlatformStories" target="_blank" rel="noopener noreferrer">Read Stories</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/customer-story-videos.svg" alt="Customer Story Videos" width="80" height="80">
           <h3>Customer Story Videos</h3>
           <p>Customer story videos that showcase how Power Platform is being used to transform businesses, careers and lives.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/PowerPlatformVideos" target="_blank" rel="noopener noreferrer">Watch Stories</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/PowerPlatformVideos" target="_blank" rel="noopener noreferrer">Watch Stories</fluent-anchor-button>
         </div>
 
         <div class="card">
           <img src="images/share-your-story.svg" alt="Share Your Story" width="80" height="80">
           <h3>Share Your Story</h3>
           <p>Share your story to showcase within Microsoft, among our customers, and across the broader community.</p>
-          <fluent-anchor appearance="accent" href="https://aka.ms/CXGStoryNomination" target="_blank" rel="noopener noreferrer">Submit Your Story</fluent-anchor>
+          <fluent-anchor-button appearance="primary" href="https://aka.ms/CXGStoryNomination" target="_blank" rel="noopener noreferrer">Submit Your Story</fluent-anchor-button>
         </div>
 
       </div>
