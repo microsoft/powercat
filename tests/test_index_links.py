@@ -14,6 +14,7 @@ class IndexParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.anchors = []
+        self.cards = []
         self.scripts = []
         self.unsupported_anchors = []
 
@@ -21,6 +22,8 @@ class IndexParser(HTMLParser):
         attributes = dict(attrs)
         if tag == "fluent-anchor-button":
             self.anchors.append(attributes)
+        elif tag == "a" and "card" in attributes.get("class", "").split():
+            self.cards.append(attributes)
         elif tag == "fluent-anchor":
             self.unsupported_anchors.append(attributes)
         elif tag == "script":
@@ -43,23 +46,16 @@ class IndexLinkTests(unittest.TestCase):
 
     def test_uses_supported_fluent_anchor_component(self):
         self.assertFalse(self.parser.unsupported_anchors)
-        self.assertEqual(18, len(self.parser.anchors))
+        self.assertEqual(4, len(self.parser.anchors))
         self.assertTrue(all(anchor.get("href") for anchor in self.parser.anchors))
-        self.assertEqual(
-            {"primary", "subtle"},
-            {anchor.get("appearance") for anchor in self.parser.anchors},
-        )
+        self.assertEqual({"subtle"}, {anchor.get("appearance") for anchor in self.parser.anchors})
 
-    def test_external_fluent_anchors_open_safely(self):
-        external = [
-            anchor
-            for anchor in self.parser.anchors
-            if anchor["href"].startswith(("http://", "https://"))
-        ]
-        self.assertTrue(external)
-        for anchor in external:
-            self.assertEqual("_blank", anchor.get("target"))
-            self.assertEqual({"noopener", "noreferrer"}, set(anchor.get("rel", "").split()))
+    def test_cards_are_complete_safe_links(self):
+        self.assertEqual(14, len(self.parser.cards))
+        for card in self.parser.cards:
+            self.assertTrue(card.get("href", "").startswith("https://"))
+            self.assertEqual("_blank", card.get("target"))
+            self.assertEqual({"noopener", "noreferrer"}, set(card.get("rel", "").split()))
 
 
 if __name__ == "__main__":
