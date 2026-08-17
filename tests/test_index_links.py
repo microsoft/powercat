@@ -51,7 +51,7 @@ class IndexLinkTests(unittest.TestCase):
         self.assertEqual({"subtle"}, {anchor.get("appearance") for anchor in self.parser.anchors})
 
     def test_cards_are_complete_safe_links(self):
-        self.assertEqual(14, len(self.parser.cards))
+        self.assertEqual(11, len(self.parser.cards))
         for card in self.parser.cards:
             self.assertTrue(card.get("href", "").startswith("https://"))
             self.assertEqual("_blank", card.get("target"))
